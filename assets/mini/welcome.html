@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NebuliOS Mini</title>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #0a0a0a;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center center;
+    color: #fff;
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #6a00ff, #d4af37, #6a00ff 60%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .welcome-text {
+    max-width: 800px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #d9d9d9;
+  }
+</style>
+</head>
+<body>
+
+<h1>NebuliOS Mini</h1>
+
+<div class="welcome-text">
+  Welcome to NebuliOS Mini! Because of serverside restrictions, AI, Nebuli Search, and Music have been removed. Enjoy the features on the sidebar to the left.
+</div>
+
+</body>
+</html>
