@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nebuli Root</title>
+  <style>
+    :root {
+      --box-h: 46px;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+      --glass-filter: blur(16px) saturate(160%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh; width: 100vw;
+      background: #000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow: hidden; color: white; user-select: none;
+    }
+    .sidebar {
+      position: fixed; left: 0; top: 0;
+      height: 100%; width: 68px;
+      background: var(--glass-bg); backdrop-filter: var(--glass-filter);
+      border-right: var(--glass-border);
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      padding: 16px 0; z-index: 50;
+    }
+    .sidebar .top, .sidebar .bottom { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+    .sidebar button {
+      width: 44px; height: 44px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: white; cursor: pointer; transition: background 0.2s ease;
+    }
+    .sidebar button:hover { background: rgba(255,255,255,0.2); }
+    .sidebar button img { width: 24px; height: 24px; }
+    #gamesBtn img { filter: invert(1) brightness(2); }
+    #settingsBtn img { filter: invert(1); }
+
+    #wrapper {
+      position: fixed; top: 0; left: 68px;
+      width: calc(100% - 68px); height: 88px;
+      display: flex; flex-direction: column;
+      z-index: 105;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-filter);
+      border-bottom: var(--glass-border);
+    }
+    #header {
+      padding: 10px 18px;
+      height: var(--box-h);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .tab-bar {
+      height: 42px; width: 100%; display: flex; align-items: center; gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0 8px;
+    }
+    .tab {
+      flex-shrink: 0; min-width: 150px; max-width: 240px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+      height: 32px; border-radius: 8px 8px 0 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 10px; color: #fff; cursor: pointer; transition: all 0.2s ease;
+    }
+    .tab.active { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.3); }
+    .tab span { flex-grow: 1; font-size: 0.9rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .tab .close { margin-left: 10px; font-weight: bold; opacity: 0.6; }
+    
+    .nav-btn {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      user-select: none; cursor: pointer;
+      border-radius: 6px; border: none; background: transparent;
+      transition: background 0.2s;
+    }
+    .nav-btn img {
+      width: 18px;
+      height: 18px;
+      filter: invert(1);
+    }
+    .nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.1); }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+    #reloadBtn { color: white; font-size: 18px; }
+
+    #urlInput {
+      flex: 1; height: 30px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+      padding: 0 14px; font-size: 14px; outline: none; user-select: text;
+      background: rgba(255,255,255,0.05); color: white; transition: background 0.2s;
+    }
+    #urlInput:focus { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.4); }
+
+    #iframeContainer { position: fixed; top: 88px; left: 68px; width: calc(100% - 68px); height: calc(100% - 88px); }
+    #iframeContainer iframe { width: 100%; height: 100%; border: none; display: none; }
+
+    .panel {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+      background: white;
+      z-index: 1;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel.settings-page {
+        background: rgba(255 255 255 / 0.95);
+        color: #111;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        font-size: 16px;
+        overflow-y: auto;
+        position: absolute;
+        inset: 0;
+    }
+
+    .panel.settings-page .settings-section {
+        padding: 20px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .panel.settings-page .settings-section:first-child {
+        padding-top: 0;
+    }
+
+    .panel.settings-page .settings-section:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .panel.settings-page .settings-section > div:first-child {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 20px;
+        color: #111;
+    }
+
+    .panel.settings-page label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .panel.settings-page label:last-of-type {
+        border-bottom: none;
+    }
+
+    .panel.settings-page select {
+        background: #f8f8f8;
+        border: 1px solid #ccc;
+        color: #111;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+        min-width: 120px;
+    }
+
+    .panel.settings-page input[type="checkbox"] {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .panel.settings-page label span {
+        text-align: left;
+        align-self: flex-start;
+    }
+
+    .settings-divider {
+        margin: 12px 0;
+        padding-top: 12px;
+        border-top: 1px solid #ddd;
+    }
+
+    .settings-pill {
+      padding: 8px 16px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .settings-pill:hover {
+      background: #e0e0e0;
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .settings-pill.active {
+      background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+      background-size: 200% 200%;
+      color: white;
+      border-color: transparent;
+    }
+
+    #settingsPills {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #view {
+      flex: 1;
+      position: relative;
+      transition: opacity 0.3s ease;
+      z-index: 109;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="top">
+      <button id="homeBtn" title="Home"><img src="https://assets.nebulilabs.xyz/nebuli.png" alt="Home"></button>
+      <button id="gamesBtn" title="Games"><img src="https://assets.nebulilabs.xyz/NebuliOS/games.png" alt="Games"></button>
+      <button id="aiBtn" title="AI"><img src="https://assets.nebulilabs.xyz/NebuliOS/AI.png" alt="AI"></button>
+      <button id="musicBtn" title="Music"><img src="https://assets.nebulilabs.xyz/NebuliOS/Music.png" alt="Music"></button>
+      <button id="chatBtn" title="Chat"><img src="https://assets.nebulilabs.xyz/NebuliOS/Chat.png" alt="Chat"></button>
+      <button id="codeBtn" title="Code Editor"><img src="https://assets.nebulilabs.xyz/NebuliOS/Code_Editor.png" alt="Code Editor"></button>
+      <button id="streamingBtn" title="Movies & TV"><img src="https://assets.nebulilabs.xyz/NebuliOS/Streaming.png" alt="Movies & TV"></button>
+    </div>
+    <div class="bottom">
+      <button id="settingsBtn" title="Settings"><img src="https://assets.nebulilabs.xyz/NebuliOS/settings.png" alt="Settings"></button>
+    </div>
+  </div>
+
+  <div id="wrapper" role="region" aria-label="Browser Omnibox">
+    <div class="tab-bar" id="tabBar"></div>
+    <div id="header">
+      <button id="backBtn" class="nav-btn" title="Back" disabled aria-label="Back">
+        <img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_back.png" alt="◀" />
+      </button>
+      <button id="forwardBtn" class="nav-btn" title="Forward" disabled aria-label="Forward">
+        <img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_forward.png" alt="▶" />
+      </button>
+      <button id="reloadBtn" class="nav-btn" title="Reload" aria-label="Reload page">⟳</button>
+      <input id="urlInput" type="text" placeholder="Search or enter URL" />
+      <button id="newTab" class="nav-btn" title="New Tab" aria-label="Open New Tab">
+        <img id="newtabIcon" src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" alt="+" />
+      </button>
+      <button id="fullscreenBtn" class="nav-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen Mode">
+        <img id="fullscreenIcon" src="https://assets.nebulilabs.xyz/NebuliOS/fullscreen.png" alt="[]" />
+      </button>
+    </div>
+  </div>
+
+  <div id="iframeContainer"></div>
+
+  <div id="settingsTemplate" style="display: none;">
+    <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+      <button class="settings-pill active" data-section="main">Main Settings</button>
+    </div>
+
+    <div class="settings-section" data-section-content="main">
+      <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Main Settings</div>
+      <label for="pSelect" class="notranslate">
+        <span>Select Proxy:</span>
+        <select id="pSelect" aria-describedby="pDesc">
+          <option value="light" class="notranslate">Light</option>
+          <option value="sonic" class="notranslate">Sonic</option>
+        </select>
+      </label>
+
+      <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd;">
+        <label for="wispInput" style="border-bottom: none; flex-direction: column;">
+          <span style="margin-bottom: 5px; font-size: 13px;">Wisp Server URL:</span>
+          <input type="text" id="wispInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="wss://example.com/"/>
+        </label>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <label for="bareInput" style="border-bottom: none; flex-direction: column;">
+          <span style="margin-bottom: 5px; font-size: 13px;">Bare Server URL:</span>
+          <input type="text" id="bareInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="https://example.com/"/>
+        </label>
+      </div>
+
+      <div class="settings-divider"></div>
+      <button id="resetAllSettingsBtn" title="Reset all settings to default" style="padding: 10px; border-radius: 6px; border: none; background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600); background-size: 200% 200%; color: white; font-weight: 700; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; width: 100%; margin-top: 0;">
+        Reset All Settings to Default
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const tabBar = document.getElementById('tabBar')
+    const addressInput = document.getElementById('urlInput')
+    const homeBtn = document.getElementById('homeBtn')
+    const iframeContainer = document.getElementById('iframeContainer')
+    const gamesBtn = document.getElementById('gamesBtn')
+    const aiBtn = document.getElementById('aiBtn')
+    const musicBtn = document.getElementById('musicBtn')
+    const codeBtn = document.getElementById('codeBtn')
+    const streamingBtn = document.getElementById('streamingBtn')
+    const chatBtn = document.getElementById('chatBtn')
+    const backBtn = document.getElementById('backBtn')
+    const forwardBtn = document.getElementById('forwardBtn')
+    const reloadBtn = document.getElementById('reloadBtn')
+    const newTabBtn = document.getElementById('newTab')
+    const fullscreenBtn = document.getElementById('fullscreenBtn')
+    const settingsBtn = document.getElementById('settingsBtn')
+    const settingsTemplate = document.getElementById('settingsTemplate')
+
+    const CUSTOM_PROTOCOL = 'nebuli-root://'
+    const TITLES = { HOME: 'Home', GAMES: 'Games', AI: 'AI', MUSIC: 'Music', CODE: 'Code Editor', STREAMING: 'Movies & TV', CHAT: 'Chat', NEW_TAB: 'New Tab', SETTINGS: 'Settings' }
+    const SLUG_TITLES = { 'home': 'Home', 'games': 'Games', 'ai': 'AI', 'music': 'Music', 'code-editor': 'Code Editor', 'streaming': 'Movies & TV', 'chat': 'Chat', 'settings': 'Settings' }
+    
+    const REDIRECTS = {
+      'home': 'https://nbli-os-v2.vercel.app/search.html',
+      'games': 'https://nbli-os-v2.vercel.app/games.html',
+      'ai': 'https://nbli-os-v2.vercel.app/ai.html',
+      'music': 'https://nbli-os-v2.vercel.app/music.html',
+      'code-editor': 'https://nbli-os-v2.vercel.app/code_editor.html',
+      'streaming': 'https://nbli-os-v2.vercel.app/nebuflix.html',
+      'chat': 'https://nbli-os-v2.vercel.app/chat.html'
+    }
+
+    const PROXY_EMBED_URL = 'https://nbli-os-v2.vercel.app/embed.html#'
+    const SEARCH_ENGINE_URL = 'https://duckduckgo.com/?q='
+    
+    const DEFAULT_POSITION = 'bottom'
+    const DEFAULT_FULL = false
+    const DEFAULT_APPEARANCE_TYPE = 'glassy'
+    const DEFAULT_p = 'light'
+    const DEFAULT_WISP = 'wss://wisp.rhw.one/'
+    const DEFAULT_BARE = 'https://larp.foundation/tspmo/'
+    
+    let currentTabId = 0
+    let tabs = {}
+    let currentSettingsPanel = null
+    let histories = {}
+
+    function decodeProxyUrl(url) {
+      if (!url) return url
+      if (url.includes('/p/light/light/')) {
+        try {
+          let part = url.split('/p/light/light/')[1]
+          if (!part) return url
+          let decoded = decodeURIComponent(part).split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char).join('')
+          return decoded
+        } catch (e) { return url }
+      }
+      if (url.includes('/p/sonic/s/')) {
+        try {
+          let part = url.split('/p/sonic/s/')[1]
+          if (!part) return url
+          return decodeURIComponent(part)
+        } catch (e) { return url }
+      }
+      return url
+    }
+
+    function getInnerIframeUrl(outerIframe) {
+      try {
+        const embedDoc = outerIframe.contentDocument || outerIframe.contentWindow.document
+        if (!embedDoc) return null
+        
+        const innerIframe = embedDoc.querySelector('iframe')
+        if (!innerIframe) return null
+        
+        const innerUrl = innerIframe.contentWindow.location.href
+        return innerUrl
+      } catch (e) {
+        return null
+      }
+    }
+
+    function getProxyURL(targetUrl) {
+      if (!targetUrl) return ''
+      let urlToProxy = targetUrl
+      if (!urlToProxy.match(/^https?:\/\//i)) urlToProxy = 'https://' + urlToProxy
+      return `${PROXY_EMBED_URL}${urlToProxy}`
+    }
+
+    function loadAllSettings(panel) {
+      const pSelect = panel.querySelector('#pSelect')
+      const wispInput = panel.querySelector('#wispInput')
+      const bareInput = panel.querySelector('#bareInput')
+      const p = localStorage.getItem('nebuli-p')
+      const wisp = localStorage.getItem('wisp')
+      const bare = localStorage.getItem('bare')
+
+      if (pSelect) {
+        pSelect.value = p || DEFAULT_p
+      }
+      if (wispInput) {
+        wispInput.value = wisp || DEFAULT_WISP
+      }
+      if (bareInput) {
+        bareInput.value = bare || DEFAULT_BARE
+      }
+    }
+
+    function saveAllSettings(panel) {
+      const pSelect = panel.querySelector('#pSelect')
+      const wispInput = panel.querySelector('#wispInput')
+      const bareInput = panel.querySelector('#bareInput')
+      if (pSelect) {
+        localStorage.setItem('nebuli-p', pSelect.value)
+      }
+      if (wispInput) {
+        localStorage.setItem('wisp', wispInput.value)
+      }
+      if (bareInput) {
+        localStorage.setItem('bare', bareInput.value)
+      }
+    }
+
+    function setupSettingsBindings(panel) {
+      loadAllSettings(panel)
+      const resetBtn = panel.querySelector('#resetAllSettingsBtn')
+      const pSelect = panel.querySelector('#pSelect')
+      const wispInput = panel.querySelector('#wispInput')
+      const bareInput = panel.querySelector('#bareInput')
+
+      if (pSelect) pSelect.addEventListener('change', () => saveAllSettings(panel))
+      if (wispInput) wispInput.addEventListener('input', () => saveAllSettings(panel))
+      if (bareInput) bareInput.addEventListener('input', () => saveAllSettings(panel))
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          localStorage.removeItem('nebuli-p')
+          localStorage.removeItem('wisp')
+          localStorage.removeItem('bare')
+
+          loadAllSettings(panel)
+          saveAllSettings(panel)
+        })
+      }
+    }
+
+    function createSettingsPanel() {
+      if (currentSettingsPanel) {
+        currentSettingsPanel.remove()
+      }
+
+      const panel = document.createElement('div')
+      panel.className = 'panel active settings-page'
+      panel.dataset.id = 'settings'
+
+      const settingsContent = settingsTemplate.cloneNode(true)
+      settingsContent.id = 'settingsPanelContent'
+      settingsContent.style.display = 'block'
+      panel.appendChild(settingsContent)
+
+      iframeContainer.appendChild(panel)
+      currentSettingsPanel = panel
+
+      setupSettingsBindings(panel)
+    }
+
+    function switchToSettingsTab() {
+      const existingSettings = Object.values(tabs).find(t => t.url === CUSTOM_PROTOCOL + 'settings')
+      if (existingSettings) {
+        switchTab(existingSettings.id)
+        return existingSettings.id
+      }
+
+      currentTabId++
+      const id = currentTabId
+      const newTab = document.createElement('div')
+      newTab.classList.add('tab')
+      newTab.innerHTML = `<span>Settings</span><div class="close">×</div>`
+      tabBar.appendChild(newTab)
+      
+      tabs[id] = { id, element: newTab, iframe: null, isActive: false, url: CUSTOM_PROTOCOL + 'settings', isSettings: true, lastSyncedUrl: null }
+      newTab.addEventListener('click', () => switchTab(id))
+      newTab.querySelector('.close').addEventListener('click', (e) => { e.stopPropagation(); closeTab(id); })
+      
+      switchTab(id)
+      createSettingsPanel()
+      return id
+    }
+
+    function navigate(id, url) {
+      const h = histories[id]
+      if (!h || h.isSettings) return
+
+      if (h.idx < h.stack.length - 1) {
+        h.stack.splice(h.idx + 1)
+      }
+      h.stack.push(url)
+      h.idx++
+      h.iframe.src = url
+      h.showUrl = url
+      addressInput.value = (url === CUSTOM_PROTOCOL + 'home') ? '' : url
+      updateNavButtons()
+    }
+
+    async function loadURL(inputValue, tabId = null) {
+      const input = inputValue.trim()
+      if (!input) return
+      let finalUrl = ''
+      let displayUrl = ''
+
+      if (input.startsWith(CUSTOM_PROTOCOL)) {
+        const slug = input.replace(CUSTOM_PROTOCOL, '')
+        if (REDIRECTS[slug]) {
+            finalUrl = REDIRECTS[slug]
+            displayUrl = input
+        } else {
+            finalUrl = getProxyURL(SEARCH_ENGINE_URL + encodeURIComponent(input))
+            displayUrl = input
+        }
+      } else if (input.includes('.') && !input.includes(' ')) {
+        finalUrl = getProxyURL(input); displayUrl = input;
+      } else {
+        finalUrl = getProxyURL(SEARCH_ENGINE_URL + encodeURIComponent(input)); displayUrl = input;
+      }
+
+      let activeTabId = tabId || (Object.values(tabs).find(t => t.isActive) || {}).id || createNewTab();
+      const activeTab = tabs[activeTabId]
+      
+      if (activeTab.isSettings) return
+
+      const h = histories[activeTabId]
+      if (h.idx < h.stack.length - 1) {
+        h.stack.splice(h.idx + 1)
+      }
+      h.stack.push(finalUrl)
+      h.idx++
+      h.showUrl = displayUrl
+      
+      activeTab.url = displayUrl
+      activeTab.lastSyncedUrl = null
+      addressInput.value = (displayUrl === CUSTOM_PROTOCOL + 'home') ? '' : displayUrl
+      
+      if (activeTab.iframe) {
+        activeTab.iframe.src = finalUrl
+        activeTab.iframe.style.display = 'block'
+      }
+      updateTabLabel(activeTabId, displayUrl)
+      updateNavButtons()
+    }
+
+    function updateTabLabel(id, text) {
+      const slug = text.replace(CUSTOM_PROTOCOL, '')
+      const title = SLUG_TITLES[slug] || text
+      tabs[id].element.querySelector('span').textContent = title.length > 20 ? title.substring(0, 17) + '...' : title
+    }
+
+    function createNewTab(title = TITLES.HOME, url = CUSTOM_PROTOCOL + 'home') {
+      currentTabId++
+      const id = currentTabId
+      const newTab = document.createElement('div')
+      newTab.classList.add('tab')
+      newTab.innerHTML = `<span>${title}</span><div class="close">×</div>`
+      tabBar.appendChild(newTab)
+      
+      const newFrame = document.createElement('iframe')
+      newFrame.style.display = 'none'
+      newFrame.setAttribute('allowfullscreen', 'true')
+      iframeContainer.appendChild(newFrame)
+      
+      tabs[id] = { id, element: newTab, iframe: newFrame, isActive: false, url: url, isSettings: false, lastSyncedUrl: null }
+      newTab.addEventListener('click', () => switchTab(id))
+      newTab.querySelector('.close').addEventListener('click', (e) => { e.stopPropagation(); closeTab(id); })
+      
+      const REDIRECTS_URL = REDIRECTS[url.replace(CUSTOM_PROTOCOL, '')]
+      histories[id] = { stack: [REDIRECTS_URL || url], idx: 0, showUrl: url, isSettings: false }
+      
+      newFrame.onload = () => {
+        syncTabWithIframe(id)
+        updateNavButtons()
+      }
+
+      switchTab(id)
+      loadURL(url, id)
+      return id
+    }
+
+    function syncTabWithIframe(id) {
+      const tab = tabs[id]
+      if (!tab || tab.isSettings) return
+      try {
+        const innerIframeUrl = getInnerIframeUrl(tab.iframe)
+        
+        if (!innerIframeUrl) {
+          return
+        }
+
+        if (innerIframeUrl.startsWith('blob:')) {
+          return
+        }
+
+        let realUrl = decodeProxyUrl(innerIframeUrl)
+        let displayUrl = realUrl
+
+        if (realUrl.includes('vercel.app/search.html')) {
+          displayUrl = CUSTOM_PROTOCOL + 'home'
+        }
+
+        const h = histories[id]
+        if (tab.lastSyncedUrl !== displayUrl) {
+          tab.url = displayUrl
+          tab.lastSyncedUrl = displayUrl
+          h.showUrl = displayUrl
+
+          if (tab.isActive) {
+            addressInput.value = (displayUrl === CUSTOM_PROTOCOL + 'home') ? '' : displayUrl
+          }
+        }
+      } catch (e) {}
+    }
+
+    function switchTab(id) {
+      Object.keys(tabs).forEach(tid => {
+        tabs[tid].isActive = false
+        tabs[tid].element.classList.remove('active')
+        if (tabs[tid].iframe) tabs[tid].iframe.style.display = 'none'
+      })
+      
+      if (currentSettingsPanel) {
+        currentSettingsPanel.style.display = 'none'
+      }
+
+      const active = tabs[id]
+      active.isActive = true
+      active.element.classList.add('active')
+      
+      const h = histories[id]
+      addressInput.value = (h && h.showUrl) ? ((h.showUrl === CUSTOM_PROTOCOL + 'home') ? '' : h.showUrl) : ''
+      
+      if (active.iframe) {
+        active.iframe.style.display = 'block'
+      }
+      
+      if (active.isSettings) {
+        createSettingsPanel()
+        if (currentSettingsPanel) {
+          currentSettingsPanel.style.display = 'block'
+        }
+      }
+
+      updateNavButtons()
+    }
+
+    function closeTab(id) {
+      tabs[id].element.remove()
+      if (tabs[id].iframe) tabs[id].iframe.remove()
+      const wasActive = tabs[id].isActive
+      
+      if (tabs[id].isSettings && currentSettingsPanel) {
+        currentSettingsPanel.remove()
+        currentSettingsPanel = null
+      }
+      
+      delete tabs[id]
+      delete histories[id]
+      
+      if (wasActive) {
+        const remaining = Object.keys(tabs)
+        if (remaining.length > 0) switchTab(remaining[remaining.length - 1])
+        else createNewTab()
+      }
+    }
+
+    function updateNavButtons() {
+      const activeTab = Object.values(tabs).find(t => t.isActive)
+      if (!activeTab || activeTab.isSettings) {
+        backBtn.disabled = true
+        forwardBtn.disabled = true
+        return
+      }
+
+      const h = histories[activeTab.id]
+      if (!h) {
+        backBtn.disabled = true
+        forwardBtn.disabled = true
+        return
+      }
+
+      backBtn.disabled = h.idx <= 0
+      forwardBtn.disabled = h.idx >= h.stack.length - 1
+    }
+
+    setInterval(() => {
+      const activeTab = Object.values(tabs).find(t => t.isActive)
+      if (activeTab && !activeTab.isSettings) syncTabWithIframe(activeTab.id)
+    }, 500)
+
+    newTabBtn.addEventListener('click', () => createNewTab())
+    addressInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadURL(addressInput.value) })
+    reloadBtn.addEventListener('click', () => { const active = Object.values(tabs).find(t => t.isActive); if(active && active.iframe) active.iframe.contentWindow.location.reload(); })
+    backBtn.addEventListener('click', () => {
+      const activeTab = Object.values(tabs).find(t => t.isActive)
+      if (!activeTab || activeTab.isSettings) return
+      
+      const h = histories[activeTab.id]
+      if (h && h.idx > 0) {
+        h.idx--
+        const previousUrl = h.stack[h.idx]
+        activeTab.iframe.src = previousUrl
+        
+        const slug = previousUrl.split('/').pop()
+        for (let key in REDIRECTS) {
+          if (REDIRECTS[key] === previousUrl) {
+            h.showUrl = CUSTOM_PROTOCOL + key
+            addressInput.value = CUSTOM_PROTOCOL + key
+            break
+          }
+        }
+        
+        updateNavButtons()
+      }
+    })
+    forwardBtn.addEventListener('click', () => {
+      const activeTab = Object.values(tabs).find(t => t.isActive)
+      if (!activeTab || activeTab.isSettings) return
+      
+      const h = histories[activeTab.id]
+      if (h && h.idx < h.stack.length - 1) {
+        h.idx++
+        const nextUrl = h.stack[h.idx]
+        activeTab.iframe.src = nextUrl
+        
+        const slug = nextUrl.split('/').pop()
+        for (let key in REDIRECTS) {
+          if (REDIRECTS[key] === nextUrl) {
+            h.showUrl = CUSTOM_PROTOCOL + key
+            addressInput.value = CUSTOM_PROTOCOL + key
+            break
+          }
+        }
+        
+        updateNavButtons()
+      }
+    })
+    
+    homeBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'home'))
+    gamesBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'games'))
+    aiBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'ai'))
+    musicBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'music'))
+    codeBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'code-editor'))
+    streamingBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'streaming'))
+    chatBtn.addEventListener('click', () => loadURL(CUSTOM_PROTOCOL + 'chat'))
+    settingsBtn.addEventListener('click', () => switchToSettingsTab())
+    fullscreenBtn.addEventListener('click', () => {
+      const activeTab = Object.values(tabs).find(t => t.isActive)
+      if (!activeTab || !activeTab.iframe) return
+      const target = activeTab.iframe
+      if (!document.fullscreenElement) {
+        if (target.requestFullscreen) {
+          target.requestFullscreen()
+        } else if (target.webkitRequestFullscreen) {
+          target.webkitRequestFullscreen()
+        } else if (target.msRequestFullscreen) {
+          target.msRequestFullscreen()
+        }
+      } else {
+        document.exitFullscreen()
+      }
+    })
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createNewTab()
+      if (!localStorage.getItem('wisp')) {
+        localStorage.setItem('wisp', DEFAULT_WISP)
+      }
+      if (!localStorage.getItem('bare')) {
+        localStorage.setItem('bare', DEFAULT_BARE)
+      }
+      if (!localStorage.getItem('nebuli-p')) {
+        localStorage.setItem('nebuli-p', DEFAULT_p)
+      }
+    })
+  </script>
+</body>
+</html>

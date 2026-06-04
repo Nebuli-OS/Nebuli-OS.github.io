@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nebuli Intro</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+        }
+
+        #starfield {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+        }
+
+        #logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            z-index: 2;
+            pointer-events: none;
+            animation: spin 6s linear infinite;
+        }
+
+        #blackFade {
+            position: fixed;
+            inset: 0;
+            background: black;
+            opacity: 0;
+            z-index: 5;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <img id="logo" src="https://assets.nebulilabs.xyz/nebuli.png">
+    <div id="blackFade"></div>
+
+    <script>
+        const canvas = document.getElementById("starfield")
+        const ctx = canvas.getContext("2d")
+        const blackFade = document.getElementById("blackFade")
+
+        function resize() {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+        }
+
+        window.addEventListener("resize", resize)
+        resize()
+
+        const STAR_COUNT = 220
+        const stars = []
+        const centerX = () => canvas.width / 2
+        const centerY = () => canvas.height / 2
+        let phase = "wait"
+
+        class Star {
+            constructor() {
+                this.x = centerX()
+                this.y = centerY()
+                const angle = Math.random() * Math.PI * 2
+                const speed = Math.random() * 7 + 2
+                this.vx = Math.cos(angle) * speed
+                this.vy = Math.sin(angle) * speed
+                this.size = Math.random() * 1.5 + 0.5
+                this.alpha = Math.random() * 0.8 + 0.2
+                this.driftSpeed = Math.random() * 0.8 + 0.2
+            }
+
+            update() {
+                if (phase === "explode") {
+                    this.x += this.vx
+                    this.y += this.vy
+                    this.vx *= 0.99
+                    this.vy *= 0.99
+                }
+                if (phase === "drift") {
+                    this.vx += (-this.driftSpeed - this.vx) * 0.02
+                    this.vy *= 0.98
+                    this.x += this.vx
+                    this.y += this.vy
+                }
+                if (this.x < 0) {
+                    this.x = canvas.width
+                    this.y = Math.random() * canvas.height
+                }
+                if (this.y < 0) this.y = canvas.height
+                if (this.y > canvas.height) this.y = 0
+            }
+
+            draw() {
+                ctx.beginPath()
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(255,255,255,${this.alpha})`
+                ctx.shadowColor = "white"
+                ctx.shadowBlur = 8
+                ctx.fill()
+            }
+        }
+
+        for (let i = 0; i < STAR_COUNT; i++) {
+            stars.push(new Star())
+        }
+
+        setTimeout(() => {
+            phase = "explode"
+        }, 1000)
+
+        setTimeout(() => {
+            phase = "drift"
+            setTimeout(() => {
+                blackFade.style.opacity = 1
+            }, 1000)
+        }, 3000)
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            for (const star of stars) {
+                star.update()
+                star.draw()
+            }
+            requestAnimationFrame(animate)
+        }
+
+        animate()
+    </script>
+</body>
+</html>

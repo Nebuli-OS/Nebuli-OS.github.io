@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NebuFlix</title>
+<style>
+:root {
+  --bg-dark: #0e0114;
+  --bg-panel: rgba(25, 10, 40, 0.85);
+  --accent: #FFD700;
+  --accent-violet: #8A2BE2;
+  --accent-glow: 0 0 12px #FFD700, 0 0 24px #FFD70077;
+  --text-main: #fffbe9;
+  --text-dim: #cfc2a8;
+  --danger: #ff355e;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+header {
+  padding: 25px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  gap: 15px;
+}
+#headerControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+#backButtonHeader {
+  background: rgba(255,255,255,0.06);
+  border: 2px solid var(--accent);
+  border-radius: 40px;
+  color: var(--accent);
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.25s;
+  display: none;
+  font-size: 16px;
+}
+#backButtonHeader:hover {
+  background: rgba(255,255,255,0.1);
+}
+#searchBox {
+  width: 70%;
+  padding: 14px 18px;
+  border: 2px solid var(--accent);
+  border-radius: 40px;
+  font-size: 18px;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-main);
+  outline: none;
+  box-shadow: inset 0 0 12px #000;
+  transition: 0.25s ease;
+}
+#searchBox:focus {
+  background: rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 8px #000;
+}
+#announcement {
+  text-align: center;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(255, 53, 94, 0.15);
+  border: 2px solid var(--danger);
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+}
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 25px;
+  gap: 24px;
+}
+.result {
+  width: 180px;
+  cursor: pointer;
+  text-align: center;
+  background: var(--bg-panel);
+  border-radius: 18px;
+  padding: 14px;
+  transition: 0.25s;
+  box-shadow: 0 0 15px #000, inset 0 0 10px #000;
+  border: 2px solid transparent;
+}
+.result:hover {
+  transform: translateY(-6px) scale(1.03);
+  border: 2px solid var(--accent);
+}
+.result img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 0 10px #000;
+}
+.result p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--text-dim);
+}
+#playerContainer {
+  position: relative;
+}
+#player {
+  margin: 25px auto;
+  width: 90%;
+  max-width: 1200px;
+}
+iframe {
+  width: 100%;
+  height: 70vh;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #000;
+  border: 2px solid var(--accent-violet);
+}
+#placeholder {
+  text-align: center;
+  font-size: 54px;
+  margin-top: 40px;
+  color: var(--accent);
+  font-weight: bold;
+  text-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-violet);
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { text-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-violet); }
+  50% { text-shadow: 0 0 25px var(--accent), 0 0 40px var(--accent-violet); }
+}
+#continueWatching {
+  padding: 20px;
+}
+#continueWatching h2 {
+  color: var(--accent);
+  margin-bottom: 14px;
+  text-align: center;
+}
+.continue-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+.continue-item {
+  width: 160px;
+  background: var(--bg-panel);
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 0 12px #000;
+  transition: 0.2s;
+  border: 2px solid transparent;
+}
+.continue-item:hover {
+  transform: scale(1.05);
+  border: 2px solid var(--accent);
+}
+.continue-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+.continue-item p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+#seasonPopup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  z-index: 50;
+}
+#popupContent {
+  background: var(--bg-panel);
+  padding: 22px;
+  border-radius: 18px;
+  width: 80%;
+  max-width: 650px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 30px #000;
+  border: 2px solid var(--accent);
+}
+#seasonControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+#seasonControls button {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 6px 14px;
+  color: var(--accent);
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+#seasonControls button:hover {
+  filter: brightness(1.2);
+}
+#seasonControls button img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(87%) sepia(74%) saturate(391%) hue-rotate(44deg) brightness(105%) contrast(97%);
+}
+#episodeList {
+  flex: 1;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: inset 0 0 12px #000;
+}
+.episode {
+  padding: 12px;
+  margin: 8px 0;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 2px solid transparent;
+}
+.episode:hover {
+  background: rgba(255,215,0,0.12);
+  border: 2px solid var(--accent);
+}
+#closePopup {
+  margin-top: 14px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: bold;
+  transition: 0.25s;
+}
+#closePopup:hover {
+  background: var(--accent);
+  color: #000;
+}
+#showWarning {
+  background: rgba(255, 53, 94, 0.2);
+  border: 2px solid var(--danger);
+  color: var(--text-main);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  text-align: center;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffd600, #9c27b0, #ffd600);
+  background-attachment: fixed;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+</style>
+</head>
+<body>
+<header>
+  <div id="headerControls">
+    <button id="backButtonHeader">← Back</button>
+    <input type="text" id="searchBox" placeholder="Search for movies or TV shows...">
+  </div>
+  <div id="announcement">If you get any site popups, close them immediately.</div>
+</header>
+<main>
+  <div id="placeholder">NebuFlix</div>
+  <div id="continueWatching" style="display:none;">
+    <h2>Continue Watching</h2>
+    <div class="continue-list" id="continueList"></div>
+  </div>
+  <div id="results"></div>
+  <div id="playerContainer">
+    <div id="player"></div>
+  </div>
+</main>
+
+<div id="seasonPopup">
+  <div id="popupContent">
+    <div id="seasonControls">
+      <button id="prevSeason"><img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_back.png" alt="Previous"></button>
+      <h2 id="seasonTitle">Season 1</h2>
+      <button id="nextSeason"><img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_forward.png" alt="Next"></button>
+    </div>
+    <div id="showWarning" style="display:none;"></div>
+    <div id="episodeList"></div>
+    <button id="closePopup">Close</button>
+  </div>
+</div>
+
+<script>
+const apiKey = "832be0e3"; // This is a free key, get it yourself, don't be stupid
+const searchBox = document.getElementById("searchBox");
+const results = document.getElementById("results");
+const player = document.getElementById("player");
+const placeholder = document.getElementById("placeholder");
+const continueWatching = document.getElementById("continueWatching");
+const continueList = document.getElementById("continueList");
+const seasonPopup = document.getElementById("seasonPopup");
+const seasonTitle = document.getElementById("seasonTitle");
+const episodeList = document.getElementById("episodeList");
+const prevSeason = document.getElementById("prevSeason");
+const nextSeason = document.getElementById("nextSeason");
+const closePopup = document.getElementById("closePopup");
+const showWarning = document.getElementById("showWarning");
+const backButtonHeader = document.getElementById("backButtonHeader");
+
+let currentShowId = null;
+let currentShowTitle = "";
+let currentPoster = "";
+let currentSeason = 1;
+
+function updatePlaceholder() {
+  if (!results.hasChildNodes() && !player.hasChildNodes()) {
+    placeholder.style.display = "block";
+    loadContinueWatching();
+  } else {
+    placeholder.style.display = "none";
+    continueWatching.style.display = "none";
+  }
+}
+
+searchBox.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") searchMovies();
+});
+
+async function searchMovies() {
+  results.innerHTML = "Searching...";
+  player.innerHTML = "";
+  backButtonHeader.style.display = "none";
+  updatePlaceholder();
+  const query = searchBox.value;
+  const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  results.innerHTML = "";
+  if (data.Search) {
+    data.Search.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "result";
+      div.innerHTML = `
+        <img src="${item.Poster !== "N/A" ? item.Poster : ""}" alt="">
+        <p>${item.Title} (${item.Year})</p>
+      `;
+      div.onclick = () => {
+        if (item.Type === "movie") {
+          loadMovie(item.imdbID, item.Title, item.Poster);
+        } else {
+          openShow(item.imdbID, item.Title, item.Poster);
+        }
+        results.innerHTML = "";
+        updatePlaceholder();
+      };
+      results.appendChild(div);
+    });
+  } else {
+    results.innerHTML = "No results found.";
+  }
+  updatePlaceholder();
+}
+
+function saveContinueWatching(id, title, poster, type, season=null, episode=null) {
+  let saved = JSON.parse(localStorage.getItem("continueWatching") || "[]");
+  saved = saved.filter(v => v.id !== id); 
+  saved.unshift({id, title, poster, type, season, episode});
+  if (saved.length > 8) saved = saved.slice(0, 8);
+  localStorage.setItem("continueWatching", JSON.stringify(saved));
+}
+
+function loadContinueWatching() {
+  let saved = JSON.parse(localStorage.getItem("continueWatching") || "[]");
+  continueList.innerHTML = "";
+  if (saved.length > 0) {
+    continueWatching.style.display = "block";
+    saved.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "continue-item";
+      div.innerHTML = `
+        <img src="${item.poster !== "N/A" ? item.poster : ""}" alt="">
+        <p>${item.type === "show" ? `${item.title} (S${item.season}E${item.episode})` : item.title}</p>
+      `;
+      div.onclick = () => {
+        if (item.type === "movie") {
+          loadMovie(item.id, item.title, item.poster);
+        } else {
+          playEpisode(item.id, item.title, item.poster, item.season, item.episode);
+        }
+      };
+      continueList.appendChild(div);
+    });
+  } else {
+    continueWatching.style.display = "none";
+  }
+}
+
+function loadMovie(id, title, poster) {
+  player.innerHTML = `
+    <iframe src="/embed.html#https://moviesapi.club/movie/${id}" allowfullscreen allow="encrypted-media"></iframe>
+  `;
+  backButtonHeader.style.display = "block";
+  saveContinueWatching(id, title, poster, "movie");
+  updatePlaceholder();
+}
+
+function openShow(id, title, poster) {
+  currentShowId = id;
+  currentShowTitle = title;
+  currentPoster = poster;
+  currentSeason = 1;
+  loadSeason(currentSeason);
+  seasonPopup.style.display = "flex";
+  showWarning.style.display = "block";
+  showWarning.textContent = "You may have to switch the source to Alpha for the episode to work.";
+}
+
+async function loadSeason(season) {
+  seasonTitle.textContent = `Season ${season}`;
+  episodeList.innerHTML = "Loading episodes...";
+  const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${currentShowId}&Season=${season}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.Episodes) {
+    episodeList.innerHTML = "";
+    data.Episodes.forEach(ep => {
+      const div = document.createElement("div");
+      div.className = "episode";
+      div.textContent = `${ep.Episode}. ${ep.Title}`;
+      div.onclick = () => {
+        seasonPopup.style.display = "none";
+        playEpisode(currentShowId, currentShowTitle, currentPoster, season, ep.Episode);
+      };
+      episodeList.appendChild(div);
+    });
+  } else {
+    episodeList.innerHTML = "No episodes found.";
+  }
+}
+
+function playEpisode(id, title, poster, season, episode) {
+  player.innerHTML = `
+    <iframe src="/embed.html#https://moviesapi.club/tv/${id}-${season}-${episode}" allowfullscreen allow="encrypted-media"></iframe>
+  `;
+  backButtonHeader.style.display = "block";
+  saveContinueWatching(id, title, poster, "show", season, episode);
+  updatePlaceholder();
+}
+
+function goBack() {
+  player.innerHTML = "";
+  backButtonHeader.style.display = "none";
+  searchBox.value = "";
+  results.innerHTML = "";
+  updatePlaceholder();
+}
+
+prevSeason.onclick = () => {
+  if (currentSeason > 1) {
+    currentSeason--;
+    loadSeason(currentSeason);
+  }
+};
+nextSeason.onclick = () => {
+  currentSeason++;
+  loadSeason(currentSeason);
+};
+closePopup.onclick = () => {
+  seasonPopup.style.display = "none";
+};
+backButtonHeader.onclick = goBack;
+
+updatePlaceholder();
+</script>
+</body>
+</html>

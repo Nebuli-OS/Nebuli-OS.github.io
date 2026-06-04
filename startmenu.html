@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --glass-surface: rgba(12, 12, 12, 0.92); 
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --inner-glow: rgba(255, 255, 255, 0.03);
+            --hover-item: rgba(255, 255, 255, 0.08);
+            --text-color: #ffffff;
+            --accent-gradient: linear-gradient(90deg, #FFD700 0%, #8A2BE2 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+
+        body, html {
+            width: 100%; height: 100%; overflow: hidden;
+            font-family: 'Segoe UI Variable', 'Segoe UI', -apple-system, sans-serif;
+            background: transparent; 
+        }
+
+        .start-container {
+            width: 100%; height: 100%;
+            background: var(--glass-surface);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+
+        .content { 
+            padding: 15px 20px;
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-y: auto; 
+            width: 100%;
+        }
+
+        .search-box-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            background: rgba(45, 45, 45, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 8px 12px; border-radius: 4px; width: 100%;
+            outline: none; color: white; font-size: 0.75rem;
+            transition: 0.2s;
+        }
+
+        .search-box-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--accent-gradient);
+            border-radius: 0 0 4px 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .search-box-container:focus-within::after { opacity: 1; }
+
+        .section-header { margin-bottom: 8px; padding-left: 4px; }
+        .section-header span { font-weight: 600; font-size: 0.68rem; color: var(--text-color); opacity: 0.7; }
+
+        .app-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); 
+            gap: 4px; 
+            margin-bottom: 20px; 
+        }
+        .app-item { 
+            display: flex; flex-direction: column; align-items: center; 
+            padding: 8px 4px; border-radius: 4px; transition: 0.1s; 
+            cursor: pointer; text-decoration: none;
+        }
+        .app-item:hover { background: var(--hover-item); }
+        .icon-img { width: 24px; height: 24px; object-fit: contain; margin-bottom: 6px; filter: brightness(0) invert(1); }
+        .app-name { font-size: 0.62rem; text-align: center; color: var(--text-color); }
+
+        .recent-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .recent-item { 
+            display: flex; align-items: center; gap: 8px; padding: 6px 10px; 
+            border-radius: 4px; transition: 0.1s; cursor: pointer; text-decoration: none;
+        }
+        .recent-item:hover { background: var(--hover-item); }
+        .recent-icon { width: 16px; height: 16px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8; }
+        .recent-info { display: flex; flex-direction: column; overflow: hidden; }
+        .recent-name { font-size: 0.7rem; font-weight: 400; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .recent-meta { font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .footer { 
+            background: rgba(0, 0, 0, 0.4); 
+            padding: 10px 20px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid var(--glass-border); 
+        }
+        .user-pill { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: white; }
+        .avatar { width: 24px; height: 24px; background: white; border-radius: 50%; display:flex; align-items:center; justify-content:center; color: black; font-weight: bold; font-size: 0.6rem; }
+        .power-icon { font-size: 1rem; color: white; cursor: pointer; opacity: 0.7; transition: 0.2s;}
+        .power-icon:hover { opacity: 1; color: #ff4b4b; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="start-container">
+    <div class="content">
+        <div class="search-box-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search..." autocomplete="off">
+        </div>
+
+        <div id="appsWrapper">
+            <div class="section-header"><span>Pinned</span></div>
+            <div class="app-grid" id="mainAppGrid">
+                <div class="app-item" onclick="sendAction('open_internet')"><img src="https://assets.nebulilabs.xyz/NebuliOS/internet.png" class="icon-img"><span class="app-name">Internet</span></div>
+                <div class="app-item" onclick="sendAction('open_games')"><img src="https://assets.nebulilabs.xyz/NebuliOS/games.png" class="icon-img"><span class="app-name">Games</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'AI')"><img src="https://assets.nebulilabs.xyz/NebuliOS/AI.png" class="icon-img"><span class="app-name">AI</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Music')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Music.png" class="icon-img"><span class="app-name">Music</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Editor')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Code_Editor.png" class="icon-img"><span class="app-name">Editor</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Chat')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Chat.png" class="icon-img"><span class="app-name">Chat</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Movies')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Streaming.png" class="icon-img"><span class="app-name">Movies</span></div>
+                <div class="app-item" onclick="sendAction('open_files')"><img src="https://assets.nebulilabs.xyz/NebuliOS/folder.png" class="icon-img"><span class="app-name">Files</span></div>
+                <div class="app-item" onclick="sendAction('open_settings')"><img src="https://assets.nebulilabs.xyz/NebuliOS/settings.png" class="icon-img"><span class="app-name">Settings</span></div>
+                <div class="app-item" onclick="sendAction('open_more')"><img src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" class="icon-img"><span class="app-name">More</span></div>
+            </div>
+        </div>
+
+        <div class="section-header"><span id="listTitle">Recent</span></div>
+        <div class="recent-list" id="dynamicList"></div>
+    </div>
+
+    <div class="footer">
+        <div class="user-pill"><div class="avatar">NG</div><span>Nebuli Guest</span></div>
+        <div class="power-icon" onclick="sendAction('close_start')">⏻</div>
+    </div>
+</div>
+
+<script>
+    const GAMES_ICON = "https://assets.nebulilabs.xyz/NebuliOS/games.png";
+    const FOLDER_ICON = "https://assets.nebulilabs.xyz/NebuliOS/folder.png";
+    let allGames = [];
+
+    function sendAction(type, detail = "") {
+        window.parent.postMessage({ type: type, detail: detail }, "*");
+    }
+
+    async function init() {
+        try {
+            const res = await fetch("https://nbli-os-v2.vercel.app/assets/game/games.json");
+            const data = await res.json();
+            allGames = Object.values(data).flat();
+            loadRecent();
+        } catch (e) { loadRecent(); }
+    }
+
+    function loadRecent() {
+        const container = document.getElementById('dynamicList');
+        container.innerHTML = "";
+        document.getElementById('listTitle').textContent = "Recent";
+        document.getElementById('appsWrapper').style.display = "block";
+
+        const gamesData = JSON.parse(localStorage.getItem('recentGames')) || [];
+        gamesData.slice(0, 2).forEach(g => {
+            createItem(container, g.name, "Game", GAMES_ICON, () => sendAction('open_specific_game', g.link));
+        });
+
+        const filesData = JSON.parse(localStorage.getItem('recentFiles')) || [];
+        filesData.slice(0, 2).forEach(path => {
+            const fileName = path.split('/').pop();
+            createItem(container, fileName, "File", FOLDER_ICON, () => sendAction('open_specific_file', path));
+        });
+    }
+
+    function searchVFS(obj, query, path = "", results = []) {
+        for (let key in obj) {
+            let currentPath = path + (path === "" ? "" : "/") + key;
+            if (obj[key].type === "file") {
+                if (key.toLowerCase().includes(query)) results.push({ name: key, fullPath: currentPath });
+            } else if (obj[key].type === "folder" && obj[key].children) {
+                searchVFS(obj[key].children, query, currentPath, results);
+            }
+        }
+        return results;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        const container = document.getElementById('dynamicList');
+        const appsWrapper = document.getElementById('appsWrapper');
+        if (q === "") { loadRecent(); return; }
+        appsWrapper.style.display = "none";
+        document.getElementById('listTitle').textContent = "Results";
+        container.innerHTML = "";
+
+        allGames.filter(g => g.title.toLowerCase().includes(q)).slice(0, 4).forEach(g => {
+            createItem(container, g.title, "Game", GAMES_ICON, () => sendAction('open_specific_game', g.href));
+        });
+
+        const vfsRaw = localStorage.getItem("vfs_file_manager_data");
+        if (vfsRaw) {
+            searchVFS(JSON.parse(vfsRaw), q).slice(0, 6).forEach(file => {
+                createItem(container, file.name, "File", FOLDER_ICON, () => sendAction('open_specific_file', file.fullPath));
+            });
+        }
+    });
+
+    function createItem(parent, title, meta, iconSrc, callback) {
+        const item = document.createElement('div');
+        item.className = 'recent-item';
+        item.onclick = callback;
+        item.innerHTML = `
+            <img src="${iconSrc}" class="recent-icon">
+            <div class="recent-info">
+                <span class="recent-name">${title}</span>
+                <span class="recent-meta">${meta}</span>
+            </div>
+        `;
+        parent.appendChild(item);
+    }
+    init();
+</script>
+
+</body>
+</html>

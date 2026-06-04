@@ -1,0 +1,213 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-start: #0b0013;
+    --bg-end: #150026;
+    --gold: #d4af37;
+    --violet: #8a2be2;
+    --text-color: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: radial-gradient(circle at center, var(--bg-end) 0%, var(--bg-start) 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-family: 'Kanit', sans-serif;
+    color: var(--text-color);
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+  }
+
+  .h404 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #6a00ff, #d4af37, #6a00ff 60%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+    z-index: 2;
+    line-height: 1;
+  }
+
+  p {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.88);
+    max-width: 620px;
+    z-index: 2;
+  }
+
+  #Text {
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.72);
+    max-width: 580px;
+    z-index: 2;
+  }
+
+  .button {
+    position: relative;
+    margin-top: 2.2rem;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(212,175,55,0.3);
+    color: var(--text-color);
+    padding: 16px 42px;
+    font-size: 17px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    user-select: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      0 8px 22px rgba(0,0,0,0.7),
+      0 0 10px rgba(212,175,55,0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, var(--gold), var(--violet), var(--gold));
+    background-size: 200% 200%;
+    border-radius: 16px;
+    filter: blur(18px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    animation: shimmer 5s linear infinite;
+  }
+
+  .button:hover {
+    transform: scale(1.08);
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(212,175,55,0.5);
+    box-shadow:
+      0 12px 36px rgba(138,43,226,0.5),
+      0 0 25px rgba(212,175,55,0.15),
+      inset 0 1px 3px rgba(255,255,255,0.3);
+  }
+
+  .button:hover::before {
+    opacity: 0.18;
+  }
+
+  .particle {
+    position: absolute;
+    background: rgba(212,175,55,0.25);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 8s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%,100% {
+      transform: translateY(0);
+      opacity: 0.8;
+    }
+
+    50% {
+      transform: translateY(-60px);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  #nbliImport {
+    display: none;
+  }
+</style>
+</head>
+
+<body>
+
+<h1 class="h404">404</h1>
+
+<p>The page you are looking for can not be found.</p>
+
+<div id="Text">
+  If you are using the proxy, please hit the button below to reload the page.
+</div>
+
+<button class="button" id="reloadBtn">↻ Reload</button>
+
+<script>
+  function reloadPage() {
+    try {
+      if (window.self !== window.top) {
+        window.location.reload();
+      } else {
+        window.location.reload();
+      }
+    } catch (e) {
+      window.location.reload();
+    }
+  }
+
+  document.getElementById('reloadBtn').addEventListener('click', reloadPage);
+
+  for (let i = 0; i < 25; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+
+    const size = Math.random() * 4 + 2;
+
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.top = Math.random() * 100 + 'vh';
+    particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
+
+    document.body.appendChild(particle);
+  }
+</script>
+</body>
+</html>

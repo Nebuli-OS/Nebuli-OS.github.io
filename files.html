@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebuli File Manager</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-theme">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --bg: #0e0114;
+            --panel: rgba(255,255,255,0.03);
+            --glass: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-dim: rgba(212,175,55,0.18);
+            --violet: #8A2BE2;
+            --text: #f5e8ff;
+            --muted: rgba(245,232,255,0.55);
+            --shadow: 0 8px 30px rgba(0,0,0,0.6);
+            --modal-bg: #160a22;
+        }
+
+        * { box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(1200px 800px at 10% 10%, rgba(138,43,226,0.06), transparent),
+                        radial-gradient(1000px 600px at 90% 80%, rgba(212,175,55,0.02), transparent),
+                        var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        #file-manager-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+
+        .toolbar {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(90deg, rgba(138,43,226,0.08), rgba(212,175,55,0.04));
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        #path-bar {
+            flex: 1;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--muted);
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        #path-bar span {
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        #path-bar span:hover { text-decoration: underline; color: #ffe59a; }
+
+        .btn {
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all .15s ease;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255,255,255,0.08);
+            border-color: var(--gold);
+        }
+
+        #file-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        #file-list::-webkit-scrollbar { width: 8px; }
+        #file-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(212,175,55,0.22), rgba(138,43,226,0.12));
+            border-radius: 8px;
+        }
+
+        .file-item {
+            display: grid;
+            grid-template-columns: 40px 2fr 1fr 1fr;
+            align-items: center;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: background .12s;
+            cursor: pointer;
+        }
+
+        .file-item:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .icon {
+            color: var(--gold);
+            display: flex;
+            justify-content: center;
+        }
+
+        .item-name { font-weight: 600; color: var(--text); }
+        .item-type, .item-size { color: var(--muted); font-size: 0.9rem; }
+
+        #home-warning, #project-message {
+            padding: 12px 24px;
+            background: rgba(212, 175, 55, 0.05);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #project-message a {
+            color: var(--text);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        #context-menu {
+            position: fixed;
+            background: #1a0a2a;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 6px;
+            border-radius: 8px;
+            min-width: 160px;
+        }
+
+        #context-menu li {
+            padding: 10px 14px;
+            cursor: pointer;
+            color: var(--text);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        #context-menu li:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 20000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 900px;
+            background: var(--modal-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            animation: modalScale 0.2s ease-out;
+        }
+
+        @keyframes modalScale {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body {
+            padding: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            max-height: 80vh;
+            overflow: hidden;
+        }
+
+        .modal-footer {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .editor-wrapper {
+            position: relative;
+            flex: 1;
+            background: #0d0d0d;
+            overflow: hidden;
+            min-height: 60vh;
+        }
+
+        #preview-viewer textarea, #preview-viewer pre {
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            tab-size: 4;
+            white-space: pre;
+            word-wrap: normal;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            outline: none;
+            overflow: auto;
+        }
+
+        #preview-viewer textarea {
+            background: transparent;
+            color: transparent;
+            caret-color: #fff;
+            z-index: 2;
+            resize: none;
+        }
+
+        #preview-viewer pre {
+            z-index: 1;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        #preview-viewer code {
+            font-family: inherit;
+            background: transparent;
+            padding: 0;
+        }
+
+        #preview-viewer iframe {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            background: #fff;
+        }
+
+        #preview-viewer .img-container {
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        #preview-viewer img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
+        .img-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .img-nav:hover { background: var(--gold); color: #000; }
+        .img-nav.prev { left: 20px; }
+        .img-nav.next { right: 20px; }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover { color: #ff5555; }
+    </style>
+</head>
+<body>
+
+<div id="file-manager-container">
+    <div class="toolbar">
+        <button class="btn" id="new-folder-btn"><i data-lucide="folder-plus"></i> New Folder</button>
+        <button class="btn" id="upload-btn"><i data-lucide="upload"></i> Upload</button>
+        <div id="path-bar"></div>
+    </div>
+    <div id="home-warning" style="display:none;">
+        <i data-lucide="alert-triangle" size="18"></i>
+        <span>Try not to upload high file size images/videos. That could cause slow load times or crashes.</span>
+    </div>
+    <div id="project-message" style="display:none;">
+        <i data-lucide="info" size="18"></i>
+        <span>This folder connects to your projects in the <a href="/code_editor.html">Code Editor</a></span>
+    </div>
+    <div id="file-list"></div>
+</div>
+
+<ul id="context-menu">
+    <li data-action="rename">Rename</li>
+    <li data-action="delete" style="color: #ff5555;">Delete</li>
+</ul>
+
+<div id="choice-modal" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+            <h2 id="choice-filename"></h2>
+            <button class="close-btn choice-close"><i data-lucide="x" size="18"></i></button>
+        </div>
+        <div class="modal-body" style="padding: 20px;">
+            <div style="display:flex; flex-direction: column; gap:10px;">
+                <button id="edit-button" class="btn"><i data-lucide="edit-3"></i> Edit Code</button>
+                <button id="view-button" class="btn"><i data-lucide="eye"></i> View Live</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="preview-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="preview-filename"></h2>
+            <button class="close-btn preview-close"><i data-lucide="x" size="18"></i></button>
+        </div>
+        <div class="modal-body">
+            <div id="preview-viewer"></div>
+        </div>
+        <div class="modal-footer" id="modal-footer" style="display: none;">
+            <button id="save-content-btn" class="btn" style="border-color: var(--violet);"><i data-lucide="save"></i> Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<input type="file" id="file-input" multiple style="display: none;">
+
+<script>
+    const STORAGE_KEY = 'vfs_file_manager_data';
+    const RECENT_KEY = 'recentFiles';
+    let fileSystem = {};
+    let currentPath = ['SystemRoot', 'Home'];
+    let selectedItem = null;
+    let currentFile = null;
+    let imageGallery = [];
+    let currentImgIndex = -1;
+
+    const fileList = document.getElementById('file-list');
+    const pathBar = document.getElementById('path-bar');
+    const fileInput = document.getElementById('file-input');
+    const contextMenu = document.getElementById('context-menu');
+    const choiceModal = document.getElementById('choice-modal');
+    const previewModal = document.getElementById('preview-modal');
+    const previewViewer = document.getElementById('preview-viewer');
+    const saveBtn = document.getElementById('save-content-btn');
+    const modalFooter = document.getElementById('modal-footer');
+    const homeWarning = document.getElementById('home-warning');
+    const projectMsg = document.getElementById('project-message');
+
+    function saveFS() { localStorage.setItem(STORAGE_KEY, JSON.stringify(fileSystem)); }
+
+    function addToRecent(path) {
+        let recents = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+        recents = recents.filter(p => p !== path);
+        recents.unshift(path);
+        localStorage.setItem(RECENT_KEY, JSON.stringify(recents.slice(0, 10)));
+    }
+
+    function loadFS() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+            fileSystem = JSON.parse(data);
+        } else {
+            fileSystem = {
+                'SystemRoot': {
+                    type: 'folder',
+                    children: {
+                        'Home': {
+                            type: 'folder',
+                            children: {
+                                'Documents': { type: 'folder', children: {} },
+                                'Code_Projects': { type: 'folder', children: {} },
+                                'Media': { type: 'folder', children: {} }
+                            }
+                        }
+                    }
+                }
+            };
+            saveFS();
+        }
+    }
+
+    function getCurrentFolder() {
+        let node = fileSystem;
+        for (const key of currentPath) {
+            node = node[key].children || node[key];
+        }
+        return node;
+    }
+
+    function render() {
+        fileList.innerHTML = '';
+        const folder = getCurrentFolder();
+        homeWarning.style.display = (currentPath.length === 2 && currentPath[1] === 'Home') ? 'flex' : 'none';
+        projectMsg.style.display = (currentPath.length === 3 && currentPath[2] === 'Code_Projects') ? 'flex' : 'none';
+
+        if (currentPath.length > 2) {
+            const up = document.createElement('div');
+            up.className = 'file-item';
+            up.innerHTML = `<span class="icon"><i data-lucide="chevron-up"></i></span><span class="item-name">..</span><span></span><span></span>`;
+            up.onclick = () => { currentPath.pop(); render(); };
+            fileList.appendChild(up);
+        }
+
+        Object.keys(folder).forEach(key => {
+            const item = folder[key];
+            const el = document.createElement('div');
+            el.className = 'file-item';
+            let icon = 'file';
+            if(item.type === 'folder') icon = 'folder';
+            else if(item.mime && item.mime.startsWith('image/')) icon = 'image';
+            else if(key.endsWith('.html') || key.endsWith('.js') || key.endsWith('.css')) icon = 'file-code';
+            
+            el.innerHTML = `
+                <span class="icon"><i data-lucide="${icon}"></i></span>
+                <span class="item-name">${key}</span>
+                <span class="item-type">${item.type}</span>
+                <span class="item-size">${item.size || '-'}</span>
+            `;
+            el.onclick = () => item.type === 'folder' ? openFolder(key) : openFile(key, item);
+            el.oncontextmenu = (e) => {
+                e.preventDefault();
+                selectedItem = key;
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = e.clientX + 'px';
+                contextMenu.style.top = e.clientY + 'px';
+            };
+            fileList.appendChild(el);
+        });
+        
+        pathBar.innerHTML = '';
+        currentPath.slice(1).forEach((seg, i) => {
+            const s = document.createElement('span');
+            s.textContent = seg + ' / ';
+            s.onclick = () => { currentPath = currentPath.slice(0, i + 2); render(); };
+            pathBar.appendChild(s);
+        });
+        lucide.createIcons();
+    }
+
+    function openFolder(name) { currentPath.push(name); render(); }
+
+    function openFile(name, file) {
+        currentFile = { name, ...file };
+        addToRecent(currentPath.join('/') + '/' + name);
+        if (name.endsWith('.html')) {
+            document.getElementById('choice-filename').innerHTML = `<i data-lucide="file-code" size="18"></i> ${name}`;
+            lucide.createIcons();
+            choiceModal.style.display = 'flex';
+        } else if (file.mime && file.mime.startsWith('image/')) {
+            updateImageGallery();
+            currentImgIndex = imageGallery.findIndex(img => img.name === name);
+            showPreview('image');
+        } else {
+            showPreview('edit');
+        }
+    }
+
+    function updateImageGallery() {
+        const folder = getCurrentFolder();
+        imageGallery = Object.keys(folder)
+            .filter(key => folder[key].mime && folder[key].mime.startsWith('image/'))
+            .map(key => ({ name: key, ...folder[key] }));
+    }
+
+    function navigateGallery(dir) {
+        currentImgIndex = (currentImgIndex + dir + imageGallery.length) % imageGallery.length;
+        currentFile = imageGallery[currentImgIndex];
+        showPreview('image');
+    }
+
+    function showPreview(mode) {
+        previewViewer.innerHTML = '';
+        modalFooter.style.display = 'none';
+        
+        if (mode === 'image') {
+            const container = document.createElement('div');
+            container.className = 'img-container';
+            if (imageGallery.length > 1) {
+                const prev = document.createElement('div');
+                prev.className = 'img-nav prev';
+                prev.innerHTML = '<i data-lucide="chevron-left"></i>';
+                prev.onclick = (e) => { e.stopPropagation(); navigateGallery(-1); };
+                const next = document.createElement('div');
+                next.className = 'img-nav next';
+                next.innerHTML = '<i data-lucide="chevron-right"></i>';
+                next.onclick = (e) => { e.stopPropagation(); navigateGallery(1); };
+                container.appendChild(prev);
+                container.appendChild(next);
+            }
+            const img = document.createElement('img');
+            img.src = currentFile.content;
+            container.appendChild(img);
+            previewViewer.appendChild(container);
+        } else if (mode === 'live') {
+            const content = atob(currentFile.content.split(',')[1] || '');
+            const ifr = document.createElement('iframe');
+            ifr.srcdoc = content;
+            previewViewer.appendChild(ifr);
+        } else {
+            const content = atob(currentFile.content.split(',')[1] || '');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'editor-wrapper';
+            
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+            const txt = document.createElement('textarea');
+            
+            const ext = currentFile.name.split('.').pop().toLowerCase();
+            code.className = `language-${ext}`;
+            code.textContent = content;
+            pre.appendChild(code);
+            
+            txt.value = content;
+            txt.setAttribute('spellcheck', 'false');
+            txt.setAttribute('wrap', 'off');
+            
+            const updateHighlight = () => {
+                code.textContent = txt.value;
+                hljs.highlightElement(code);
+            };
+
+            txt.oninput = updateHighlight;
+            txt.onscroll = () => {
+                pre.scrollTop = txt.scrollTop;
+                pre.scrollLeft = txt.scrollLeft;
+            };
+
+            wrapper.appendChild(pre);
+            wrapper.appendChild(txt);
+            previewViewer.appendChild(wrapper);
+            
+            setTimeout(() => {
+                updateHighlight();
+            }, 10);
+
+            modalFooter.style.display = 'flex';
+            saveBtn.onclick = () => {
+                const folder = getCurrentFolder();
+                folder[currentFile.name].content = 'data:' + (currentFile.mime || 'text/plain') + ';base64,' + btoa(txt.value);
+                saveFS();
+                previewModal.style.display = 'none';
+            };
+        }
+        
+        let iconType = mode === 'image' ? 'image' : (mode === 'live' ? 'eye' : 'edit-3');
+        document.getElementById('preview-filename').innerHTML = `<i data-lucide="${iconType}" size="18"></i> ${currentFile.name}`;
+        lucide.createIcons();
+        previewModal.style.display = 'flex';
+    }
+
+    document.getElementById('new-folder-btn').onclick = () => {
+        const n = prompt("Name:");
+        if(n) { getCurrentFolder()[n] = { type: 'folder', children: {} }; saveFS(); render(); }
+    };
+
+    document.getElementById('upload-btn').onclick = () => fileInput.click();
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (res) => {
+            getCurrentFolder()[file.name] = { 
+                type: 'file', 
+                content: res.target.result, 
+                mime: file.type,
+                size: (file.size/1024).toFixed(1) + ' KB' 
+            };
+            saveFS(); render();
+        };
+        reader.readAsDataURL(file);
+    };
+
+    document.getElementById('edit-button').onclick = () => { choiceModal.style.display='none'; showPreview('edit'); };
+    document.getElementById('view-button').onclick = () => { choiceModal.style.display='none'; showPreview('live'); };
+    document.querySelectorAll('.choice-close, .preview-close').forEach(b => b.onclick = () => { choiceModal.style.display='none'; previewModal.style.display='none'; });
+
+    window.onclick = (e) => {
+        if(e.target.classList.contains('modal')) {
+            choiceModal.style.display = 'none';
+            previewModal.style.display = 'none';
+        }
+        contextMenu.style.display = 'none';
+    };
+    
+    contextMenu.onclick = (e) => {
+        const action = e.target.dataset.action;
+        if (action === 'delete' && confirm('Delete?')) delete getCurrentFolder()[selectedItem];
+        if (action === 'rename') {
+            const n = prompt("New name:", selectedItem);
+            if(n) { getCurrentFolder()[n] = getCurrentFolder()[selectedItem]; delete getCurrentFolder()[selectedItem]; }
+        }
+        saveFS(); render();
+    };
+
+    function handleURLParams() {
+        const fullURL = window.location.search;
+        if (!fullURL || fullURL.length < 2) return;
+        const rawPath = decodeURIComponent(fullURL.substring(1));
+        const pathSegments = rawPath.split('/');
+        const fileName = pathSegments.pop();
+        let node = fileSystem;
+        let success = true;
+        for (const segment of pathSegments) {
+            if (node[segment] && node[segment].type === 'folder') {
+                node = node[segment].children;
+            } else {
+                success = false;
+                break;
+            }
+        }
+        if (success && node[fileName] && node[fileName].type === 'file') {
+            currentPath = pathSegments;
+            render();
+            openFile(fileName, node[fileName]);
+        }
+    }
+
+    loadFS();
+    render();
+    handleURLParams();
+</script>
+</body>
+</html>

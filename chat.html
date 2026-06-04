@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vortex X Nebuli</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+
+  #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  #popupContent {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+  }
+
+  #popupContent h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  #popupContent p {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  #closeBtn {
+    background: linear-gradient(135deg, #9d00ff, #ffc400);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  #closeBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div id="popup">
+  <div id="popupContent">
+    <h2>Nebuli X Vortex chats</h2>
+    <p>Chats are made possible in partnership with vortex. Thank you vortex for making this possible.</p>
+    <p>(If site gives 404, reload & try again)</p>
+    <button id="closeBtn">Continue</button>
+  </div>
+</div>
+
+<script>
+  const popup = document.getElementById('popup');
+  const closeBtn = document.getElementById('closeBtn');
+
+  closeBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = '/p/ultraviolet/embed.html#https://vtx.chat/embed/nebuli';
+    document.body.appendChild(iframe);
+  });
+</script>
+
+</body>
+</html>
+

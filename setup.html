@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NebuliOS Setup</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", sans-serif; }
+
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a0a0a;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  overflow: hidden;
+}
+
+#page-1-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(135deg, #5f00e6 0%, #d4af37 50%, #5f00e6 100%);
+  background-size: 300% 300%;
+  animation: moveGradient 6s linear infinite;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  opacity: 1;
+}
+@keyframes moveGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#wizard {
+  width: 560px;
+  max-width: calc(100% - 48px);
+  min-height: 360px;
+  border-radius: 18px;
+  background: rgba(18,18,18,0.78);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 34px;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  inset: 0 0 0 0;
+  width: 100%;
+  padding: 20px 10px;
+  left: 100%;
+  opacity: 0;
+  transition: transform 0.48s cubic-bezier(.2,.9,.3,1), opacity 0.38s ease;
+  transform: translateX(0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page.active {
+  left: 0;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page.left {
+  left: -100%;
+  opacity: 0;
+}
+
+#title-reveal {
+  font-size: clamp(48px, 8vw, 72px);
+  line-height: 0.95;
+  font-weight: 900;
+  text-align: center;
+  color: transparent;
+  background: linear-gradient(135deg, #5f00e6 0%, #d4af37 50%, #5f00e6 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: moveGradient 6s linear infinite;
+  margin-bottom: 18px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.page h1 {
+  font-size: 24px;
+  color: #7c3cff;
+  margin-bottom: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+#page-1 h1 {
+  color: #ffffff !important;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+p {
+  color: #e7e7e7;
+  opacity: 0.95;
+  text-align: center;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  max-width: 88%;
+  font-size: 15px;
+}
+
+.option {
+  width: calc(100% - 40px);
+  max-width: 420px;
+  background: #101010;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: transform .16s ease, background .18s ease, box-shadow .18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+.option:hover { transform: translateY(-4px); background: #171717; }
+.option.selected {
+  border-color: rgba(212,175,55,0.9);
+  box-shadow: 0 6px 26px rgba(106,0,255,0.06);
+}
+
+#nav-bar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  width: min(720px, calc(100% - 28px));
+  height: 62px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  background: rgba(20,20,20,0.86);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+}
+
+#nav-bar button {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+#nav-bar button:hover { background: #202020; }
+
+#dots { display: flex; gap: 10px; align-items:center; }
+.dot {
+  width: 12px; height: 12px; background: #5a5a5a; border-radius:50%;
+  transition: transform .18s ease, background .2s ease, box-shadow .2s ease;
+}
+.dot.active { background: #d4af37; transform: scale(1.15); box-shadow: 0 6px 18px rgba(212,175,55,0.12); }
+
+@media (max-width:560px) {
+  #wizard { padding: 20px; }
+  #nav-bar { height: 54px; padding: 6px 12px; }
+  .option { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-1-bg" aria-hidden="true"></div>
+
+<div id="wizard" role="main" aria-labelledby="title-reveal">
+
+  <section class="page active" id="page-1" aria-hidden="false">
+    <div id="title-reveal" aria-hidden="true">NebuliOS</div>
+    <h1>Welcome</h1>
+    <p>Let’s customize your experience so that you can explore a galaxy of web freedom better.</p>
+  </section>
+
+  <section class="page" id="page-2" aria-hidden="true">
+    <h1 class="notranslate">Choose Default &#x0420;&#x0433;&#x043e;&#x0445;&#x0443;</h1>
+    <p class="notranslate">Pick the &#x0420;&#x0433;&#x043e;&#x0445;&#x0443; NebuliOS should use by default. You can change this later in Settings.</p>
+
+    <div id="opt-ultra" class="option" onclick="selectp('light')" role="button" tabindex="0">
+      <span class="notranslate">&#x0055;&#x04cf;&#x0074;&#x0433;&#x0430;&#x03bd;&#x0456;&#x043e;&#x04cf;&#x0435;&#x0074; (Recommended)</span>
+      <small id="choice-ultra" aria-hidden="true"> </small>
+    </div>
+
+    <div id="opt-scram" class="option" onclick="selectp('sonic')" role="button" tabindex="0">
+      <span class="notranslate">&#x0405;&#x0441;&#x0433;&#x0430;&#x006d;&#x0458;&#x0435;&#x0074;</span>
+      <small id="choice-scram" aria-hidden="true"> </small>
+    </div>
+  </section>
+
+  <section class="page" id="page-3" aria-hidden="true">
+    <h1>Tips & Tricks</h1>
+    <p>
+      • Use CTRL +/- and fullscreen for a better fitting experience.<br>
+      • Add shortcuts on the search page for your most-used sites.<br>
+      • You can edit the taskbar settings in settings.<br>
+      • Resize windows by dragging the bottom right corner.<br>
+      • Press `alt + shift + ?` to see all keyboard shortcuts<br>
+      • You can see this setup at anytime in the "more" page.
+    </p>
+  </section>
+
+  <section class="page" id="page-4" aria-hidden="true">
+    <h1>Status & Announcements</h1>
+    <p>
+      WELCOME TO V2 🥳<br>
+      Pretty much EVERYTHING has been updated. This includes but is not limited to:<br>
+      • SJ (A faster internet worker, with more accessible sites)<br>
+      • Better games page with multiple sources<br>
+      • A search engine?? woww<br>
+      • Updated tools page UI with new options to import/export all of your tools data to another link!<br>
+      • New UI for the AI, along with multiple chats.<br>
+      • Vortex Guilds chats!! New partnership, thx Evicly<br>
+      • You can edit the taskbar settings in settings.<br>
+      • Updated code editor with multiple projects.<br>
+      • Updated streaming page with "continue watching"<br>
+      • File manager.<br>
+    </p>
+  </section>
+
+</div>
+
+<nav id="nav-bar" aria-label="Setup navigation">
+  <button id="backBtn" onclick="prevPage()">Back</button>
+
+  <div id="dots" aria-hidden="true">
+    <div class="dot active" id="dot-1"></div>
+    <div class="dot" id="dot-2"></div>
+    <div class="dot" id="dot-3"></div>
+    <div class="dot" id="dot-4"></div>
+  </div>
+
+  <button id="nextBtn" onclick="nextPage()">Next</button>
+</nav>
+
+<script>
+let currentPage = 1;
+const totalPages = 4;
+
+function showPage(n) {
+  currentPage = Math.max(1, Math.min(totalPages, n));
+  document.querySelectorAll(".page").forEach((el, idx) => {
+    const pageIndex = idx + 1;
+    if (pageIndex === currentPage) {
+      el.classList.add("active");
+      el.classList.remove("left");
+      el.setAttribute("aria-hidden", "false");
+    } else if (pageIndex < currentPage) {
+      el.classList.add("left");
+      el.classList.remove("active");
+      el.setAttribute("aria-hidden", "true");
+    } else {
+      el.classList.remove("active", "left");
+      el.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  const bg = document.getElementById("page-1-bg");
+  bg.style.opacity = (currentPage === 1 ? "1" : "0");
+
+  document.querySelectorAll(".dot").forEach((d, i) => {
+    d.classList.toggle("active", i + 1 === currentPage);
+  });
+
+  document.getElementById("backBtn").disabled = (currentPage === 1);
+  document.getElementById("nextBtn").textContent = (currentPage === totalPages ? "Finish" : "Next");
+}
+
+function nextPage() {
+  if (currentPage < totalPages) {
+    showPage(currentPage + 1);
+  } else {
+    finishSetup();
+  }
+}
+function prevPage() { showPage(currentPage - 1); }
+
+function selectp(name) {
+  localStorage.setItem("nebuli-p", name);
+
+  document.getElementById("opt-ultra").classList.remove("selected");
+  document.getElementById("opt-scram").classList.remove("selected");
+  if (name === "light") document.getElementById("opt-ultra").classList.add("selected");
+  else document.getElementById("opt-scram").classList.add("selected");
+}
+
+function finishSetup() {
+  localStorage.setItem("nebuli-setup-done", "true");
+  if (!localStorage.getItem("nebuli-p"))
+    localStorage.setItem("nebuli-p", "light");
+
+  window.parent.postMessage({ action: "close-embed" }, "*");
+}
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") nextPage();
+  if (e.key === "ArrowLeft") prevPage();
+});
+
+let touchStartX = 0;
+window.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+window.addEventListener("touchend", (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (dx < -40) nextPage();
+  if (dx > 40) prevPage();
+}, {passive:true});
+
+(function init() {
+  const saved = localStorage.getItem("nebuli-p");
+  if (saved === "sonic") selectp("sonic");
+  else if (saved === "light") selectp("light");
+
+  showPage(1);
+})();
+</script>
+</body>
+</html>
+

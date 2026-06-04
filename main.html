@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/assets/main/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NebuliOS</title>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div id="wrapper" role="region" aria-label="Browser Omnibox">
+<button id="exitImmersiveBtn" title="Exit Fullscreen Mode" aria-label="Exit Fullscreen Mode" role="button" tabindex="0">
+&times;
+</button>
+<div id="tabs" aria-label="Browser Tabs" role="tablist" tabindex="0">
+<div class="traffic" title="Window Controls" role="group" aria-label="Window controls">
+<div class="close" title="Close Omnibox" role="button" tabindex="0" aria-label="Close window"></div>
+<div class="min" title="Minimize Omnibox" role="button" tabindex="0" aria-label="Minimize window"></div>
+<div class="max" title="Maximize/Restore Omnibox" role="button" tabindex="0" aria-label="Maximize or restore window"></div>
+</div>
+</div>
+<div id="header">
+<button id="backBtn" class="nav-btn" title="Back" disabled aria-label="Back">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_back.png" alt="◀" style="width:16px; height:16px;"/>
+</button>
+<button id="forwardBtn" class="nav-btn" title="Forward" disabled aria-label="Forward">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_forward.png" alt="▶" style="width:16px; height:16px;"/>
+</button>
+<button id="reloadBtn" class="nav-btn" title="Reload" aria-label="Reload page">⟳</button>
+<input id="urlInput" type="text" placeholder="Search or enter URL"/>
+
+<button id="newTab" class="nav-btn" title="New Tab" aria-label="Open New Tab">
+<img id="newtabIcon" src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" alt="[]" style="width:16px; height:16px;"/>
+</button>
+
+<button id="fullscreenBtn" class="nav-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen Mode">
+<img id="fullscreenIcon" src="https://assets.nebulilabs.xyz/NebuliOS/fullscreen.png" alt="[]" style="width:16px; height:16px;"/>
+</button>
+
+</div>
+<div id="view" role="main" aria-live="polite"></div>
+<div id="resize-handle" aria-label="Resize omnibox" role="separator" tabindex="0" title="Resize"></div>
+</div>
+
+<div id="minimizeBubble" title="Restore Omnibox" role="button" tabindex="0" aria-label="Restore omnibox">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/internet.png" alt="🌐" style="width:32px; height:32px;"/>
+</div>
+
+<div id="nebuliText" aria-hidden="true">NebuliOS</div>
+
+<div id="centerTextContainer" aria-live="polite" aria-label="Current time and battery level">
+<div id="centerTime">00:00:00</div>
+<div id="centerBattery">Battery: N/A</div>
+</div>
+
+<div id="nebuliRootPopup">
+<div id="nebuliRootPopupClose">×</div>
+<div id="nebuliRootPopupTitle">Not a big fan of the OS look?</div>
+<button id="openNebuliRoot">Try Nebuli Root</button>
+</div>
+
+<div id="nebuliRootFrameContainer">
+<iframe id="nebuliRootFrame" src="/nbli-root.html"></iframe>
+</div>
+
+<div id="startMenuContainer" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: 415px; height: 525px; z-index: 10001; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);">
+<iframe id="startMenuFrame" src="/startmenu.html" style="width: 100%; height: 100%; border: none; margin: 0; padding: 0;"></iframe>
+</div>
+
+<div class="taskbar pos-bottom appearance-glassy">
+<button id="startMenuBtn" title="Start Menu" style="background: none; border: none; padding: 8px 12px; cursor: pointer; display: flex; filter: invert(0); align-items: center; justify-content: center; height: 100%;">
+<img src="https://assets.nebulilabs.xyz/nebuli.png" alt="Start Menu" style="width: 24px; height: 24px;"/>
+</button>
+
+<div id="statusIndicator">
+<div id="statusTime"></div>
+<div id="statusBattery"></div>
+</div>
+
+<div id="appButtonsContainer">
+<button id="browserBtn" title="Internet">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/internet.png" alt="Internet"/>
+</button>
+<button id="gamesBtn" title="Games">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/games.png" alt="Games"/>
+</button>
+<button id="toolsBtn" title="Tools">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/tools.png" alt="Tools"/>
+</button>
+<button id="filesBtn" title="Files">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/folder.png" alt="Files"/>
+</button>
+<button id="moreBtn" title="More">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" alt="More"/>
+</button>
+<div id="customAppsContainer"></div>
+<button id="taskbarSettingsBtn" title="Settings">
+<img src="https://assets.nebulilabs.xyz/NebuliOS/settings.png" alt="Settings"/>
+</button>
+</div>
+</div>
+
+<div id="taskbarCollapsedHint"></div>
+
+<div id="settingsTemplate" style="display: none;">
+  <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+    <button class="settings-pill active" data-section="main">Main Settings</button>
+    <button class="settings-pill" data-section="taskbar">Taskbar Settings</button>
+    <button class="settings-pill" data-section="custom">Custom Apps</button>
+  </div>
+
+  <div class="settings-section" data-section-content="main">
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Main Settings</div>
+    <label for="pSelect" class="notranslate">
+      Select &#x0420;&#x0433;&#x043e;&#x0445;&#x0443;:
+      <select id="pSelect" aria-describedby="pDesc">
+        <option value="light" class="notranslate">&#x0055;&#x04cf;&#x0074;&#x0433;&#x0430;&#x03bd;&#x0456;&#x043e;&#x04cf;&#x0435;&#x0074;</option>
+        <option value="sonic" class="notranslate">&#x0405;&#x0441;&#x0433;&#x0430;&#x006d;&#x0458;&#x0435;&#x0074;</option>
+      </select>
+    </label>
+
+    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd;">
+      <label for="wispInput" style="border-bottom: none; flex-direction: column;">
+        <span style="margin-bottom: 5px; font-size: 13px;">Wisp Server URL:</span>
+        <input type="text" id="wispInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="wss://example.com/"/>
+      </label>
+    </div>
+
+    <div style="margin-top: 12px;">
+      <label for="bareInput" style="border-bottom: none; flex-direction: column;">
+        <span style="margin-bottom: 5px; font-size: 13px;">Bare Server URL:</span>
+        <input type="text" id="bareInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="https://example.com/"/>
+      </label>
+    </div>
+  </div>
+
+  <div class="settings-section" data-section-content="taskbar" style="display: none;">
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Taskbar Settings</div>
+
+    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; padding-bottom: 10px;">
+      <label for="appearanceTypeSelect" style="border-bottom: none;">
+        <span>Appearance Type:</span>
+        <select id="appearanceTypeSelect">
+          <option value="glassy" selected>Glassy</option>
+          <option value="solid">Solid Color</option>
+          <option value="gradient">Gradient</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="solidColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid #eee;">
+      <div style="font-weight: 600; margin-bottom: 5px; color: #333;">Solid Color:</div>
+      <label for="solidColorInput" style="border-bottom: none;">
+        <span>Pick Color:</span>
+        <input type="color" id="solidColorInput" value="#333333" style="width: 80px; height: 36px; cursor: pointer;">
+      </label>
+    </div>
+
+    <div id="gradientColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid #eee;">
+      <div style="font-weight: 600; margin-bottom: 5px; color: #333;">Gradient Colors:</div>
+      <label for="gradientColor1Input" style="border-bottom: 1px solid #eee; margin-bottom: 0;">
+        <span>Color 1 (Left):</span>
+        <input type="color" id="gradientColor1Input" value="#007aff" style="width: 80px; height: 36px; cursor: pointer;">
+      </label>
+      <label for="gradientColor2Input" style="border-bottom: none;">
+        <span>Color 2 (Right):</span>
+        <input type="color" id="gradientColor2Input" value="#5ac8fa" style="width: 80px; height: 36px; cursor: pointer;">
+      </label>
+    </div>
+
+    <label for="taskbarFullCheckbox" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+      <span>Full Bar Mode</span>
+      <input type="checkbox" id="taskbarFullCheckbox"/>
+    </label>
+    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: #777;">
+      Full mode makes the bar span the entire edge of the screen.
+    </div>
+
+    <label for="taskbarCollapseCheckbox" style="padding-top: 0; border-top: none;">
+      <span>Auto-Collapse Taskbar</span>
+      <input type="checkbox" id="taskbarCollapseCheckbox"/>
+    </label>
+    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: #777;">
+      Hide the taskbar when not focused. Hover to show.
+    </div>
+
+    <label for="taskbarPositionSelect">
+      <span>Position:</span>
+      <select id="taskbarPositionSelect">
+        <option value="bottom" selected>Bottom</option>
+        <option value="top">Top</option>
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+      </select>
+    </label>
+    <div class="info" style="margin-top: -12px; margin-bottom: 30px; font-size: 13px; color: #777;">
+      Select where the taskbar will appear on your screen.
+    </div>
+  </div>
+
+  <div class="settings-section" data-section-content="custom" style="display: none;">
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Custom Apps</div>
+
+    <div id="customAppsList" style="margin-bottom: 12px;">
+    </div>
+
+    <div style="display: flex; gap: 8px; flex-direction: column;">
+      <div>
+        <label for="appUrlInput" style="display: flex; flex-direction: column; border-bottom: none;">
+          <span style="margin-bottom: 4px; font-size: 13px;">App URL:</span>
+          <input type="text" id="appUrlInput" placeholder="https://example.com" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px;">
+        </label>
+      </div>
+      <div>
+        <label for="appTitleInput" style="display: flex; flex-direction: column; border-bottom: none;">
+          <span style="margin-bottom: 4px; font-size: 13px;">App Title:</span>
+          <input type="text" id="appTitleInput" placeholder="My App" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px;">
+        </label>
+      </div>
+      <button id="addAppBtn" title="Add Custom App">
+        Add App
+      </button>
+    </div>
+
+    <div class="settings-divider"></div>
+  </div>
+  <button id="resetAllSettingsBtn" title="Reset all settings to default">
+      Reset All Settings to Default
+  </button>
+</div>
+
+<script src="/assets/main/script.js"></script>
+</body>
+</html>

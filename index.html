@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Riverview Academy is a premier preparatory institution established in 1922, offering a rigorous curriculum focused on analytical thought, creative expression, and global citizenship.">
+    <meta name="keywords" content="Riverview Academy, private school, preparatory education, college placement, academic excellence, Highland District school, student hub, research academy">
+    <meta name="author" content="Riverview Academy Administration">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Riverview Academy | Excellence in Preparatory Education">
+    <meta property="og:description" content="Join a community dedicated to academic rigor and global citizenship. 98% college placement rate and 12:1 student-to-teacher ratio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.riverviewacademy.edu">
+    <meta property="og:site_name" content="Riverview Academy">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Riverview Academy | Established 1922">
+    <meta name="twitter:description" content="Explore our digital ecosystem, writing labs, and world-class faculty directory.">
+    <meta name="theme-color" content="#004d40">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2D5DPFL81S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2D5DPFL81S');
+    </script>
+    <title>Riverview Academy</title>
+    <style>
+        :root {
+            --primary: #004d40;
+            --accent: #c0ca33;
+            --dark: #212121;
+            --light-grey: #f5f5f5;
+            --bg: #ffffff;
+            --border: 3px solid var(--primary);
+            --transition: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--dark);
+            background-color: var(--bg);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+            display: none;
+        }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: reveal 0.6s ease-out forwards;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            margin-left: 25px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        header {
+            padding: 120px 5%;
+            background-color: var(--light-grey);
+            border-bottom: var(--border);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin: 0;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            color: var(--primary);
+        }
+
+        .hero-sub {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 20px 0 40px 0;
+            font-weight: 500;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            border: var(--border);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translate(-6px, -6px);
+            box-shadow: 6px 6px 0px var(--primary);
+        }
+
+        .section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            letter-spacing: -2px;
+            margin-bottom: 40px;
+        }
+
+        .grid-bento {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .bento-box {
+            border: var(--border);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .bento-box:hover {
+            background: #08aa8e;
+        }
+
+        .bento-featured {
+            grid-column: span 2;
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .bento-featured { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr !important; }
+        }
+
+        .directory-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            border-top: 1px solid #ccc;
+            transition: var(--transition);
+            gap: 15px;
+        }
+
+        .directory-row:hover {
+            background: var(--accent);
+            border-color: var(--primary);
+        }
+
+        .tag {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-top: 50px;
+            border-top: var(--border);
+            padding-top: 30px;
+        }
+
+        .stat-item b {
+            font-size: 2.5rem;
+            display: block;
+            line-height: 1;
+        }
+
+        .hidden-check {
+            display: none;
+        }
+
+        .expand-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: #eee;
+            text-align: center;
+            font-weight: 800;
+            cursor: pointer;
+            border: var(--border);
+            transition: background var(--transition);
+        }
+
+        .expand-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .hidden-check:checked ~ .expandable-content {
+            max-height: 1000px;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 5%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-logo {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-heading {
+            color: var(--accent);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">RIVERVIEW</a>
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#tools">Resources</a>
+        <a href="#faculty">Directory</a>
+        <a href="#admissions">Admissions</a>
+    </div>
+</nav>
+
+<header>
+    <div class="animate">
+        <div class="tag">ESTABLISHED 1922</div>
+        <h1 class="hero-title">RIVERVIEW<br>ACADEMY</h1>
+        <p class="hero-sub">Providing a rigorous preparatory education focused on analytical thought, creative expression, and global citizenship.</p>
+        <a href="#tools" class="cta-btn">STUDENT HUB</a>
+    </div>
+    
+    <div class="stats animate" style="animation-delay: 0.2s;">
+        <div class="stat-item"><b>12:1</b> Student Ratio</div>
+        <div class="stat-item"><b>98%</b> College Placement</div>
+        <div class="stat-item"><b>45</b> Elective Courses</div>
+    </div>
+</header>
+
+<section id="tools" class="section">
+    <h2 class="section-title">Digital Ecosystem</h2>
+    <div class="grid-bento">
+        <div class="bento-box bento-featured animate">
+            <h3>Central Archive</h3>
+            <p>Digital access to the full academic database including peer-reviewed journals, historical manuscripts, and modern literary collections.</p>
+            <a href="#" style="color: var(--accent); font-weight: 800; text-decoration: none; display: inline-block; margin-top: 15px;">OPEN REPOSITORY &rarr;</a>
+        </div>
+        <div class="bento-box animate">
+            <h3>Lab Access</h3>
+            <p>Secure remote access for virtual simulation data and scientific calculation tools.</p>
+        </div>
+        <div class="bento-box animate">
+            <h3>Writing Lab</h3>
+            <p>Advanced citation guides and structured logic templates for senior thesis development.</p>
+        </div>
+        <div class="bento-box bento-featured animate">
+            <h3>Campus Bulletin</h3>
+            <p>Spring Semester update: The new Riverview Center for Innovation is now open for weekend research hours. Faculty-led workshops begin Monday.</p>
+        </div>
+    </div>
+</section>
+
+<section id="faculty" class="section" style="background: #fafafa; border-top: var(--border); border-bottom: var(--border);">
+    <h2 class="section-title">Staff Directory</h2>
+    
+    <div class="directory-row animate">
+        <div>
+            <strong style="font-size: 1.2rem; display: block;">Julian Thorne, PhD</strong>
+            <span style="font-size: 0.9rem; opacity: 0.8;">Head of School | Administration</span>
+        </div>
+        <div>j.thorne@riverview.edu</div>
+        <div style="font-weight: 800;">Office 1A</div>
+    </div>
+
+    <div class="directory-row animate">
+        <div>
+            <strong style="font-size: 1.2rem; display: block;">Sarah Al-Fayed</strong>
+            <span style="font-size: 0.9rem; opacity: 0.8;">Chair of Mathematics & Applied Physics</span>
+        </div>
+        <div>s.alfayed@riverview.edu</div>
+        <div style="font-weight: 800;">Science Wing</div>
+    </div>
+
+    <div class="directory-row animate">
+        <div>
+            <strong style="font-size: 1.2rem; display: block;">Marcus Vane</strong>
+            <span style="font-size: 0.9rem; opacity: 0.8;">Director of Fine Arts & Classical History</span>
+        </div>
+        <div>m.vane@riverview.edu</div>
+        <div style="font-weight: 800;">Arts Pavilion</div>
+    </div>
+</section>
+
+<section id="admissions" class="section">
+    <input type="checkbox" id="more-info" class="hidden-check">
+    <label for="more-info" class="expand-btn">VIEW ADMISSIONS REQUIREMENTS</label>
+    <div class="expandable-content">
+        <div style="padding: 40px; border: var(--border); margin-top: 20px;">
+            <h3 style="margin-bottom: 10px;">Application Process</h3>
+            <p style="margin-bottom: 20px;">Prospective students must submit formal transcripts, a personal statement, and two faculty recommendations. Interviews are conducted during the Spring visit days.</p>
+            <h3 style="margin-bottom: 10px;">Financial Services</h3>
+            <p>Riverview Academy remains committed to a need-blind admission policy. Institutional grants are awarded based on demonstrated financial necessity.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo footer-logo">RIVERVIEW</div>
+            <p>800 Riverview Heights<br>Highland District<br>United States</p>
+        </div>
+        <div>
+            <h4 class="footer-heading">Portals</h4>
+            <p>Parent Access</p>
+            <p>Alumni Network</p>
+            <p>Career Center</p>
+        </div>
+        <div>
+            <h4 class="footer-heading">Contact</h4>
+            <p>Main Office: 555-0192</p>
+            <p>Admissions: 555-0195</p>
+            <p>Security: 555-0111</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        Riverview Academy. All institutional data current for the 2026 academic year.
+    </div>
+</footer>
+</body>
+<script src="edu.js" defer></script>
+</html>

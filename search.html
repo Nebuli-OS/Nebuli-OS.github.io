@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NebuliOS Search</title>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #0a0a0a;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center center;
+    color: #fff;
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #6a00ff, #d4af37, #6a00ff 60%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .search-box { width: 100%; max-width: 500px; z-index: 1; }
+
+  .search-box input {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    text-align: center;
+  }
+
+  .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 500px;
+    z-index: 1;
+  }
+
+  .shortcut,
+  .add-btn {
+    position: relative;
+    background: #111;
+    border: 1px solid #444;
+    border-radius: 30px;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    transition: background .3s, box-shadow .3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .shortcut:hover,
+  .add-btn:hover {
+    background: #333;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  }
+
+  .shortcut a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .more-btn {
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .more-menu {
+    position: fixed;
+    background: #222;
+    border: 1px solid #555;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10000;
+    min-width: 120px;
+  }
+
+  .more-menu button {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .more-menu button:hover {
+    background: #333;
+  }
+
+  .add-btn {
+    font-size: 1.4rem;
+    font-weight: 900;
+    justify-content: center;
+    width: 60px;
+  }
+
+  #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 20000;
+  }
+
+  #popupBox {
+    background: #111;
+    border: 1px solid #555;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #popupBox input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+  }
+
+  #popupBox button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .button#SaveBtn {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+    background-size: 200% 200%;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .button#SaveBtn:hover {
+    background-position: right center;
+    filter: brightness(1.1);
+    transform: scale(1.02);
+  }
+
+  #cancelBtn {
+    background: #333;
+  }
+</style>
+</head>
+<body>
+
+<h1>NebuliOS</h1>
+
+<form class="search-box" onsubmit="doSearch(event)">
+  <input id="query" type="text" placeholder="Type your URL or search with Nebuli Search…" />
+</form>
+
+<div class="quick-links" id="linksContainer"></div>
+
+<div id="popup">
+  <div id="popupBox">
+    <h3 style="text-align:center;">Shortcut</h3>
+    <input id="shortcutName" placeholder="Name" />
+    <input id="shortcutURL" placeholder="URL (include https://)" />
+    <button class="button" id="SaveBtn" onclick="saveShortcut()">Save</button>
+    <button id="cancelBtn" onclick="closePopup()">Cancel</button>
+  </div>
+</div>
+
+<script>
+function getpBase() {
+  return "/embed.html#"
+}
+
+function getResultsBase() {
+  return "/results.html#"
+}
+
+function doSearch(e) {
+  e.preventDefault()
+  const q = document.getElementById("query").value.trim()
+  if (!q) return
+  window.location.href = getResultsBase() + encodeURIComponent(q)
+}
+
+let shortcuts = JSON.parse(localStorage.getItem("shortcuts")) || [
+  { name: "Google", url: "https://www.google.com" },
+  { name: "YouTube", url: "https://youtube.com" },
+  { name: "GitHub", url: "https://github.com" },
+  { name: "Discord", url: "https://discord.com/app" }
+]
+
+let editingIndex = null
+
+function renderShortcuts() {
+  const container = document.getElementById("linksContainer")
+  container.innerHTML = ""
+  const pBase = getpBase()
+
+  shortcuts.forEach((s, i) => {
+    const div = document.createElement("div")
+    div.className = "shortcut"
+
+    div.innerHTML = `
+      <a href="${pBase + s.url}">${s.name}</a>
+      <span class="more-btn" onclick="toggleMenu(${i}, event)">⋮</span>
+      <div class="more-menu" id="menu-${i}">
+        <button onclick="editShortcut(${i})">Edit</button>
+        <button onclick="deleteShortcut(${i})">Delete</button>
+      </div>
+    `
+
+    container.appendChild(div)
+  })
+
+  const addBtn = document.createElement("div")
+  addBtn.className = "add-btn"
+  addBtn.innerText = "+"
+  addBtn.onclick = openPopup
+  container.appendChild(addBtn)
+}
+
+function toggleMenu(i, event) {
+  event.stopPropagation()
+
+  document.querySelectorAll(".more-menu").forEach(m => {
+    m.style.display = "none"
+  })
+
+  const menu = document.getElementById("menu-" + i)
+  const rect = event.target.getBoundingClientRect()
+
+  menu.style.top = rect.bottom + "px"
+  menu.style.left = rect.right - menu.offsetWidth + "px"
+  menu.style.display = "flex"
+}
+
+document.body.addEventListener("click", () => {
+  document.querySelectorAll(".more-menu").forEach(m => {
+    m.style.display = "none"
+  })
+})
+
+function openPopup() {
+  editingIndex = null
+  document.getElementById("shortcutName").value = ""
+  document.getElementById("shortcutURL").value = ""
+  document.getElementById("popup").style.display = "flex"
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none"
+}
+
+function saveShortcut() {
+  const name = document.getElementById("shortcutName").value.trim()
+  const url = document.getElementById("shortcutURL").value.trim()
+
+  if (!name || !url) return
+
+  if (editingIndex !== null) {
+    shortcuts[editingIndex] = { name, url }
+  } else {
+    shortcuts.push({ name, url })
+  }
+
+  localStorage.setItem("shortcuts", JSON.stringify(shortcuts))
+  closePopup()
+  renderShortcuts()
+}
+
+function editShortcut(i) {
+  editingIndex = i
+
+  document.getElementById("shortcutName").value = shortcuts[i].name
+  document.getElementById("shortcutURL").value = shortcuts[i].url
+  document.getElementById("popup").style.display = "flex"
+}
+
+function deleteShortcut(i) {
+  shortcuts.splice(i, 1)
+  localStorage.setItem("shortcuts", JSON.stringify(shortcuts))
+  renderShortcuts()
+}
+
+renderShortcuts()
+</script>
+
+</body>
+</html>
