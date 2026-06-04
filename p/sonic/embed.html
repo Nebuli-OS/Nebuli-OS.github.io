@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Loading...</title>
+<script src="/p/sonic/baremux/index.js"></script>
+<script src="/p/sonic/s/scramjet.all.js"></script>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, sans-serif;
+  }
+
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .glow-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+    text-shadow:
+      0 0 5px white,
+      0 0 10px white,
+      0 0 20px white,
+      0 0 40px white;
+    -webkit-text-stroke: 2px white;
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: none;
+    z-index: 10;
+    background: #fff;
+  }
+</style>
+</head>
+<body>
+
+<video class="background-video" autoplay muted loop playsinline>
+  <source src="https://assets.nebulilabs.xyz/loading.mp4" type="video/mp4" />
+</video>
+
+<div class="glow-text" id="status">Please wait while NebuliOS loads your content</div>
+
+<iframe src="" id="frame"></iframe>
+
+<script>
+navigator.serviceWorker.register("/p/sonic/sw.js");
+
+const connection = new BareMux.BareMuxConnection("/p/sonic/baremux/worker.js");
+connection.setTransport("/p/sonic/libcurl/index.mjs", [{ websocket: localStorage.getItem("wisp") || "wss://wisp.rhw.one/" }]);
+
+const { ScramjetController } = $scramjetLoadController();
+const scramjet = new ScramjetController({
+    files: {
+        all: "/p/sonic/s/scramjet.all.js",
+        wasm: "/p/sonic/s/scramjet.wasm.wasm",
+        sync: "/p/sonic/s/scramjet.sync.js"
+    },
+    prefix: "/p/sonic/s/"
+});
+
+async function launch() {
+    await scramjet.init();
+    let url = window.location.hash.substring(1);
+
+    if (url) {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+
+        const frame = document.getElementById("frame");
+        frame.src = scramjet.encodeUrl(url);
+        
+        frame.onload = () => {
+            frame.style.display = "block";
+            document.getElementById("status").style.display = "none";
+        };
+    }
+}
+
+launch();
+
+window.addEventListener("hashchange", () => {
+    window.location.reload();
+});
+</script>
+
+</body>
+</html>
