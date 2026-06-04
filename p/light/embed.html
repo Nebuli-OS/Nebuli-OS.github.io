@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Loading...</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, sans-serif;
+  }
+
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .glow-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+    text-shadow:
+      0 0 5px white,
+      0 0 10px white,
+      0 0 20px white,
+      0 0 40px white;
+    -webkit-text-stroke: 2px white;
+  }
+</style>
+</head>
+<body>
+<video class="background-video" autoplay muted loop playsinline>
+  <source src="https://nebulilabs.github.io/assets/loading.mp4" type="video/mp4" />
+</video>
+<div class="glow-text">Please wait while NebuliOS loads your content</div>
+<script src="l/uv.bundle.js" defer></script>
+<script src="l/uv.config.js" defer></script>
+<script src="register-sw.js" defer></script>
+<script src="embed.js" defer></script>
+
+</body>
+</html>
