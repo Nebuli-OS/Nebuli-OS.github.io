@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NebuliOS Mini Games</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0e0114; }
+#host { width: 100%; height: 100%; border: none; display: block; }
+#game-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+}
+#game-overlay.active { display: block; }
+#game-frame { width: 100%; height: 100%; border: none; display: block; }
+</style>
+</head>
+<body>
+
+<iframe id="host" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+
+<div id="game-overlay">
+    <iframe id="game-frame"></iframe>
+</div>
+
+<script>
+const CDN = "https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io"
+
+const overlay = document.getElementById("game-overlay")
+const gameFrame = document.getElementById("game-frame")
+
+async function init() {
+    const res = await fetch(CDN + "/games.html")
+    let html = await res.text()
+
+    html = html.replace(
+        'fetch("/assets/game/games.json")',
+        'fetch("' + CDN + '/assets/game/games.json")'
+    )
+
+    const injected = `<script>
+(function() {
+    var CDN = "https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io";
+    document.addEventListener("click", function(e) {
+        var a = e.target.closest("a");
+        if (!a) return;
+        var href = a.getAttribute("href");
+        if (!href || href.includes("forms.gle")) return;
+        e.preventDefault();
+        if (!href.startsWith("http")) {
+            href = CDN + (href.startsWith("/") ? "" : "/") + href;
+        }
+        window.parent.postMessage({ type: "openGame", href: href }, "*");
+    }, true);
+})();
+<\/script>`
+
+    html = html.replace("</body>", injected + "\n</body>")
+
+    const blob = new Blob([html], { type: "text/html" })
+    document.getElementById("host").src = URL.createObjectURL(blob)
+}
+
+let currentBlobUrl = null
+
+window.addEventListener("message", async function(e) {
+    if (!e.data || e.data.type !== "openGame") return
+    const res = await fetch(e.data.href)
+    const html = await res.text()
+    if (currentBlobUrl) URL.revokeObjectURL(currentBlobUrl)
+    const blob = new Blob([html], { type: "text/html" })
+    currentBlobUrl = URL.createObjectURL(blob)
+    gameFrame.src = currentBlobUrl
+    overlay.classList.add("active")
+})
+
+init()
+</script>
+</body>
+</html>
