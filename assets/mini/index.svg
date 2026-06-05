@@ -1,15 +1,456 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 600">
   <foreignObject width="100%" height="100%">
-    <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">
-      <script type="text/javascript">
-        fetch("https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/index.html")
-          .then(r => r.text())
-          .then(html => {
-            document.open();
-            document.write(html);
-            document.close();
-          });
+    <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; margin:0; padding:0;">
+      <![CDATA[
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Nebuli Mini</title>
+      </head>
+      <body>
+      <script>
+      async function run() {
+        const res = await fetch('https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/nbli-root.html');
+        let html = await res.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        ['aiBtn','musicBtn','settingsBtn','streamingBtn'].forEach(id => {
+          const el = doc.getElementById(id);
+          if (el) el.closest('button').remove();
+        });
+
+        const settingsTemplate = doc.getElementById('settingsTemplate');
+        if (settingsTemplate) settingsTemplate.remove();
+
+        [...doc.querySelectorAll('style')].forEach(s => {
+          s.textContent = s.textContent
+            .replace(/#settingsBtn img[^}]*\}/g, '')
+            .replace(/\.panel\.settings-page[\s\S]*?\n    \}/g, '')
+            .replace(/\.settings-divider[^}]*\}/g, '')
+            .replace(/\.settings-pill(\.[^{]*)?\s*\{[^}]*\}/g, '')
+            .replace(/#settingsPills[^}]*\}/g, '')
+            .replace(/#view\s*\{[^}]*\}/g, '');
+        });
+
+        [...doc.querySelectorAll('script:not([src])')].forEach(s => s.remove());
+
+        const sandstoneScript = doc.createElement('script');
+        sandstoneScript.defer = true;
+        sandstoneScript.src = 'https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/sandstone.js';
+        doc.head.appendChild(sandstoneScript);
+
+        const homeFrame = doc.createElement('iframe');
+        homeFrame.id = 'homeFrame';
+        homeFrame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:none;z-index:2;';
+        const iframeContainer = doc.getElementById('iframeContainer');
+        if (iframeContainer) iframeContainer.appendChild(homeFrame);
+
+        const newScript = doc.createElement('script');
+        newScript.textContent = `
+          const tabBar = document.getElementById('tabBar')
+          const addressInput = document.getElementById('urlInput')
+          const homeBtn = document.getElementById('homeBtn')
+          const iframeContainer = document.getElementById('iframeContainer')
+          const homeFrame = document.getElementById('homeFrame')
+          const gamesBtn = document.getElementById('gamesBtn')
+          const codeBtn = document.getElementById('codeBtn')
+          const chatBtn = document.getElementById('chatBtn')
+          const backBtn = document.getElementById('backBtn')
+          const forwardBtn = document.getElementById('forwardBtn')
+          const reloadBtn = document.getElementById('reloadBtn')
+          const newTabBtn = document.getElementById('newTab')
+          const fullscreenBtn = document.getElementById('fullscreenBtn')
+
+          const CUSTOM_PROTOCOL = 'nbli-mini://'
+          const TITLES = { HOME: 'Home', GAMES: 'Games', CODE: 'Code Editor', CHAT: 'Chat', NEW_TAB: 'New Tab' }
+          const SLUG_TITLES = { 'home': 'Home', 'games': 'Games', 'code-editor': 'Code Editor', 'chat': 'Chat' }
+
+          const CDN = 'https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/'
+          const HOME_URL  = CDN + 'assets/mini/welcome.html'
+          const GAMES_URL = CDN + 'assets/mini/games.html'
+          const CODE_URL  = CDN + 'code_editor.html'
+          const CHAT_PROXY_URL = 'https://vtx.chat/embed/nebuli'
+
+          const VORTEX_SPLASH = \`<!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Vortex X Nebuli</title>
+      <style>
+        html, body { margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000; }
+        #popup {
+          position:fixed;top:0;left:0;width:100%;height:100%;
+          background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;
+          z-index:10;backdrop-filter:blur(5px);animation:fadeIn 0.3s ease;
+        }
+        #popupContent {
+          background:rgba(255,255,255,0.1);border-radius:15px;padding:40px 30px;
+          width:90%;max-width:400px;text-align:center;color:#fff;
+          font-family:Arial,sans-serif;box-shadow:0 8px 25px rgba(0,0,0,0.3);
+          backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);
+        }
+        #popupContent h2 { margin-bottom:20px;font-size:24px; }
+        #popupContent p { margin-bottom:20px;font-size:16px; }
+        #closeBtn {
+          background:linear-gradient(135deg,#9d00ff,#ffc400);border:none;
+          padding:10px 25px;border-radius:50px;font-size:16px;cursor:pointer;
+          transition:all 0.3s ease;color:#fff;font-weight:bold;
+        }
+        #closeBtn:hover { transform:scale(1.1);box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+      </style>
+      </head>
+      <body>
+      <div id="popup">
+        <div id="popupContent">
+          <h2>Nebuli X Vortex chats</h2>
+          <p>Chats are made possible in partnership with vortex. Thank you vortex for making this possible.</p>
+          <p>The page might take a while to load because of Sandstone restrictions.</p>
+          <button id="closeBtn">Continue</button>
+        </div>
+      </div>
+      <script>
+        document.getElementById('closeBtn').addEventListener('click', () => {
+          window.parent.postMessage('vortex-continue', '*')
+        })
+      <\\/script>
+      </body>
+      </html>\`
+
+          const SEARCH_ENGINE_URL = 'https://html.duckduckgo.com/html/?q='
+
+          let currentTabId = 0
+          let tabs = {}
+          let histories = {}
+          let frameControllers = {}
+
+          function getOrCreateController(tabId) {
+            if (frameControllers[tabId]) return frameControllers[tabId]
+            if (window.sandstone && sandstone.controller) {
+              const ctrl = new sandstone.controller.ProxyFrame()
+              ctrl.iframe.style.width = '100%'
+              ctrl.iframe.style.height = '100%'
+              ctrl.iframe.style.border = 'none'
+              ctrl.iframe.style.display = 'none'
+              iframeContainer.appendChild(ctrl.iframe)
+              frameControllers[tabId] = ctrl
+              ctrl.iframe.addEventListener('load', () => updateNavButtons())
+              return ctrl
+            }
+            return null
+          }
+
+          function showSrcdocFrame(tabId, html, label, historyKey) {
+            hideHomeFrame()
+            Object.values(frameControllers).forEach(c => c.iframe.style.display = 'none')
+
+            let frame = tabs[tabId].srcdocFrame
+            if (!frame) {
+              frame = document.createElement('iframe')
+              frame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:none;z-index:2;'
+              iframeContainer.appendChild(frame)
+              tabs[tabId].srcdocFrame = frame
+            }
+            frame.srcdoc = html
+            frame.style.display = 'block'
+            tabs[tabId].isHome = false
+            tabs[tabId].isSrcdoc = true
+
+            const h = histories[tabId]
+            if (h.idx < h.stack.length - 1) h.stack.splice(h.idx + 1)
+            h.stack.push(historyKey)
+            h.idx++
+            h.showUrl = historyKey
+            tabs[tabId].url = historyKey
+            addressInput.value = ''
+            updateTabLabel(tabId, label)
+            updateNavButtons()
+          }
+
+          function hideHomeFrame() {
+            homeFrame.style.display = 'none'
+            Object.values(tabs).forEach(t => { if (t.srcdocFrame) t.srcdocFrame.style.display = 'none' })
+          }
+
+          function navigateViaProxy(tabId, url) {
+            let finalUrl = url
+            if (!finalUrl.match(/^https?:\\/\\//i)) finalUrl = 'https://' + finalUrl
+
+            hideHomeFrame()
+            tabs[tabId].isSrcdoc = false
+            Object.values(frameControllers).forEach(c => c.iframe.style.display = 'none')
+            if (tabs[tabId].srcdocFrame) tabs[tabId].srcdocFrame.style.display = 'none'
+
+            const ctrl = getOrCreateController(tabId)
+            if (!ctrl) {
+              alert('Sandstone proxy not yet loaded. Please wait a moment and try again.')
+              return
+            }
+            ctrl.iframe.style.display = 'block'
+            ctrl.navigate_to(finalUrl)
+
+            const h = histories[tabId]
+            if (h.idx < h.stack.length - 1) h.stack.splice(h.idx + 1)
+            h.stack.push(finalUrl)
+            h.idx++
+            h.showUrl = finalUrl
+            tabs[tabId].url = finalUrl
+            addressInput.value = finalUrl
+            updateNavButtons()
+          }
+
+          function loadURL(inputValue, tabId = null) {
+            const input = inputValue.trim()
+            if (!input) return
+            const activeTabId = tabId || (Object.values(tabs).find(t => t.isActive) || {}).id || createNewTab()
+
+            if (input === CUSTOM_PROTOCOL + 'home') {
+              goHome(activeTabId)
+              return
+            }
+
+            let finalUrl = ''
+            if (input.startsWith(CUSTOM_PROTOCOL)) {
+              finalUrl = SEARCH_ENGINE_URL + encodeURIComponent(input)
+            } else if (input.includes('.') && !input.includes(' ')) {
+              finalUrl = input.startsWith('http') ? input : 'https://' + input
+            } else {
+              finalUrl = SEARCH_ENGINE_URL + encodeURIComponent(input)
+            }
+
+            navigateViaProxy(activeTabId, finalUrl)
+            updateTabLabel(activeTabId, input)
+          }
+
+          function goHome(tabId) {
+            hideHomeFrame()
+            Object.values(frameControllers).forEach(c => c.iframe.style.display = 'none')
+            if (tabs[tabId].srcdocFrame) tabs[tabId].srcdocFrame.style.display = 'none'
+
+            tabs[tabId].isHome = true
+            tabs[tabId].isSrcdoc = false
+            homeFrame.style.display = 'block'
+
+            const h = histories[tabId]
+            if (h.idx < h.stack.length - 1) h.stack.splice(h.idx + 1)
+            h.stack.push('nbli-mini://home')
+            h.idx++
+            h.showUrl = CUSTOM_PROTOCOL + 'home'
+            tabs[tabId].url = CUSTOM_PROTOCOL + 'home'
+            addressInput.value = ''
+            updateTabLabel(tabId, 'Home')
+            updateNavButtons()
+          }
+
+          function updateTabLabel(id, text) {
+            const slug = text.replace(CUSTOM_PROTOCOL, '')
+            const title = SLUG_TITLES[slug] || text
+            if (tabs[id] && tabs[id].element) {
+              tabs[id].element.querySelector('span').textContent = title.length > 20 ? title.substring(0, 17) + '...' : title
+            }
+          }
+
+          function createNewTab(title = TITLES.HOME, url = CUSTOM_PROTOCOL + 'home') {
+            currentTabId++
+            const id = currentTabId
+            const newTab = document.createElement('div')
+            newTab.classList.add('tab')
+            newTab.innerHTML = \`<span>\${title}</span><div class="close">×</div>\`
+            tabBar.appendChild(newTab)
+
+            tabs[id] = { id, element: newTab, isActive: false, url }
+            histories[id] = { stack: [], idx: -1, showUrl: url }
+
+            newTab.addEventListener('click', () => switchTab(id))
+            newTab.querySelector('.close').addEventListener('click', e => { e.stopPropagation(); closeTab(id) })
+
+            switchTab(id)
+            loadURL(url, id)
+            return id
+          }
+
+          function switchTab(id) {
+            Object.keys(tabs).forEach(tid => {
+              tabs[tid].isActive = false
+              tabs[tid].element.classList.remove('active')
+              if (frameControllers[tid]) frameControllers[tid].iframe.style.display = 'none'
+              if (tabs[tid].srcdocFrame) tabs[tid].srcdocFrame.style.display = 'none'
+            })
+            homeFrame.style.display = 'none'
+
+            const active = tabs[id]
+            active.isActive = true
+            active.element.classList.add('active')
+
+            if (active.isHome) {
+              homeFrame.style.display = 'block'
+            } else if (active.isSrcdoc && active.srcdocFrame) {
+              active.srcdocFrame.style.display = 'block'
+            } else if (frameControllers[id]) {
+              frameControllers[id].iframe.style.display = 'block'
+            }
+
+            const h = histories[id]
+            addressInput.value = (h && h.showUrl && h.showUrl !== CUSTOM_PROTOCOL + 'home') ? h.showUrl : ''
+            updateNavButtons()
+          }
+
+          function closeTab(id) {
+            tabs[id].element.remove()
+            if (frameControllers[id]) {
+              frameControllers[id].iframe.remove()
+              delete frameControllers[id]
+            }
+            if (tabs[id].srcdocFrame) tabs[id].srcdocFrame.remove()
+            const wasActive = tabs[id].isActive
+            delete tabs[id]
+            delete histories[id]
+
+            if (wasActive) {
+              const remaining = Object.keys(tabs)
+              if (remaining.length > 0) switchTab(remaining[remaining.length - 1])
+              else createNewTab()
+            }
+          }
+
+          function updateNavButtons() {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (!activeTab) { backBtn.disabled = true; forwardBtn.disabled = true; return }
+            const h = histories[activeTab.id]
+            if (!h) { backBtn.disabled = true; forwardBtn.disabled = true; return }
+            backBtn.disabled = h.idx <= 0
+            forwardBtn.disabled = h.idx >= h.stack.length - 1
+          }
+
+          newTabBtn.addEventListener('click', () => createNewTab())
+          addressInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadURL(addressInput.value) })
+          reloadBtn.addEventListener('click', () => {
+            const active = Object.values(tabs).find(t => t.isActive)
+            if (active && frameControllers[active.id]) {
+              try { frameControllers[active.id].iframe.contentWindow.location.reload() } catch(e) {}
+            }
+          })
+
+          function restoreFromHistory(activeTab, url) {
+            const id = activeTab.id
+            homeFrame.style.display = 'none'
+            if (activeTab.srcdocFrame) activeTab.srcdocFrame.style.display = 'none'
+            if (frameControllers[id]) frameControllers[id].iframe.style.display = 'none'
+
+            if (url === 'nbli-mini://home') {
+              activeTab.isHome = true; activeTab.isSrcdoc = false
+              homeFrame.style.display = 'block'
+              histories[id].showUrl = CUSTOM_PROTOCOL + 'home'
+              addressInput.value = ''
+            } else if (url === 'nbli-mini://games' || url === 'nbli-mini://code-editor' || url === 'nbli-mini://chat') {
+              activeTab.isHome = false; activeTab.isSrcdoc = true
+              if (activeTab.srcdocFrame) activeTab.srcdocFrame.style.display = 'block'
+              histories[id].showUrl = url
+              addressInput.value = ''
+            } else {
+              activeTab.isHome = false; activeTab.isSrcdoc = false
+              const ctrl = frameControllers[id]
+              if (ctrl) { ctrl.iframe.style.display = 'block'; ctrl.navigate_to(url) }
+              histories[id].showUrl = url
+              addressInput.value = url
+            }
+            updateNavButtons()
+          }
+
+          backBtn.addEventListener('click', () => {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (!activeTab) return
+            const h = histories[activeTab.id]
+            if (h && h.idx > 0) { h.idx--; restoreFromHistory(activeTab, h.stack[h.idx]) }
+          })
+
+          forwardBtn.addEventListener('click', () => {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (!activeTab) return
+            const h = histories[activeTab.id]
+            if (h && h.idx < h.stack.length - 1) { h.idx++; restoreFromHistory(activeTab, h.stack[h.idx]) }
+          })
+
+          homeBtn.addEventListener('click', () => {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (activeTab) goHome(activeTab.id)
+          })
+
+          gamesBtn.addEventListener('click', () => {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (!activeTab) return
+            fetch(GAMES_URL).then(r => r.text()).then(html => {
+              showSrcdocFrame(activeTab.id, html, 'Games', 'nbli-mini://games')
+            })
+          })
+
+          if (codeBtn) {
+            codeBtn.addEventListener('click', () => {
+              const activeTab = Object.values(tabs).find(t => t.isActive)
+              if (!activeTab) return
+              fetch(CODE_URL).then(r => r.text()).then(html => {
+                showSrcdocFrame(activeTab.id, html, 'Code Editor', 'nbli-mini://code-editor')
+              })
+            })
+          }
+
+          if (chatBtn) {
+            chatBtn.addEventListener('click', () => {
+              const activeTab = Object.values(tabs).find(t => t.isActive)
+              if (!activeTab) return
+              showSrcdocFrame(activeTab.id, VORTEX_SPLASH, 'Chat', 'nbli-mini://chat')
+            })
+          }
+
+          window.addEventListener('message', e => {
+            if (e.data === 'vortex-continue') {
+              const activeTab = Object.values(tabs).find(t => t.isActive)
+              if (!activeTab) return
+              activeTab.isSrcdoc = false
+              if (activeTab.srcdocFrame) activeTab.srcdocFrame.style.display = 'none'
+              navigateViaProxy(activeTab.id, CHAT_PROXY_URL)
+              updateTabLabel(activeTab.id, 'Chat')
+            }
+          })
+
+          fullscreenBtn.addEventListener('click', () => {
+            const activeTab = Object.values(tabs).find(t => t.isActive)
+            if (!activeTab || !frameControllers[activeTab.id]) return
+            const target = frameControllers[activeTab.id].iframe
+            if (!document.fullscreenElement) {
+              if (target.requestFullscreen) target.requestFullscreen()
+              else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen()
+            } else {
+              document.exitFullscreen()
+            }
+          })
+
+          document.addEventListener('DOMContentLoaded', () => {
+            fetch(HOME_URL)
+              .then(r => r.text())
+              .then(html => { homeFrame.srcdoc = html })
+              .catch(() => { homeFrame.srcdoc = '<body style="background:#0a0a0a;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;">Failed to load home page.</body>' })
+            createNewTab()
+          })
+        `;
+        doc.body.appendChild(newScript);
+
+        const finalHtml = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+        document.open();
+        document.write(finalHtml);
+        document.close();
+      }
+
+      run();
       </script>
+      </body>
+      </html>
+      ]]>
     </xhtml:div>
   </foreignObject>
 </svg>
