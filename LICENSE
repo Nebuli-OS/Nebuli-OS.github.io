@@ -1,0 +1,175 @@
+NEBULIOS SOFTWARE LICENSE AGREEMENT
+Version 1.0
+
+Copyright © 2026 NEBULI LABS
+All Rights Reserved.
+
+IMPORTANT NOTICE
+
+BY DOWNLOADING, INSTALLING, COPYING, ACCESSING, EXECUTING, MODIFYING, HOSTING, USING, OR DISTRIBUTING NEBULIOS, OR ANY PORTION THEREOF, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE LEGALLY BOUND BY THE TERMS OF THIS LICENSE AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS, YOU MUST NOT DOWNLOAD, INSTALL, ACCESS, USE, MODIFY, HOST, COPY, OR DISTRIBUTE NEBULIOS.
+
+1. DEFINITIONS
+
+1.1 "NebuliOS" means the software project known as NebuliOS, including all source code, object code, scripts, documentation, assets, configurations, interfaces, updates, releases, and accompanying materials provided by the Copyright Owner.
+
+1.2 "Original Software" means the official, unmodified version of NebuliOS as released by the Copyright Owner.
+
+1.3 "Modified Version" means any modification, derivative work, fork, adaptation, customization, enhancement, extension, translation, port, reconfiguration, compilation, integration, alteration, or other work based in whole or in part upon NebuliOS, regardless of the extent of the changes made.
+
+1.4 "Distribution" means any transfer, publication, sharing, delivery, transmission, deployment, hosting, sublicensing, sale, assignment, provision, disclosure, or making available of NebuliOS or any portion thereof to another person or entity by any means.
+
+1.5 "Public Distribution" means any Distribution to one or more third parties, including but not limited to publication on websites, repositories, cloud services, file-sharing platforms, software marketplaces, package managers, SaaS platforms, hosting environments, public servers, source-control systems, or any other publicly or externally accessible medium.
+
+1.6 "Private Instance" means an instance, installation, deployment, or execution of NebuliOS operated solely for the personal use or internal organizational use of the Licensee and not accessible to any third party.
+
+1.7 "Copyright Owner" means the individual or legal entity that owns all applicable copyrights and intellectual property rights in NebuliOS.
+
+1.8 "Licensee" means any individual or legal entity exercising rights under this License.
+
+2. GRANT OF LICENSE
+
+Subject to full compliance with this License, the Copyright Owner grants the Licensee a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to:
+
+(a) Download and obtain copies of the Original Software;
+
+(b) Install, execute, and use the Original Software;
+
+(c) Create and operate Private Instances of the Original Software;
+
+(d) Create Modified Versions solely for the Licensee's own private and internal use;
+
+(e) Redistribute unmodified copies of the Original Software only in accordance with Section 6 of this License.
+
+No ownership rights are granted under this License.
+
+3. OWNERSHIP AND INTELLECTUAL PROPERTY
+
+3.1 NebuliOS is licensed, not sold.
+
+3.2 All copyrights, proprietary rights, and other intellectual property rights in and to NebuliOS remain exclusively with the Copyright Owner.
+
+3.3 No provision of this License transfers ownership of NebuliOS or any related rights to any Licensee.
+
+3.4 No person or entity may claim ownership of NebuliOS or any Modified Version derived from NebuliOS.
+
+3.5 Any rights not expressly granted are reserved by the Copyright Owner.
+
+4. MODIFICATION RULES
+
+4.1 Licensees may create Modified Versions solely for private and internal use.
+
+4.2 All Modified Versions remain subject to this License.
+
+4.3 Creation of a Modified Version does not confer ownership.
+
+4.4 Modified Versions may not be publicly distributed, published, sold, sublicensed, shared, or otherwise made available to any third party without prior written authorization from the Copyright Owner.
+
+4.5 The Licensee shall not represent any Modified Version as an official release of NebuliOS.
+
+4.6 Any authorization to distribute a Modified Version must be in writing from the Copyright Owner.
+
+5. RESTRICTIONS
+
+Except as expressly permitted, the Licensee shall not:
+
+(a) Publicly distribute any Modified Version;
+
+(b) Sell, lease, sublicense, or commercially exploit any Modified Version;
+
+(c) Allow third-party access to a Modified Version without authorization;
+
+(d) Remove or alter copyright or license notices;
+
+(e) Rebrand NebuliOS or misrepresent ownership;
+
+(f) Claim authorship of NebuliOS;
+
+(g) Circumvent license restrictions;
+
+(h) Use NebuliOS outside the rights granted.
+
+6. DISTRIBUTION RULES
+
+6.1 Licensees may redistribute exact, unmodified copies of the Original Software.
+
+6.2 Any redistribution must:
+
+(a) Include this License in full;
+
+(b) Retain all copyright notices;
+
+(c) Retain ownership notices;
+
+(d) Retain attribution and branding;
+
+(e) Clearly identify it as an unmodified official copy.
+
+6.3 No redistribution of Modified Versions is permitted without written authorization.
+
+6.4 Distribution through repositories, websites, or platforms is allowed only if the software remains unmodified.
+
+7. PRIVATE INSTANCES
+
+7.1 Licensees may operate Private Instances.
+
+7.2 Private Instances are for personal or internal organizational use only.
+
+7.3 Access may not be shared with third parties without authorization.
+
+7.4 Any third-party access voids Private Instance status.
+
+8. PUBLIC HOSTING RESTRICTIONS
+
+8.1 Hosting Modified Versions on public systems constitutes Public Distribution.
+
+8.2 Public Distribution of Modified Versions is prohibited without written authorization.
+
+8.3 NebuliOS may not be offered as a hosted service or SaaS without authorization.
+
+9. ENFORCEMENT
+
+9.1 The Copyright Owner may enforce this License by any lawful means.
+
+9.2 Violations constitute a material breach.
+
+9.3 Remedies include injunctive relief, damages, and other legal remedies.
+
+10. TERMINATION
+
+10.1 This License terminates automatically upon violation.
+
+10.2 All rights cease immediately upon termination.
+
+10.3 Licensee must stop all use and delete copies upon termination.
+
+10.4 Termination does not limit the Copyright Owner’s rights.
+
+11. DISCLAIMER OF WARRANTY
+
+NEBULIOS IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND.
+
+ALL WARRANTIES, EXPRESS OR IMPLIED, ARE DISCLAIMED.
+
+USE IS AT YOUR OWN RISK.
+
+12. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT OWNER SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM USE OF NEBULIOS.
+
+TOTAL LIABILITY SHALL NOT EXCEED US $1.00 OR THE MINIMUM PERMITTED BY LAW.
+
+13. SEVERABILITY
+
+If any provision is invalid, the rest remains in effect.
+
+14. GOVERNING LAW
+
+This License is governed by the laws of:
+
+[INSERT JURISDICTION]
+
+15. ENTIRE AGREEMENT
+
+This License is the entire agreement regarding NebuliOS and supersedes prior agreements.
+
+END OF LICENSE
