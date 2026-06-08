@@ -18,61 +18,6 @@
   <![CDATA[
   (function() {
 
-    var DEFAULT_TITLE = "Nebuli-OS";
-
-    function applySettings() {
-      try {
-        var savedTitle = localStorage.getItem("z_title");
-        var savedIcon = localStorage.getItem("z_icon");
-        var savedLeave = localStorage.getItem("z_leave");
-
-        document.title = savedTitle && savedTitle.trim()
-          ? savedTitle
-          : DEFAULT_TITLE;
-
-        var icon = document.querySelector("link[rel='icon']");
-        if (!icon) {
-          icon = document.createElement("link");
-          icon.rel = "icon";
-          document.head.appendChild(icon);
-        }
-        if (savedIcon && savedIcon.trim()) {
-          icon.href = savedIcon;
-        }
-
-        window.onbeforeunload = savedLeave === "true" ? function(){ return true; } : null;
-
-      } catch(e) {}
-    }
-
-    applySettings();
-
-    window.addEventListener("storage", function(e) {
-      if (e.key === "z_title") {
-        document.title = e.newValue && e.newValue.trim()
-          ? e.newValue
-          : DEFAULT_TITLE;
-      }
-
-      if (e.key === "z_icon") {
-        var icon = document.querySelector("link[rel='icon']");
-        if (!icon) {
-          icon = document.createElement("link");
-          icon.rel = "icon";
-          document.head.appendChild(icon);
-        }
-        if (e.newValue && e.newValue.trim()) {
-          icon.href = e.newValue;
-        }
-      }
-
-      if (e.key === "z_leave") {
-        window.onbeforeunload = e.newValue === "true"
-          ? function(){ return true; }
-          : null;
-      }
-    });
-
     var URLS = [
       "https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/latest.html",
       "https://gcore.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/latest.html",
