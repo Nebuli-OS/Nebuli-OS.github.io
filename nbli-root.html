@@ -34,8 +34,6 @@
     }
     .sidebar button:hover { background: rgba(255,255,255,0.2); }
     .sidebar button img { width: 24px; height: 24px; }
-    #gamesBtn img { filter: invert(1) brightness(2); }
-    #settingsBtn img { filter: invert(1); }
 
     #wrapper {
       position: fixed; top: 0; left: 68px;
@@ -79,7 +77,6 @@
     .nav-btn img {
       width: 18px;
       height: 18px;
-      filter: invert(1);
     }
     .nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.1); }
     .nav-btn:disabled { opacity: 0.2; cursor: default; }
@@ -231,15 +228,15 @@
   <div class="sidebar">
     <div class="top">
       <button id="homeBtn" title="Home"><img src="https://assets.nebulilabs.xyz/nebuli.png" alt="Home"></button>
-      <button id="gamesBtn" title="Games"><img src="https://assets.nebulilabs.xyz/NebuliOS/games.png" alt="Games"></button>
-      <button id="aiBtn" title="AI"><img src="https://assets.nebulilabs.xyz/NebuliOS/AI.png" alt="AI"></button>
-      <button id="musicBtn" title="Music"><img src="https://assets.nebulilabs.xyz/NebuliOS/Music.png" alt="Music"></button>
-      <button id="chatBtn" title="Chat"><img src="https://assets.nebulilabs.xyz/NebuliOS/Chat.png" alt="Chat"></button>
-      <button id="codeBtn" title="Code Editor"><img src="https://assets.nebulilabs.xyz/NebuliOS/Code_Editor.png" alt="Code Editor"></button>
-      <button id="streamingBtn" title="Movies & TV"><img src="https://assets.nebulilabs.xyz/NebuliOS/Streaming.png" alt="Movies & TV"></button>
+      <button id="gamesBtn" title="Games"><img src="/assets/img/game.svg" alt="Games"></button>
+      <button id="aiBtn" title="AI"><img src="/assets/img/ai.svg" alt="AI"></button>
+      <button id="musicBtn" title="Music"><img src="/assets/img/music.svg" alt="Music"></button>
+      <button id="chatBtn" title="Chat"><img src="/assets/img/chat.svg" alt="Chat"></button>
+      <button id="codeBtn" title="Code Editor"><img src="/assets/img/code.svg" alt="Code Editor"></button>
+      <button id="streamingBtn" title="Movies & TV"><img src="/assets/img/streaming.svg" alt="Movies & TV"></button>
     </div>
     <div class="bottom">
-      <button id="settingsBtn" title="Settings"><img src="https://assets.nebulilabs.xyz/NebuliOS/settings.png" alt="Settings"></button>
+      <button id="settingsBtn" title="Settings"><img src="/assets/img/setting.svg" alt="Settings"></button>
     </div>
   </div>
 
@@ -247,18 +244,18 @@
     <div class="tab-bar" id="tabBar"></div>
     <div id="header">
       <button id="backBtn" class="nav-btn" title="Back" disabled aria-label="Back">
-        <img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_back.png" alt="◀" />
+        <img src="/assets/img/back_arrow.svg" alt="◀" />
       </button>
       <button id="forwardBtn" class="nav-btn" title="Forward" disabled aria-label="Forward">
-        <img src="https://assets.nebulilabs.xyz/NebuliOS/arrow_forward.png" alt="▶" />
+        <img src="/assets/img/forward_arrow.svg" alt="▶" />
       </button>
       <button id="reloadBtn" class="nav-btn" title="Reload" aria-label="Reload page">⟳</button>
       <input id="urlInput" type="text" placeholder="Search or enter URL" />
       <button id="newTab" class="nav-btn" title="New Tab" aria-label="Open New Tab">
-        <img id="newtabIcon" src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" alt="+" />
+        <img id="newtabIcon" src="/assets/img/more.svg" alt="+" />
       </button>
       <button id="fullscreenBtn" class="nav-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen Mode">
-        <img id="fullscreenIcon" src="https://assets.nebulilabs.xyz/NebuliOS/fullscreen.png" alt="[]" />
+        <img id="fullscreenIcon" src="/assets/img/fullscreen.svg" alt="[]" />
       </button>
     </div>
   </div>
