@@ -119,16 +119,16 @@
         <div id="appsWrapper">
             <div class="section-header"><span>Pinned</span></div>
             <div class="app-grid" id="mainAppGrid">
-                <div class="app-item" onclick="sendAction('open_internet')"><img src="https://assets.nebulilabs.xyz/NebuliOS/internet.png" class="icon-img"><span class="app-name">Internet</span></div>
-                <div class="app-item" onclick="sendAction('open_games')"><img src="https://assets.nebulilabs.xyz/NebuliOS/games.png" class="icon-img"><span class="app-name">Games</span></div>
-                <div class="app-item" onclick="sendAction('open_tools', 'AI')"><img src="https://assets.nebulilabs.xyz/NebuliOS/AI.png" class="icon-img"><span class="app-name">AI</span></div>
-                <div class="app-item" onclick="sendAction('open_tools', 'Music')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Music.png" class="icon-img"><span class="app-name">Music</span></div>
-                <div class="app-item" onclick="sendAction('open_tools', 'Editor')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Code_Editor.png" class="icon-img"><span class="app-name">Editor</span></div>
-                <div class="app-item" onclick="sendAction('open_tools', 'Chat')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Chat.png" class="icon-img"><span class="app-name">Chat</span></div>
-                <div class="app-item" onclick="sendAction('open_tools', 'Movies')"><img src="https://assets.nebulilabs.xyz/NebuliOS/Streaming.png" class="icon-img"><span class="app-name">Movies</span></div>
-                <div class="app-item" onclick="sendAction('open_files')"><img src="https://assets.nebulilabs.xyz/NebuliOS/folder.png" class="icon-img"><span class="app-name">Files</span></div>
-                <div class="app-item" onclick="sendAction('open_settings')"><img src="https://assets.nebulilabs.xyz/NebuliOS/settings.png" class="icon-img"><span class="app-name">Settings</span></div>
-                <div class="app-item" onclick="sendAction('open_more')"><img src="https://assets.nebulilabs.xyz/NebuliOS/plus.png" class="icon-img"><span class="app-name">More</span></div>
+                <div class="app-item" onclick="sendAction('open_internet')"><img src="/assets/img/internet.svg" class="icon-img"><span class="app-name">Internet</span></div>
+                <div class="app-item" onclick="sendAction('open_games')"><img src="/assets/img/game.svg" class="icon-img"><span class="app-name">Games</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'AI')"><img src="/assets/img/ai.svg" class="icon-img"><span class="app-name">AI</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Music')"><img src="/assets/img/music.svg" class="icon-img"><span class="app-name">Music</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Editor')"><img src="/assets/img/code.svg" class="icon-img"><span class="app-name">Editor</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Chat')"><img src="/assets/img/chat.svg" class="icon-img"><span class="app-name">Chat</span></div>
+                <div class="app-item" onclick="sendAction('open_tools', 'Movies')"><img src="/assets/img/streaming.svg" class="icon-img"><span class="app-name">Movies</span></div>
+                <div class="app-item" onclick="sendAction('open_files')"><img src="/assets/img/file.svg" class="icon-img"><span class="app-name">Files</span></div>
+                <div class="app-item" onclick="sendAction('open_settings')"><img src="/assets/img/setting.svg" class="icon-img"><span class="app-name">Settings</span></div>
+                <div class="app-item" onclick="sendAction('open_more')"><img src="/assets/img/more.svg" class="icon-img"><span class="app-name">More</span></div>
             </div>
         </div>
 
@@ -143,8 +143,8 @@
 </div>
 
 <script>
-    const GAMES_ICON = "https://assets.nebulilabs.xyz/NebuliOS/games.png";
-    const FOLDER_ICON = "https://assets.nebulilabs.xyz/NebuliOS/folder.png";
+    const GAMES_ICON = "/assets/img/game.svg";
+    const FOLDER_ICON = "/assets/img/file.svg";
     let allGames = [];
 
     function sendAction(type, detail = "") {
@@ -153,7 +153,7 @@
 
     async function init() {
         try {
-            const res = await fetch("https://nbli-os-v2.vercel.app/assets/game/games.json");
+            const res = await fetch("/assets/game/games.json");
             const data = await res.json();
             allGames = Object.values(data).flat();
             loadRecent();
