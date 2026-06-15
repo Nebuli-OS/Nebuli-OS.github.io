@@ -2,9 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      style="position:fixed;top:0;left:0;width:100%;height:100%;display:block;">
-
   <title>New Tab</title>
-
   <foreignObject x="0" y="0" width="100%" height="100%">
     <body xmlns="http://www.w3.org/1999/xhtml"
           style="margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;">
@@ -13,11 +11,9 @@
       </iframe>
     </body>
   </foreignObject>
-
   <script type="text/javascript">
   <![CDATA[
   (function() {
-
     var URLS = [
       "https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/latest.html",
       "https://gcore.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/latest.html",
@@ -25,12 +21,9 @@
       "https://jsdelivr.b-cdn.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/mini/latest.html",
       "https://raw.githubusercontent.com/Nebuli-OS/Nebuli-OS.github.io/main/assets/mini/latest.html"
     ];
-
     var frame = document.getElementById("f");
-
     function tryFetch(i) {
       if (i >= URLS.length) return;
-
       fetch(URLS[i])
         .then(function(r) {
           if (!r.ok) throw new Error();
@@ -44,9 +37,7 @@
           tryFetch(i + 1);
         });
     }
-
     tryFetch(0);
-
   }());
   ]]>
   </script>
