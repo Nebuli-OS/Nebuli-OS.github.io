@@ -7,7 +7,6 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 
@@ -46,7 +45,7 @@
         }
 
         .explorer {
-            width: 260px;
+            width: 280px;
             background: rgba(0,0,0,0.2);
             border-right: 1px solid var(--border-color);
             flex-shrink: 0;
@@ -79,7 +78,7 @@
         }
 
         .explorer-footer {
-            padding: 10px;
+            padding: 12px;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: flex-start;
@@ -95,10 +94,10 @@
 
         .reopen-btn {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 32px;
-            height: 32px;
+            bottom: 15px;
+            left: 15px;
+            width: 48px;
+            height: 48px;
             background: var(--violet);
             border-radius: 50%;
             display: none;
@@ -129,11 +128,11 @@
         }
 
         .project-row {
-            padding: 8px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 14px;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -142,7 +141,7 @@
         .project-row .controls, .file-item .controls {
             margin-left: auto;
             display: none;
-            gap: 8px;
+            gap: 12px;
         }
         .project-row:hover .controls, .file-item:hover .controls { display: flex; }
 
@@ -150,15 +149,35 @@
         .control-icon:hover { opacity: 1; color: #ff4d4d; }
 
         .file-item {
-            padding: 6px 20px 6px 40px;
+            padding: 8px 20px 8px 48px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 14px;
             cursor: pointer;
             transition: background 0.2s;
         }
         .file-item:hover { background: rgba(255,255,255,0.05); }
+
+        .icon-btn-wrapper {
+            display: inline-block;
+            background: currentColor;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .folder-icon-large {
+            width: 32px;
+            height: 32px;
+        }
 
         .editor-workspace {
             flex: 1;
@@ -177,14 +196,14 @@
         }
 
         .tab {
-            padding: 10px 15px;
-            font-size: 12px;
+            padding: 12px 18px;
+            font-size: 13px;
             border-right: 1px solid var(--border-color);
             cursor: pointer;
             color: var(--text-dim);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             white-space: nowrap;
         }
 
@@ -198,6 +217,8 @@
             padding: 2px;
             border-radius: 4px;
             opacity: 0.5;
+            display: flex;
+            align-items: center;
         }
         .close-tab:hover {
             background: rgba(255,255,255,0.1);
@@ -312,7 +333,7 @@
             background: rgba(14, 1, 20, 0.8);
             border: 1px solid var(--border-color);
             color: var(--gold);
-            padding: 6px;
+            padding: 8px;
             border-radius: 4px;
             cursor: pointer;
             backdrop-filter: blur(5px);
@@ -324,6 +345,11 @@
         .preview-btn:hover {
             background: var(--violet);
             color: white;
+        }
+        
+        .preview-btn .icon-btn-wrapper {
+            width: 24px;
+            height: 24px;
         }
 
         iframe { width: 100%; height: 100%; border: none; background: white; }
@@ -392,17 +418,17 @@
 <body>
 
     <div id="reopen-explorer" class="reopen-btn" onclick="toggleExplorer(false)">
-        <i data-lucide="sidebar" size="18" style="color: white"></i>
+        <span class="icon-btn-wrapper" style="-webkit-mask-image: url('/assets/img/sidebar_out.svg'); mask-image: url('/assets/img/sidebar_out.svg'); width: 28px; height: 28px; background: white;"></span>
     </div>
 
     <aside class="explorer" id="main-explorer">
         <div class="explorer-header">
             Explorer
-            <i data-lucide="folder-plus" class="add-project-btn" size="16" onclick="showProjectModal()"></i>
+            <span class="add-project-btn icon-btn-wrapper" style="-webkit-mask-image: url('/assets/img/add_folder.svg'); mask-image: url('/assets/img/add_folder.svg'); width: 24px; height: 24px;" onclick="showProjectModal()"></span>
         </div>
         <div class="explorer-content" id="explorer-list"></div>
         <div class="explorer-footer">
-            <i data-lucide="sidebar" class="collapse-btn" size="18" onclick="toggleExplorer(true)"></i>
+            <span class="collapse-btn icon-btn-wrapper" style="-webkit-mask-image: url('/assets/img/sidebar_in.svg'); mask-image: url('/assets/img/sidebar_in.svg'); width: 28px; height: 28px;" onclick="toggleExplorer(true)"></span>
         </div>
     </aside>
 
@@ -410,7 +436,7 @@
         <div class="tabs-container" id="tabs-bar"></div>
         <div class="code-entry">
             <div id="no-file-message" class="no-edit-msg">
-                <i data-lucide="code-2" size="48" style="color: var(--violet); margin-bottom: 15px; opacity: 0.3;"></i>
+                <span class="icon-btn-wrapper" style="-webkit-mask-image: url('/assets/img/code_file.svg'); mask-image: url('/assets/img/code_file.svg'); width: 64px; height: 64px; color: var(--violet); margin-bottom: 15px; opacity: 0.3;"></span>
                 <p>You cannot edit this file, select a file or create a new project to start editing</p>
             </div>
             <textarea id="editing" spellcheck="false" oninput="updateAll()" onscroll="syncScroll()"></textarea>
@@ -423,7 +449,7 @@
     <section class="preview-pane" id="preview-side">
         <div class="preview-controls">
             <button class="preview-btn" onclick="toggleFullscreen()" id="fs-toggle">
-                <i data-lucide="maximize" size="16"></i>
+                <span class="icon-btn-wrapper" style="-webkit-mask-image: url('/assets/img/fullscreen.svg'); mask-image: url('/assets/img/fullscreen.svg');"></span>
             </button>
         </div>
         <iframe id="preview-window"></iframe>
@@ -467,6 +493,18 @@
         const explorer = document.getElementById('main-explorer');
         const reopenBtn = document.getElementById('reopen-explorer');
 
+        const ICON_BASE = 'https://cdn.jsdelivr.net/gh/Nebuli-OS/Nebuli-OS.github.io@latest/assets/img/';
+        const ICON_MAP = {
+            'chevron-down': 'down.svg', 
+            'chevron-right': 'up.svg',
+            'folder': 'folder.svg',
+            'file-plus': 'upload_file.svg',
+            'trash-2': 'close.svg',
+            'file': 'file.svg',
+            'x': 'close.svg',
+            'fullscreen': 'fullscreen.svg'
+        };
+
         function toggleExplorer(collapsed) {
             if (collapsed) {
                 explorer.classList.add('collapsed');
@@ -478,10 +516,7 @@
         }
 
         function toggleFullscreen() {
-            const isFullscreen = previewPane.classList.toggle('fullscreen');
-            const icon = document.getElementById('fs-toggle');
-            icon.innerHTML = isFullscreen ? '<i data-lucide="minimize" size="16"></i>' : '<i data-lucide="maximize" size="16"></i>';
-            lucide.createIcons();
+            previewPane.classList.toggle('fullscreen');
         }
 
         let isResizing = false;
@@ -588,31 +623,32 @@
             let html = '';
             for (const [projName, projData] of Object.entries(projects)) {
                 const isCollapsed = collapsedFolders.has(projName);
+                const chevronIcon = isCollapsed ? 'chevron-right' : 'chevron-down';
                 html += `
                     <div class="project-item">
                         <div class="project-row" onclick="toggleFolder('${projName}')">
-                            <i data-lucide="${isCollapsed ? 'chevron-right' : 'chevron-down'}" size="14"></i>
-                            <i data-lucide="folder" size="14" style="color: var(--violet)"></i>
+                            <span class="icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP[chevronIcon]}'); mask-image: url('${ICON_BASE}${ICON_MAP[chevronIcon]}'); width: 24px; height: 24px;"></span>
+                            <span class="icon-btn-wrapper folder-icon-large" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['folder']}'); mask-image: url('${ICON_BASE}${ICON_MAP['folder']}'); color: var(--violet)"></span>
                             <span>${projName}</span>
                             <div class="controls">
-                                <i data-lucide="file-plus" class="control-icon" size="14" onclick="event.stopPropagation(); addFileToProject('${projName}')"></i>
-                                <i data-lucide="trash-2" class="control-icon" size="14" onclick="event.stopPropagation(); deleteProject('${projName}')"></i>
+                                <span class="control-icon icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['file-plus']}'); mask-image: url('${ICON_BASE}${ICON_MAP['file-plus']}'); width: 24px; height: 24px;" onclick="event.stopPropagation(); addFileToProject('${projName}')"></span>
+                                <span class="control-icon icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['trash-2']}'); mask-image: url('${ICON_BASE}${ICON_MAP['trash-2']}'); width: 24px; height: 24px;" onclick="event.stopPropagation(); deleteProject('${projName}')"></span>
                             </div>
                         </div>
                         <div class="${isCollapsed ? 'hidden' : ''}">
                             ${Object.keys(projData.children).map(fileName => `
                                 <div class="file-item" onclick="openFile('${projName}', '${fileName}')">
-                                    <i data-lucide="file" size="14" style="color: var(--gold)"></i>
+                                    <span class="icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['file']}'); mask-image: url('${ICON_BASE}${ICON_MAP['file']}'); width: 24px; height: 24px; color: var(--gold)"></span>
                                     <span>${fileName}</span>
                                     <div class="controls">
-                                        <i data-lucide="trash-2" class="control-icon" size="14" onclick="event.stopPropagation(); deleteFile('${projName}', '${fileName}')"></i>
+                                        <span class="control-icon icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['trash-2']}'); mask-image: url('${ICON_BASE}${ICON_MAP['trash-2']}'); width: 24px; height: 24px;" onclick="event.stopPropagation(); deleteFile('${projName}', '${fileName}')"></span>
                                     </div>
                                 </div>
                             `).join('')}
                         </div>
                     </div>`;
             }
-            list.innerHTML = html; lucide.createIcons();
+            list.innerHTML = html;
         }
 
         function openFile(projName, fileName) {
@@ -642,11 +678,10 @@
             const bar = document.getElementById('tabs-bar');
             bar.innerHTML = openTabs.map(t => `
                 <div class="tab ${t.path === activeTabPath ? 'active' : ''}" onclick="switchTab('${t.path}')">
-                    <i data-lucide="file" size="12"></i>
+                    <span class="icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['file']}'); mask-image: url('${ICON_BASE}${ICON_MAP['file']}'); width: 18px; height: 18px;"></span>
                     ${t.fileName}
-                    <i data-lucide="x" class="close-tab" size="12" onclick="closeTab(event, '${t.path}')"></i>
+                    <span class="close-tab icon-btn-wrapper" style="-webkit-mask-image: url('${ICON_BASE}${ICON_MAP['x']}'); mask-image: url('${ICON_BASE}${ICON_MAP['x']}'); width: 16px; height: 16px;" onclick="closeTab(event, '${t.path}')"></span>
                 </div>`).join('');
-            lucide.createIcons();
         }
 
         function switchTab(path) { 

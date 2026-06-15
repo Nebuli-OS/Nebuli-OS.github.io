@@ -657,10 +657,10 @@ window.addEventListener('message', (event) => {
         toolUrl = '/ai.html';
         toolTitle = 'AI';
       } else if (toolType === 'Music') {
-        toolUrl = '/musicplayer.html';
-        toolTitle = 'Music Player';
+        toolUrl = '/music.html';
+        toolTitle = 'Music';
       } else if (toolType === 'Editor') {
-        toolUrl = '/code_editor.html';
+        toolUrl = '/code.html';
         toolTitle = 'Code Editor';
       } else if (toolType === 'Chat') {
         toolUrl = '/chat.html';

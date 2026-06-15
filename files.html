@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebuli File Manager</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-theme">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <style>
@@ -104,7 +103,7 @@
 
         .file-item {
             display: grid;
-            grid-template-columns: 40px 2fr 1fr 1fr;
+            grid-template-columns: 44px 2fr 1fr 1fr;
             align-items: center;
             padding: 14px 24px;
             border-bottom: 1px solid rgba(255,255,255,0.02);
@@ -117,9 +116,22 @@
         }
 
         .icon {
-            color: var(--gold);
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-icon-wrapper {
+            display: inline-block;
+            background: #d4af37;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
         }
 
         .item-name { font-weight: 600; color: var(--text); }
@@ -350,16 +362,16 @@
 
 <div id="file-manager-container">
     <div class="toolbar">
-        <button class="btn" id="new-folder-btn"><i data-lucide="folder-plus"></i> New Folder</button>
-        <button class="btn" id="upload-btn"><i data-lucide="upload"></i> Upload</button>
+        <button class="btn" id="new-folder-btn"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/add_folder.svg'); mask-image: url('/assets/img/add_folder.svg'); width: 24px; height: 24px;"></span> New Folder</button>
+        <button class="btn" id="upload-btn"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/upload_file.svg'); mask-image: url('/assets/img/upload_file.svg'); width: 24px; height: 24px;"></span> Upload</button>
         <div id="path-bar"></div>
     </div>
     <div id="home-warning" style="display:none;">
-        <i data-lucide="alert-triangle" size="18"></i>
+        <span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/error_file.svg'); mask-image: url('/assets/img/error_file.svg'); width: 20px; height: 20px;"></span>
         <span>Try not to upload high file size images/videos. That could cause slow load times or crashes.</span>
     </div>
     <div id="project-message" style="display:none;">
-        <i data-lucide="info" size="18"></i>
+        <span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/tool.svg'); mask-image: url('/assets/img/tool.svg'); width: 20px; height: 20px;"></span>
         <span>This folder connects to your projects in the <a href="/code_editor.html">Code Editor</a></span>
     </div>
     <div id="file-list"></div>
@@ -374,12 +386,12 @@
     <div class="modal-content" style="max-width: 400px;">
         <div class="modal-header">
             <h2 id="choice-filename"></h2>
-            <button class="close-btn choice-close"><i data-lucide="x" size="18"></i></button>
+            <button class="close-btn choice-close"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/close.svg'); mask-image: url('/assets/img/close.svg'); width: 20px; height: 20px;"></span></button>
         </div>
         <div class="modal-body" style="padding: 20px;">
             <div style="display:flex; flex-direction: column; gap:10px;">
-                <button id="edit-button" class="btn"><i data-lucide="edit-3"></i> Edit Code</button>
-                <button id="view-button" class="btn"><i data-lucide="eye"></i> View Live</button>
+                <button id="edit-button" class="btn"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/edit.svg'); mask-image: url('/assets/img/edit.svg'); width: 24px; height: 24px;"></span> Edit Code</button>
+                <button id="view-button" class="btn"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/internet.svg'); mask-image: url('/assets/img/internet.svg'); width: 24px; height: 24px;"></span> View Live</button>
             </div>
         </div>
     </div>
@@ -389,13 +401,13 @@
     <div class="modal-content">
         <div class="modal-header">
             <h2 id="preview-filename"></h2>
-            <button class="close-btn preview-close"><i data-lucide="x" size="18"></i></button>
+            <button class="close-btn preview-close"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/close.svg'); mask-image: url('/assets/img/close.svg'); width: 20px; height: 20px;"></span></button>
         </div>
         <div class="modal-body">
             <div id="preview-viewer"></div>
         </div>
         <div class="modal-footer" id="modal-footer" style="display: none;">
-            <button id="save-content-btn" class="btn" style="border-color: var(--violet);"><i data-lucide="save"></i> Save Changes</button>
+            <button id="save-content-btn" class="btn" style="border-color: var(--violet);"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('/assets/img/code_file.svg'); mask-image: url('/assets/img/code_file.svg'); width: 24px; height: 24px;"></span> Save Changes</button>
         </div>
     </div>
 </div>
@@ -423,6 +435,18 @@
     const modalFooter = document.getElementById('modal-footer');
     const homeWarning = document.getElementById('home-warning');
     const projectMsg = document.getElementById('project-message');
+
+    const ICON_MAP = {
+        'folder': '/assets/img/folder.svg',
+        'file': '/assets/img/file.svg',
+        'image': '/assets/img/streaming.svg',
+        'file-code': '/assets/img/code_file.svg',
+        'edit-3': '/assets/img/edit.svg',
+        'eye': '/assets/img/internet.svg',
+        'up': '/assets/img/up.svg',
+        'left': '/assets/img/back_arrow.svg',
+        'right': '/assets/img/forward_arrow.svg'
+    };
 
     function saveFS() { localStorage.setItem(STORAGE_KEY, JSON.stringify(fileSystem)); }
 
@@ -474,7 +498,7 @@
         if (currentPath.length > 2) {
             const up = document.createElement('div');
             up.className = 'file-item';
-            up.innerHTML = `<span class="icon"><i data-lucide="chevron-up"></i></span><span class="item-name">..</span><span></span><span></span>`;
+            up.innerHTML = `<span class="icon"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP['up']}'); mask-image: url('${ICON_MAP['up']}'); width: 24px; height: 24px;"></span></span><span class="item-name">..</span><span></span><span></span>`;
             up.onclick = () => { currentPath.pop(); render(); };
             fileList.appendChild(up);
         }
@@ -483,13 +507,13 @@
             const item = folder[key];
             const el = document.createElement('div');
             el.className = 'file-item';
-            let icon = 'file';
-            if(item.type === 'folder') icon = 'folder';
-            else if(item.mime && item.mime.startsWith('image/')) icon = 'image';
-            else if(key.endsWith('.html') || key.endsWith('.js') || key.endsWith('.css')) icon = 'file-code';
+            let iconKey = 'file';
+            if(item.type === 'folder') iconKey = 'folder';
+            else if(item.mime && item.mime.startsWith('image/')) iconKey = 'image';
+            else if(key.endsWith('.html') || key.endsWith('.js') || key.endsWith('.css')) iconKey = 'file-code';
             
             el.innerHTML = `
-                <span class="icon"><i data-lucide="${icon}"></i></span>
+                <span class="icon"><span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP[iconKey]}'); mask-image: url('${ICON_MAP[iconKey]}'); width: 24px; height: 24px;"></span></span>
                 <span class="item-name">${key}</span>
                 <span class="item-type">${item.type}</span>
                 <span class="item-size">${item.size || '-'}</span>
@@ -512,7 +536,6 @@
             s.onclick = () => { currentPath = currentPath.slice(0, i + 2); render(); };
             pathBar.appendChild(s);
         });
-        lucide.createIcons();
     }
 
     function openFolder(name) { currentPath.push(name); render(); }
@@ -521,8 +544,7 @@
         currentFile = { name, ...file };
         addToRecent(currentPath.join('/') + '/' + name);
         if (name.endsWith('.html')) {
-            document.getElementById('choice-filename').innerHTML = `<i data-lucide="file-code" size="18"></i> ${name}`;
-            lucide.createIcons();
+            document.getElementById('choice-filename').innerHTML = `<span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP['file-code']}'); mask-image: url('${ICON_MAP['file-code']}'); width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"></span> ${name}`;
             choiceModal.style.display = 'flex';
         } else if (file.mime && file.mime.startsWith('image/')) {
             updateImageGallery();
@@ -556,11 +578,11 @@
             if (imageGallery.length > 1) {
                 const prev = document.createElement('div');
                 prev.className = 'img-nav prev';
-                prev.innerHTML = '<i data-lucide="chevron-left"></i>';
+                prev.innerHTML = `<span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP['left']}'); mask-image: url('${ICON_MAP['left']}'); width: 24px; height: 24px;"></span>`;
                 prev.onclick = (e) => { e.stopPropagation(); navigateGallery(-1); };
                 const next = document.createElement('div');
                 next.className = 'img-nav next';
-                next.innerHTML = '<i data-lucide="chevron-right"></i>';
+                next.innerHTML = `<span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP['right']}'); mask-image: url('${ICON_MAP['right']}'); width: 24px; height: 24px;"></span>`;
                 next.onclick = (e) => { e.stopPropagation(); navigateGallery(1); };
                 container.appendChild(prev);
                 container.appendChild(next);
@@ -621,8 +643,7 @@
         }
         
         let iconType = mode === 'image' ? 'image' : (mode === 'live' ? 'eye' : 'edit-3');
-        document.getElementById('preview-filename').innerHTML = `<i data-lucide="${iconType}" size="18"></i> ${currentFile.name}`;
-        lucide.createIcons();
+        document.getElementById('preview-filename').innerHTML = `<span class="btn-icon-wrapper" style="-webkit-mask-image: url('${ICON_MAP[iconType]}'); mask-image: url('${ICON_MAP[iconType]}'); width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"></span> ${currentFile.name}`;
         previewModal.style.display = 'flex';
     }
 
