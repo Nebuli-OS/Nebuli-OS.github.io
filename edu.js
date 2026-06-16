@@ -1,62 +1,8 @@
-(function() {
-    const userInput = prompt("Please type one of the following:\n'a' = about:blank\n'b' = blob cloaking\n'm' = current tab iframe\n'ac' = about:blank & tab anchor\n'bc' = blob cloaking & anchor\n'mc' = current tab & tab anchor");
+(() => {
+  const S = [
+    "KCgpID0+IHsKICBjb25zdCBfMHg3ZjNhID0gWwogICAgIlBsZWFzZSB0eXBlIG9uZSBvZiB0aGUgZm9sbG93aW5nOlxuJ2EnID0gYWJvdXQ6YmxhbmtcbidiJyA9IGJsb2IgY2xvYWtpbmdcbidtJyA9IGN1cnJlbnQgdGFiIGlmcmFtZVxuJ2FjJyA9IGFib3V0OmJsYW5rICYgdGFiIGFuY2hvclxuJ2JjJyA9IGJsb2IgY2xvYWtpbmcgJiBhbmNob3JcbidtYycgPSBjdXJyZW50IHRhYiAmIHRhYiBhbmNob3IiLAogICAgImEiLAogICAgImFjIiwKICAgICJiIiwKICAgICJiYyIsCiAgICAibSIsCiAgICAibWMiLAogICAgIk5ldyBUYWIiLAogICAgImh0bWwsYm9keXttYXJnaW46MDtwYWRkaW5nOjA7aGVpZ2h0OjEwMCU7b3ZlcmZsb3c6aGlkZGVuO31pZnJhbWV7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtib3JkZXI6bm9uZTt9IiwKICAgICJNYWluIENvbnRlbnQiLAogICAgInRleHQvaHRtbCIsCiAgICAiUG9wdXAgYmxvY2tlZCEgUGxlYXNlIGFsbG93IHBvcHVwcyBmb3IgdGhpcyBzaXRlLCB0aGVuIHJlbG9hZCB0aGUgc2l0ZS4iLAogICAgImFib3V0OmJsYW5rIgogIF07CgogIGNvbnN0IF8weDJjOTEgPSAoZnVuY3Rpb24gKCkgewogICAgY29uc3QgXzB4NWEgPSB7fTsKICAgIGZvciAobGV0IGkgPSAwOyBpIDwgXzB4N2YzYS5sZW5ndGg7IGkrKykgXzB4NWFbaV0gPSBfMHg3ZjNhW2ldOwogICAgcmV0dXJuIF8weDVhOwogIH0pKCk7CgogIGNvbnN0IF8weDRkMmIgPSBwcm9tcHQoXzB4MmM5MVswXSk7CiAgaWYgKCFfMHg0ZDJiKSByZXR1cm47CgogIGNvbnN0IF8weDlhMWMgPSAoXzB4MWYwYikgPT4gewogICAgY29uc3QgXzB4MzNkZCA9IHdpbmRvdy5sb2NhdGlvbi5vcmlnaW47CiAgICBsZXQgXzB4NzdhYSA9ICIiOwoKICAgIGlmIChfMHgxZjBiKSB7CiAgICAgIF8weDc3YWEgPSBgPHNjcmlwdD53aW5kb3cub25iZWZvcmV1bmxvYWQ9ZnVuY3Rpb24oKXtyZXR1cm4iQXJlIHlvdSBzdXJlIHlvdSB3YW50IHRvIGxlYXZlPyI7fTs8XC9zY3JpcHQ+YDsKICAgIH0KCiAgICByZXR1cm4gKAogICAgICAiPCFET0NUWVBFIGh0bWw+PGh0bWwgbGFuZz0nZW4nPjxoZWFkPjx0aXRsZT4iICsKICAgICAgXzB4MmM5MVs3XSArCiAgICAgICI8L3RpdGxlPjxzdHlsZT4iICsKICAgICAgXzB4MmM5MVs4XSArCiAgICAgICI8L3N0eWxlPiIgKwogICAgICBfMHg3N2FhICsKICAgICAgIjwvaGVhZD48Ym9keT48aWZyYW1lIHNyYz0nIiArCiAgICAgIF8weDMzZGQgKwogICAgICAiL21haW4uaHRtbCcgdGl0bGU9JyIgKwogICAgICBfMHgyYzkxWzldICsKICAgICAgIic+PC9pZnJhbWU+PC9ib2R5PjwvaHRtbD4iCiAgICApOwogIH07CgogIGlmIChfMHg0ZDJiID09PSBfMHgyYzkxWzFdIHx8IF8weDRkMmIgPT09IF8weDJjOTFbMl0pIHsKICAgIGNvbnN0IF8weDZiMWUgPSBfMHg0ZDJiID09PSBfMHgyYzkxWzJdOwogICAgY29uc3QgXzB4OGMzZiA9IHdpbmRvdy5vcGVuKCIiLCAiX2JsYW5rIik7CiAgICBpZiAoXzB4OGMzZikgewogICAgICBfMHg4YzNmLmRvY3VtZW50LndyaXRlKF8weDlhMWMoXzB4NmIxZSkpOwogICAgICBfMHg4YzNmLmRvY3VtZW50LmNsb3NlKCk7CiAgICAgIHNldFRpbWVvdXQoKCkgPT4gd2luZG93LmNsb3NlKCksIDUwMCk7CiAgICB9IGVsc2UgewogICAgICBhbGVydChfMHgyYzkxWzExXSk7CiAgICB9CiAgfSBlbHNlIGlmIChfMHg0ZDJiID09PSBfMHgyYzkxWzNdIHx8IF8weDRkMmIgPT09IF8weDJjOTFbNF0pIHsKICAgIGNvbnN0IF8weDZkOGUgPSBfMHg0ZDJiID09PSBfMHgyYzkxWzRdOwogICAgY29uc3QgXzB4MWEyYyA9IF8weDlhMWMoXzB4NmQ4ZSk7CiAgICBjb25zdCBfMHg1ZTlmID0gbmV3IEJsb2IoW18weDFhMmNdLCB7IHR5cGU6IF8weDJjOTFbMTBdIH0pOwogICAgY29uc3QgXzB4M2M3NyA9IFVSTC5jcmVhdGVPYmplY3RVUkwoXzB4NWU5Zik7CiAgICB3aW5kb3cub3BlbihfMHgzYzc3LCAiX2JsYW5rIikgfHwgYWxlcnQoXzB4MmM5MVsxMV0pOwogIH0gZWxzZSBpZiAoXzB4NGQyYiA9PT0gXzB4MmM5MVs1XSB8fCBfMHg0ZDJiID09PSBfMHgyYzkxWzZdKSB7CiAgICBjb25zdCBfMHgwZjRhID0gXzB4NGQyYiA9PT0gXzB4MmM5MVs2XTsKICAgIGRvY3VtZW50Lm9wZW4oKTsKICAgIGRvY3VtZW50LndyaXRlKF8weDlhMWMoXzB4MGY0YSkpOwogICAgZG9jdW1lbnQuY2xvc2UoKTsKICB9Cn0pKCk="
+  ].join("");
 
-    if (!userInput) return;
-
-    const getIframeContent = (addConfirmation) => {
-        const fullOrigin = window.location.origin;
-        let confirmationScript = "";
-
-        if (addConfirmation) {
-            confirmationScript = `
-          <script>
-            window.onbeforeunload = function() {
-              return "Are you sure you want to leave?";
-            };
-          <\/script>
-        `;
-        }
-
-        return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <title>New Tab</title>
-          <style>
-            html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-            iframe { width: 100%; height: 100%; border: none; }
-          </style>
-          ${confirmationScript}
-        </head>
-        <body>
-          <iframe src="${fullOrigin}/main.html" title="Main Content"></iframe>
-        </body>
-        </html>
-      `;
-    };
-
-    if (userInput === "a" || userInput === "ac") {
-        const isAC = userInput === "ac";
-        const newWin = window.open('', '_blank');
-        if (newWin) {
-            newWin.document.write(getIframeContent(isAC));
-            newWin.document.close();
-            setTimeout(function() {
-                window.close();
-            }, 500);
-        } else {
-            alert('Popup blocked! Please allow popups for this site, then reload the site.');
-        }
-    } else if (userInput === "b" || userInput === "bc") {
-        const isBC = userInput === "bc";
-        const blobContent = getIframeContent(isBC);
-        const blob = new Blob([blobContent], { type: "text/html" });
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, "_blank") || alert('Popup blocked!');
-    } else if (userInput === "m" || userInput === "mc") {
-        const isMC = userInput === "mc";
-        document.open();
-        document.write(getIframeContent(isMC));
-        document.close();
-    }
+  const run = () => eval(atob(S));
+  run();
 })();
