@@ -105,14 +105,15 @@
 <div id="taskbarCollapsedHint"></div>
 
 <div id="settingsTemplate" style="display: none;">
-  <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+  <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
     <button class="settings-pill active" data-section="main">Main Settings</button>
     <button class="settings-pill" data-section="taskbar">Taskbar Settings</button>
     <button class="settings-pill" data-section="custom">Custom Apps</button>
   </div>
 
   <div class="settings-section" data-section-content="main">
-    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Main Settings</div>
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #ffffff;">Main Settings</div>
+
     <label for="pSelect" class="notranslate">
       Select &#x0420;&#x0433;&#x043e;&#x0445;&#x0443;:
       <select id="pSelect" aria-describedby="pDesc">
@@ -121,25 +122,25 @@
       </select>
     </label>
 
-    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd;">
+    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
       <label for="wispInput" style="border-bottom: none; flex-direction: column;">
-        <span style="margin-bottom: 5px; font-size: 13px;">Wisp Server URL:</span>
-        <input type="text" id="wispInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="wss://example.com/"/>
+        <span style="margin-bottom: 5px; font-size: 13px; color: #ffffff;">Wisp Server URL:</span>
+        <input type="text" id="wispInput" style="width: 100%; padding: 6px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; font-family: monospace; font-size: 12px; background: rgba(255,255,255,0.05); color: #ffffff;" placeholder="wss://example.com/"/>
       </label>
     </div>
 
     <div style="margin-top: 12px;">
       <label for="bareInput" style="border-bottom: none; flex-direction: column;">
-        <span style="margin-bottom: 5px; font-size: 13px;">Bare Server URL:</span>
-        <input type="text" id="bareInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="https://example.com/"/>
+        <span style="margin-bottom: 5px; font-size: 13px; color: #ffffff;">Bare Server URL:</span>
+        <input type="text" id="bareInput" style="width: 100%; padding: 6px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; font-family: monospace; font-size: 12px; background: rgba(255,255,255,0.05); color: #ffffff;" placeholder="https://example.com/"/>
       </label>
     </div>
   </div>
 
   <div class="settings-section" data-section-content="taskbar" style="display: none;">
-    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Taskbar Settings</div>
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #ffffff;">Taskbar Settings</div>
 
-    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; padding-bottom: 10px;">
+    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); padding-bottom: 10px;">
       <label for="appearanceTypeSelect" style="border-bottom: none;">
         <span>Appearance Type:</span>
         <select id="appearanceTypeSelect">
@@ -150,17 +151,17 @@
       </label>
     </div>
 
-    <div id="solidColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid #eee;">
-      <div style="font-weight: 600; margin-bottom: 5px; color: #333;">Solid Color:</div>
+    <div id="solidColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.15);">
+      <div style="font-weight: 600; margin-bottom: 5px; color: #ffffff;">Solid Color:</div>
       <label for="solidColorInput" style="border-bottom: none;">
         <span>Pick Color:</span>
         <input type="color" id="solidColorInput" value="#333333" style="width: 80px; height: 36px; cursor: pointer;">
       </label>
     </div>
 
-    <div id="gradientColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid #eee;">
-      <div style="font-weight: 600; margin-bottom: 5px; color: #333;">Gradient Colors:</div>
-      <label for="gradientColor1Input" style="border-bottom: 1px solid #eee; margin-bottom: 0;">
+    <div id="gradientColorSettings" style="display: none; margin-top: 10px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.15);">
+      <div style="font-weight: 600; margin-bottom: 5px; color: #ffffff;">Gradient Colors:</div>
+      <label for="gradientColor1Input" style="border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0;">
         <span>Color 1 (Left):</span>
         <input type="color" id="gradientColor1Input" value="#007aff" style="width: 80px; height: 36px; cursor: pointer;">
       </label>
@@ -170,11 +171,12 @@
       </label>
     </div>
 
-    <label for="taskbarFullCheckbox" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+    <label for="taskbarFullCheckbox" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15);">
       <span>Full Bar Mode</span>
       <input type="checkbox" id="taskbarFullCheckbox"/>
     </label>
-    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: #777;">
+
+    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.6);">
       Full mode makes the bar span the entire edge of the screen.
     </div>
 
@@ -182,7 +184,8 @@
       <span>Auto-Collapse Taskbar</span>
       <input type="checkbox" id="taskbarCollapseCheckbox"/>
     </label>
-    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: #777;">
+
+    <div class="info" style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.6);">
       Hide the taskbar when not focused. Hover to show.
     </div>
 
@@ -195,30 +198,32 @@
         <option value="right">Right</option>
       </select>
     </label>
-    <div class="info" style="margin-top: -12px; margin-bottom: 30px; font-size: 13px; color: #777;">
+
+    <div class="info" style="margin-top: -12px; margin-bottom: 30px; font-size: 13px; color: rgba(255,255,255,0.6);">
       Select where the taskbar will appear on your screen.
     </div>
   </div>
 
   <div class="settings-section" data-section-content="custom" style="display: none;">
-    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Custom Apps</div>
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #ffffff;">Custom Apps</div>
 
-    <div id="customAppsList" style="margin-bottom: 12px;">
-    </div>
+    <div id="customAppsList" style="margin-bottom: 12px;"></div>
 
     <div style="display: flex; gap: 8px; flex-direction: column;">
       <div>
         <label for="appUrlInput" style="display: flex; flex-direction: column; border-bottom: none;">
           <span style="margin-bottom: 4px; font-size: 13px;">App URL:</span>
-          <input type="text" id="appUrlInput" placeholder="https://example.com" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px;">
+          <input type="text" id="appUrlInput" placeholder="https://example.com" style="padding: 6px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; font-size: 12px; background: rgba(255,255,255,0.05); color: #ffffff;">
         </label>
       </div>
+
       <div>
         <label for="appTitleInput" style="display: flex; flex-direction: column; border-bottom: none;">
           <span style="margin-bottom: 4px; font-size: 13px;">App Title:</span>
-          <input type="text" id="appTitleInput" placeholder="My App" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px;">
+          <input type="text" id="appTitleInput" placeholder="My App" style="padding: 6px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; font-size: 12px; background: rgba(255,255,255,0.05); color: #ffffff;">
         </label>
       </div>
+
       <button id="addAppBtn" title="Add Custom App">
         Add App
       </button>
@@ -226,6 +231,7 @@
 
     <div class="settings-divider"></div>
   </div>
+
   <button id="resetAllSettingsBtn" title="Reset all settings to default">
       Reset All Settings to Default
   </button>

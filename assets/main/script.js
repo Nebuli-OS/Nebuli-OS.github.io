@@ -896,7 +896,7 @@ function getFavicon(url) {
     const u = new URL(url);
     return `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encodeURIComponent(u.href)}&size=128`;
   } catch {
-    return 'https://assets.nebulilabs.xyz/NebuliOS/internet.png';
+    return '/assets/img/internet.svg';
   }
 }
 
@@ -1282,7 +1282,7 @@ function closeTab(id) {
   } else {
     wrapper.style.display = 'none';
     minimizeBubble.style.display = 'none';
-    setFavicon('https://assets.nebulilabs.xyz/NebuliOS/internet.png');
+    setFavicon('/assets/img/internet.svg');
   }
 }
 
@@ -1576,7 +1576,7 @@ function toggleImmersiveFullscreen() {
     applyMaximizedStyles();
 
     if (fullscreenIcon) {
-      fullscreenIcon.src = 'https://assets.nebulilabs.xyz/NebuliOS/close.png';
+      fullscreenIcon.src = '/assets/img/close.svg';
       fullscreenBtn.title = 'Exit Fullscreen';
     }
     trafficMax.title = 'Maximize/Restore Omnibox';
@@ -1592,7 +1592,7 @@ function exitImmersiveFullscreen() {
   applyRestoredStyles();
 
   if (fullscreenIcon) {
-    fullscreenIcon.src = 'https://assets.nebulilabs.xyz/NebuliOS/fullscreen.png';
+    fullscreenIcon.src = '/assets/img/fullscreen.svg';
     fullscreenBtn.title = 'Toggle Fullscreen';
   }
   trafficMax.title = 'Maximize/Restore Omnibox';
@@ -1606,7 +1606,7 @@ if (trafficClose) {
     });
     wrapper.style.display = 'none';
     minimizeBubble.style.display = 'none';
-    setFavicon('https://assets.nebulilabs.xyz/NebuliOS/internet.png');
+    setFavicon('/assets/img/internet.svg');
   });
 }
 
@@ -2233,7 +2233,7 @@ function openSettingsInOmnibox(forceNewTab = false) {
   minimizeBubble.style.display = 'none';
 
   if (fullscreenIcon) {
-    fullscreenIcon.src = 'https://assets.nebulilabs.xyz/NebuliOS/fullscreen.png';
+    fullscreenIcon.src = '/assets/img/fullscreen.svg';
     fullscreenBtn.title = 'Toggle Fullscreen';
   }
   trafficMax.title = 'Maximize/Restore Omnibox';
@@ -2363,31 +2363,34 @@ function showShortcutsPopup() {
     shortcutsContainer.appendChild(shortcutItem);
   });
   
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = 'Close';
-  closeBtn.style.cssText = `
-    margin-top: 20px;
-    padding: 10px 16px;
-    background: rgba(0, 122, 255, 0.8);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    width: 100%;
-    font-weight: 500;
-    transition: background 0.2s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  `;
-  
-  closeBtn.addEventListener('mouseover', () => {
-    closeBtn.style.background = 'rgba(0, 122, 255, 1)';
-  });
-  
-  closeBtn.addEventListener('mouseout', () => {
-    closeBtn.style.background = 'rgba(0, 122, 255, 0.8)';
-  });
+const closeBtn = document.createElement('button');
+closeBtn.textContent = 'Close';
+closeBtn.style.cssText = `
+  margin-top: 20px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+  background-size: 200% 200%;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  width: 100%;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+`;
+
+closeBtn.addEventListener('mouseover', () => {
+  closeBtn.style.backgroundPosition = 'right center';
+  closeBtn.style.filter = 'brightness(1.1)';
+  closeBtn.style.transform = 'scale(1.02)';
+});
+
+closeBtn.addEventListener('mouseout', () => {
+  closeBtn.style.backgroundPosition = '';
+  closeBtn.style.filter = '';
+  closeBtn.style.transform = '';
+});
   
   popupContent.appendChild(title);
   popupContent.appendChild(shortcutsContainer);
