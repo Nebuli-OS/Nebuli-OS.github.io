@@ -194,6 +194,14 @@
       white-space: nowrap;
     }
 
+    .mode-switch-input:checked ~ .mode-switch-track {
+      background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+    }
+
+    .mode-switch-input:checked ~ .mode-switch-track .mode-switch-thumb {
+      transform: translateX(24px);
+    }
+
     .settings-pill:hover {
       background: #e0e0e0;
       border-color: rgba(0, 0, 0, 0.3);
@@ -225,6 +233,11 @@
   </style>
 </head>
 <body>
+  <script>
+    if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
+      document.write('<div id="modeSwitchCover" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:99999;"></div>')
+    }
+  </script>
   <div class="sidebar">
     <div class="top">
       <button id="homeBtn" title="Home"><img src="https://assets.nebulilabs.xyz/nebuli.png" alt="Home"></button>
@@ -260,6 +273,7 @@
     </div>
   </div>
 
+
   <div id="iframeContainer"></div>
 
   <div id="settingsTemplate" style="display: none;">
@@ -289,6 +303,19 @@
           <span style="margin-bottom: 5px; font-size: 13px;">Bare Server URL:</span>
           <input type="text" id="bareInput" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 12px;" placeholder="https://example.com/"/>
         </label>
+      </div>
+
+      <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; padding: 6px 0;">
+          <span id="modeSwitchOsLabel" style="font-size: 13px; color: #111; font-weight: 600;">OS Mode</span>
+          <label class="mode-switch-toggle" style="position: relative; display: inline-block; width: 52px; height: 28px; border-bottom: none; padding: 0; margin: 0; cursor: pointer; flex-shrink: 0;">
+            <input type="checkbox" id="modeSwitchInput" class="mode-switch-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: pointer; z-index: 2;">
+            <span class="mode-switch-track" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border: 1px solid #bbb; border-radius: 28px; transition: background 0.25s ease; pointer-events: none;">
+              <span class="mode-switch-thumb" style="position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; background: #ffffff; border-radius: 50%; transition: transform 0.25s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.4);"></span>
+            </span>
+          </label>
+          <span id="modeSwitchRootLabel" style="font-size: 13px; color: #111; font-weight: 600;">Root Mode</span>
+        </div>
       </div>
 
       <div class="settings-divider"></div>
@@ -340,11 +367,71 @@
     const DEFAULT_p = 'light'
     const DEFAULT_WISP = 'wss://wisp.rhw.one/'
     const DEFAULT_BARE = 'https://larp.foundation/tspmo/'
+    const NEBULI_MODE_KEY = 'nebuli-mode'
+    const DEFAULT_NEBULI_MODE = 'os'
     
     let currentTabId = 0
     let tabs = {}
     let currentSettingsPanel = null
     let histories = {}
+
+    function getNebuliMode() {
+      return localStorage.getItem(NEBULI_MODE_KEY) || DEFAULT_NEBULI_MODE
+    }
+
+    function setNebuliMode(mode) {
+      localStorage.setItem(NEBULI_MODE_KEY, mode)
+    }
+
+    function playIntroSequence(onFadeStart) {
+      const overlay = document.createElement('div')
+      overlay.id = 'introOverlay'
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `
+
+      const iframe = document.createElement('iframe')
+      iframe.src = '/intro.html'
+      iframe.style.cssText = `
+        width: 100%;
+        height: 100%;
+        border: none;
+        margin: 0;
+        padding: 0;
+      `
+
+      overlay.appendChild(iframe)
+      document.body.appendChild(overlay)
+
+      setTimeout(() => {
+        if (typeof onFadeStart === 'function') {
+          onFadeStart()
+        }
+        overlay.style.transition = 'opacity 1s ease-out'
+        overlay.style.opacity = '0'
+        setTimeout(() => {
+          overlay.style.display = 'none'
+          overlay.remove()
+        }, 1000)
+      }, 6000)
+    }
+
+    function switchToOsMode() {
+      setNebuliMode('os')
+      sessionStorage.setItem('nebuli-mode-switch', '1')
+      playIntroSequence(() => {
+        window.location.href = '/main.html'
+      })
+    }
 
     function decodeProxyUrl(url) {
       if (!url) return url
@@ -405,6 +492,11 @@
       if (bareInput) {
         bareInput.value = bare || DEFAULT_BARE
       }
+
+      const modeSwitchInput = panel.querySelector('#modeSwitchInput')
+      if (modeSwitchInput) {
+        modeSwitchInput.checked = getNebuliMode() === 'root'
+      }
     }
 
     function saveAllSettings(panel) {
@@ -428,10 +520,21 @@
       const pSelect = panel.querySelector('#pSelect')
       const wispInput = panel.querySelector('#wispInput')
       const bareInput = panel.querySelector('#bareInput')
+      const modeSwitchInput = panel.querySelector('#modeSwitchInput')
 
       if (pSelect) pSelect.addEventListener('change', () => saveAllSettings(panel))
       if (wispInput) wispInput.addEventListener('input', () => saveAllSettings(panel))
       if (bareInput) bareInput.addEventListener('input', () => saveAllSettings(panel))
+
+      if (modeSwitchInput) {
+        modeSwitchInput.addEventListener('change', () => {
+          if (!modeSwitchInput.checked) {
+            switchToOsMode()
+          } else {
+            modeSwitchInput.checked = false
+          }
+        })
+      }
 
       if (resetBtn) {
         resetBtn.addEventListener('click', () => {
@@ -778,6 +881,16 @@
       }
       if (!localStorage.getItem('nebuli-p')) {
         localStorage.setItem('nebuli-p', DEFAULT_p)
+      }
+      sessionStorage.removeItem('nebuli-mode-switch')
+
+      const modeSwitchCover = document.getElementById('modeSwitchCover')
+      if (modeSwitchCover) {
+        modeSwitchCover.style.transition = 'opacity 0.4s ease-out'
+        modeSwitchCover.style.opacity = '0'
+        setTimeout(() => {
+          modeSwitchCover.remove()
+        }, 400)
       }
     })
   </script>

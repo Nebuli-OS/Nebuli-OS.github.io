@@ -1,39 +1,87 @@
-const introOverlay = document.createElement('div');
-introOverlay.id = 'introOverlay';
-introOverlay.style.cssText = `
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const NEBULI_MODE_KEY = 'nebuli-mode';
+const DEFAULT_NEBULI_MODE = 'os';
 
-const introIframe = document.createElement('iframe');
-introIframe.src = '/intro.html';
-introIframe.style.cssText = `
-  width: 100%;
-  height: 100%;
-  border: none;
-  margin: 0;
-  padding: 0;
-`;
+function getNebuliMode() {
+  return localStorage.getItem(NEBULI_MODE_KEY) || DEFAULT_NEBULI_MODE;
+}
 
-introOverlay.appendChild(introIframe);
-document.body.appendChild(introOverlay);
+function setNebuliMode(mode) {
+  localStorage.setItem(NEBULI_MODE_KEY, mode);
+}
 
-setTimeout(() => {
-  introOverlay.style.transition = 'opacity 1s ease-out';
-  introOverlay.style.opacity = '0';
+function playIntroSequence(onFadeStart) {
+  const overlay = document.createElement('div');
+  overlay.id = 'introOverlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+
+  const iframe = document.createElement('iframe');
+  iframe.src = '/intro.html';
+  iframe.style.cssText = `
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+  `;
+
+  overlay.appendChild(iframe);
+  document.body.appendChild(overlay);
+
   setTimeout(() => {
-    introOverlay.style.display = 'none';
-    introOverlay.remove();
-  }, 1000);
-}, 6000);
+    if (typeof onFadeStart === 'function') {
+      onFadeStart();
+    }
+    overlay.style.transition = 'opacity 1s ease-out';
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      overlay.remove();
+    }, 1000);
+  }, 6000);
+}
+
+function revealNebuliRootIframe() {
+  const rootFrameContainer = document.getElementById('nebuliRootFrameContainer');
+  if (rootFrameContainer) {
+    rootFrameContainer.style.display = 'block';
+  }
+}
+
+function removeModeSwitchCover() {
+  const modeSwitchCover = document.getElementById('modeSwitchCover');
+  if (modeSwitchCover) {
+    modeSwitchCover.style.transition = 'opacity 0.4s ease-out';
+    modeSwitchCover.style.opacity = '0';
+    setTimeout(() => {
+      modeSwitchCover.remove();
+    }, 400);
+  }
+}
+
+if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
+  sessionStorage.removeItem('nebuli-mode-switch');
+  if (getNebuliMode() === 'root') {
+    revealNebuliRootIframe();
+  }
+  window.addEventListener('DOMContentLoaded', removeModeSwitchCover);
+} else {
+  playIntroSequence(() => {
+    if (getNebuliMode() === 'root') {
+      revealNebuliRootIframe();
+    }
+  });
+}
 
 const settingsTemplate = document.getElementById('settingsTemplate');
 
@@ -48,6 +96,14 @@ const popup = document.getElementById("nebuliRootPopup");
 const closeBtn = document.getElementById("nebuliRootPopupClose");
 const openBtn = document.getElementById("openNebuliRoot");
 const frameContainer = document.getElementById("nebuliRootFrameContainer");
+
+function switchToRootMode() {
+  setNebuliMode('root');
+  sessionStorage.setItem('nebuli-mode-switch', '1');
+  playIntroSequence(() => {
+    window.location.href = '/nbli-root.html';
+  });
+}
 
 let wrapperDragState = {
   dragging: false,
@@ -90,6 +146,12 @@ const PROXY_EMBED_URL = '/embed.html#';
 const REDIRECTS = {
 };
 
+const NEBULI_ROOT_POPUP_SEEN_KEY = 'nebuli-root-popup-seen';
+
+if (popup && localStorage.getItem(NEBULI_ROOT_POPUP_SEEN_KEY) === 'true') {
+  popup.style.display = "none";
+}
+
 if (closeBtn) {
   closeBtn.onclick = () => {
     popup.style.display = "none";
@@ -98,8 +160,9 @@ if (closeBtn) {
 
 if (openBtn) {
   openBtn.onclick = () => {
-    frameContainer.style.display = "block";
+    localStorage.setItem(NEBULI_ROOT_POPUP_SEEN_KEY, 'true');
     popup.style.display = "none";
+    openSettingsWindow();
   };
 }
 
@@ -2110,6 +2173,11 @@ function loadAllSettings(panel) {
     bareInput.value = bare || DEFAULT_BARE;
   }
 
+  const modeSwitchInput = panel.querySelector('#modeSwitchInput');
+  if (modeSwitchInput) {
+    modeSwitchInput.checked = getNebuliMode() === 'root';
+  }
+
   loadCustomApps(panel);
 
   if (panel) toggleAppearanceInputs(panel);
@@ -2311,6 +2379,7 @@ function setupSettingsBindings(panel) {
   const addAppBtn = panel.querySelector('#addAppBtn');
   const appUrlInput = panel.querySelector('#appUrlInput');
   const appTitleInput = panel.querySelector('#appTitleInput');
+  const modeSwitchInput = panel.querySelector('#modeSwitchInput');
 
   if (taskbarFullCheckbox) taskbarFullCheckbox.addEventListener('change', () => saveAllSettings(panel));
   if (taskbarCollapseCheckbox) taskbarCollapseCheckbox.addEventListener('change', () => saveAllSettings(panel));
@@ -2322,6 +2391,16 @@ function setupSettingsBindings(panel) {
   if (pSelect) pSelect.addEventListener('change', () => saveAllSettings(panel));
   if (wispInput) wispInput.addEventListener('input', () => saveAllSettings(panel));
   if (bareInput) bareInput.addEventListener('input', () => saveAllSettings(panel));
+
+  if (modeSwitchInput) {
+    modeSwitchInput.addEventListener('change', () => {
+      if (modeSwitchInput.checked) {
+        switchToRootMode();
+      } else {
+        modeSwitchInput.checked = true;
+      }
+    });
+  }
 
   if (addAppBtn) {
     addAppBtn.addEventListener('click', () => {

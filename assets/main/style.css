@@ -566,6 +566,14 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.mode-switch-input:checked ~ .mode-switch-track {
+  background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+}
+
+.mode-switch-input:checked ~ .mode-switch-track .mode-switch-thumb {
+  transform: translateX(24px);
+}
+
 .settings-pill {
   padding: 8px 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
