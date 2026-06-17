@@ -348,28 +348,53 @@ body {
     overflow-y: auto;
 }
 
-.panel.settings-page .settings-section {
+.app-window-settings-view {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(20, 20, 30, 0.55);
+}
+
+.app-window-settings-view .settings-page {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+    background: transparent;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-size: 16px;
+}
+
+.panel.settings-page .settings-section,
+.app-window-settings-view .settings-page .settings-section {
     padding: 20px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.panel.settings-page .settings-section:first-child {
+.panel.settings-page .settings-section:first-child,
+.app-window-settings-view .settings-page .settings-section:first-child {
     padding-top: 0;
 }
 
-.panel.settings-page .settings-section:last-child {
+.panel.settings-page .settings-section:last-child,
+.app-window-settings-view .settings-page .settings-section:last-child {
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.panel.settings-page .settings-section > div:first-child {
+.panel.settings-page .settings-section > div:first-child,
+.app-window-settings-view .settings-page .settings-section > div:first-child {
     font-weight: bold;
     margin-bottom: 8px;
     font-size: 20px;
     color: #ffffff;
 }
 
-.panel.settings-page label {
+.panel.settings-page label,
+.app-window-settings-view .settings-page label {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -379,11 +404,13 @@ body {
     color: #ffffff;
 }
 
-.panel.settings-page label:last-of-type {
+.panel.settings-page label:last-of-type,
+.app-window-settings-view .settings-page label:last-of-type {
     border-bottom: none;
 }
 
-.panel.settings-page select {
+.panel.settings-page select,
+.app-window-settings-view .settings-page select {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
@@ -394,18 +421,21 @@ body {
     min-width: 120px;
 }
 
-.panel.settings-page input[type="checkbox"] {
+.panel.settings-page input[type="checkbox"],
+.app-window-settings-view .settings-page input[type="checkbox"] {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-.panel.settings-page label span {
+.panel.settings-page label span,
+.app-window-settings-view .settings-page label span {
     text-align: left;
     align-self: flex-start;
     color: #ffffff;
 }
 
-.panel.settings-page button#resetAllSettingsBtn {
+.panel.settings-page button#resetAllSettingsBtn,
+.app-window-settings-view .settings-page button#resetAllSettingsBtn {
     padding: 10px;
     border-radius: 6px;
     border: none;
@@ -419,7 +449,8 @@ body {
     margin-top: 0;
 }
 
-.panel.settings-page button#resetAllSettingsBtn:hover {
+.panel.settings-page button#resetAllSettingsBtn:hover,
+.app-window-settings-view .settings-page button#resetAllSettingsBtn:hover {
     background-position: right center;
     filter: brightness(1.1);
     transform: scale(1.02);

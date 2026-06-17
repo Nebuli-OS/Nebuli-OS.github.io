@@ -546,13 +546,183 @@ function createAppWindow(url, title, showUrl, iconUrl) {
   return windowId;
 }
 
+function createSettingsAppWindow(title, showUrl, iconUrl) {
+  appWindowCounter++;
+  const windowId = 'appWindow' + appWindowCounter;
+
+  const windowElement = document.createElement('div');
+  windowElement.id = windowId;
+  windowElement.style.cssText = `
+    position: absolute;
+    top: ${100 + appWindowCounter * 40}px;
+    left: ${100 + appWindowCounter * 40}px;
+    width: ${WINDOW_WIDTH}px;
+    height: ${WINDOW_HEIGHT}px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 10px 30px rgba(0, 0, 0, 0.7);
+    user-select: none;
+    z-index: ${maxZIndex};
+    transition: none;
+    min-width: 300px;
+    min-height: 200px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    animation: fadeInApp 0.3s ease-out forwards;
+  `;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInApp {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  `;
+  if (!document.querySelector('style[data-fade-in-app]')) {
+    style.setAttribute('data-fade-in-app', 'true');
+    document.head.appendChild(style);
+  }
+
+  const headerElement = document.createElement('div');
+  headerElement.style.cssText = `
+    background: rgba(238, 238, 238, 0.2);
+    height: 32px;
+    cursor: grab;
+    user-select: none;
+    z-index: 106;
+    flex-shrink: 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px 16px 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  `;
+
+  const trafficLights = document.createElement('div');
+  trafficLights.style.cssText = `
+    display: flex;
+    gap: 8px;
+  `;
+
+  const closeLight = document.createElement('div');
+  closeLight.style.cssText = `
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff605c;
+    cursor: pointer;
+  `;
+  closeLight.addEventListener('click', () => closeAppWindow(windowId));
+
+  const minLight = document.createElement('div');
+  minLight.style.cssText = `
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffbd44;
+    cursor: pointer;
+  `;
+  minLight.addEventListener('click', () => minimizeAppWindow(windowId));
+
+  const maxLight = document.createElement('div');
+  maxLight.style.cssText = `
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ca4e;
+    cursor: pointer;
+  `;
+  maxLight.addEventListener('click', () => maximizeAppWindow(windowId));
+
+  trafficLights.appendChild(closeLight);
+  trafficLights.appendChild(minLight);
+  trafficLights.appendChild(maxLight);
+
+  const titleSpan = document.createElement('span');
+  titleSpan.textContent = title;
+  titleSpan.style.cssText = `
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+  `;
+
+  headerElement.appendChild(trafficLights);
+  headerElement.appendChild(titleSpan);
+
+  const viewElement = document.createElement('div');
+  viewElement.style.cssText = `
+    flex: 1;
+    position: relative;
+    z-index: 109;
+    overflow: hidden;
+    display: block;
+  `;
+
+  const settingsView = document.createElement('div');
+  settingsView.className = 'app-window-settings-view';
+  settingsView.id = windowId + 'SettingsView';
+
+  const settingsPage = document.createElement('div');
+  settingsPage.className = 'settings-page';
+
+  const settingsContent = settingsTemplate.cloneNode(true);
+  settingsContent.removeAttribute('id');
+  settingsContent.style.display = 'block';
+  settingsPage.appendChild(settingsContent);
+  settingsView.appendChild(settingsPage);
+  viewElement.appendChild(settingsView);
+
+  windowElement.appendChild(headerElement);
+  windowElement.appendChild(viewElement);
+  document.body.appendChild(windowElement);
+
+  setupWindowDrag(windowElement, headerElement, windowId);
+  setupWindowResize(windowElement, windowId);
+
+  windowElement.addEventListener('pointerdown', () => {
+    raiseWindowToTop(windowElement);
+  });
+
+  appWindows[windowId] = {
+    element: windowElement,
+    url: showUrl,
+    title: title,
+    showUrl: showUrl,
+    iconUrl: iconUrl,
+    iframe: null,
+    minimized: false,
+    maximized: false
+  };
+
+  setupSettingsBindings(settingsPage);
+
+  raiseWindowToTop(windowElement);
+
+  return windowId;
+}
+
 function closeAppWindow(windowId) {
   const windowData = appWindows[windowId];
   if (windowData) {
     windowData.element.remove();
-    delete appWindows[windowId];
     delete appWindowDragStates[windowId];
     delete appWindowResizeStates[windowId];
+    delete appWindows[windowId];
   }
 }
 
@@ -698,7 +868,7 @@ window.addEventListener('message', (event) => {
     }
     else if (event.data.type === 'open_settings') {
       closeStartMenu();
-      openSettingsInOmnibox(false);
+      openSettingsWindow();
     }
     else if (event.data.type === 'open_more') {
       closeStartMenu();
@@ -1436,7 +1606,8 @@ let appWindowStates = {
   games: null,
   tools: null,
   files: null,
-  more: null
+  more: null,
+  settings: null
 };
 
 function getTaskbarIconForInternal(url) {
@@ -2239,10 +2410,24 @@ function openSettingsInOmnibox(forceNewTab = false) {
   trafficMax.title = 'Maximize/Restore Omnibox';
 }
 
+function openSettingsWindow() {
+  const iconUrl = taskbarSettingsBtn.querySelector('img').src;
+  if (appWindowStates.settings && appWindows[appWindowStates.settings]) {
+    const windowData = appWindows[appWindowStates.settings];
+    if (windowData.minimized) {
+      restoreAppWindow(appWindowStates.settings);
+    } else {
+      raiseWindowToTop(windowData.element);
+    }
+  } else {
+    appWindowStates.settings = createSettingsAppWindow('Settings', 'nebuli://settings', iconUrl);
+  }
+}
+
 if (taskbarSettingsBtn) {
   taskbarSettingsBtn.addEventListener('click', e => {
     e.stopPropagation();
-    openSettingsInOmnibox();
+    openSettingsWindow();
   });
 }
 
