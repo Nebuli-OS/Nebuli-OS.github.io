@@ -566,8 +566,15 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.mode-switch-track {
+  background: rgb(255,214,0,1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 28px;
+  transition: background 0.25s ease;
+}
+
 .mode-switch-input:checked ~ .mode-switch-track {
-  background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+  background: #9c27b0;
 }
 
 .mode-switch-input:checked ~ .mode-switch-track .mode-switch-thumb {

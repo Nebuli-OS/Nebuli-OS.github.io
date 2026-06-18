@@ -194,8 +194,15 @@
       white-space: nowrap;
     }
 
+    .mode-switch-track {
+      background: #ccc;
+      border: 1px solid #bbb;
+      border-radius: 28px;
+      transition: background 0.25s ease;
+    }
+
     .mode-switch-input:checked ~ .mode-switch-track {
-      background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+      background: #9c27b0;
     }
 
     .mode-switch-input:checked ~ .mode-switch-track .mode-switch-thumb {
@@ -310,7 +317,7 @@
           <span id="modeSwitchOsLabel" style="font-size: 13px; color: #111; font-weight: 600;">OS Mode</span>
           <label class="mode-switch-toggle" style="position: relative; display: inline-block; width: 52px; height: 28px; border-bottom: none; padding: 0; margin: 0; cursor: pointer; flex-shrink: 0;">
             <input type="checkbox" id="modeSwitchInput" class="mode-switch-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: pointer; z-index: 2;">
-            <span class="mode-switch-track" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border: 1px solid #bbb; border-radius: 28px; transition: background 0.25s ease; pointer-events: none;">
+            <span class="mode-switch-track" style="position: absolute; top: 0; left: 0; width: 52px; height: 28px; box-sizing: border-box; pointer-events: none;">
               <span class="mode-switch-thumb" style="position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; background: #ffffff; border-radius: 50%; transition: transform 0.25s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.4);"></span>
             </span>
           </label>
