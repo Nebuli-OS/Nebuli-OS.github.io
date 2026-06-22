@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NebuliOS - Tools</title>
+<title>NebuliOS - More</title>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
+    --bg: #0e0114;
     --bg-start: #0b0013;
     --bg-end: #150026;
     --gold: #d4af37;
@@ -107,7 +108,7 @@
     100% { background-position: -200% 0; }
   }
 
-  /* Modal styles */
+
   .modal {
     display: none;
     position: fixed;
@@ -122,7 +123,9 @@
   }
 
   .modal-content {
-    background: rgba(24,0,45,0.95);
+    background: radial-gradient(1200px 800px at 10% 10%, rgba(138,43,226,0.06), transparent),
+                radial-gradient(1000px 600px at 90% 80%, rgba(212,175,55,0.02), transparent),
+                var(--bg);
     padding: 30px;
     border-radius: 16px;
     max-width: 500px;
@@ -143,12 +146,20 @@
   .close-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background: var(--gold);
-    color: #000;
+    background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+    background-size: 200% auto; 
+    color: #fff;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .close-btn:hover {
+    background-position: right center; 
+    filter: brightness(1.1);
+    transform: scale(1.02);
   }
 </style>
 </head>
@@ -157,8 +168,8 @@
 <div class="row">
   <a href="#" class="button" id="creditsBtn">Credits</a>
   <a href="https://discord.gg/z4ZJnK2x7S" class="button">Discord</a>
-  <a href="https://raw.githubusercontent.com/NebuliLabs/NebuliOS_Mini/refs/heads/main/index.html" class="button">NebuliOS mini (single file)</a>
-  <a href="/setup.html" class="button">Setup Popup</a>
+  <a href="#" id="downloadBtn" class="button">NebuliOS Mini Download</a>
+  <a href="/setup.html" class="button">Redo Setup</a>
 </div>
 
 <div class="modal" id="creditsModal">
@@ -167,11 +178,13 @@
     <p>Nebulord - Main Dev</p>
     <p>Technonyte - Inspiration, Beginning help, owning nebulilabs.xyz domain</p>
     <p>Groq - AI</p>
+    <p>Youtube V3 API - Music</p>
+    <p>Serper - Search</p>
     <p>Testuerforlearning & ZXS - proxy help</p>
     <p>HTML - being the goat</p>
     <p>CSS - Making stuff look cool</p>
     <p>JS - being annoying</p>
-    <p>Thank you for using NebuliOS!</p>
+    <p>You - Thank you for using NebuliOS!</p>
     <button class="close-btn" id="closeModal">Close</button>
   </div>
 </div>
@@ -205,6 +218,30 @@
     if (e.target === modal) {
       modal.style.display = 'none';
     }
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    fetch('/assets/mini/latest.html')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mini.html';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      })
+      .catch(() => {
+        const a = document.createElement('a');
+        a.href = '/assets/mini/latest.html';
+        a.download = 'mini.html';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
   });
 </script>
 
