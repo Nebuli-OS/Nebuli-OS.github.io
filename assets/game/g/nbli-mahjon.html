@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="mahjongPage">
+    <head>
+        <title>Mahjong</title>
+        <script>
+            window.addEventListener("load", function() {
+                var updateConsent = function() {
+                    var consent = this.hasConsented();
+                    window.adsbygoogle.requestNonPersonalizedAds = consent ? 0 : 1;
+                };
+                var autoConsent = function() {
+                    window.store.set("cookie-consent", "allow");
+                    window.adsbygoogle.requestNonPersonalizedAds = 0;
+                    window.adsbygoogle.pauseAdRequests = 0;
+                };
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#252e39"
+                        },
+                        "button": {
+                            "background": "#b5f9cf"
+                        }
+                    },
+                    "theme": "classic",
+                    "position": "bottom",
+                    // refers to unused revoke float
+                    "static": true,
+                    "type": "opt-in",
+                    "content": {
+                        "href": "/legal"
+                    },
+                    "reallyNotRevokable": true,
+                    "location": {
+                        "services": ["geoipdb"]
+                    },
+                    "onStatusChange": updateConsent,
+                    "onRevokeChoice": updateConsent,
+                    "onNoCookieLaw": autoConsent
+                }, function complete(popup) {
+                    document.getElementById("revoke-cookie-consent").addEventListener("click", function() {
+                        popup.revokeChoice();
+                    });
+                    window.adsbygoogle.pauseAdRequests = 0;
+                }, function error(err, popup) {
+                    document.getElementById("revoke-cookie-consent").addEventListener("click", function() {
+                        popup.revokeChoice();
+                    });
+                    window.adsbygoogle.requestNonPersonalizedAds = 0;
+                    window.adsbygoogle.pauseAdRequests = 0;
+                })
+            });
+        </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-26841383-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-26841383-3', {
+                "custom_map": {
+                    "dimension2": "settings"
+                }
+            });
+
+            function updateGASettings(settings) {
+                setTimeout(function() {
+                    gtag("event", "update_settings", {
+                        "settings": JSON.stringify(settings),
+                        non_interaction: true
+                    });
+                }, 0);
+            }
+
+            setTimeout((function() {
+                gtag('event', 'nobounce', {
+                    event_category: 'aux'
+                })
+            }
+            ), 60000);
+            setInterval((function() {
+                gtag('event', 'beacon', {
+                    event_category: 'aux'
+                })
+            }
+            ), 1500000);
+        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" media="screen" href="https://mahjon.gg/assets/mahjong-677d5d053a7ec3b066d510fb889a43f3.css">
+        <script>
+            (window.Promise && window.Symbol && Object.entries) || document.write('\x3Cscript src="https://mahjon.gg/assets/shim.min-da6a3b9b50b0fb3804a86c0c2cd5d123.js">\x3C/script>')
+        </script>
+        <script src="https://mahjon.gg/assets/application-67cff164f04de397a15cbbf24fcf6124.js"></script>
+        <meta name="description" content="Play Mahjong for free. No download or registration needed.">
+    </head>
+    <body>
+        
+            <div class="solitr-menu-bar mahjong-menu-bar">
+                <div class="mahjong-menu-bar-contents">
+                    <a class="solitr-menu-item solitr-new-game" tabindex="0">New Game</a>
+                    <a class="solitr-menu-item solitr-hint-button" tabindex="0">
+                        <div class="hint-icon"></div>
+                        &nbsp;Hint
+                    </a>
+                    <a class="solitr-menu-item solitr-undo-button disabled" tabindex="0">
+                        <div class="undo-icon"></div>
+                        &nbsp;Undo
+                    </a>
+                    <div class="solitr-dropdown-menu-wrapper dropdown">
+                        <a class="solitr-menu-item dropdown-toggle" data-toggle="dropdown" tabindex="0">
+                            <div class="shuffle-icon"></div>
+                            &nbsp;Shuffle <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu mahjong-shuffle-dropdown" role="menu">
+                            <li class="dropdown-header" role="presentation">
+                                You have shuffled <b class="mahjong-shuffle-count">0</b>
+                                time(s) this game.
+                            </li>
+                            <li class="solitr-dropdown-button-item" role="presentation">
+                                <div class="btn btn-primary solitr-shuffle-button" role="button">Shuffle remaining tiles</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mahjongContainer">
+            <div class="mahjongGame">
+                <div id="mahjongCanvas"></div>
+            </div>
+            <div class="mahjongAd">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5247847789508527" data-ad-slot="5659697046" data-ad-format="auto"></ins>
+            </div>
+        </div>
+        <div class="modal fade" id="about-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">About Solitr</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Hi there, I'm Jo! I originally created this game in November 2011. Please let me know if something doesn't work. I also love hearing suggestions! Email me at <a href="mailto:joliss42@gmail.com?subject=Solitr">joliss42@gmail.com</a>
+                            .
+                        </p>
+                        <p>
+                            P.S. Check out my new <a href="https://www.calcu.net/">calculator</a>
+                            web app!
+                        </p>
+                        <h4>Legal</h4>
+                        <p>This site is now owned and operated by my company:</p>
+                        <p>
+                            Sinopia Olive Limited<br>
+                            11 Raven Wharf<br>
+                            Lafone Street<br>
+                            London<br>
+                            SE1 2LR<br>United Kingdom
+                        </p>
+                        <p>Company number: 10151298</p>
+                        <p>
+                            Website: <a href="https://sinopiaolive.com/">sinopiaolive.com</a>
+                        </p>
+                        <p>
+                            By using this site you agree to the <a href="/legal">Privacy and Cookie Policy</a>
+                            .
+                        </p>
+                        <h4>Credits</h4>
+                        <p>
+                            I would like to thank Richard Hoelscher, who created an excellent vector version of Grimaud's 19th-century "Paris pattern" card deck (see the <a href="https://web.archive.org/web/20110910064024/http://rahga.com/svg/">archived page</a>
+                            or download <a href="https://mahjon.gg/images/original/paris-b09de7c04863f4866fbff2043ac09c50.svg">paris.svg</a>
+                            ).
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" data-dismiss="modal" href="#">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="win-modal modal fade" id="win-mahjong-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">You Win</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            ✨✨✨ You have won the game with <b class="mahjong-shuffle-count">0</b>
+                            shuffle(s)! ✨✨✨
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success new-game-button" data-dismiss="modal">New Game</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            TurtleMahjongController.setupGame();
+        </script>
+    </body>
+</html>

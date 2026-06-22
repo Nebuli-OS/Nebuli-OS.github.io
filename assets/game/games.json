@@ -4607,6 +4607,14 @@
     }
   ],
   
+  "nbli-ports": [
+    {
+      "title": "mahjon",
+      "href": "/assets/game/g/nbli-mahjon.html",
+      "image": "https://themahjong.com/image/layouts/mahjong-layouts/traditional-reviewed.webp",
+      "alt": "mahjon"
+    }
+  ],
   "gn-ports": [
     {
       "title": "A Bite at Freddy's",
