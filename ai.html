@@ -325,9 +325,11 @@ body.sidebar-collapsed #input-area {
 
 #chat-container {
     width: 100%;
+    max-width: 824px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
+    padding: 0;
 }
 
 .user-message, .ai-message {
@@ -366,18 +368,40 @@ body.sidebar-collapsed #input-area {
     max-width: 85%;
 }
 
-.ai-message code {
+.ai-message code, .ai-message-generating code {
     background: rgba(0,0,0,0.35);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Consolas', 'JetBrains Mono', monospace;
 }
 
-.ai-message pre {
+.ai-message pre, .ai-message-generating pre {
     background: rgba(0,0,0,0.35);
     padding: 10px;
     border-radius: 8px;
     overflow-x: auto;
+    position: relative;
+}
+
+.code-copy-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(20,8,32,0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s ease;
+    font-family: inherit;
+}
+
+.code-copy-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold);
 }
 
 .ai-message-generating {
@@ -392,7 +416,7 @@ body.sidebar-collapsed #input-area {
     border-radius: 12px;
     margin-bottom: 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
 }
 
@@ -434,7 +458,7 @@ body.sidebar-collapsed #input-area {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.05);
+    background: var(--modal-bg);
     border: 1px solid rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
@@ -447,7 +471,7 @@ body.sidebar-collapsed #input-area {
 }
 
 .icon-button:hover {
-    background: rgba(255,255,255,0.08);
+    filter: brightness(1.15);
     border-color: var(--gold);
     transform: translateY(-1px);
 }
@@ -458,7 +482,7 @@ body.sidebar-collapsed #input-area {
 }
 
 .icon-button:disabled:hover {
-    background: rgba(255,255,255,0.05);
+    filter: none;
     border-color: rgba(255,255,255,0.08);
     transform: none;
 }
@@ -521,7 +545,7 @@ body.sidebar-collapsed #input-area {
     flex: 1;
     max-width: 700px;
     position: relative;
-    background: rgba(255,255,255,0.05);
+    background: var(--modal-bg);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 999px;
     box-shadow: var(--shadow);
@@ -544,6 +568,7 @@ body.sidebar-collapsed #input-area {
     font-size: 14px;
     line-height: 1.4;
     padding: 15px 58px 15px 22px;
+    overflow-y: hidden;
 }
 
 #prompt::placeholder {
@@ -579,6 +604,45 @@ body.sidebar-collapsed #input-area {
     opacity: 0.5;
     cursor: default;
     transform: translateY(-50%);
+}
+
+#scroll-bottom-wrapper {
+    position: fixed;
+    bottom: 92px;
+    left: 250px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    transition: left .2s ease;
+    z-index: 60;
+}
+
+body.sidebar-collapsed #scroll-bottom-wrapper {
+    left: 0;
+}
+
+#scroll-bottom-btn {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--modal-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all .15s ease;
+}
+
+#scroll-bottom-btn.visible {
+    display: flex;
+}
+
+#scroll-bottom-btn:hover {
+    border-color: var(--gold);
 }
 
 #welcome-text {
@@ -633,6 +697,11 @@ body.sidebar-collapsed #input-area {
         </div>
     </div>
 </div>
+<div id="scroll-bottom-wrapper">
+    <button id="scroll-bottom-btn" title="Scroll to bottom">
+        <span class="btn-icon-wrapper" style="-webkit-mask-image:url('/assets/img/down.svg'); mask-image:url('/assets/img/down.svg'); width:18px; height:18px;"></span>
+    </button>
+</div>
 <div id="input-area">
     <div id="tools-button-wrapper">
         <button id="tools-button" class="icon-button" title="More">
@@ -675,10 +744,13 @@ const usageFillEl = document.getElementById("usage-bar-fill");
 const usageResetEl = document.getElementById("usage-reset");
 const usageBadgeEl = document.getElementById("usage-badge");
 const proStatusIcon = document.getElementById("pro-status-icon");
+const mainContent = document.getElementById("main-content");
+const scrollBottomBtn = document.getElementById("scroll-bottom-btn");
 
 const LOCAL_STORAGE_KEY = 'nebuli_chats';
 const SIDEBAR_STATE_KEY = 'nebuli_sidebar_collapsed';
 const USAGE_KEY = 'nbli_usage';
+const USAGE_SALT = 'nbli_usage_integrity_v1';
 const FREE_LIMIT = 50;
 const PRO_LIMIT = 100;
 const RESET_INTERVAL = 48 * 60 * 60 * 1000;
@@ -760,6 +832,41 @@ function renderMathInElement(element, options) {
     element.innerHTML = html;
 }
 
+function addCopyButtons(container) {
+    container.querySelectorAll('pre').forEach(pre => {
+        if (pre.dataset.copyAdded) return;
+        pre.dataset.copyAdded = "1";
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.type = 'button';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', () => {
+            const codeEl = pre.querySelector('code');
+            const codeText = codeEl ? codeEl.innerText : pre.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                }, 1500);
+            });
+        });
+        pre.appendChild(btn);
+    });
+}
+
+function autoResizeTextarea() {
+    promptInput.style.height = 'auto';
+    promptInput.style.height = promptInput.scrollHeight + 'px';
+}
+
+function isNearBottom() {
+    return mainContent.scrollHeight - mainContent.scrollTop - mainContent.clientHeight < 80;
+}
+
+function updateScrollButton() {
+    scrollBottomBtn.classList.toggle('visible', !isNearBottom());
+}
+
 function setSidebarCollapsed(collapsed) {
     document.body.classList.toggle('sidebar-collapsed', collapsed);
     localStorage.setItem(SIDEBAR_STATE_KEY, collapsed ? '1' : '0');
@@ -777,9 +884,30 @@ function getMidnight(ts) {
     return d.getTime();
 }
 
-function loadUsage() {
-    let stored = JSON.parse(localStorage.getItem(USAGE_KEY) || 'null');
+async function computeUsageSig(count, resetAt) {
+    return await sha256(`${USAGE_SALT}:${count}:${resetAt}`);
+}
+
+async function loadUsage() {
     const now = Date.now();
+    let raw = null;
+    try {
+        raw = JSON.parse(localStorage.getItem(USAGE_KEY) || 'null');
+    } catch (e) {
+        raw = null;
+    }
+
+    let stored = null;
+
+    if (raw && typeof raw.count === 'number' && typeof raw.resetAt === 'number') {
+        const expectedSig = await computeUsageSig(raw.count, raw.resetAt);
+        if (raw.sig === expectedSig) {
+            stored = { count: raw.count, resetAt: raw.resetAt };
+        } else {
+            stored = { count: FREE_LIMIT, resetAt: now + RESET_INTERVAL };
+        }
+    }
+
     if (!stored) {
         const anchor = getMidnight(now);
         stored = { count: 0, resetAt: anchor + RESET_INTERVAL };
@@ -790,21 +918,24 @@ function loadUsage() {
         }
         stored = { count: 0, resetAt: nextReset };
     }
-    localStorage.setItem(USAGE_KEY, JSON.stringify(stored));
+
+    const sig = await computeUsageSig(stored.count, stored.resetAt);
+    localStorage.setItem(USAGE_KEY, JSON.stringify({ count: stored.count, resetAt: stored.resetAt, sig }));
     return stored;
 }
 
-function saveUsage() {
-    localStorage.setItem(USAGE_KEY, JSON.stringify(usage));
+async function saveUsage() {
+    const sig = await computeUsageSig(usage.count, usage.resetAt);
+    localStorage.setItem(USAGE_KEY, JSON.stringify({ count: usage.count, resetAt: usage.resetAt, sig }));
 }
 
 function getLimit() {
     return isPro ? PRO_LIMIT : FREE_LIMIT;
 }
 
-function incrementUsage() {
+async function incrementUsage() {
     usage.count++;
-    saveUsage();
+    await saveUsage();
     renderUsage();
 }
 
@@ -1004,7 +1135,18 @@ function updateGeneratingMessage(text) {
     if (generatingMessageDiv) {
         const textSpan = generatingMessageDiv.querySelector("span");
         if (textSpan) {
-            textSpan.textContent = text;
+            textSpan.innerHTML = marked.parse(text);
+            hljs.highlightAll();
+            renderMathInElement(textSpan, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ],
+                throwOnError: false
+            });
+            addCopyButtons(textSpan);
         }
     }
 }
@@ -1035,6 +1177,8 @@ function replaceGeneratingMessage(fullMessage) {
         throwOnError: false
     });
     
+    addCopyButtons(div);
+    
     return div;
 }
 
@@ -1058,6 +1202,8 @@ function addAiMessage(message, saveAndScroll = true) {
         ],
         throwOnError: false
     });
+    
+    addCopyButtons(div);
     
     if (saveAndScroll) {
         chats[activeChatId].messages.push({ role: 'ai', content: message });
@@ -1202,9 +1348,10 @@ async function sendMessage() {
         addUserMessage(prompt, true);
     }
 
-    incrementUsage();
+    await incrementUsage();
 
     promptInput.value = "";
+    autoResizeTextarea();
     sendButton.disabled = true;
 
     createGeneratingMessage();
@@ -1304,16 +1451,24 @@ promptInput.addEventListener("keydown", function(event) {
         sendMessage();
     }
 });
+promptInput.addEventListener('input', autoResizeTextarea);
+mainContent.addEventListener('scroll', updateScrollButton);
+scrollBottomBtn.addEventListener('click', () => {
+    mainContent.scrollTo({ top: mainContent.scrollHeight, behavior: 'smooth' });
+});
+const chatObserver = new MutationObserver(updateScrollButton);
+chatObserver.observe(chatContainer, { childList: true, subtree: true });
 
 async function init() {
     loadSidebarState();
-    usage = loadUsage();
+    usage = await loadUsage();
     renderUsage();
     await refreshProStatus();
     loadChats();
-    setInterval(() => {
+    updateScrollButton();
+    setInterval(async () => {
         if (Date.now() >= usage.resetAt) {
-            usage = loadUsage();
+            usage = await loadUsage();
             renderUsage();
         }
     }, 60000);

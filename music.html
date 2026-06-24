@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebuli Music</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <style>
 :root {
@@ -321,8 +320,8 @@ body {
 .play-btn {
     background: var(--accent);
     color: var(--bg);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -541,6 +540,33 @@ input[type="range"]::-webkit-slider-thumb {
     flex-direction: column;
     align-items: center;
 }
+
+.icon-white {
+    width: 22px;
+    height: 22px;
+}
+
+.icon-accent {
+    width: 50px;
+    height: 50px;
+    filter: invert(72%) sepia(57%) saturate(366%) hue-rotate(11deg) brightness(93%) contrast(89%);
+}
+
+.player-btn-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.play-btn-icon {
+    width: 26px;
+    height: 26px;
+    filter: brightness(0);
+}
+
+.full-close-icon {
+    width: 24px;
+    height: 24px;
+}
     </style>
 </head>
 <body id="main-body">
@@ -569,10 +595,10 @@ input[type="range"]::-webkit-slider-thumb {
                 <select id="playlistSelect">
                     <option value="">Select a playlist</option>
                 </select>
-                <button onclick="openCreatePlaylistModal()"><i data-lucide="plus" size="16"></i> New</button>
-                <button onclick="renameCurrentPlaylist()" id="renamePlaylistBtn" style="display: none;"><i data-lucide="edit-2" size="16"></i></button>
-                <button onclick="shuffleCurrentPlaylist()" id="shufflePlaylistBtn" style="display: none;"><i data-lucide="shuffle" size="16"></i></button>
-                <button onclick="deleteCurrentPlaylist()" id="deletePlaylistBtn" style="display: none; color: #ff4444;"><i data-lucide="trash-2" size="16"></i></button>
+                <button onclick="openCreatePlaylistModal()"><img src="/assets/img/more.svg" class="icon-white"> New</button>
+                <button onclick="renameCurrentPlaylist()" id="renamePlaylistBtn" style="display: none;"><img src="/assets/img/edit.svg" class="icon-white"></button>
+                <button onclick="shuffleCurrentPlaylist()" id="shufflePlaylistBtn" style="display: none;"><img src="/assets/img/shuffle.svg" class="icon-white"></button>
+                <button onclick="deleteCurrentPlaylist()" id="deletePlaylistBtn" style="display: none;"><img src="/assets/img/close.svg" class="icon-white" style="filter: invert(27%) sepia(91%) saturate(7335%) hue-rotate(352deg) brightness(101%) contrast(114%);"></button>
             </div>
             <div class="list-container" id="playlistTracksPanel"></div>
         </div>
@@ -581,7 +607,7 @@ input[type="range"]::-webkit-slider-thumb {
     <div id="ytplayercontainer"></div>
 
     <div id="full-view">
-        <div style="position:absolute; top:30px; right:30px; cursor:pointer" id="closeFull"><i data-lucide="chevron-down" size="40"></i></div>
+        <div style="position:absolute; top:30px; right:30px; cursor:pointer" id="closeFull"><img src="/assets/img/close.svg" class="full-close-icon"></div>
         <img id="fullArt" style="width:40vh; height:40vh; border-radius:20px; object-fit:cover; box-shadow:0 20px 60px rgba(0,0,0,0.5)">
         <div style="margin-top:30px">
             <h1 id="fTitle" style="font-size:2.5rem; margin:0"></h1>
@@ -593,11 +619,11 @@ input[type="range"]::-webkit-slider-thumb {
             <span class="time-label" id="fDurTime">0:00</span>
         </div>
         <div class="control-btns" style="margin-top:40px; gap:40px">
-            <i data-lucide="skip-back" id="fPrevBtn" style="cursor:pointer; font-size:24px"></i>
-            <button class="play-btn" id="fPlayBtn" style="width:50px; height:50px">
-                <i data-lucide="play" id="fPlayIcon"></i>
+            <img src="/assets/img/skip_back.svg" id="fPrevBtn" style="cursor:pointer; width:32px; height:32px;">
+            <button class="play-btn" id="fPlayBtn" style="width:60px; height:60px">
+                <img src="/assets/img/play.svg" id="fPlayIcon" style="width:32px; height:32px; filter: brightness(0);">
             </button>
-            <i data-lucide="skip-forward" id="fNextBtn" style="cursor:pointer; font-size:24px"></i>
+            <img src="/assets/img/skip_forward.svg" id="fNextBtn" style="cursor:pointer; width:32px; height:32px;">
         </div>
     </div>
 
@@ -636,6 +662,16 @@ input[type="range"]::-webkit-slider-thumb {
         </div>
     </div>
 
+    <div id="errorModal" class="modal">
+        <div class="modal-content" style="align-items: center; text-align: center;">
+            <img src="/assets/img/error.svg" class="icon-accent" style="width: 50px; height: 50px;">
+            <p id="errorMessage" style="margin: 0 0 20px 0; font-size: 1.1rem; line-height: 1.5;"></p>
+            <div class="modal-buttons" style="justify-content: center; width: 100%;">
+                <button onclick="document.getElementById('errorModal').classList.remove('show')">OK</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="player-bar">
         <div class="now-playing">
             <div id="art" style="width:56px; height:56px; border-radius:6px; border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; background:var(--input-bg)">
@@ -661,12 +697,12 @@ input[type="range"]::-webkit-slider-thumb {
 
         <div class="controls">
             <div class="control-btns">
-                <i data-lucide="skip-back" id="prevBtn" style="cursor:pointer"></i>
+                <img src="/assets/img/skip_back.svg" id="prevBtn" style="cursor:pointer;" class="player-btn-icon">
                 <button class="play-btn" id="playBtn">
-                    <i data-lucide="play" id="playIcon"></i>
+                    <img src="/assets/img/play.svg" id="playIcon" class="play-btn-icon">
                 </button>
-                <i data-lucide="skip-forward" id="nextBtn" style="cursor:pointer"></i>
-                <i data-lucide="maximize-2" id="fullBtn" size="18" style="cursor:pointer"></i>
+                <img src="/assets/img/skip_forward.svg" id="nextBtn" style="cursor:pointer;" class="player-btn-icon">
+                <img src="/assets/img/expand.svg" id="fullBtn" style="cursor:pointer;" class="player-btn-icon">
             </div>
             <div class="progress-container">
                 <span class="time-label" id="curTime">0:00</span>
@@ -676,12 +712,17 @@ input[type="range"]::-webkit-slider-thumb {
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:15px; align-items:center">
-            <i data-lucide="volume-2" size="18" id="volumeIcon"></i>
+            <img src="/assets/img/sound.svg" id="volumeIcon" style="width:24px; height:24px;">
             <input type="range" id="volumeSlider" min="0" max="100" value="100" style="width:80px">
         </div>
     </footer>
 
     <script>
+        const proDatabase = { "e74aee44047586331774643c0dbe094c95c368cf86c7c8156548e47f90f35ea7": "qr7x", "d0ba796d91a49164d7f978328fda75baa61323fa9e0f814f5407f9046d2ac011": "technonyte" };
+        async function sha256(message) { const msgBuffer = new TextEncoder().encode(message); const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer); const hashArray = Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); }
+        async function verifyLicenseKey(rawKey) { const computedHash = await sha256(rawKey.trim()); const matchedUser = proDatabase[computedHash]; if (matchedUser) { localStorage.setItem('nbli-pro', rawKey.trim()); return { success: true, user: matchedUser }; } return { success: false, user: null }; }
+        async function checkExistingProSession() { const storedKey = localStorage.getItem('nbli-pro'); if (!storedKey) return { isPro: false, user: null }; const checkHash = await sha256(storedKey.trim()); const matchedUser = proDatabase[checkHash]; if (matchedUser) { return { isPro: true, user: matchedUser }; } else { localStorage.removeItem('nbli-pro'); return { isPro: false, user: null }; } }
+
         let currentTheme = localStorage.getItem('theme') || 'dark';
         
         function applyTheme(theme) {
@@ -703,7 +744,6 @@ input[type="range"]::-webkit-slider-thumb {
             }
         }, 1000);
 
-        lucide.createIcons();
         let playlists = JSON.parse(localStorage.getItem('contrast_playlists') || '{}');
         const recentlyPlayed = JSON.parse(localStorage.getItem('contrast_recent') || '[]');
         let currentView = 'recent';
@@ -788,10 +828,18 @@ input[type="range"]::-webkit-slider-thumb {
             document.getElementById('playlistNameInput').value = '';
         }
 
-        function createPlaylist() {
+        async function createPlaylist() {
             const name = document.getElementById('playlistNameInput').value.trim();
             if (!name) return;
             
+            const session = await checkExistingProSession();
+            const maxPlaylists = session.isPro ? 10 : 2;
+            if (Object.keys(playlists).length >= maxPlaylists) {
+                document.getElementById('errorMessage').textContent = "You can only have 2 playlists! Upgrade to Pro to have 5x more.";
+                document.getElementById('errorModal').classList.add('show');
+                return;
+            }
+
             const id = 'pl_' + Date.now();
             playlists[id] = { name, tracks: [] };
             savePlaylists();
@@ -872,19 +920,11 @@ input[type="range"]::-webkit-slider-thumb {
 
         function updatePlayButton() {
             const iconEl = document.getElementById('playIcon');
-            const newIcon = document.createElement('i');
-            newIcon.id = 'playIcon';
-            const iconName = playing ? 'pause' : 'play';
-            newIcon.setAttribute('data-lucide', iconName);
-            iconEl.replaceWith(newIcon);
+            const iconName = playing ? '/assets/img/pause.svg' : '/assets/img/play.svg';
+            iconEl.src = iconName;
 
             const fIconEl = document.getElementById('fPlayIcon');
-            const fNewIcon = document.createElement('i');
-            fNewIcon.id = 'fPlayIcon';
-            fNewIcon.setAttribute('data-lucide', iconName);
-            fIconEl.replaceWith(fNewIcon);
-
-            lucide.createIcons();
+            fIconEl.src = iconName;
         }
 
         function renderRecent() {
@@ -907,10 +947,10 @@ input[type="range"]::-webkit-slider-thumb {
                     </div>
                     <div class="list-actions">
                         <button class="mBtn" onclick="event.stopPropagation(); openAddToPlaylistModal(${i})">
-                            <i data-lucide="plus" size="16"></i>
+                            <img src="/assets/img/more.svg" style="width:22px; height:22px;">
                         </button>
                         <button class="mBtn delete" onclick="event.stopPropagation(); deleteRecent(${i})">
-                            <i data-lucide="trash-2" size="16"></i>
+                            <img src="/assets/img/close.svg" style="width:22px; height:22px; filter: invert(27%) sepia(91%) saturate(7335%) hue-rotate(352deg) brightness(101%) contrast(114%);">
                         </button>
                     </div>
                 `;
@@ -921,7 +961,6 @@ input[type="range"]::-webkit-slider-thumb {
                 
                 playlistPanel.appendChild(row);
             });
-            lucide.createIcons();
         }
 
         function renderPlaylistTracks() {
@@ -952,7 +991,7 @@ input[type="range"]::-webkit-slider-thumb {
                 row.dataset.index = i;
                 
                 row.innerHTML = `
-                    <div class="drag-handle"><i data-lucide="drag-vertical" size="18"></i></div>
+                    <div class="drag-handle"><img src="/assets/img/more.svg" style="width:20px; height:20px; transform: rotate(90deg); opacity: 0.5;"></div>
                     <img class="list-art" src="${item.artworkUrl || placeholderArt()}" />
                     <div class="list-info">
                         <div class="list-title">${item.title || 'Untitled'}</div>
@@ -960,7 +999,7 @@ input[type="range"]::-webkit-slider-thumb {
                     </div>
                     <div class="list-actions">
                         <button class="mBtn delete" onclick="event.stopPropagation(); deleteFromPlaylist(${i})">
-                            <i data-lucide="trash-2" size="16"></i>
+                            <img src="/assets/img/close.svg" style="width:22px; height:22px; filter: invert(27%) sepia(91%) saturate(7335%) hue-rotate(352deg) brightness(101%) contrast(114%);">
                         </button>
                     </div>
                 `;
@@ -993,7 +1032,6 @@ input[type="range"]::-webkit-slider-thumb {
                 
                 playlistTracksPanel.appendChild(row);
             });
-            lucide.createIcons();
         }
 
         function deleteRecent(index) {
