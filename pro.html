@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Activation</title>
+    <style>
+        :root {
+            --bg: #0e0114;
+            --panel: rgba(255,255,255,0.03);
+            --glass: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-dim: rgba(212,175,55,0.18);
+            --violet: #8A2BE2;
+            --text: #f5e8ff;
+            --muted: rgba(245,232,255,0.55);
+            --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            --modal-bg: #160a22;
+        }
+
+        * { box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(138, 43, 226, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {color: var(--text);}
+
+        .activation-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 30px;
+            background: var(--modal-bg);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .activation-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--text) 30%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .activation-header p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.5;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .perks-list {
+            text-align: left;
+            margin: 20px auto 0 auto;
+            padding: 0;
+            list-style: none;
+            max-width: 320px;
+            opacity: 0;
+            transform: translateY(10px);
+            display: none;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .perks-list li {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perks-list li::before {
+            content: "✦";
+            color: var(--gold);
+        }
+
+        .form-content {
+            margin-top: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+        }
+
+        .activation-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .activation-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-dim);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .activation-input::placeholder {
+            color: rgba(245, 232, 255, 0.25);
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: normal;
+        }
+
+        .btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, #b89326 100%);
+            color: #0e0114;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all .2s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .toast-notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--modal-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 99999;
+        }
+
+        .toast-notification.show {
+            bottom: 30px;
+        }
+
+        .toast-notification.success {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .toast-notification.error {
+            border-color: #ff5555;
+            color: #ff5555;
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 14px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .pro-badge.reveal {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="activation-container" id="activation-card">
+        <div class="activation-header">
+            <h1 id="main-heading">Nebuli Pro Activation</h1>
+            <p id="sub-heading">Join Pro at the <a href="https://dsc.gg/NebuliLabs">Discord</a>.</p>
+            <ul class="perks-list" id="perks-container">
+                <li>Double AI usage</li>
+                <li>Access to AI Pro Model</li>
+                <li>5x More Playlists</li>
+            </ul>
+            <div id="status-badge"></div>
+        </div>
+
+        <div class="form-content" id="form-container">
+            <div class="input-group">
+                <label for="license-key">Enter Pro Key:</label>
+                <input type="text" id="license-key" class="activation-input" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+            </div>
+            <button type="button" class="btn" id="activate-btn">Activate Pro Account</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-notification"></div>
+
+    <script>
+        const licenseInput = document.getElementById('license-key');
+        const activateBtn = document.getElementById('activate-btn');
+        const formContainer = document.getElementById('form-container');
+        const mainHeading = document.getElementById('main-heading');
+        const subHeading = document.getElementById('sub-heading');
+        const perksContainer = document.getElementById('perks-container');
+        const badgeContainer = document.getElementById('status-badge');
+        const toast = document.getElementById('toast');
+
+        const proDatabase = {
+            "e74aee44047586331774643c0dbe094c95c368cf86c7c8156548e47f90f35ea7": "qr7x",
+            "d0ba796d91a49164d7f978328fda75baa61323fa9e0f814f5407f9046d2ac011": "technonyte"
+        };
+
+        licenseInput.addEventListener('input', (e) => {
+            let cursorStart = e.target.selectionStart;
+            let oldLength = e.target.value.length;
+            
+            let val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            let formatted = '';
+            for (let i = 0; i < val.length && i < 16; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += '-';
+                }
+                formatted += val[i];
+            }
+            e.target.value = formatted;
+            
+            let newLength = formatted.length;
+            let finalCursor = cursorStart + (newLength - oldLength);
+            e.target.setSelectionRange(finalCursor, finalCursor);
+        });
+
+        function showToast(message, type) {
+            toast.textContent = message;
+            toast.className = `toast-notification show ${type}`;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function triggerProTransition(username) {
+            formContainer.style.opacity = '0';
+            mainHeading.style.opacity = '0';
+            subHeading.style.opacity = '0';
+
+            setTimeout(() => {
+                formContainer.style.display = 'none';
+                
+                mainHeading.textContent = `Welcome ${username}...`;
+                subHeading.textContent = "Welcome to Pro! Your current perks are:";
+                
+                mainHeading.style.opacity = '1';
+                subHeading.style.opacity = '1';
+                
+                perksContainer.style.display = 'block';
+                badgeContainer.innerHTML = '<span class="pro-badge">PRO ACTIVE</span>';
+                
+                setTimeout(() => {
+                    perksContainer.style.opacity = '1';
+                    perksContainer.style.transform = 'translateY(0)';
+                    document.querySelector('.pro-badge').classList.add('reveal');
+                }, 50);
+
+            }, 400);
+        }
+
+        activateBtn.addEventListener('click', async () => {
+            const rawInputValue = licenseInput.value.trim();
+
+            if (rawInputValue.length < 19) {
+                showToast('Please enter a complete 16-digit product key.', 'error');
+                return;
+            }
+
+            activateBtn.disabled = true;
+            activateBtn.textContent = 'Verifying your Key...';
+
+            const computedHash = await sha256(rawInputValue);
+            const matchedUser = proDatabase[computedHash];
+
+            setTimeout(() => {
+                if (matchedUser) {
+                    localStorage.setItem('nbli-pro', rawInputValue);
+                    showToast('Key Verified.', 'success');
+                    triggerProTransition(matchedUser);
+                } else {
+                    showToast('Invalid key footprint matches.', 'error');
+                    activateBtn.disabled = false;
+                    activateBtn.textContent = 'Activate Pro';
+                }
+            }, 1200);
+        });
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const stored = localStorage.getItem('nbli-pro');
+            
+            if (stored) {
+                const checkHash = await sha256(stored.trim());
+                if (proDatabase[checkHash]) {
+                    triggerProTransition(proDatabase[checkHash]);
+                } else {
+                    localStorage.removeItem('nbli-pro');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
