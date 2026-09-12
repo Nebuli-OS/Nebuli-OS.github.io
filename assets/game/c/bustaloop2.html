@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+        <base href="https://cdn.jsdelivr.net/gh/genizy/biologyexams@main/bust-a-loop/">
+  <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LM67KGEJRK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LM67KGEJRK');
+</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>University of Adelaide</title>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" style="width: 1024px; height: 768px; background: #231F20"></canvas>
+    <script src="Build/Web.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/Web.data",
+        frameworkUrl: "Build/Web.framework.js",
+        codeUrl: "Build/Web.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "5x Train LLC",
+        productName: "LD47",
+        productVersion: "1.0",
+      });
+    </script>
+  </body>
+</html>
+
+
+
