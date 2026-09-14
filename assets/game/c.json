@@ -1,0 +1,4192 @@
+[
+  {
+    "name": "Hollow Knight",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hollowknight.png",
+    "url": "/assets/game/c/hollowknight.html"
+  },
+  {
+    "name": "Buckshot Roulette",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/buckshotroulette.jpg",
+    "url": "/assets/game/c/buckshotroulette.html"
+  },
+  {
+    "name": "Doom 64",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/doom64.jpg",
+    "url": "/assets/game/c/doom64.html"
+  },
+  {
+    "name": "Ultrakill",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ultrakill.jpg",
+    "url": "/assets/game/c/ultrakillgame.html"
+  },
+  {
+    "name": "Omori",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/omori.png",
+    "url": "/assets/game/c/omorigame.html"
+  },
+  {
+    "name": "R.E.P.O",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/repo.webp",
+    "url": "/assets/game/c/repo.html"
+  },
+  {
+    "name": "Minecraft 1.12.2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraft1122.html"
+  },
+  {
+    "name": "Basket Random",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/basketrandom.png",
+    "url": "/assets/game/c/basketrandom.html"
+  },
+  {
+    "name": "Bendy and the Ink Machine",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bendy.png",
+    "url": "/assets/game/c/bendyandtheinkmachine.html"
+  },
+  {
+    "name": "Class of '09",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/classof09.png",
+    "url": "/assets/game/c/classof09.html"
+  },
+  {
+    "name": "Hotline Miami",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hotlinemiami.png",
+    "url": "/assets/game/c/hotlinemiami.html"
+  },
+  {
+    "name": "Cuphead",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cuphead.png",
+    "url": "/assets/game/c/cupheadgame.html"
+  },
+  {
+    "name": "Half-life",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/halflife.png",
+    "url": "/assets/game/c/halflife.html"
+  },
+  {
+    "name": "People Playground",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/peopleplayground.jpg",
+    "url": "/assets/game/c/peopleplayground.html"
+  },
+  {
+    "name": "Stickman Hook",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmanhook.jpg",
+    "url": "/assets/game/c/stickmanhook.html"
+  },
+  {
+    "name": "Crazy Cars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crazycars.png",
+    "url": "/assets/game/c/crazycars.html"
+  },
+  {
+    "name": "Cut the Rope",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cuttherope.png",
+    "url": "/assets/game/c/cuttherope.html"
+  },
+  {
+    "name": "Drift Hunters",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drifthunters.png",
+    "url": "/assets/game/c/drifthunters.html"
+  },
+  {
+    "name": "Blumgi Rocket",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blumgirocket.png",
+    "url": "/assets/game/c/blumgirocket.html"
+  },
+  {
+    "name": "Candy Crush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/candycrush.png",
+    "url": "/assets/game/c/candycrush.html"
+  },
+  {
+    "name": "Pokemon Emerald",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonemerald.jpg",
+    "url": "/assets/game/c/pokemonemerald.html"
+  },
+  {
+    "name": "Bad Parenting 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badparenting.jpg",
+    "url": "/assets/game/c/badparenting1.html"
+  },
+  {
+    "name": "Baldi's Basics Plus",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baldisbasicsplus.webp",
+    "url": "/assets/game/c/baldisbasicsplus.html"
+  },
+  {
+    "name": "The Binding of Isaac: Wrath of the Lamb",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bindingofisaac.jpg",
+    "url": "/assets/game/c/bindingofisaac.html"
+  },
+  {
+    "name": "Karlson",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/karlson.jpg",
+    "url": "/assets/game/c/karlsongame.html"
+  },
+  {
+    "name": "Kindergarten",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kindergarten1.jpg",
+    "url": "/assets/game/c/kindergarten1.html"
+  },
+  {
+    "name": "Kindergarten 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kindergarten2.jpg",
+    "url": "/assets/game/c/kindergarten2.html"
+  },
+  {
+    "name": "Pizza Tower",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pizzatower.png",
+    "url": "/assets/game/c/pizzatower.html"
+  },
+  {
+    "name": "Quake III Arena",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/quake3arena.jpg",
+    "url": "/assets/game/c/quake3arena.html"
+  },
+  {
+    "name": "Undertale Yellow",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/undertaleyellow.png",
+    "url": "/assets/game/c/undertaleyellow.html"
+  },
+  {
+    "name": "Doki Doki Literature Club",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ddlc.webp",
+    "url": "/assets/game/c/ddlc.html"
+  },
+  {
+    "name": "Blumgi Racers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blumgiracers.avif",
+    "url": "/assets/game/c/blumgiracers.html"
+  },
+  {
+    "name": "Revelations: Persona",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/persona1.png",
+    "url": "/assets/game/c/revelationspersona.html"
+  },
+  {
+    "name": "Persona 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/persona2.jpg",
+    "url": "/assets/game/c/persona2.html"
+  },
+  {
+    "name": "Pokemon Black",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonblack.webp",
+    "url": "/assets/game/c/pokemonblack.html"
+  },
+  {
+    "name": "Pokemon Blue",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonblue.jpg",
+    "url": "/assets/game/c/pokemonblue.html"
+  },
+  {
+    "name": "Pokemon Crystal",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemoncrystal.jpg",
+    "url": "/assets/game/c/pokemoncrystal.html"
+  },
+  {
+    "name": "Pokemon Diamond",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemondiamond.png",
+    "url": "/assets/game/c/pokemondiamond.html"
+  },
+  {
+    "name": "Pokemon Gold",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemongold.webp",
+    "url": "/assets/game/c/pokemongold.html"
+  },
+  {
+    "name": "Pokemon Pearl",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonpearl.jpg",
+    "url": "/assets/game/c/pokemonpearl.html"
+  },
+  {
+    "name": "Pokemon Platinum",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonplatinum.png",
+    "url": "/assets/game/c/pokemonplatinum.html"
+  },
+  {
+    "name": "Pokemon Red",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonred.jpg",
+    "url": "/assets/game/c/pokemonred.html"
+  },
+  {
+    "name": "Pokemon Ruby",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonruby.webp",
+    "url": "/assets/game/c/pokemonruby.html"
+  },
+  {
+    "name": "Pokemon Sapphire",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonsapphire.jpg",
+    "url": "/assets/game/c/pokemonsapphire.html"
+  },
+  {
+    "name": "Pokemon Silver",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonsilver.jpg",
+    "url": "/assets/game/c/pokemonsilver.html"
+  },
+  {
+    "name": "Pokemon White",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonwhite.jpg",
+    "url": "/assets/game/c/pokemonwhite.html"
+  },
+  {
+    "name": "Pokemon Yellow",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonyellow.jpg",
+    "url": "/assets/game/c/pokemonyellow.html"
+  },
+  {
+    "name": "Celeste Pico-8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/celestepico.png",
+    "url": "/assets/game/c/celestepico.html"
+  },
+  {
+    "name": "Crazy Cattle 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crazycattle3d.jpg",
+    "url": "/assets/game/c/crazycattle3d.html"
+  },
+  {
+    "name": "Drive Mad",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drivemad.png",
+    "url": "/assets/game/c/drivemad.html"
+  },
+  {
+    "name": "Tony Hawk's Pro Skater 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tonyhawksproskater4.jpg",
+    "url": "/assets/game/c/tonyhawksproskater4.html"
+  },
+  {
+    "name": "Super Smash Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supersmashbros.webp",
+    "url": "/assets/game/c/supersmashbros.html"
+  },
+  {
+    "name": "Grand Theft Auto",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gta1.jpg",
+    "url": "/assets/game/c/gta1.html"
+  },
+  {
+    "name": "Tom Clancy's Rainbow Six",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tomclancysrainbowsix.jpg",
+    "url": "/assets/game/c/tomclancysrainbowsix.html"
+  },
+  {
+    "name": "Block Blast",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blockblast.jpg",
+    "url": "/assets/game/c/blockblast.html"
+  },
+  {
+    "name": "1v1.lol",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/1v1lol.webp",
+    "url": "/assets/game/c/1v1lol.html"
+  },
+  {
+    "name": "2048",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/2048.png",
+    "url": "/assets/game/c/2048game.html"
+  },
+  {
+    "name": "Suika Game",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/suikagame.webp",
+    "url": "/assets/game/c/suikagame.html"
+  },
+  {
+    "name": "Supreme Duelist",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supremeduelist.webp",
+    "url": "/assets/game/c/supremeduelist.html"
+  },
+  {
+    "name": "Tanuki Sunset",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tanukisunset.jpg",
+    "url": "/assets/game/c/tanukisunset.html"
+  },
+  {
+    "name": "Polytrack",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/polytrack.png",
+    "url": "/assets/game/c/polytrack.html"
+  },
+  {
+    "name": "Bad Piggies",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badpiggies.webp",
+    "url": "/assets/game/c/badpiggies.html"
+  },
+  {
+    "name": "Infinite Craft",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/infinitecraft.jpg",
+    "url": "/assets/game/c/infinitecraft.html"
+  },
+  {
+    "name": "Jetpack Joyride",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/jetpackjoyride.jpg",
+    "url": "/assets/game/c/jetpackjoyride.html"
+  },
+  {
+    "name": "Level Devil",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/leveldevil.jpg",
+    "url": "/assets/game/c/leveldevil.html"
+  },
+  {
+    "name": "Melon Playground",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/melonplayground.png",
+    "url": "/assets/game/c/melonplayground.html"
+  },
+  {
+    "name": "Plants VS Zombies",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pvz.jpg",
+    "url": "/assets/game/c/pvz.html"
+  },
+  {
+    "name": "Solitaire",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/solitaire.jpg",
+    "url": "/assets/game/c/solitairegame.html"
+  },
+  {
+    "name": "Granny",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/granny.png",
+    "url": "/assets/game/c/grannygame.html"
+  },
+  {
+    "name": "Fruit Ninja",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fruitninja.webp",
+    "url": "/assets/game/c/fruitninja.html"
+  },
+  {
+    "name": "Five Nights at Freddy's",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnaf.jpg",
+    "url": "/assets/game/c/fnaf.html"
+  },
+  {
+    "name": "Five Nights at Freddy's 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnaf2.webp",
+    "url": "/assets/game/c/fnaf2.html"
+  },
+  {
+    "name": "Five Nights at Freddy's 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnaf3.jpg",
+    "url": "/assets/game/c/fnaf3.html"
+  },
+  {
+    "name": "Five Nights at Freddy's 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnaf4.webp",
+    "url": "/assets/game/c/fnaf4.html"
+  },
+  {
+    "name": "Cookie Clicker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cookieclicker.png",
+    "url": "/assets/game/c/cookieclicker.html"
+  },
+  {
+    "name": "Chess",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/chess.jpg",
+    "url": "/assets/game/c/chessgame.html"
+  },
+  {
+    "name": "BTD1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/btd1.jpg",
+    "url": "/assets/game/c/btd1.html"
+  },
+  {
+    "name": "BTD2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/btd2.jpg",
+    "url": "/assets/game/c/btd2.html"
+  },
+  {
+    "name": "BTD3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/btd3.jpg",
+    "url": "/assets/game/c/btd3.html"
+  },
+  {
+    "name": "BTD4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/btd4.jpg",
+    "url": "/assets/game/c/btd4.html"
+  },
+  {
+    "name": "BTD5",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/btd5.jpg",
+    "url": "/assets/game/c/btd5.html"
+  },
+  {
+    "name": "Survival Race",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/survivalrace.jpg",
+    "url": "/assets/game/c/survivalrace.html"
+  },
+  {
+    "name": "Yandere Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/yanderesimulator.jpg",
+    "url": "/assets/game/c/yanderesimulator.html"
+  },
+  {
+    "name": "Wordle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wordle.png",
+    "url": "/assets/game/c/wordlegame.html"
+  },
+  {
+    "name": "The Legend of Zelda: Ocarina of Time",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ocarinaoftime.jpg",
+    "url": "/assets/game/c/ocarinaoftime.html"
+  },
+  {
+    "name": "Among Us",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/amongus.png",
+    "url": "/assets/game/c/amongus.html"
+  },
+  {
+    "name": "Territorial.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/territorialio.webp",
+    "url": "/assets/game/c/territorialio.html"
+  },
+  {
+    "name": "Tetris",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tetris.png",
+    "url": "/assets/game/c/tetrisgame.html"
+  },
+  {
+    "name": "Pac-Man",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pacman.jpg",
+    "url": "/assets/game/c/pacman.html"
+  },
+  {
+    "name": "Crossy Road",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crossyroad.jpg",
+    "url": "/assets/game/c/crossyroad.html"
+  },
+  {
+    "name": "Slime Rancher",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slimerancher.jpg",
+    "url": "/assets/game/c/slimerancher.html"
+  },
+  {
+    "name": "Geometry Dash Lite",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/geometrydashlite.png",
+    "url": "/assets/game/c/geometrydashlite.html"
+  },
+  {
+    "name": "Idle Breakout",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/idlebreakout.jpg",
+    "url": "/assets/game/c/idlebreakout.html"
+  },
+  {
+    "name": "Bouncemasters",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bouncemasters.jpg",
+    "url": "/assets/game/c/bouncemasters.html"
+  },
+  {
+    "name": "Bowmasters",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bowmasters.png",
+    "url": "/assets/game/c/bowmasters.html"
+  },
+  {
+    "name": "Doodle Jump",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/doodlejump.jpg",
+    "url": "/assets/game/c/doodlejump.html"
+  },
+  {
+    "name": "Flappy Bird",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/flappybird.jpg",
+    "url": "/assets/game/c/flappybird.html"
+  },
+  {
+    "name": "Five Nights at Freddy's World",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnafworld.jpg",
+    "url": "/assets/game/c/fnafworld.html"
+  },
+  {
+    "name": "Flappy Dunk",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/flappydunk.png",
+    "url": "/assets/game/c/flappydunk.html"
+  },
+  {
+    "name": "Fork n Sausage",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/forknsausage.jpg",
+    "url": "/assets/game/c/forknsausage.html"
+  },
+  {
+    "name": "Friday Night Funkin",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnf.webp",
+    "url": "/assets/game/c/fnf.html"
+  },
+  {
+    "name": "Gobble",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gobble.jpg",
+    "url": "/assets/game/c/gobblegame.html"
+  },
+  {
+    "name": "Going Balls",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/goingballs.jpg",
+    "url": "/assets/game/c/goingballs.html"
+  },
+  {
+    "name": "Hill Climb Racing Lite",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hillclimbracing.jpg",
+    "url": "/assets/game/c/hillclimbracing.html"
+  },
+  {
+    "name": "Magic Tiles 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/magictiles3.jpg",
+    "url": "/assets/game/c/magictiles3.html"
+  },
+  {
+    "name": "Minecraft 1.21.4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraft1214.html"
+  },
+  {
+    "name": "Monkey Mart",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/monkeymart.jpg",
+    "url": "/assets/game/c/monkeymart.html"
+  },
+  {
+    "name": "Nubby's Number Factory",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/nubbysnumberfactory.jpg",
+    "url": "/assets/game/c/nubbysnumberfactory.html"
+  },
+  {
+    "name": "Paper.io 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/paperio2.jpg",
+    "url": "/assets/game/c/paperio2.html"
+  },
+  {
+    "name": "Drift Boss",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/driftboss.jpg",
+    "url": "/assets/game/c/driftboss.html"
+  },
+  {
+    "name": "Superhot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/superhot.png",
+    "url": "/assets/game/c/superhotgame.html"
+  },
+  {
+    "name": "Sandboxels",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sandboxels.webp",
+    "url": "/assets/game/c/sandboxels.html"
+  },
+  {
+    "name": "Re:Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rerun.jpg",
+    "url": "/assets/game/c/rerun.html"
+  },
+  {
+    "name": "Bitlife",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bitlife.png",
+    "url": "/assets/game/c/bitlife.html"
+  },
+  {
+    "name": "Pokemon White 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonwhite2.jpg",
+    "url": "/assets/game/c/pokemonwhite2.html"
+  },
+  {
+    "name": "Pokemon Black 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonblack2.jpg",
+    "url": "/assets/game/c/pokemonblack2.html"
+  },
+  {
+    "name": "Pokemon Sword and Shield Ultimate Plus",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonswordandshieldultimateplus.jpg",
+    "url": "/assets/game/c/pokemonswordandshieldultimateplus.html"
+  },
+  {
+    "name": "Sonic Classic Collection",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicclassiccollection.jpg",
+    "url": "/assets/game/c/sonicclassiccollection.html"
+  },
+  {
+    "name": "Stealth Masters",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stealthmasters.jpg",
+    "url": "/assets/game/c/stealthmasters.html"
+  },
+  {
+    "name": "Speed Stars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/speedstars.png",
+    "url": "/assets/game/c/speedstars.html"
+  },
+  {
+    "name": "Bloxorz",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bloxorz.png",
+    "url": "/assets/game/c/bloxorzgame.html"
+  },
+  {
+    "name": "99 Nights in the Forest",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/99nights.png",
+    "url": "/assets/game/c/99nights.html"
+  },
+  {
+    "name": "10 Minutes till Dawn",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/10minutestilldawn.jpg",
+    "url": "/assets/game/c/10minutestilldawn.html"
+  },
+  {
+    "name": "Retro Bowl",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/retrobowl.png",
+    "url": "/assets/game/c/retrobowl.html"
+  },
+  {
+    "name": "Retro Bowl College",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/retrobowlcollege.png",
+    "url": "/assets/game/c/retrobowlcollege.html"
+  },
+  {
+    "name": "Rooftop Snipers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rooftopsnipers.webp",
+    "url": "/assets/game/c/rooftopsnipers.html"
+  },
+  {
+    "name": "Rooftop Snipers 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rooftopsnipers2.png",
+    "url": "/assets/game/c/rooftopsnipers2.html"
+  },
+  {
+    "name": "Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/run1.png",
+    "url": "/assets/game/c/run1.html"
+  },
+  {
+    "name": "Run 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/run2.jpg",
+    "url": "/assets/game/c/run2.html"
+  },
+  {
+    "name": "Run 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/run3.jpg",
+    "url": "/assets/game/c/run3.html"
+  },
+  {
+    "name": "Slither.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slitherio.jpg",
+    "url": "/assets/game/c/slitherio.html"
+  },
+  {
+    "name": "Solar Smash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/solarsmash.jpg",
+    "url": "/assets/game/c/solarsmash.html"
+  },
+  {
+    "name": "Getting Over It",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gettingoverit.jpg",
+    "url": "/assets/game/c/gettingoverit.html"
+  },
+  {
+    "name": "Fallout",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fallout1.jpg",
+    "url": "/assets/game/c/fallout1.html"
+  },
+  {
+    "name": "Hypper Sandbox",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hyppersandbox.png",
+    "url": "/assets/game/c/hyppersandbox.html"
+  },
+  {
+    "name": "Osu!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/osu.png",
+    "url": "/assets/game/c/osu.html"
+  },
+  {
+    "name": "Slow Roads",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slowroads.webp",
+    "url": "/assets/game/c/slowroads.html"
+  },
+  {
+    "name": "Slope",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slope1.png",
+    "url": "/assets/game/c/slope1.html"
+  },
+  {
+    "name": "Slope 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slope2.jpg",
+    "url": "/assets/game/c/slope2.html"
+  },
+  {
+    "name": "Slope 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slope3.jpg",
+    "url": "/assets/game/c/slope3.html"
+  },
+  {
+    "name": "Space Waves",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spacewaves.png",
+    "url": "/assets/game/c/spacewaves.html"
+  },
+  {
+    "name": "Tiny Fishing",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tinyfishing.png",
+    "url": "/assets/game/c/tinyfishing.html"
+  },
+  {
+    "name": "Tomb of the Mask",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tombofthemask.png",
+    "url": "/assets/game/c/tombofthemask.html"
+  },
+  {
+    "name": "Uno",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/uno.jpg",
+    "url": "/assets/game/c/unogame.html"
+  },
+  {
+    "name": "Aquapark.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/aquaparkio.jpg",
+    "url": "/assets/game/c/aquaparkio.html"
+  },
+  {
+    "name": "Deltarune",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/deltarune.png",
+    "url": "/assets/game/c/deltarunegame.html"
+  },
+  {
+    "name": "Boxing Random",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/boxingrandom.webp",
+    "url": "/assets/game/c/boxingrandom.html"
+  },
+  {
+    "name": "Soccer Random",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/soccerrandom.jpg",
+    "url": "/assets/game/c/soccerrandom.html"
+  },
+  {
+    "name": "Volley Random",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/volleyrandom.jpg",
+    "url": "/assets/game/c/volleyrandom.html"
+  },
+  {
+    "name": "Basketball Stars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/basketballstars.jpg",
+    "url": "/assets/game/c/basketballstars.html"
+  },
+  {
+    "name": "BLOODMONEY!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bloodmoney.png",
+    "url": "/assets/game/c/bloodmoney.html"
+  },
+  {
+    "name": "Deltatraveler",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/deltatraveler.webp",
+    "url": "/assets/game/c/deltatravelergame.html"
+  },
+  {
+    "name": "That's Not My Neighbour",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thatsnotmyneighbour.jpg",
+    "url": "/assets/game/c/thatsnotmyneighbour.html"
+  },
+  {
+    "name": "Doge Miner",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dogeminer.png",
+    "url": "/assets/game/c/dogeminer.html"
+  },
+  {
+    "name": "Angry Birds",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/angrybirds.png",
+    "url": "/assets/game/c/angrybirds.html"
+  },
+  {
+    "name": "Angry Birds Showdown",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/angrybirdshowdown.png",
+    "url": "/assets/game/c/angrybirdsshowdown.html"
+  },
+  {
+    "name": "Papas Pizzeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papaspizzeria.webp",
+    "url": "/assets/game/c/papaspizzeria.html"
+  },
+  {
+    "name": "Raft",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/raft.png",
+    "url": "/assets/game/c/raftgame.html"
+  },
+  {
+    "name": "Sandtris",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sandtris.jpg",
+    "url": "/assets/game/c/sandtrisgame.html"
+  },
+  {
+    "name": "City Smash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/citysmash.png",
+    "url": "/assets/game/c/citysmash.html"
+  },
+  {
+    "name": "Yume Nikki",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/yumenikki.png",
+    "url": "/assets/game/c/yumenikkigame.html"
+  },
+  {
+    "name": "WebFishing",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/webfishing.png",
+    "url": "/assets/game/c/webfishinggame.html"
+  },
+  {
+    "name": "Ice Dodo",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/icedodo.png",
+    "url": "/assets/game/c/icedodo.html"
+  },
+  {
+    "name": "Sandbox City",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sandboxcity.jpg",
+    "url": "/assets/game/c/icedodo.html"
+  },
+  {
+    "name": "Jelly Mario",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/jellymario.png",
+    "url": "/assets/game/c/jellymario.html"
+  },
+  {
+    "name": "Snowball.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/snowballio.png",
+    "url": "/assets/game/c/snowballio.html"
+  },
+  {
+    "name": "Sprunki",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sprunki.png",
+    "url": "/assets/game/c/sprunkigame.html"
+  },
+  {
+    "name": "Space Invaders",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spaceinvaders.png",
+    "url": "/assets/game/c/spaceinvaders.html"
+  },
+  {
+    "name": "Asteroids",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/asteroids.jpg",
+    "url": "/assets/game/c/asteroidsgame.html"
+  },
+  {
+    "name": "Sonic CD",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/soniccd.jpg",
+    "url": "/assets/game/c/soniccd.html"
+  },
+  {
+    "name": "Five Nights at Candy's",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fivenightsatcandys.png",
+    "url": "/assets/game/c/fivenightsatcandys.html"
+  },
+  {
+    "name": "Five Nights at Candy's 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fivenightsatcandys2.png",
+    "url": "/assets/game/c/fivenightsatcandys2.html"
+  },
+  {
+    "name": "Five Nights at Freddy's 4: Halloween Edition",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnaf4halloween.png",
+    "url": "/assets/game/c/fnaf4halloween.html"
+  },
+  {
+    "name": "Five Nights at Freddy's: Pizza Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnafpizzasim.png",
+    "url": "/assets/game/c/fnafpizzasim.html"
+  },
+  {
+    "name": "Five Nights at Freddy's: Ultimate Custom Night",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnafucn.png",
+    "url": "/assets/game/c/fnafucn.html"
+  },
+  {
+    "name": "Five Nights at Freddy's: Sister Location",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnafsisterlocation.png",
+    "url": "/assets/game/c/fnafsisterlocation.html"
+  },
+  {
+    "name": "Granny 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/granny2.png",
+    "url": "/assets/game/c/granny2.html"
+  },
+  {
+    "name": "Granny 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/granny3.png",
+    "url": "/assets/game/c/granny3.html"
+  },
+  {
+    "name": "CSGO Clicker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/csgoclicker.png",
+    "url": "/assets/game/c/csgoclicker.html"
+  },
+  {
+    "name": "The Backrooms",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thebackrooms.webp",
+    "url": "/assets/game/c/thebackrooms.html"
+  },
+  {
+    "name": "Pokemon Fire Red",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonfirered.jpg",
+    "url": "/assets/game/c/pokemonfirered.html"
+  },
+  {
+    "name": "Pokemon Leaf Green",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonleafgreen.jpg",
+    "url": "/assets/game/c/pokemonleafgreen.html"
+  },
+  {
+    "name": "Pokemon Soul Silver",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonsoulsilver.jpg",
+    "url": "/assets/game/c/pokemonsoulsilver.html"
+  },
+  {
+    "name": "Pokemon Heart Gold",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonheartgold.jpg",
+    "url": "/assets/game/c/pokemonheartgold.html"
+  },
+  {
+    "name": "Super Mario 64",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermario64.png",
+    "url": "/assets/game/c/supermario64.html"
+  },
+  {
+    "name": "Super Mario Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermariobros.png",
+    "url": "/assets/game/c/supermariobros.html"
+  },
+  {
+    "name": "Grand Theft Auto 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gta2.jpg",
+    "url": "/assets/game/c/gta2.html"
+  },
+  {
+    "name": "Donkey Kong",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/donkeykong.webp",
+    "url": "/assets/game/c/donkeykong.html"
+  },
+  {
+    "name": "Metal Gear Solid",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/metalgearsolid.png",
+    "url": "/assets/game/c/metalgearsolid.html"
+  },
+  {
+    "name": "One Piece",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/onepiece.jpg",
+    "url": "/assets/game/c/onepiece.html"
+  },
+  {
+    "name": "Sonic Advance",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicadvance.jpg",
+    "url": "/assets/game/c/sonicadvance.html"
+  },
+  {
+    "name": "Kirby's Adventure",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kirbysadventure.webp",
+    "url": "/assets/game/c/kirbysadventure.html"
+  },
+  {
+    "name": "Vex 8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex8.jpg",
+    "url": "/assets/game/c/vex8.html"
+  },
+  {
+    "name": "Steal a Brainrot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stealabrainrot.png",
+    "url": "/assets/game/c/stealabrainrot.html"
+  },
+  {
+    "name": "The Legend of Zelda: Majora's Mask",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldamajorasmask.png",
+    "url": "/assets/game/c/thelegendofzeldamajorasmask.html"
+  },
+  {
+    "name": "The Legend of Zelda: Oracle of Seasons",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldaoracleofseasons.jpg",
+    "url": "/assets/game/c/thelegendofzeldaoracleofseasons.html"
+  },
+  {
+    "name": "The Legend of Zelda: Links Awakening",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldalinksawakening.png",
+    "url": "/assets/game/c/thelegendofzeldalinksawakening.html"
+  },
+  {
+    "name": "Jelly Drift",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/jellydrift.png",
+    "url": "/assets/game/c/jellydrift.html"
+  },
+  {
+    "name": "Johnny Trigger",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/johnnytrigger.png",
+    "url": "/assets/game/c/johnnytrigger.html"
+  },
+  {
+    "name": "Helix Jump",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/helixjump.jpg",
+    "url": "/assets/game/c/helixjump.html"
+  },
+  {
+    "name": "Harvest.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/harvestio.png",
+    "url": "/assets/game/c/harvestio.html"
+  },
+  {
+    "name": "Growden.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/growdenio.jpg",
+    "url": "/assets/game/c/growdenio.html"
+  },
+  {
+    "name": "Attack Hole",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/attackhole.png",
+    "url": "/assets/game/c/attackhole.html"
+  },
+  {
+    "name": "Ball Blast",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ballblast.webp",
+    "url": "/assets/game/c/ballblast.html"
+  },
+  {
+    "name": "Balatro",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/balatro.jpg",
+    "url": "/assets/game/c/balatrogame.html"
+  },
+  {
+    "name": "Escape Road",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/escaperoad.png",
+    "url": "/assets/game/c/escaperoad.html"
+  },
+  {
+    "name": "Escape Road 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/escaperoad2.png",
+    "url": "/assets/game/c/escaperoad2.html"
+  },
+  {
+    "name": "Little Alchemy",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/littlealchemy.png",
+    "url": "/assets/game/c/littlealchemy.html"
+  },
+  {
+    "name": "Subway Surfers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/subwaysurfers.png",
+    "url": "/assets/game/c/subwaysurfers.html"
+  },
+  {
+    "name": "Smash Karts",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/smashkarts.webp",
+    "url": "/assets/game/c/smashkarts.html"
+  },
+  {
+    "name": "Rocket Soccer Derby",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rocketsoccerderby.png",
+    "url": "/assets/game/c/rocketsoccerderby.html"
+  },
+  {
+    "name": "Plants vs Zombies 2: Gardenless",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pvz2.webp",
+    "url": "/assets/game/c/pvz2.html"
+  },
+  {
+    "name": "New Super Mario Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/newsupermariobros.jpg",
+    "url": "/assets/game/c/newsupermariobros.html"
+  },
+  {
+    "name": "Google Dino",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/googledino.png",
+    "url": "/assets/game/c/googledino.html"
+  },
+  {
+    "name": "Google Baseball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/googlebaseball.png",
+    "url": "/assets/game/c/googlebaseball.html"
+  },
+  {
+    "name": "Bad Time Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badtimesimulator.png",
+    "url": "/assets/game/c/badtimesimulator.html"
+  },
+  {
+    "name": "3D Bowling",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/3dbowling.png",
+    "url": "/assets/game/c/3dbowling.html"
+  },
+  {
+    "name": "Amanda the Adventurer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/amandatheadventurer.png",
+    "url": "/assets/game/c/amandatheadventurer.html"
+  },
+  {
+    "name": "Baldur's Gate II",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baldursgate2.webp",
+    "url": "/assets/game/c/baldursgate2.html"
+  },
+  {
+    "name": "Kindergarten 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kindergarten3.png",
+    "url": "/assets/game/c/kindergarten3.html"
+  },
+  {
+    "name": "A Small World Cup",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/asmallworldcup.png",
+    "url": "/assets/game/c/asmallworldcup.html"
+  },
+  {
+    "name": "Abandoned",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/abandoned.png",
+    "url": "/assets/game/c/abandonedgame.html"
+  },
+  {
+    "name": "Amaze",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/amaze.png",
+    "url": "/assets/game/c/amazegame.html"
+  },
+  {
+    "name": "Basket Battle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/basketbattle.png",
+    "url": "/assets/game/c/basketbattle.html"
+  },
+  {
+    "name": "Apes VS Helium",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/apesvshelium.jpg",
+    "url": "/assets/game/c/apesvshelium.html"
+  },
+  {
+    "name": "Burrito Bison",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/burritobison.png",
+    "url": "/assets/game/c/burritobison.html"
+  },
+  {
+    "name": "Shapez.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/shapezio.png",
+    "url": "/assets/game/c/shapezio.html"
+  },
+  {
+    "name": "Cluster Rush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/clusterrush.jpg",
+    "url": "/assets/game/c/clusterrush.html"
+  },
+  {
+    "name": "Dead Tapes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/deadtapes.jpg",
+    "url": "/assets/game/c/deadtapes.html"
+  },
+  {
+    "name": "Gunspin",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gunspin.png",
+    "url": "/assets/game/c/gunspingame.html"
+  },
+  {
+    "name": "Tall Man Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tallmanrun.png",
+    "url": "/assets/game/c/tallmanrun.html"
+  },
+  {
+    "name": "Temple Run 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/templerun2.jpg",
+    "url": "/assets/game/c/templerun2.html"
+  },
+  {
+    "name": "Papas Bakeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papasbakeria.webp",
+    "url": "/assets/game/c/papasbakeria.html"
+  },
+  {
+    "name": "Papas Burgeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papasburgeria.png",
+    "url": "/assets/game/c/papasburgeria.html"
+  },
+  {
+    "name": "Papas Cheeseria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papascheeseria.png",
+    "url": "/assets/game/c/papascheeseria.html"
+  },
+  {
+    "name": "Papas Cupcakeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papascupcakeria.png",
+    "url": "/assets/game/c/papascupcakeria.html"
+  },
+  {
+    "name": "Papas Donuteria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papasdonuteria.webp",
+    "url": "/assets/game/c/papasdonuteria.html"
+  },
+  {
+    "name": "Papas Freezeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papasfreezeria.png",
+    "url": "/assets/game/c/papasfreezeria.html"
+  },
+  {
+    "name": "Papas Hotdoggeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papashotdoggeria.jpg",
+    "url": "/assets/game/c/papashotdoggeria.html"
+  },
+  {
+    "name": "Papas Pancakeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papaspancakeria.png",
+    "url": "/assets/game/c/papaspancakeria.html"
+  },
+  {
+    "name": "Papas Pastaria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papaspastaria.webp",
+    "url": "/assets/game/c/papaspastaria.html"
+  },
+  {
+    "name": "Papas Scooperia",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papasscooperia.webp",
+    "url": "/assets/game/c/papasscooperia.html"
+  },
+  {
+    "name": "Papas Sushiria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papassushiria.webp",
+    "url": "/assets/game/c/papassushiria.html"
+  },
+  {
+    "name": "Papas Taco Mia",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papastacomia.png",
+    "url": "/assets/game/c/papastacomia.html"
+  },
+  {
+    "name": "Papas Wingeria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papaswingeria.png",
+    "url": "/assets/game/c/papaswingeria.html"
+  },
+  {
+    "name": "Pokemon Snap",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonsnap.png",
+    "url": "/assets/game/c/pokemonsnap.html"
+  },
+  {
+    "name": "Pokemon Stadium",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonstadium.jpg",
+    "url": "/assets/game/c/pokemonstadium.html"
+  },
+  {
+    "name": "Pokemon Tower Defense",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemontowerdefense.webp",
+    "url": "/assets/game/c/pokemontowerdefense.html"
+  },
+  {
+    "name": "Pokemon Unbound",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonunbound.jpg",
+    "url": "/assets/game/c/pokemonunbound.html"
+  },
+  {
+    "name": "Pokemon Dreamstone Mysteries",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemondreamstonemysteries.jpg",
+    "url": "/assets/game/c/pokemondreamstonemysteries.html"
+  },
+  {
+    "name": "Pokemon Flora Sky",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonflorasky.webp",
+    "url": "/assets/game/c/pokemonflorasky.html"
+  },
+  {
+    "name": "Pokemon Gaia",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemongaia.jpg",
+    "url": "/assets/game/c/pokemongaia.html"
+  },
+  {
+    "name": "Pokemon Mega Moemon",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonmegamoemon.jpg",
+    "url": "/assets/game/c/pokemonmegamoemon.html"
+  },
+  {
+    "name": "Pokemon Quetzal",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonquetzal.jpg",
+    "url": "/assets/game/c/pokemonquetzal.html"
+  },
+  {
+    "name": "Pokemon Shiny Gold Sigma",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonshinygoldsigma.jpg",
+    "url": "/assets/game/c/pokemonshinygoldsigma.html"
+  },
+  {
+    "name": "Undertale",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/undertale.png",
+    "url": "/assets/game/c/undertalegame.html"
+  },
+  {
+    "name": "Battle Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/battlesimulator.webp",
+    "url": "/assets/game/c/battlesimulator.html"
+  },
+  {
+    "name": "Time Shooter 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/timeshooter2.png",
+    "url": "/assets/game/c/timeshooter2.html"
+  },
+  {
+    "name": "Time Shooter 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/timeshooter3.png",
+    "url": "/assets/game/c/timeshooter3.html"
+  },
+  {
+    "name": "Touhou Mother",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhoumother.png",
+    "url": "/assets/game/c/touhoumother.html"
+  },
+  {
+    "name": "Resident Evil 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/residentevil2.png",
+    "url": "/assets/game/c/residentevil2.html"
+  },
+  {
+    "name": "Crazy Chicken 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crazychicken3d.jpg",
+    "url": "/assets/game/c/crazychicken3d.html"
+  },
+  {
+    "name": "Counter Strike 1.6",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/counterstrike16.jpg",
+    "url": "/assets/game/c/counterstrike16.html"
+  },
+  {
+    "name": "Clash of Vikings",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/clashofvikings.jpg",
+    "url": "/assets/game/c/clashofvikings.html"
+  },
+  {
+    "name": "Slender: The Eight Pages",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slender.webp",
+    "url": "/assets/game/c/slender.html"
+  },
+  {
+    "name": "Plinko",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/plinko.png",
+    "url": "/assets/game/c/plinkogame.html"
+  },
+  {
+    "name": "Pokemon Ultra Violet",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonultraviolet.jpg",
+    "url": "/assets/game/c/pokemonultraviolet.html"
+  },
+  {
+    "name": "Getaway Shootout",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/getawayshootout.png",
+    "url": "/assets/game/c/getawayshootout.html"
+  },
+  {
+    "name": "Capybara Clicker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/capybaraclicker.png",
+    "url": "/assets/game/c/capybaraclicker.html"
+  },
+  {
+    "name": "Nazi Zombies Portable",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/nzp.jpg",
+    "url": "/assets/game/c/nzp.html"
+  },
+  {
+    "name": "Pou",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pou.png",
+    "url": "/assets/game/c/pougame.html"
+  },
+  {
+    "name": "Minecraft 1.8.8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraft188.html"
+  },
+  {
+    "name": "Minecraft 1.7.3 Beta",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraft173.html"
+  },
+  {
+    "name": "Mini Crosswords",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minicrosswords.png",
+    "url": "/assets/game/c/minicrosswords.html"
+  },
+  {
+    "name": "Agar.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/agario.jpg",
+    "url": "/assets/game/c/agario.html"
+  },
+  {
+    "name": "Stacktris",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stacktris.jpg",
+    "url": "/assets/game/c/stacktrisgame.html"
+  },
+  {
+    "name": "Whack Your Boss",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/whackyourboss.png",
+    "url": "/assets/game/c/whackyourboss.html"
+  },
+  {
+    "name": "Kour.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kourio.jpg",
+    "url": "/assets/game/c/kourio.html"
+  },
+  {
+    "name": "Idle Dice",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/idledice.jpg",
+    "url": "/assets/game/c/idledice.html"
+  },
+  {
+    "name": "Draw Climber",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drawclimber.jpg",
+    "url": "/assets/game/c/drawclimber.html"
+  },
+  {
+    "name": "1 on 1 Soccer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/1on1soccer.jpg",
+    "url": "/assets/game/c/1on1soccer.html"
+  },
+  {
+    "name": "1 on 1 Tennis",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/1on1tennis.jpg",
+    "url": "/assets/game/c/1on1tennis.html"
+  },
+  {
+    "name": "3Dash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/3dash.webp",
+    "url": "/assets/game/c/3dash.html"
+  },
+  {
+    "name": "60 Second Burger Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/60secondburgerrun.jpg",
+    "url": "/assets/game/c/60secondburgerrun.html"
+  },
+  {
+    "name": "500 Caliber Contractz",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/500calibercontractz.webp",
+    "url": "/assets/game/c/500calibercontractz.html"
+  },
+  {
+    "name": "Abandoned 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/abandoned3.jpg",
+    "url": "/assets/game/c/abandoned3.html"
+  },
+  {
+    "name": "Achievement Unlocked",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/achievementunlocked.jpg",
+    "url": "/assets/game/c/achievementunlocked.html"
+  },
+  {
+    "name": "Mario Tennis",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mariotennis.jpg",
+    "url": "/assets/game/c/mariotennis.html"
+  },
+  {
+    "name": "Wave Dash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wavedash.jpg",
+    "url": "/assets/game/c/wavedash.html"
+  },
+  {
+    "name": "Vapor Trails",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vaportrails.png",
+    "url": "/assets/game/c/vaportrails.html"
+  },
+  {
+    "name": "Twin Shot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/twinshot.jpg",
+    "url": "/assets/game/c/twinshot.html"
+  },
+  {
+    "name": "Turbo Stars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/turbostars.png",
+    "url": "/assets/game/c/turbostars.html"
+  },
+  {
+    "name": "Traffic Jam 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/trafficjam3d.jpg",
+    "url": "/assets/game/c/trafficjam3d.html"
+  },
+  {
+    "name": "Tag",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tag.webp",
+    "url": "/assets/game/c/taggame.html"
+  },
+  {
+    "name": "State.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stateio.png",
+    "url": "/assets/game/c/stateio.html"
+  },
+  {
+    "name": "Spacebar Clicker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spacebarclicker.png",
+    "url": "/assets/game/c/spacebarclicker.html"
+  },
+  {
+    "name": "Snow Rider 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/snowrider3d.webp",
+    "url": "/assets/game/c/snowrider3d.html"
+  },
+  {
+    "name": "Slice it All",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sliceitall.jpg",
+    "url": "/assets/game/c/sliceitall.html"
+  },
+  {
+    "name": "Rolly Vortex",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rollyvortex.jpg",
+    "url": "/assets/game/c/rollyvortex.html"
+  },
+  {
+    "name": "Only Up",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/onlyup.png",
+    "url": "/assets/game/c/onlyup.html"
+  },
+  {
+    "name": "Fireboy and Watergirl",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fireboyandwatergirl.jpg",
+    "url": "/assets/game/c/fireboyandwatergirl.html"
+  },
+  {
+    "name": "Fireboy and Watergirl 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fireboyandwatergirl2.jpg",
+    "url": "/assets/game/c/fireboyandwatergirl2.html"
+  },
+  {
+    "name": "Fireboy and Watergirl 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fireboyandwatergirl3.jpg",
+    "url": "/assets/game/c/fireboyandwatergirl3.html"
+  },
+  {
+    "name": "A Dance of Fire and Ice",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/adanceoffireandice.png",
+    "url": "/assets/game/c/adanceoffireandice.html"
+  },
+  {
+    "name": "Adventure Capitalist",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/adventurecapitalist.png",
+    "url": "/assets/game/c/adventurecapitalist.html"
+  },
+  {
+    "name": "Baseball Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baseballbros.jpg",
+    "url": "/assets/game/c/baseballbros.html"
+  },
+  {
+    "name": "Basket Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/basketbros.jpg",
+    "url": "/assets/game/c/basketbros.html"
+  },
+  {
+    "name": "Dadish",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dadish.png",
+    "url": "/assets/game/c/dadish1.html"
+  },
+  {
+    "name": "Dadish 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dadish2.png",
+    "url": "/assets/game/c/dadish2.html"
+  },
+  {
+    "name": "Dadish 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dadish3.png",
+    "url": "/assets/game/c/dadish3.html"
+  },
+  {
+    "name": "Dadish 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dadish3d.png",
+    "url": "/assets/game/c/dadish3d.html"
+  },
+  {
+    "name": "Daily Dadish",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dailydadish.png",
+    "url": "/assets/game/c/dailydadish.html"
+  },
+  {
+    "name": "Dreadhead Parkour",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dreadheadparkour.jpg",
+    "url": "/assets/game/c/dreadheadparkour.html"
+  },
+  {
+    "name": "Duck Life 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife1.png",
+    "url": "/assets/game/c/ducklife1.html"
+  },
+  {
+    "name": "Duck Life 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife2.png",
+    "url": "/assets/game/c/ducklife2.html"
+  },
+  {
+    "name": "Duck Life 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife3.png",
+    "url": "/assets/game/c/ducklife3.html"
+  },
+  {
+    "name": "Duck Life 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife4.png",
+    "url": "/assets/game/c/ducklife4.html"
+  },
+  {
+    "name": "Duck Life 5",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife5.png",
+    "url": "/assets/game/c/ducklife5.html"
+  },
+  {
+    "name": "Minesweeper Plus",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minesweeperplus.jpg",
+    "url": "/assets/game/c/minesweeperplus.html"
+  },
+  {
+    "name": "Room Clicker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/roomclicker.jpg",
+    "url": "/assets/game/c/roomclicker.html"
+  },
+  {
+    "name": "Vex 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex1.png",
+    "url": "/assets/game/c/vex1.html"
+  },
+  {
+    "name": "Vex 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex2.png",
+    "url": "/assets/game/c/vex2.html"
+  },
+  {
+    "name": "Vex 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex3.png",
+    "url": "/assets/game/c/vex3.html"
+  },
+  {
+    "name": "Vex 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex4.png",
+    "url": "/assets/game/c/vex4.html"
+  },
+  {
+    "name": "Vex 5",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex5.png",
+    "url": "/assets/game/c/vex5.html"
+  },
+  {
+    "name": "Vex 6",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex6.png",
+    "url": "/assets/game/c/vex6.html"
+  },
+  {
+    "name": "Vex 7",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex7.png",
+    "url": "/assets/game/c/vex7.html"
+  },
+  {
+    "name": "OvO",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ovo1.png",
+    "url": "/assets/game/c/ovo1.html"
+  },
+  {
+    "name": "OvO 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ovo2.png",
+    "url": "/assets/game/c/ovo2.html"
+  },
+  {
+    "name": "OvO 3 Dimensions",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ovo3dimensions.png",
+    "url": "/assets/game/c/ovo3dimensions.html"
+  },
+  {
+    "name": "Human Expenditure Program",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/humanexpenditureprogram.png",
+    "url": "/assets/game/c/humanexpenditureprogram.html"
+  },
+  {
+    "name": "Laceys Flash Games",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/laceysflashgames.png",
+    "url": "/assets/game/c/laceysflashgames.html"
+  },
+  {
+    "name": "Stick With It",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickwithit.png",
+    "url": "/assets/game/c/stickwithit.html"
+  },
+  {
+    "name": "Do NOT Take This Cat Home",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/donottakethiscathome.png",
+    "url": "/assets/game/c/donottakethiscathome.html"
+  },
+  {
+    "name": "The Deadseat",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thedeadseat.png",
+    "url": "/assets/game/c/thedeadseat.html"
+  },
+  {
+    "name": "Awesome Tanks",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/awesometanks.png",
+    "url": "/assets/game/c/awesometanks.html"
+  },
+  {
+    "name": "Awesome Tanks 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/awesometanks2.png",
+    "url": "/assets/game/c/awesometanks2.html"
+  },
+  {
+    "name": "Bank Robbery 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bankrobbery2.webp",
+    "url": "/assets/game/c/bankrobbery2.html"
+  },
+  {
+    "name": "Crazy Kitty 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crazykitty3d.png",
+    "url": "/assets/game/c/crazykitty3d.html"
+  },
+  {
+    "name": "Funny Shooter 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/funnyshooter2.png",
+    "url": "/assets/game/c/funnyshooter2.html"
+  },
+  {
+    "name": "Google Feud",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/googlefeud.png",
+    "url": "/assets/game/c/googlefeud.html"
+  },
+  {
+    "name": "Happy Wheels",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/happywheels.png",
+    "url": "/assets/game/c/happywheels.html"
+  },
+  {
+    "name": "Learn to Fly",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/learntofly.jpg",
+    "url": "/assets/game/c/learntofly.html"
+  },
+  {
+    "name": "Learn to Fly 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/learntofly2.jpg",
+    "url": "/assets/game/c/learntofly2.html"
+  },
+  {
+    "name": "Learn to Fly 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/learntofly3.webp",
+    "url": "/assets/game/c/learntofly3.html"
+  },
+  {
+    "name": "Monster Tracks",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/monstertracks.jpg",
+    "url": "/assets/game/c/monstertracks.html"
+  },
+  {
+    "name": "Super Liquid Soccer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/superliquidsoccer.webp",
+    "url": "/assets/game/c/superliquidsoccer.html"
+  },
+  {
+    "name": "Idle Mining Empire",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/idleminingempire.jpg",
+    "url": "/assets/game/c/idleminingempire.html"
+  },
+  {
+    "name": "99 Balls",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/99balls.png",
+    "url": "/assets/game/c/99balls.html"
+  },
+  {
+    "name": "Soundboard",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/soundboard.png",
+    "url": "/assets/game/c/soundboardgame.html"
+  },
+  {
+    "name": "Henry Stickmin: Breaking the Bank",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/breakingthebank.jpg",
+    "url": "/assets/game/c/breakingthebank.html"
+  },
+  {
+    "name": "Henry Stickmin: Escaping the Prison",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/escapingtheprison.jpg",
+    "url": "/assets/game/c/escapingtheprison.html"
+  },
+  {
+    "name": "Henry Stickmin: Fleeing the Complex",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fleeingthecomplex.png",
+    "url": "/assets/game/c/fleeingthecomplex.html"
+  },
+  {
+    "name": "Henry Stickmin: Infiltrating the Airship",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/infiltratingtheairship.jpg",
+    "url": "/assets/game/c/infiltratingtheairship.html"
+  },
+  {
+    "name": "Henry Stickmin: Stealing the Diamond",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stealingthediamond.jpg",
+    "url": "/assets/game/c/stealingthediamond.html"
+  },
+  {
+    "name": "Achievement Unlocked 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/achievementunlocked2.png",
+    "url": "/assets/game/c/achievementunlocked2.html"
+  },
+  {
+    "name": "Achievement Unlocked 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/achievementunlocked3.png",
+    "url": "/assets/game/c/achievementunlocked3.html"
+  },
+  {
+    "name": "Rainbow Obby",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rainbowobby.png",
+    "url": "/assets/game/c/rainbowobby.html"
+  },
+  {
+    "name": "Raft Wars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/raftwars.png",
+    "url": "/assets/game/c/raftwars.html"
+  },
+  {
+    "name": "Raft Wars 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/raftwars2.png",
+    "url": "/assets/game/c/raftwars2.html"
+  },
+  {
+    "name": "Shooting Master",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/shootingmaster.png",
+    "url": "/assets/game/c/shootingmaster.html"
+  },
+  {
+    "name": "The Man From the Window",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/themanfromthewindow.png",
+    "url": "/assets/game/c/themanfromthewindow.html"
+  },
+  {
+    "name": "Station Saturn",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stationsaturn.png",
+    "url": "/assets/game/c/stationsaturn.html"
+  },
+  {
+    "name": "Sky Riders",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/skyriders.png",
+    "url": "/assets/game/c/skyriders.html"
+  },
+  {
+    "name": "Side Effects",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sideeffects.png",
+    "url": "/assets/game/c/sideeffects.html"
+  },
+  {
+    "name": "Resident Evil 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/residentevil3.jpg",
+    "url": "/assets/game/c/residentevil3.html"
+  },
+  {
+    "name": "2048 Merge Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/2048mergerun.png",
+    "url": "/assets/game/c/2048mergerun.html"
+  },
+  {
+    "name": "Schoolboy Runaway",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/schoolboyrunaway.png",
+    "url": "/assets/game/c/schoolboyrunaway.html"
+  },
+  {
+    "name": "Death Run 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/deathrun3d.png",
+    "url": "/assets/game/c/deathrun3d.html"
+  },
+  {
+    "name": "Om Nom Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/omnomrun.png",
+    "url": "/assets/game/c/omnomrun.html"
+  },
+  {
+    "name": "12 Mini Battles",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/12minibattles.png",
+    "url": "/assets/game/c/12minibattles.html"
+  },
+  {
+    "name": "8 Ball Classic",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/8ballclassic.png",
+    "url": "/assets/game/c/8ballclassic.html"
+  },
+  {
+    "name": "8 Ball Pool",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/8ballpool.png",
+    "url": "/assets/game/c/8ballpool.html"
+  },
+  {
+    "name": "A Bite at Freddys",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/abiteatfreddys.png",
+    "url": "/assets/game/c/abiteatfreddys.html"
+  },
+  {
+    "name": "Adventure Drivers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/adventuredrivers.png",
+    "url": "/assets/game/c/adventuredrivers.html"
+  },
+  {
+    "name": "Ages of Conflict",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/agesofconflict.png",
+    "url": "/assets/game/c/agesofconflict.html"
+  },
+  {
+    "name": "Alien Hominid",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/alienhominid.png",
+    "url": "/assets/game/c/alienhominid.html"
+  },
+  {
+    "name": "Andy's Apple Farm",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/andysapplefarm.png",
+    "url": "/assets/game/c/andysapplefarm.html"
+  },
+  {
+    "name": "Angry Birds Chrome",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/angrybirdschrome.png",
+    "url": "/assets/game/c/angrybirdschrome.html"
+  },
+  {
+    "name": "Nut Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/nutsimulator.png",
+    "url": "/assets/game/c/nutsimulator.html"
+  },
+  {
+    "name": "Archery World Tour",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/archeryworldtour.png",
+    "url": "/assets/game/c/archeryworldtour.html"
+  },
+  {
+    "name": "Backrooms",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/backrooms.png",
+    "url": "/assets/game/c/backroomsgame.html"
+  },
+  {
+    "name": "Bacon May Die",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baconmaydie.png",
+    "url": "/assets/game/c/baconmaydie.html"
+  },
+  {
+    "name": "Bad Ice Cream",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badicecream.png",
+    "url": "/assets/game/c/badicecream.html"
+  },
+  {
+    "name": "Bad Ice Cream 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badicecream2.png",
+    "url": "/assets/game/c/badicecream2.html"
+  },
+  {
+    "name": "Bad Ice Cream 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badicecream3.png",
+    "url": "/assets/game/c/badicecream3.html"
+  },
+  {
+    "name": "Bad Monday Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/badmondaysimulator.png",
+    "url": "/assets/game/c/badmondaysimulator.html"
+  },
+  {
+    "name": "Baldi's Basics",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baldisbasics.png",
+    "url": "/assets/game/c/baldisbasics.html"
+  },
+  {
+    "name": "Baldi's Basics Classic Remastered",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/baldisbasicsclassicremastered.png",
+    "url": "/assets/game/c/baldisbasicsclassicremastered.html"
+  },
+  {
+    "name": "Basketball Frvr",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/basketballfrvr.png",
+    "url": "/assets/game/c/basketballfrvr.html"
+  },
+  {
+    "name": "Blumgi Slime",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blumgislime.png",
+    "url": "/assets/game/c/blumgislime.html"
+  },
+  {
+    "name": "Bazooka Boy",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bazookaboy.png",
+    "url": "/assets/game/c/bazookaboy.html"
+  },
+  {
+    "name": "BERGENTRUCK",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bergentruck.png",
+    "url": "/assets/game/c/bergentruckgame.html"
+  },
+  {
+    "name": "Big ICE Tower Tiny Square",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bigicetowertinysquare.png",
+    "url": "/assets/game/c/bigicetowertinysquare.html"
+  },
+  {
+    "name": "Big NEON Tower Tiny Square",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bigneontowertinysquare.png",
+    "url": "/assets/game/c/bigneontowertinysquare.html"
+  },
+  {
+    "name": "Big Tower Tiny Square",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bigtowertinysquare.png",
+    "url": "/assets/game/c/bigtowertinysquare.html"
+  },
+  {
+    "name": "Big Tower Tiny Square 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bigtowertinysquare2.png",
+    "url": "/assets/game/c/bigtowertinysquare2.html"
+  },
+  {
+    "name": "BitGun.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bitgunio.png",
+    "url": "/assets/game/c/bitgunio.html"
+  },
+  {
+    "name": "BitPlanes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bitplanes.png",
+    "url": "/assets/game/c/bitplanesgame.html"
+  },
+  {
+    "name": "BlackJack",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blackjack.png",
+    "url": "/assets/game/c/blackjackgame.html"
+  },
+  {
+    "name": "Blade Ball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bladeball.png",
+    "url": "/assets/game/c/bladeball.html"
+  },
+  {
+    "name": "BlockPost",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blockpost.png",
+    "url": "/assets/game/c/blockpostgame.html"
+  },
+  {
+    "name": "Blocky Snakes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/blockysnakes.png",
+    "url": "/assets/game/c/blockysnakes.html"
+  },
+  {
+    "name": "Bob the Robber 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bobtherobber2.png",
+    "url": "/assets/game/c/bobtherobber2.html"
+  },
+  {
+    "name": "Boom Slingers: Reboom",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/boomslingersreboom.png",
+    "url": "/assets/game/c/boomslingersreboom.html"
+  },
+  {
+    "name": "Bottle Jump 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bottlejump3d.png",
+    "url": "/assets/game/c/bottlejump3d.html"
+  },
+  {
+    "name": "Brawl Guys.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/brawlguysio.png",
+    "url": "/assets/game/c/brawlguysio.html"
+  },
+  {
+    "name": "Bridge Race",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bridgerace.png",
+    "url": "/assets/game/c/bridgerace.html"
+  },
+  {
+    "name": "Build a Big Army",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/buildabigarmy.png",
+    "url": "/assets/game/c/buildabigarmy.html"
+  },
+  {
+    "name": "Build a Plane",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/buildaplane.png",
+    "url": "/assets/game/c/buildaplane.html"
+  },
+  {
+    "name": "Build a Queen",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/buildaqueen.png",
+    "url": "/assets/game/c/buildaqueen.html"
+  },
+  {
+    "name": "Bust a Loop",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bustaloop.png",
+    "url": "/assets/game/c/bustaloop.html"
+  },
+  {
+    "name": "Camouflage and Sniper",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/camouflageandsniper.png",
+    "url": "/assets/game/c/camouflageandsniper.html"
+  },
+  {
+    "name": "Cannon Balls 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cannonballs3d.png",
+    "url": "/assets/game/c/cannonballs3d.html"
+  },
+  {
+    "name": "Cannon Basketball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cannonbasketball.png",
+    "url": "/assets/game/c/cannonbasketball.html"
+  },
+  {
+    "name": "Cannon Basketball 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cannonbasketball2.png",
+    "url": "/assets/game/c/cannonbasketball2.html"
+  },
+  {
+    "name": "Ultimate Car Driving Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ultimatecardrivingsimulator.png",
+    "url": "/assets/game/c/ultimatecardrivingsimulator.html"
+  },
+  {
+    "name": "Car Survival 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/carsurvival3d.png",
+    "url": "/assets/game/c/carsurvival3d.html"
+  },
+  {
+    "name": "Carrom Clash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/carromclash.png",
+    "url": "/assets/game/c/carromclash.html"
+  },
+  {
+    "name": "Cat Connection",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/catconnection.png",
+    "url": "/assets/game/c/catconnection.html"
+  },
+  {
+    "name": "Cat Gunner: Super Zombie Shoot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/catgunner.png",
+    "url": "/assets/game/c/catgunner.html"
+  },
+  {
+    "name": "CG FC 25",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cgfc25.png",
+    "url": "/assets/game/c/cgfc25.html"
+  },
+  {
+    "name": "Cheese Chompers 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cheesechompers3d.png",
+    "url": "/assets/game/c/cheesechompers3d.html"
+  },
+  {
+    "name": "Chess Classic",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/chessclassic.png",
+    "url": "/assets/game/c/chessclassic.html"
+  },
+  {
+    "name": "Chiikawa Puzzle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/chiikawapuzzle.png",
+    "url": "/assets/game/c/chiikawapuzzle.html"
+  },
+  {
+    "name": "Choppy Orc",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/choppyorc.png",
+    "url": "/assets/game/c/choppyorc.html"
+  },
+  {
+    "name": "CircloO",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/circloo.png",
+    "url": "/assets/game/c/circloo1.html"
+  },
+  {
+    "name": "CircloO 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/circloo2.png",
+    "url": "/assets/game/c/circloo2.html"
+  },
+  {
+    "name": "City Defense",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/citydefense.png",
+    "url": "/assets/game/c/citydefense.html"
+  },
+  {
+    "name": "Clothing Shop 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/clothingshop3d.png",
+    "url": "/assets/game/c/clothingshop3d.html"
+  },
+  {
+    "name": "Color Match",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/colormatch.png",
+    "url": "/assets/game/c/colormatch.html"
+  },
+  {
+    "name": "Color Water Sort 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/colorwatersort3d.png",
+    "url": "/assets/game/c/colorwatersort3d.html"
+  },
+  {
+    "name": "Cool Cars Run 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/coolcarsrun3d.png",
+    "url": "/assets/game/c/coolcarsrun3d.html"
+  },
+  {
+    "name": "Coreball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/coreball.png",
+    "url": "/assets/game/c/coreballgame.html"
+  },
+  {
+    "name": "Count Masters Stickman Games",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/countmastersstickmangames.png",
+    "url": "/assets/game/c/countmastersstickmangames.html"
+  },
+  {
+    "name": "Portal",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/portal.jpg",
+    "url": "/assets/game/c/portalgame.html"
+  },
+  {
+    "name": "Gacha Verse",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gachaverse.webp",
+    "url": "/assets/game/c/gachaverse.html"
+  },
+  {
+    "name": "Gacha Life",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gachalife.webp",
+    "url": "/assets/game/c/gachalife.html"
+  },
+  {
+    "name": "OneShot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/oneshot.jpg",
+    "url": "/assets/game/c/oneshotgame.html"
+  },
+  {
+    "name": "Doom 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/doom2.webp",
+    "url": "/assets/game/c/doom2.html"
+  },
+  {
+    "name": "Celeste",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/celeste.png",
+    "url": "/assets/game/c/celestegame.html"
+  },
+  {
+    "name": "Doom 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/doom3.png",
+    "url": "/assets/game/c/doom3.html"
+  },
+  {
+    "name": "Doom 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/doom1.png",
+    "url": "/assets/game/c/doom1.html"
+  },
+  {
+    "name": "Postal",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/postal.png",
+    "url": "/assets/game/c/postalgame.html"
+  },
+  {
+    "name": "2Doom",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/2doom.jpg",
+    "url": "/assets/game/c/2doomgame.html"
+  },
+  {
+    "name": "Get Yoked",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/getyoked.png",
+    "url": "/assets/game/c/getyoked.html"
+  },
+  {
+    "name": "Duck Life 8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife8.png",
+    "url": "/assets/game/c/ducklife8.html"
+  },
+  {
+    "name": "Crush Cars 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crushcars3d.png",
+    "url": "/assets/game/c/crushcars3d.html"
+  },
+  {
+    "name": "Cubefield",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cubefield.png",
+    "url": "/assets/game/c/cubefieldgame.html"
+  },
+  {
+    "name": "Cut the Rope: Holiday Gift",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cuttheropeholiday.png",
+    "url": "/assets/game/c/cuttheropeholiday.html"
+  },
+  {
+    "name": "Cut the Rope",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cuttherope1.png",
+    "url": "/assets/game/c/cuttherope1.html"
+  },
+  {
+    "name": "Cut the Rope: Time Travel",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cuttheropetimetravel.png",
+    "url": "/assets/game/c/cuttheropetimetravel.html"
+  },
+  {
+    "name": "Dalgona Candy Honeycomb Cookie",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dalgonacandyhoneycombcookie.png",
+    "url": "/assets/game/c/dalgonacandyhoneycombcookie.html"
+  },
+  {
+    "name": "Dan The Man",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dantheman.png",
+    "url": "/assets/game/c/dantheman.html"
+  },
+  {
+    "name": "DEAD PLATE",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/deadplate.png",
+    "url": "/assets/game/c/deadplate.html"
+  },
+  {
+    "name": "Destiny Run 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/destinyrun3d.png",
+    "url": "/assets/game/c/destinyrun3d.html"
+  },
+  {
+    "name": "Destroy The Car 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/destroythecar3d.png",
+    "url": "/assets/game/c/destroythecar3d.html"
+  },
+  {
+    "name": "Diamond Seeker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/diamondseeker.png",
+    "url": "/assets/game/c/diamondseeker.html"
+  },
+  {
+    "name": "Dig Deep",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/digdeep.png",
+    "url": "/assets/game/c/digdeep.html"
+  },
+  {
+    "name": "DONT YOU LECTURE ME",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dontyoulectureme.png",
+    "url": "/assets/game/c/dontyoulectureme.html"
+  },
+  {
+    "name": "Dragon vs Bricks",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dragonvsbricks.png",
+    "url": "/assets/game/c/dragonvsbricks.html"
+  },
+  {
+    "name": "Draw Joust",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drawjoust.png",
+    "url": "/assets/game/c/drawjoust.html"
+  },
+  {
+    "name": "Draw the Hill",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drawthehill.png",
+    "url": "/assets/game/c/drawthehill.html"
+  },
+  {
+    "name": "Draw the Line",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drawtheline.png",
+    "url": "/assets/game/c/drawtheline.html"
+  },
+  {
+    "name": "Driven Wild",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/drivenwild.png",
+    "url": "/assets/game/c/drivenwild.html"
+  },
+  {
+    "name": "Elastic Man",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/elasticman.png",
+    "url": "/assets/game/c/elasticman.html"
+  },
+  {
+    "name": "Endoparasitic",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/endoparasitic.png",
+    "url": "/assets/game/c/endoparasiticgame.html"
+  },
+  {
+    "name": "Endroll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/endroll.png",
+    "url": "/assets/game/c/endrollgame.html"
+  },
+  {
+    "name": "Evil Glitch",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/evilglitch.png",
+    "url": "/assets/game/c/evilglitch.html"
+  },
+  {
+    "name": "Evolving Bombs 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/evolvingbombs3d.png",
+    "url": "/assets/game/c/evolvingbombs3d.html"
+  },
+  {
+    "name": "EvoWars.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/evowarsio.png",
+    "url": "/assets/game/c/evowarsio.html"
+  },
+  {
+    "name": "Fancy Pants Adventure",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fancypantsadventure.png",
+    "url": "/assets/game/c/fancypantsadventure.html"
+  },
+  {
+    "name": "Fancy Pants Adventure 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fancypantsadventure2.png",
+    "url": "/assets/game/c/fancypantsadventure2.html"
+  },
+  {
+    "name": "Fancy Pants Adventure 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fancypantsadventure3.png",
+    "url": "/assets/game/c/fancypantsadventure3.html"
+  },
+  {
+    "name": "Fancy Pants Adventure 4 Part 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fancypantsadventure4part1.png",
+    "url": "/assets/game/c/fancypantsadventure4part1.html"
+  },
+  {
+    "name": "Fancy Pants Adventure 4 Part 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fancypantsadventure4part2.png",
+    "url": "/assets/game/c/fancypantsadventure4part2.html"
+  },
+  {
+    "name": "Fashion Battle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fashionbattle.png",
+    "url": "/assets/game/c/fashionbattle.html"
+  },
+  {
+    "name": "Fears to Fathom: Home Alone",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fearstofathom.png",
+    "url": "/assets/game/c/fearstofathom.html"
+  },
+  {
+    "name": "Final Earth 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/finalearth2.png",
+    "url": "/assets/game/c/finalearth2.html"
+  },
+  {
+    "name": "Find the Alien",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/findthealien.png",
+    "url": "/assets/game/c/findthealien.html"
+  },
+  {
+    "name": "Fire and Frost Master",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fireandfrostmaster.png",
+    "url": "/assets/game/c/fireandfrostmaster.html"
+  },
+  {
+    "name": "Fitness Empire",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fitnessempire.png",
+    "url": "/assets/game/c/fitnessempire.html"
+  },
+  {
+    "name": "Five Nights at Winstons",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fivenightsatwinstons.png",
+    "url": "/assets/game/c/fivenightsatwinstons.html"
+  },
+  {
+    "name": "Flick Goal",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/flickgoal.png",
+    "url": "/assets/game/c/flickgoal.html"
+  },
+  {
+    "name": "Flip Master",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/flipmaster.png",
+    "url": "/assets/game/c/flipmaster.html"
+  },
+  {
+    "name": "Football Bros",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/footballbros.png",
+    "url": "/assets/game/c/footballbros.html"
+  },
+  {
+    "name": "Fortzone Battle Royale",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fortzonebattleroyale.png",
+    "url": "/assets/game/c/fortzonebattleroyale.html"
+  },
+  {
+    "name": "Friday Night Funkin' Vs. Hatsune Miku",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fnfvshatsunemiku.png",
+    "url": "/assets/game/c/fnfvshatsunemiku.html"
+  },
+  {
+    "name": "Generic Fighter Maybe",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/genericfightermaybe.png",
+    "url": "/assets/game/c/genericfightermaybe.html"
+  },
+  {
+    "name": "Giant Wanted",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/giantwanted.png",
+    "url": "/assets/game/c/giantwanted.html"
+  },
+  {
+    "name": "Gladihoppers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gladihoppers.png",
+    "url": "/assets/game/c/gladihoppersgame.html"
+  },
+  {
+    "name": "God's Flesh",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/godsflesh.png",
+    "url": "/assets/game/c/godsflesh.html"
+  },
+  {
+    "name": "groon groon babey!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/groongroonbabey.png",
+    "url": "/assets/game/c/groongroonbabey.html"
+  },
+  {
+    "name": "Guess Their Answer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/guesstheiranswer.png",
+    "url": "/assets/game/c/guesstheiranswer.html"
+  },
+  {
+    "name": "Gun Clone",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gunclone.png",
+    "url": "/assets/game/c/gunclone.html"
+  },
+  {
+    "name": "Gun Runner",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gunrunner.png",
+    "url": "/assets/game/c/gunrunner.html"
+  },
+  {
+    "name": "Happy Sheepies",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/happysheepies.png",
+    "url": "/assets/game/c/happysheepies.html"
+  },
+  {
+    "name": "Hide N Seek",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hidenseek.png",
+    "url": "/assets/game/c/hidenseek.html"
+  },
+  {
+    "name": "High Heels",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/highheels.png",
+    "url": "/assets/game/c/highheels.html"
+  },
+  {
+    "name": "Highway Racer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/highwayracer.png",
+    "url": "/assets/game/c/highwayracer.html"
+  },
+  {
+    "name": "Highway Racer 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/highwayracer2.png",
+    "url": "/assets/game/c/highwayracer2.html"
+  },
+  {
+    "name": "Highway Racer 2 REMASTERED",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/highwayracer2remastered.png",
+    "url": "/assets/game/c/highwayracer2remastered.html"
+  },
+  {
+    "name": "House of Hazards",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/houseofhazards.png",
+    "url": "/assets/game/c/houseofhazards.html"
+  },
+  {
+    "name": "Hula Hoop Race",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hulahooprace.png",
+    "url": "/assets/game/c/hulahooprace.html"
+  },
+  {
+    "name": "i woke up next to you again",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/iwokeupnexttoyouagain.png",
+    "url": "/assets/game/c/iwokeupnexttoyouagain.html"
+  },
+  {
+    "name": "Idle Lumber Inc",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/idlelumberinc.png",
+    "url": "/assets/game/c/idlelumberinc.html"
+  },
+  {
+    "name": "Infinimoes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/infinimoes.png",
+    "url": "/assets/game/c/infinimoesgame.html"
+  },
+  {
+    "name": "Jelly Restaurant",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/jellyrestaurant.png",
+    "url": "/assets/game/c/jellyrestaurant.html"
+  },
+  {
+    "name": "Journey Downhill",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/journeydownhill.png",
+    "url": "/assets/game/c/journeydownhill.html"
+  },
+  {
+    "name": "JustFall.lol",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/justfalllol.png",
+    "url": "/assets/game/c/justfalllol.html"
+  },
+  {
+    "name": "Kaji Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kajirun.png",
+    "url": "/assets/game/c/kajirun.html"
+  },
+  {
+    "name": "Kitchen Bazar",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kitchenbazar.png",
+    "url": "/assets/game/c/kitchenbazar.html"
+  },
+  {
+    "name": "Kitty Toy",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kittytoy.png",
+    "url": "/assets/game/c/kittytoy.html"
+  },
+  {
+    "name": "Layers Roll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/layersroll.png",
+    "url": "/assets/game/c/layersroll.html"
+  },
+  {
+    "name": "Lazy Jumper",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/lazyjumper.png",
+    "url": "/assets/game/c/lazyjumper.html"
+  },
+  {
+    "name": "Learn to Fly Idle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/learntoflyidle.png",
+    "url": "/assets/game/c/learntoflyidle.html"
+  },
+  {
+    "name": "Line Rider",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/linerider.png",
+    "url": "/assets/game/c/linerider.html"
+  },
+  {
+    "name": "Little Runmo",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/littlerunmo.png",
+    "url": "/assets/game/c/littlerunmo.html"
+  },
+  {
+    "name": "Love Letters",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/loveletters.png",
+    "url": "/assets/game/c/loveletters.html"
+  },
+  {
+    "name": "Madalin Stunt Cars 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/madalinstuntcars2.png",
+    "url": "/assets/game/c/madalinstuntcars2.html"
+  },
+  {
+    "name": "Madalin Stunt Cars 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/madalinstuntcars3.png",
+    "url": "/assets/game/c/madalinstuntcars3.html"
+  },
+  {
+    "name": "Madness Combat: Project Nexus (Classic)",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/madnesscombatprojectnexus.png",
+    "url": "/assets/game/c/madnesscombatprojectnexus.html"
+  },
+  {
+    "name": "Make a Superboat",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/makeasuperboat.png",
+    "url": "/assets/game/c/makeasuperboat.html"
+  },
+  {
+    "name": "Makeover Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/makeoverrun.png",
+    "url": "/assets/game/c/makeoverrun.html"
+  },
+  {
+    "name": "Man Runner 2048",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/manrunner2048.png",
+    "url": "/assets/game/c/manrunner2048.html"
+  },
+  {
+    "name": "Maze Speedrun",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mazespeedrun.png",
+    "url": "/assets/game/c/mazespeedrun.html"
+  },
+  {
+    "name": "Mega Car Jumps",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/megacarjumps.png",
+    "url": "/assets/game/c/megacarjumps.html"
+  },
+  {
+    "name": "Merge Harvest",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mergeharvest.png",
+    "url": "/assets/game/c/mergeharvest.html"
+  },
+  {
+    "name": "Minecraft 1.5.2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraft152.html"
+  },
+  {
+    "name": "Minecraft Alpha 1.2.6",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraftalpha126.html"
+  },
+  {
+    "name": "Minecraft Beta 1.3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraftbeta13.html"
+  },
+  {
+    "name": "Minecraft Indev",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraft.webp",
+    "url": "/assets/game/c/minecraftindev.html"
+  },
+  {
+    "name": "Minesweeper Mania",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minesweepermania.png",
+    "url": "/assets/game/c/minesweepermania.html"
+  },
+  {
+    "name": "Mob Control",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mobcontrol.png",
+    "url": "/assets/game/c/mobcontrol.html"
+  },
+  {
+    "name": "Money Rush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/moneyrush.png",
+    "url": "/assets/game/c/moneyrush.html"
+  },
+  {
+    "name": "Monster Box 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/monsterbox3d.png",
+    "url": "/assets/game/c/monsterbox3d.html"
+  },
+  {
+    "name": "Moto X3M",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3m.png",
+    "url": "/assets/game/c/motox3m.html"
+  },
+  {
+    "name": "Moto X3M 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3m2.png",
+    "url": "/assets/game/c/motox3m2.html"
+  },
+  {
+    "name": "Moto X3M 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3m3.png",
+    "url": "/assets/game/c/motox3m3.html"
+  },
+  {
+    "name": "Moto X3M Pool Party",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3mpoolparty.png",
+    "url": "/assets/game/c/motox3mpoolparty.html"
+  },
+  {
+    "name": "Moto X3M Spooky",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3mspooky.png",
+    "url": "/assets/game/c/motox3mspooky.html"
+  },
+  {
+    "name": "Moto X3M Winter",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/motox3mwinter.png",
+    "url": "/assets/game/c/motox3mwinter.html"
+  },
+  {
+    "name": "myTeardrop",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/myteardrop.png",
+    "url": "/assets/game/c/myteardropgame.html"
+  },
+  {
+    "name": "n-gon",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ngon.png",
+    "url": "/assets/game/c/ngon.html"
+  },
+  {
+    "name": "Newgrounds Rumble",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/newgroundsrumble.png",
+    "url": "/assets/game/c/newgroundsrumble.html"
+  },
+  {
+    "name": "Ninja vs EvilCorp",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ninjavsevilcorp.png",
+    "url": "/assets/game/c/ninjavsevilcorp.html"
+  },
+  {
+    "name": "Off",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/off.png",
+    "url": "/assets/game/c/offgame.html"
+  },
+  {
+    "name": "Office Fight",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/officefight.png",
+    "url": "/assets/game/c/officefight.html"
+  },
+  {
+    "name": "Offroad Mountain Bike",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/offroadmountainbike.png",
+    "url": "/assets/game/c/offroadmountainbike.html"
+  },
+  {
+    "name": "Oshi Oshi Punch!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/oshioshipunch.png",
+    "url": "/assets/game/c/oshioshipunch.html"
+  },
+  {
+    "name": "Pac Man World",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pacmanworld.png",
+    "url": "/assets/game/c/pacmanworld.html"
+  },
+  {
+    "name": "Pac Man World 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pacmanworld2.png",
+    "url": "/assets/game/c/pacmanworld2.html"
+  },
+  {
+    "name": "Pac-Man Superfast",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pacmansuperfast.png",
+    "url": "/assets/game/c/pacmanworld.html"
+  },
+  {
+    "name": "PacMan (Horror)",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pacmanhorror.png",
+    "url": "/assets/game/c/pacmanhorror.html"
+  },
+  {
+    "name": "Papers Please",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papersplease.png",
+    "url": "/assets/game/c/papersplease.html"
+  },
+  {
+    "name": "Papery Planes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/paperyplanes.png",
+    "url": "/assets/game/c/paperyplanes.html"
+  },
+  {
+    "name": "Parappa The Rapper",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/parappatherapper.png",
+    "url": "/assets/game/c/parappatherapper.html"
+  },
+  {
+    "name": "Parking Fury 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/parkingfury3d.png",
+    "url": "/assets/game/c/parkingfury3d.html"
+  },
+  {
+    "name": "Parking Rush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/parkingrush.png",
+    "url": "/assets/game/c/parkingrush.html"
+  },
+  {
+    "name": "Pixel Gun Survival",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pixelgunsurvival.png",
+    "url": "/assets/game/c/pixelgunsurvival.html"
+  },
+  {
+    "name": "Pizza Tower: Scoutdigo",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pizzatowerscoutdigo.png",
+    "url": "/assets/game/c/pizzatowerscoutdigo.html"
+  },
+  {
+    "name": "Pokey Ball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokeyball.png",
+    "url": "/assets/game/c/pokeyball.html"
+  },
+  {
+    "name": "PortaBoy+",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/portaboy.png",
+    "url": "/assets/game/c/portaboy.html"
+  },
+  {
+    "name": "Pottery Master",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/potterymaster.png",
+    "url": "/assets/game/c/potterymaster.html"
+  },
+  {
+    "name": "Protektor",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/protektor.png",
+    "url": "/assets/game/c/protektorgame.html"
+  },
+  {
+    "name": "Race Master 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/racemaster3d.png",
+    "url": "/assets/game/c/racemaster3d.html"
+  },
+  {
+    "name": "Ragdoll Archers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ragdollarchers.png",
+    "url": "/assets/game/c/ragdollarchers.html"
+  },
+  {
+    "name": "Ragdoll Hit",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ragdollhit.png",
+    "url": "/assets/game/c/ragdollhit.html"
+  },
+  {
+    "name": "Resident Evil",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/residentevil.jpg",
+    "url": "/assets/game/c/residentevil.html"
+  },
+  {
+    "name": "Recoil",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/recoil.png",
+    "url": "/assets/game/c/recoilgame.html"
+  },
+  {
+    "name": "Red Ball",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball.png",
+    "url": "/assets/game/c/redball.html"
+  },
+  {
+    "name": "Red Ball 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball2.png",
+    "url": "/assets/game/c/redball2.html"
+  },
+  {
+    "name": "Red Ball 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball3.png",
+    "url": "/assets/game/c/redball3.html"
+  },
+  {
+    "name": "Red Ball 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball4.png",
+    "url": "/assets/game/c/redball4.html"
+  },
+  {
+    "name": "Red Ball 4 Vol. 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball4vol2.png",
+    "url": "/assets/game/c/redball4vol2.html"
+  },
+  {
+    "name": "Red Ball 4 Vol. 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/redball4vol3.png",
+    "url": "/assets/game/c/redball4vol3.html"
+  },
+  {
+    "name": "Rich Run 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/richrun3d.png",
+    "url": "/assets/game/c/richrun3d.html"
+  },
+  {
+    "name": "Riddle School",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddleschool.png",
+    "url": "/assets/game/c/riddleschool.html"
+  },
+  {
+    "name": "Riddle School 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddleschool2.png",
+    "url": "/assets/game/c/riddleschool2.html"
+  },
+  {
+    "name": "Riddle School 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddleschool3.png",
+    "url": "/assets/game/c/riddleschool3.html"
+  },
+  {
+    "name": "Riddle School 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddleschool4.png",
+    "url": "/assets/game/c/riddleschool4.html"
+  },
+  {
+    "name": "Riddle School 5",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddleschool5.png",
+    "url": "/assets/game/c/riddleschool5.html"
+  },
+  {
+    "name": "Riddle Transfer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddletransfer.png",
+    "url": "/assets/game/c/riddletransfer.html"
+  },
+  {
+    "name": "Riddle Transfer 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riddletransfer2.png",
+    "url": "/assets/game/c/riddletransfer2.html"
+  },
+  {
+    "name": "RigBMX",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rigbmx.png",
+    "url": "/assets/game/c/rigbmxgame.html"
+  },
+  {
+    "name": "RigBMX 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rigbmx2.png",
+    "url": "/assets/game/c/rigbmx2.html"
+  },
+  {
+    "name": "Road of Fury",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/roadoffury.png",
+    "url": "/assets/game/c/roadoffury.html"
+  },
+  {
+    "name": "Robot Invasion",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/robotinvasion.png",
+    "url": "/assets/game/c/robotinvasion.html"
+  },
+  {
+    "name": "Rolling Sky",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/rollingsky.png",
+    "url": "/assets/game/c/rollingsky.html"
+  },
+  {
+    "name": "Room Sort",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/roomsort.png",
+    "url": "/assets/game/c/roomsort.html"
+  },
+  {
+    "name": "sandspiel",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sandspiel.png",
+    "url": "/assets/game/c/sandspielgame.html"
+  },
+  {
+    "name": "Scrap Metal 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/scrapmetal3.png",
+    "url": "/assets/game/c/scrapmetal3.html"
+  },
+  {
+    "name": "Seat Jam 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/seatjam3d.png",
+    "url": "/assets/game/c/seatjam3d.html"
+  },
+  {
+    "name": "Shipo.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/shipoio.png",
+    "url": "/assets/game/c/shipoio.html"
+  },
+  {
+    "name": "Shovel 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/shovel3d.png",
+    "url": "/assets/game/c/shovel3d.html"
+  },
+  {
+    "name": "Slime.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slimeio.png",
+    "url": "/assets/game/c/slimeio.html"
+  },
+  {
+    "name": "Snowbattle.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/snowbattleio.png",
+    "url": "/assets/game/c/snowbattleio.html"
+  },
+  {
+    "name": "Sonic Mania",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicmania.png",
+    "url": "/assets/game/c/sonicmania.html"
+  },
+  {
+    "name": "Sonic the Hedgehog 2: Community's Cut",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicthehedgehog2communityscut.png",
+    "url": "/assets/game/c/sonicthehedgehog2communityscut.html"
+  },
+  {
+    "name": "Sonic the Hedgehog 3: Angel Island Remastered",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicthehedgehog3angelislandremastered.png",
+    "url": "/assets/game/c/sonicthehedgehog3angelislandremastered.html"
+  },
+  {
+    "name": "Sonic.EXE",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicexe.png",
+    "url": "/assets/game/c/sonicexe.html"
+  },
+  {
+    "name": "Sonic.EXE (Original)",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicexeoriginal.png",
+    "url": "/assets/game/c/sonicexeoriginal.html"
+  },
+  {
+    "name": "Sort the Court",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sortthecourt.png",
+    "url": "/assets/game/c/sortthecourt.html"
+  },
+  {
+    "name": "Space Funeral",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spacefuneral.png",
+    "url": "/assets/game/c/spacefuneral.html"
+  },
+  {
+    "name": "SpiderDoll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spiderdoll.png",
+    "url": "/assets/game/c/spiderdollgame.html"
+  },
+  {
+    "name": "Spiral Roll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spiralroll.png",
+    "url": "/assets/game/c/spiralroll.html"
+  },
+  {
+    "name": "SpongeBob SquarePants: Krabby Katch",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spongebobsquarepantskrabbykatch.png",
+    "url": "/assets/game/c/spongebobsquarepantskrabbykatch.html"
+  },
+  {
+    "name": "Stacky Dash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stackydash.png",
+    "url": "/assets/game/c/stackydash.html"
+  },
+  {
+    "name": "Station 141",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/station141.png",
+    "url": "/assets/game/c/station141.html"
+  },
+  {
+    "name": "Steal Brainrot Online",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stealbrainrotonline.png",
+    "url": "/assets/game/c/stealbrainrotonline.html"
+  },
+  {
+    "name": "Stickman and Guns",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmanandguns.png",
+    "url": "/assets/game/c/stickmanandguns.html"
+  },
+  {
+    "name": "Stickman Boost",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmanboost.png",
+    "url": "/assets/game/c/stickmanboost.html"
+  },
+  {
+    "name": "Stickman Climb",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmanclimb.png",
+    "url": "/assets/game/c/stickmanclimb.html"
+  },
+  {
+    "name": "Stickman Fight Ragdoll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmanfightragdoll.png",
+    "url": "/assets/game/c/stickmanfightragdoll.html"
+  },
+  {
+    "name": "Stickman Golf",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmangolf.png",
+    "url": "/assets/game/c/stickmangolf.html"
+  },
+  {
+    "name": "Stone Grass Mowing Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stonegrassmowingsimulator.png",
+    "url": "/assets/game/c/stonegrassmowingsimulator.html"
+  },
+  {
+    "name": "Super Mario 63",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermario63.png",
+    "url": "/assets/game/c/supermario63.html"
+  },
+  {
+    "name": "Super Mario Bros 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermariobros2.jpg",
+    "url": "/assets/game/c/supermariobros2.html"
+  },
+  {
+    "name": "Super Mario Bros 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermariobros3.jpg",
+    "url": "/assets/game/c/supermariobros3.html"
+  },
+  {
+    "name": "Super Star Car",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/superstarcar.png",
+    "url": "/assets/game/c/superstarcar.html"
+  },
+  {
+    "name": "Supermarket 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermarket3d.png",
+    "url": "/assets/game/c/supermarket3d.html"
+  },
+  {
+    "name": "Survive to Victory",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/survivetovictory.png",
+    "url": "/assets/game/c/survivetovictory.html"
+  },
+  {
+    "name": "Sushi Roll",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sushiroll.png",
+    "url": "/assets/game/c/sushiroll.html"
+  },
+  {
+    "name": "Swordfight!!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/swordfight.png",
+    "url": "/assets/game/c/swordfight.html"
+  },
+  {
+    "name": "Swords and Souls",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/swordsandsouls.png",
+    "url": "/assets/game/c/swordsandsouls.html"
+  },
+  {
+    "name": "Amazing Strange Rope Police",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/amazingstrangeropepolice.jpg",
+    "url": "/assets/game/c/amazingstrangeropepolice.html"
+  },
+  {
+    "name": "Tattletail",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tattletail.png",
+    "url": "/assets/game/c/tattletailgame.html"
+  },
+  {
+    "name": "Teen Titans GO!: Jump Jousts",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/teentitansgojumpjousts.png",
+    "url": "/assets/game/c/teentitansgojumpjousts.html"
+  },
+  {
+    "name": "Teen Titans GO!: Jump Jousts 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/teentitansgojumpjousts2.png",
+    "url": "/assets/game/c/teentitansgojumpjousts2.html"
+  },
+  {
+    "name": "Telekinesis",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/telekinesis.png",
+    "url": "/assets/game/c/telekinesisgame.html"
+  },
+  {
+    "name": "Telekinesis Attack",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/telekinesisattack.png",
+    "url": "/assets/game/c/telekinesisattack.html"
+  },
+  {
+    "name": "Telekinesis Car",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/telekinesiscar.png",
+    "url": "/assets/game/c/telekinesiscar.html"
+  },
+  {
+    "name": "Telekinesis Drive",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/telekinesisdrive.png",
+    "url": "/assets/game/c/telekinesisdrive.html"
+  },
+  {
+    "name": "The Impossible Quiz",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theimpossiblequiz.png",
+    "url": "/assets/game/c/theimpossiblequiz.html"
+  },
+  {
+    "name": "The Oregon Trail",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theoregontrail.png",
+    "url": "/assets/game/c/theoregontrail.html"
+  },
+  {
+    "name": "The World's Hardest Game",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theworldshardestgame.png",
+    "url": "/assets/game/c/theworldshardestgame.html"
+  },
+  {
+    "name": "The World's Hardest Game 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theworldshardestgame3.png",
+    "url": "/assets/game/c/theworldshardestgame3.html"
+  },
+  {
+    "name": "The World's Hardest Game 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theworldshardestgame4.png",
+    "url": "/assets/game/c/theworldshardestgame4.html"
+  },
+  {
+    "name": "They Are Coming",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theyarecoming.png",
+    "url": "/assets/game/c/theyarecoming.html"
+  },
+  {
+    "name": "This Is The Only Level",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thisistheonlylevel.png",
+    "url": "/assets/game/c/thisistheonlylevel.html"
+  },
+  {
+    "name": "This Is The Only Level 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thisistheonlylevel2.png",
+    "url": "/assets/game/c/thisistheonlylevel2.html"
+  },
+  {
+    "name": "Three Goblets",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/threegoblets.png",
+    "url": "/assets/game/c/threegoblets.html"
+  },
+  {
+    "name": "TileTopia",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tiletopia.png",
+    "url": "/assets/game/c/tiletopiagame.html"
+  },
+  {
+    "name": "Time Shooter 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/timeshooter1.png",
+    "url": "/assets/game/c/timeshooter1.html"
+  },
+  {
+    "name": "Tomodachi Collection",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tomodachicollection.png",
+    "url": "/assets/game/c/tomodachicollection.html"
+  },
+  {
+    "name": "Toss The Turtle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tosstheturtle.png",
+    "url": "/assets/game/c/tosstheturtle.html"
+  },
+  {
+    "name": "Touhou: Luminous Strike",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhouluminousstrike.png",
+    "url": "/assets/game/c/touhouluminousstrike.html"
+  },
+  {
+    "name": "Tower Crash 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/towercrash3d.png",
+    "url": "/assets/game/c/towercrash3d.html"
+  },
+  {
+    "name": "Toy Rider",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/toyrider.png",
+    "url": "/assets/game/c/toyrider.html"
+  },
+  {
+    "name": "Traffic Rider",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/trafficrider.png",
+    "url": "/assets/game/c/trafficrider.html"
+  },
+  {
+    "name": "Triple Match 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/triplematch3d.png",
+    "url": "/assets/game/c/triplematch3d.html"
+  },
+  {
+    "name": "Trivia Crack",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/triviacrack.png",
+    "url": "/assets/game/c/triviacrack.html"
+  },
+  {
+    "name": "Tube Jumpers",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tubejumpers.png",
+    "url": "/assets/game/c/tubejumpers.html"
+  },
+  {
+    "name": "Tug of War with Cars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tugofwarwithcars.png",
+    "url": "/assets/game/c/tugofwarwithcars.html"
+  },
+  {
+    "name": "Tunnel Rush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tunnelrush.png",
+    "url": "/assets/game/c/tunnelrush.html"
+  },
+  {
+    "name": "Twerk Race 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/twerkrace3d.png",
+    "url": "/assets/game/c/twerkrace3d.html"
+  },
+  {
+    "name": "Twisted Rope 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/twistedrope3d.png",
+    "url": "/assets/game/c/twistedrope3d.html"
+  },
+  {
+    "name": "UNDERWHEELS",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/underwheels.png",
+    "url": "/assets/game/c/underwheelsgame.html"
+  },
+  {
+    "name": "Vex 3 XMAS",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vex3xmas.png",
+    "url": "/assets/game/c/vex3xmas.html"
+  },
+  {
+    "name": "Vex Challenges",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vexchallenges.png",
+    "url": "/assets/game/c/vexchallenges.html"
+  },
+  {
+    "name": "Vex X3M",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vexx3m.png",
+    "url": "/assets/game/c/vexx3m.html"
+  },
+  {
+    "name": "Vex X3M 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vexx3m2.png",
+    "url": "/assets/game/c/vexx3m2.html"
+  },
+  {
+    "name": "Wall Crawler",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wallcrawler.png",
+    "url": "/assets/game/c/wallcrawler.html"
+  },
+  {
+    "name": "War Regions",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/warregions.png",
+    "url": "/assets/game/c/warregions.html"
+  },
+  {
+    "name": "War The Knights",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wartheknights.png",
+    "url": "/assets/game/c/wartheknights.html"
+  },
+  {
+    "name": "Waterworks!",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/waterworks.png",
+    "url": "/assets/game/c/waterworks.html"
+  },
+  {
+    "name": "Weapon Craft Run",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/weaponcraftrun.png",
+    "url": "/assets/game/c/weaponcraftrun.html"
+  },
+  {
+    "name": "Weapon Scale",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/weaponscale.png",
+    "url": "/assets/game/c/weaponscale.html"
+  },
+  {
+    "name": "Weapon Upgrade Rush",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/weaponupgraderush.png",
+    "url": "/assets/game/c/weaponupgraderush.html"
+  },
+  {
+    "name": "Wheely",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely.png",
+    "url": "/assets/game/c/wheely1.html"
+  },
+  {
+    "name": "Wheely 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely2.png",
+    "url": "/assets/game/c/wheely2.html"
+  },
+  {
+    "name": "Wheely 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely3.png",
+    "url": "/assets/game/c/wheely.html"
+  },
+  {
+    "name": "Wheely 4",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely4.png",
+    "url": "/assets/game/c/wheely4.html"
+  },
+  {
+    "name": "Wheely 5",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely5.png",
+    "url": "/assets/game/c/wheely5.html"
+  },
+  {
+    "name": "Wheely 6",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely6.png",
+    "url": "/assets/game/c/wheely6.html"
+  },
+  {
+    "name": "Wheely 7",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely7.png",
+    "url": "/assets/game/c/wheely7.html"
+  },
+  {
+    "name": "Wheely 8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wheely8.png",
+    "url": "/assets/game/c/wheely8.html"
+  },
+  {
+    "name": "World Box",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/worldbox.png",
+    "url": "/assets/game/c/worldbox.html"
+  },
+  {
+    "name": "Peggle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/peggle.jpg",
+    "url": "/assets/game/c/pegglegame.html"
+  },
+  {
+    "name": "Diablo",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/diablo.png",
+    "url": "/assets/game/c/diablo1.html"
+  },
+  {
+    "name": "Doge Miner 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dogeminer2.png",
+    "url": "/assets/game/c/dogeminer2.html"
+  },
+  {
+    "name": "The Legend of Zelda",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzelda.jpg",
+    "url": "/assets/game/c/thelegendofzelda.html"
+  },
+  {
+    "name": "The Legend of Zelda: The Minish Cap",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldatheminishcap.png",
+    "url": "/assets/game/c/thelegendofzeldatheminishcap.html"
+  },
+  {
+    "name": "Wolfenstein 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/wolfenstein3d.jpg",
+    "url": "/assets/game/c/wolfenstein3d.html"
+  },
+  {
+    "name": "Silent Hill",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/silenthill.png",
+    "url": "/assets/game/c/silenthill.html"
+  },
+  {
+    "name": "Counter Strike DS",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/counterstrikeds.png",
+    "url": "/assets/game/c/counterstrikeds.html"
+  },
+  {
+    "name": "The Legend of Zelda: Spirit Tracks",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldaspirittracks.jpg",
+    "url": "/assets/game/c/thelegendofzeldaspirittracks.html"
+  },
+  {
+    "name": "One Piece Fighting",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/onepiecefighting.jpg",
+    "url": "/assets/game/c/onepiecefighting.html"
+  },
+  {
+    "name": "Call of Duty 4: Modern Warfare",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cod4modernwarfare.png",
+    "url": "/assets/game/c/cod4modernwarfare.html"
+  },
+  {
+    "name": "Grand Theft Auto: Chinatown Wars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gtachinatownwars.jpg",
+    "url": "/assets/game/c/gtachinatownwars.html"
+  },
+  {
+    "name": "The Elder Scrolls 2: Daggerfall",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theelderscrolls2.jpg",
+    "url": "/assets/game/c/theelderscrolls2.html"
+  },
+  {
+    "name": "The Elder Scrolls: Arena",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/theelderscrolls1.jpg",
+    "url": "/assets/game/c/theelderscrolls1.html"
+  },
+  {
+    "name": "Grand Theft Auto: Advance",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gtaadvance.webp",
+    "url": "/assets/game/c/gtaadvance.html"
+  },
+  {
+    "name": "Castlevania: The Adventure",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/castlevaniatheadventure.jpg",
+    "url": "/assets/game/c/castlevaniaadventure.html"
+  },
+  {
+    "name": "Mortal Kombat Advance",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mortalkombatadvance.jpg",
+    "url": "/assets/game/c/mortalkombatadvance.html"
+  },
+  {
+    "name": "Metroid Zero Mission",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/metroidzeromission.jpg",
+    "url": "/assets/game/c/metroidzeromission.html"
+  },
+  {
+    "name": "Nickelodeon Super Brawl 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/nickelodeonsuperbrawl2.webp",
+    "url": "/assets/game/c/nickelodeonsuperbrawl2.html"
+  },
+  {
+    "name": "Customer Support",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/customersupport.jpg",
+    "url": "/assets/game/c/customersupport.html"
+  },
+  {
+    "name": "Pretend Its Not There",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pretenditsnotthere.png",
+    "url": "/assets/game/c/pretenditsnotthere.html"
+  },
+  {
+    "name": "To The Core",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tothecore.webp",
+    "url": "/assets/game/c/tothecore.html"
+  },
+  {
+    "name": "Terraria",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/terraria.png",
+    "url": "/assets/game/c/terrariagame.html"
+  },
+  {
+    "name": "Cave Story",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cavestory.png",
+    "url": "/assets/game/c/cavestory.html"
+  },
+  {
+    "name": "Spelunky Classic HD",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spelunkyclassichd.png",
+    "url": "/assets/game/c/spelunkyclassichd.html"
+  },
+  {
+    "name": "Mutilate a Doll 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mutilateadoll2.png",
+    "url": "/assets/game/c/mutilateadoll2.html"
+  },
+  {
+    "name": "Sonic Erazor",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sonicerazor.png",
+    "url": "/assets/game/c/sonicerazor.html"
+  },
+  {
+    "name": "Crash Bandicoot 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crashbandicoot2.png",
+    "url": "/assets/game/c/crashbandicoot2.html"
+  },
+  {
+    "name": "Call of Duty World at War",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/callofdutyworldatwar.jpg",
+    "url": "/assets/game/c/callofdutyworldatwar.html"
+  },
+  {
+    "name": "Duck Life 6: Space",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife6space.jpg",
+    "url": "/assets/game/c/ducklife6space.html"
+  },
+  {
+    "name": "Duck Life 7: Battle",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ducklife7battle.png",
+    "url": "/assets/game/c/ducklife7battle.html"
+  },
+  {
+    "name": "Eggy Car",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/eggycar.jpg",
+    "url": "/assets/game/c/eggycar.html"
+  },
+  {
+    "name": "Buster Jam",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/busterjam.png",
+    "url": "/assets/game/c/busterjam.html"
+  },
+  {
+    "name": "Shark Game",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/sharkgame.jpg",
+    "url": "/assets/game/c/sharkgame.html"
+  },
+  {
+    "name": "Grand Theft Auto: Vice City",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gtavicecity.png",
+    "url": "/assets/game/c/gtavicecity.html"
+  },
+  {
+    "name": "Gorilla Tag",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gorillatag.jpg",
+    "url": "/assets/game/c/gorillatag.html"
+  },
+  {
+    "name": "Geometry Dash World",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/geometrydashworld.webp",
+    "url": "/assets/game/c/geometrydashworld.html"
+  },
+  {
+    "name": "Geometry Dash Subzero",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/geometrydashsubzero.png",
+    "url": "/assets/game/c/geometrydashsubzero.html"
+  },
+  {
+    "name": "Gimme The Airpod",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/gimmetheairpod.png",
+    "url": "/assets/game/c/gimmetheairpod.html"
+  },
+  {
+    "name": "Half Life: Opposing Force",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/halflifeopposingforce.png",
+    "url": "/assets/game/c/halflifeopposingforce.html"
+  },
+  {
+    "name": "Touhou 1 Reiiden",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhou1.png",
+    "url": "/assets/game/c/touhou1.html"
+  },
+  {
+    "name": "Touhou 2 Fuumaroku",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhou2.png",
+    "url": "/assets/game/c/touhou2.html"
+  },
+  {
+    "name": "Touhou 3 Yumejikuu",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhou3.png",
+    "url": "/assets/game/c/touhou3.html"
+  },
+  {
+    "name": "Touhou 4 Gensokyou",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhou4.png",
+    "url": "/assets/game/c/touhou4.html"
+  },
+  {
+    "name": "Touhou 5 Kaikidan",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/touhou5.png",
+    "url": "/assets/game/c/touhou5.html"
+  },
+  {
+    "name": "Bullet Force",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bulletforce.png",
+    "url": "/assets/game/c/bulletforce.html"
+  },
+  {
+    "name": "Pixel Shooter",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pixelshooter.png",
+    "url": "/assets/game/c/pixelshooter.html"
+  },
+  {
+    "name": "Little Alchemy 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/littlealchemy2.png",
+    "url": "/assets/game/c/littlealchemy2.html"
+  },
+  {
+    "name": "Puppet Master",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/puppetmaster.jpg",
+    "url": "/assets/game/c/puppetmaster.html"
+  },
+  {
+    "name": "Jojo's Bizarre Adventure",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/jjba.jpg",
+    "url": "/assets/game/c/jjba.html"
+  },
+  {
+    "name": "Bank Robbery",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bankrobbery1.png",
+    "url": "/assets/game/c/bankrobbery.html"
+  },
+  {
+    "name": "Bank Robbery 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bankrobbery3.png",
+    "url": "/assets/game/c/bankrobbery3.html"
+  },
+  {
+    "name": "Stickman Destruction",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stickmandestruction.png",
+    "url": "/assets/game/c/stickmandestruction.html"
+  },
+  {
+    "name": "Real Flight Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/realflightsimulator.png",
+    "url": "/assets/game/c/realflightsimulator.html"
+  },
+  {
+    "name": "Iron Lung",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ironlung.png",
+    "url": "/assets/game/c/ironlung.html"
+  },
+  {
+    "name": "Needy Streamer Overload",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/needystreameroverload.png",
+    "url": "/assets/game/c/needystreameroverload.html"
+  },
+  {
+    "name": "Survivor.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/survivorio.png",
+    "url": "/assets/game/c/survivorio.html"
+  },
+  {
+    "name": "Five Nights at Epsteins",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fivenightsatepsteins.png",
+    "url": "/assets/game/c/fivenightsatepsteins.html"
+  },
+  {
+    "name": "Age of Empires",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ageofempires.png",
+    "url": "/assets/game/c/ageofempires.html"
+  },
+  {
+    "name": "Taiko No Tatsujin",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/taikonotatsujin.png",
+    "url": "/assets/game/c/taikonotatsujin.html"
+  },
+  {
+    "name": "The Binding of Isaac: Rebirth",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thebindingofisaacrebirth1.webp",
+    "url": "/assets/game/c/thebindingofisaacrebirth.html"
+  },
+  {
+    "name": "Little Big Planet",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/littlebigplanet.png",
+    "url": "/assets/game/c/littlebigplanet.html"
+  },
+  {
+    "name": "Danganronpa 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/danganronpa.jpg",
+    "url": "/assets/game/c/danganronpa1.html"
+  },
+  {
+    "name": "Untitled Goose Game",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/untitledgoosegame.webp",
+    "url": "/assets/game/c/untitledgoosegame.html"
+  },
+  {
+    "name": "Counter Strike 0.8",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/counterstrike08.png",
+    "url": "/assets/game/c/counterstrike08.html"
+  },
+  {
+    "name": "Clover Pit",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cloverpit.png",
+    "url": "/assets/game/c/cloverpit.html"
+  },
+  {
+    "name": "Peaks of Yore",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/peaksofyore.png",
+    "url": "/assets/game/c/peaksofyore.html"
+  },
+  {
+    "name": "Max Payne",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/maxpayne.jpg",
+    "url": "/assets/game/c/maxpayne.html"
+  },
+  {
+    "name": "A Game About Feeding A Black Hole",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/agameaboutfeedingablackhole.png",
+    "url": "/assets/game/c/agameaboutfeedingablackhole.html"
+  },
+  {
+    "name": "Look Outside",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/lookoutside.png",
+    "url": "/assets/game/c/lookoutside.html"
+  },
+  {
+    "name": "Midnight Shift",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/midnightshift.png",
+    "url": "/assets/game/c/midnightshift.html"
+  },
+  {
+    "name": "Meatboy",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/meatboy.png",
+    "url": "/assets/game/c/meatboygame.html"
+  },
+  {
+    "name": "Brotato",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/brotato.png",
+    "url": "/assets/game/c/brotatogame.html"
+  },
+  {
+    "name": "Fallout 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fallout2.jpg",
+    "url": "/assets/game/c/fallout2.html"
+  },
+  {
+    "name": "Power Hover",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/powerhover.png",
+    "url": "/assets/game/c/powerhover.html"
+  },
+  {
+    "name": "Dumb Ways To Die",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/dumbwaystodie.png",
+    "url": "/assets/game/c/dumbwaystodie.html"
+  },
+  {
+    "name": "Bart Blast",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bartblast.png",
+    "url": "/assets/game/c/bartblast.html"
+  },
+  {
+    "name": "Grand Theft Auto IV",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/grandtheftautoiv.jpg",
+    "url": "/assets/game/c/grandtheftautoiv.html"
+  },
+  {
+    "name": "Minecraft Pocket Edition",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/minecraftpocketedition.png",
+    "url": "/assets/game/c/minecraftpocketedition.html"
+  },
+  {
+    "name": "Super Monkey Ball 1 & 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermonkeyball12.png",
+    "url": "/assets/game/c/supermonkeyball12.html"
+  },
+  {
+    "name": "Grand Theft Auto III",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/grandtheftautoiii.png",
+    "url": "/assets/game/c/grandtheftautoiii.html"
+  },
+  {
+    "name": "Grand Theft Auto San Andreas",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/grandtheftautosanandreas.jpg",
+    "url": "/assets/game/c/grandtheftautosanandreas.html"
+  },
+  {
+    "name": "The Binding of Isaac",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thebindingofisaacrebirth.webp",
+    "url": "/assets/game/c/thebindingofisaac.html"
+  },
+  {
+    "name": "FISH",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fish.png",
+    "url": "/assets/game/c/fishgame.html"
+  },
+  {
+    "name": "Hollow Knight: Silksong",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/hollowknightsilksong.jpg",
+    "url": "/assets/game/c/hollowknightsilksong.html"
+  },
+  {
+    "name": "Class of 09 The Flipside",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/classof09theflipside.jpg",
+    "url": "/assets/game/c/classof09theflipside.html"
+  },
+  {
+    "name": "Class of 09 The Re-Up",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/classof09thereup.webp",
+    "url": "/assets/game/c/classof09thereup.html"
+  },
+  {
+    "name": "BFDIA 5B",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bfdia5b.png",
+    "url": "/assets/game/c/bfdia5b.html"
+  },
+  {
+    "name": "BFDIA 5B: 5*30",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bfdia5b530.png",
+    "url": "/assets/game/c/bfdia5b530.html"
+  },
+  {
+    "name": "Godzilla Daikaiju Battle Royale",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/godzilladaikaijubattleroyale.png",
+    "url": "/assets/game/c/godzilladaikaijubattleroyale.html"
+  },
+  {
+    "name": "Rio Rex",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/riorex.png",
+    "url": "/assets/game/c/riorex.html"
+  },
+  {
+    "name": "Arthur's Nightmare",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/arthursnightmare.png",
+    "url": "/assets/game/c/arthursnightmare.html"
+  },
+  {
+    "name": "Super Smash Flash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supersmashflash.png",
+    "url": "/assets/game/c/supersmashflash.html"
+  },
+  {
+    "name": "Mindwave",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mindwave.png",
+    "url": "/assets/game/c/mindwavegame.html"
+  },
+  {
+    "name": "Milk Inside a Bag of Milk Inside a Bag of Milk",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/milkinsideabagofmilk.png",
+    "url": "/assets/game/c/milkinsideabagofmilk.html"
+  },
+  {
+    "name": "Milk Outside a Bag of Milk Outside a Bag of Milk",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/milkoutsideabagofmilk.png",
+    "url": "/assets/game/c/milkoutsideabagofmilk.html"
+  },
+  {
+    "name": "Your Only Move Is HUSTLE",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/youronlymoveishustle.png",
+    "url": "/assets/game/c/youronlymoveishustle.html"
+  },
+  {
+    "name": "A Difficult Game About Climbing",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/adifficultgameaboutclimbing.png",
+    "url": "/assets/game/c/adifficultgameaboutclimbing.html"
+  },
+  {
+    "name": "Angry Birds Online",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/angrybirdsonline.png",
+    "url": "/assets/game/c/angrybirdsonline.html"
+  },
+  {
+    "name": "Angry Birds Epic",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/angrybirdsepic.png",
+    "url": "/assets/game/c/angrybirdsepic.html"
+  },
+  {
+    "name": "Academytale",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/academytale.png",
+    "url": "/assets/game/c/academytalegame.html"
+  },
+  {
+    "name": "1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/1game.png",
+    "url": "/assets/game/c/1game.html"
+  },
+  {
+    "name": "Antonblast",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/antonblast.png",
+    "url": "/assets/game/c/antonblastgame.html"
+  },
+  {
+    "name": "Banjo Kazooie",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/banjokazooie.webp",
+    "url": "/assets/game/c/banjokazooie.html"
+  },
+  {
+    "name": "Paper Mario",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/papermario.jpg",
+    "url": "/assets/game/c/papermario.html"
+  },
+  {
+    "name": "Animal Crossing Wild World",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/animalcrossingwildworld.png",
+    "url": "/assets/game/c/animalcrossingwildworld.html"
+  },
+  {
+    "name": "Call of Duty Black Ops",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/callofdutyblackops.jpg",
+    "url": "/assets/game/c/callofdutyblackops.html"
+  },
+  {
+    "name": "ZDoom",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/zdoom.png",
+    "url": "/assets/game/c/zdoomgame.html"
+  },
+  {
+    "name": "Super Mario Galaxy DS",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermariogalaxyds.jpg",
+    "url": "/assets/game/c/supermariogalaxyds.html"
+  },
+  {
+    "name": "Lego Batman The Video Game",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/legobatmanthevideogame.webp",
+    "url": "/assets/game/c/legobatmanthevideogame.html"
+  },
+  {
+    "name": "Lego Batman 2 DC Superheroes",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/legobatman2dcsuperheroes.jpg",
+    "url": "/assets/game/c/legobatman2dcsuperheroes.html"
+  },
+  {
+    "name": "The Legend of Zelda: Phantom Hourglass",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thelegendofzeldaphantomhourglass.jpg",
+    "url": "/assets/game/c/thelegendofzeldaphantomhourglass.html"
+  },
+  {
+    "name": "Crash Bandicoot",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crashbandicoot.jpg",
+    "url": "/assets/game/c/crashbandicoot.html"
+  },
+  {
+    "name": "Crash Bandicoot 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/crashbandicoot3.png",
+    "url": "/assets/game/c/crashbandicoot3.html"
+  },
+  {
+    "name": "Serial Experiments Lain",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/serialexperimentslain.png",
+    "url": "/assets/game/c/serialexperimentslain.html"
+  },
+  {
+    "name": "Cheese Rolling",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/cheeserolling.png",
+    "url": "/assets/game/c/cheeserolling.html"
+  },
+  {
+    "name": "Overburden",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/overburden.png",
+    "url": "/assets/game/c/overburdengame.html"
+  },
+  {
+    "name": "Endoparasitic 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/endoparasitic2.png",
+    "url": "/assets/game/c/endoparasitic2.html"
+  },
+  {
+    "name": "Fused 240",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/fused240.png",
+    "url": "/assets/game/c/fused240.html"
+  },
+  {
+    "name": "Kirby Soft & Wet",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/kirbysoftandwet.png",
+    "url": "/assets/game/c/kirbysoftandwet.html"
+  },
+  {
+    "name": "Flying Gorilla 3D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/flyinggorilla3d.png",
+    "url": "/assets/game/c/flyinggorilla3d.html"
+  },
+  {
+    "name": "Dice a Million",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/diceamillion.png",
+    "url": "/assets/game/c/diceamillion.html"
+  },
+  {
+    "name": "Tung Sahur Horror",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/tungsahurhorror.jpg",
+    "url": "/assets/game/c/tungsahurhorror.html"
+  },
+  {
+    "name": "Pokemon Stadium 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pokemonstadium2.jpg",
+    "url": "/assets/game/c/pokemonstadium2.html"
+  },
+  {
+    "name": "Bomberman World",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bombermanworld.jpg",
+    "url": "/assets/game/c/bombermanworld.html"
+  },
+  {
+    "name": "Brawl Stars",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/brawlstars.png",
+    "url": "/assets/game/c/brawlstars.html"
+  },
+  {
+    "name": "Final Fantasy VII",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/finalfantasyvii.png",
+    "url": "/assets/game/c/finalfantasyvii.html"
+  },
+  {
+    "name": "Witch's Heart",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/witchsheart.png",
+    "url": "/assets/game/c/witchsheart.html"
+  },
+  {
+    "name": "Whack The Thief",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/whackthethief.jpg",
+    "url": "/assets/game/c/whackthethief.html"
+  },
+  {
+    "name": "Goblin Goopmaxxing",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/goblingoopmaxxing.png",
+    "url": "/assets/game/c/goblingoopmaxxing.html"
+  },
+  {
+    "name": "Rogue Sergeant The Final Operation",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/roguesergeantthefinaloperation.png",
+    "url": "/assets/game/c/roguesergeantthefinaloperation.html"
+  },
+  {
+    "name": "Orange Roulette",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/orangeroulette.png",
+    "url": "/assets/game/c/orangeroulette.html"
+  },
+  {
+    "name": "Please Dont Touch Anything",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/pleasedonttouchanything.png",
+    "url": "/assets/game/c/pleasedonttouchanything.html"
+  },
+  {
+    "name": "Royal Towers: Medieval TD",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/royaltowermedievaltd.png",
+    "url": "/assets/game/c/royaltowermedievaltd.html"
+  },
+  {
+    "name": "I Have No Mouth And I Must Scream",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/ihavenomouthandimustscream.png",
+    "url": "/assets/game/c/ihavenomouthandimustscream.html"
+  },
+  {
+    "name": "Outhold",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/outhold.png",
+    "url": "/assets/game/c/outholdgame.html"
+  },
+  {
+    "name": "Scratch Inc",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/scratchinc.png",
+    "url": "/assets/game/c/scratchinc.html"
+  },
+  {
+    "name": "Thing-Thing Arena 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/thingthingarena3.png",
+    "url": "/assets/game/c/thingthingarena3.html"
+  },
+  {
+    "name": "Um Jammer Lammy",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/umjammerlammy.png",
+    "url": "/assets/game/c/umjammerlammy.html"
+  },
+  {
+    "name": "Bart Bash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/bartbash.png",
+    "url": "/assets/game/c/bartbash.html"
+  },
+  {
+    "name": "Command & Conquer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/commandconquer.png",
+    "url": "/assets/game/c/commandconquer.html"
+  },
+  {
+    "name": "Mountain Bike Racer",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/mountainbikeracer.png",
+    "url": "/assets/game/c/mountainbikeracer.html"
+  },
+  {
+    "name": "Beat Block",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/beatblock.png",
+    "url": "/assets/game/c/beatblock.html"
+  },
+  {
+    "name": "Super Monkey Ball Jr.",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/supermonkeyballjr.png",
+    "url": "/assets/game/c/supermonkeyballjr.html"
+  },
+  {
+    "name": "Stardew Valley",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/stardewvalley.png",
+    "url": "/assets/game/c/stardewvalley.html"
+  },
+  {
+    "name": "Helltaker",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/helltaker.png",
+    "url": "/assets/game/c/helltakergame.html"
+  },
+  {
+    "name": "Geometry Dash",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/geometrydash.png",
+    "url": "/assets/game/c/geometrydash.html"
+  },
+  {
+    "name": "Escape Road 3",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/escaperoad3.png",
+    "url": "/assets/game/c/escaperoad3.html"
+  },
+  {
+    "name": "Whos Your Daddy?",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/whosyourdaddy.png",
+    "url": "/assets/game/c/whosyourdaddy.html"
+  },
+  {
+    "name": "Plague Inc",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/plagueinc.png",
+    "url": "/assets/game/c/plagueinc.html"
+  },
+  {
+    "name": "Vampire Survivors",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/vampiresurvivors.png",
+    "url": "/assets/game/c/vampiresurvivors.html"
+  },
+  {
+    "name": "Spaceflight Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/spaceflightsimulator.png",
+    "url": "/assets/game/c/spaceflightsimulator.html"
+  },
+  {
+    "name": "Slendytubbies 1",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slendytubbies1.png",
+    "url": "/assets/game/c/slendytubbies1.html"
+  },
+  {
+    "name": "Slendytubbies 2",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slendytubbies2.png",
+    "url": "/assets/game/c/slendytubbies2.html"
+  },
+  {
+    "name": "Slendytubbies 2D",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/slendytubbies2d.png",
+    "url": "/assets/game/c/slendytubbies2d.html"
+  },
+  {
+    "name": "20 Minutes Till Dawn",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/20minutestilldawn.png",
+    "url": "/assets/game/c/20minutestilldawn.html"
+  },
+  {
+    "name": "Totally Accurate Battle Simulator",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/totallyaccuratebattlesimulator.png",
+    "url": "/assets/game/c/totallyaccuratebattlesimulator.html"
+  },
+  {
+    "name": "MiSide",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/miside.png",
+    "url": "/assets/game/c/misidegame.html"
+  },
+  {
+    "name": "YoHoHo.io",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/yohohoio.png",
+    "url": "/assets/game/c/yohohoio.html"
+  },
+  {
+    "name": "Animal Crossing",
+    "img": "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gameimages/animalcrossing.png",
+    "url": "/assets/game/c/animalcrossing.html"
+  }
+]
