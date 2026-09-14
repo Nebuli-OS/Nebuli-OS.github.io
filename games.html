@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NebuliOS | Games</title>
+<script src="https://cdn.jsdelivr.net/gh/luminsdk/script@latest/lumin.min.js"></script>
 <style>
 :root {
     --bg: #0e0114;
@@ -79,7 +80,7 @@ body {
 
 .search-area {
     width: 100%;
-    max-width: 600px;
+    max-width: 772px;
     margin: 0 auto 30px;
     display: flex;
     gap: 12px;
@@ -179,6 +180,34 @@ body {
     box-shadow: 0 0 20px rgba(255,255,255,0.05);
 }
 
+.suggest-btn {
+    width: 160px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 14px 20px;
+    color: var(--text);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.suggest-btn:hover {
+    border-color: var(--accent);
+}
+
+.suggest-btn img {
+    width: 16px;
+    height: 16px;
+}
+
 .games-wrapper {
     width: 100%;
     padding-bottom: 60px;
@@ -216,6 +245,7 @@ h2 {
     border: 1px solid var(--border);
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    cursor: pointer;
 }
 
 .game:hover {
@@ -236,11 +266,21 @@ h2 {
     transition: opacity 0.25s;
 }
 
+.game img.fallback-icon {
+    object-fit: contain;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: invert(72%) sepia(51%) saturate(543%) hue-rotate(6deg) brightness(92%) contrast(88%);
+}
+
 .game:hover img {
     opacity: 0.95;
 }
 
-.game a {
+.game a, .game button {
     position: absolute;
     top: 0;
     left: 0;
@@ -260,10 +300,214 @@ h2 {
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
+    border: none;
+    cursor: pointer;
 }
 
-.game a:hover {
+.game a:hover, .game button:hover {
     background: rgba(0,0,0,0.45);
+}
+
+#zoneViewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(14, 1, 20, 0.95);
+    backdrop-filter: blur(10px);
+    display: none;
+    flex-direction: column;
+    z-index: 2000;
+}
+
+.viewer-bar {
+    background: var(--input-bg);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.close-btn {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    border-color: var(--accent);
+}
+
+#zoneFrame {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #fff;
+}
+
+.empty-state {
+    padding: 30px;
+    text-align: center;
+    color: var(--sub-text);
+    font-size: 1rem;
+    width: 100%;
+}
+
+.cm-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+.cm-modal {
+    background: var(--modal-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--text);
+}
+
+.cm-modal-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    position: relative;
+}
+
+.cm-modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.cm-modal-titlewrap {
+    flex: 1;
+}
+
+.cm-modal-title {
+    margin: 0 0 4px 0;
+    font-size: 1.25rem;
+    color: var(--text);
+}
+
+.cm-modal-cats {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--sub-text);
+}
+
+.cm-modal-close {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: transparent;
+    border: none;
+    color: var(--sub-text);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.cm-modal-desc {
+    font-size: 0.9rem;
+    color: var(--sub-text);
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.4;
+}
+
+.cm-play-btn, .cm-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.cm-play-btn:hover, .cm-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.cm-pro-badge {
+    background: var(--accent);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.cm-maint-badge {
+    background: #e74c3c;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+.cm-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cm-form-group label {
+    font-size: 0.85rem;
+    color: var(--sub-text);
+}
+
+.cm-form-group input {
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--text);
+    outline: none;
+}
+
+.cm-header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cm-user-stats {
+    font-size: 0.9rem;
+    color: var(--sub-text);
 }
 </style>
 </head>
@@ -275,28 +519,958 @@ h2 {
     <div class="search-area">
         <div class="dropdown" id="dropdown">
             <div class="dropdown-btn" id="dropdownBtn">
-                <span id="dropdownLabel">UGS</span>
+                <span id="dropdownLabel">Lumin</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </div>
             <div class="dropdown-menu">
+                <div class="dropdown-item">GN-Math</div>
+                <div class="dropdown-item">Lumin</div>
                 <div class="dropdown-item">UGS</div>
-                <div class="dropdown-item">nbli-ports</div>
-                <div class="dropdown-item">gn-ports</div>
+                <div class="dropdown-item">Cloudmoon</div>
+                <div class="dropdown-item">Truffled</div>
+                <div class="dropdown-item">Wasm.rip</div>
+                <div class="dropdown-item">CKV</div>
+                <div class="dropdown-item">NBLI-Ports</div>
             </div>
         </div>
         <input id="search" class="search-input" placeholder="Search for a game...">
+        <a href="https://forms.gle/VtryJUW3e5zqvru27" class="suggest-btn">
+            <img src="/assets/img/file.svg" alt="Suggest">
+            <span>Suggest</span>
+        </a>
     </div>
 
     <div class="games-wrapper" id="games-container"></div>
+</div>
+
+<div id="zoneViewer">
+    <div class="viewer-bar">
+        <span id="zoneName" style="font-weight: bold; color: var(--accent);"></span>
+        <button class="close-btn" onclick="closeZone()">Close Game</button>
+    </div>
+    <iframe id="zoneFrame"></iframe>
+</div>
+
+<div class="cm-modal-overlay" id="cm-game-modal">
+    <div class="cm-modal" id="cm-modal-content"></div>
+</div>
+
+<div class="cm-modal-overlay" id="cm-login-modal">
+    <div class="cm-modal">
+        <h3 style="margin:0 0 10px 0;">Cloudmoon Sign In</h3>
+        <div class="cm-form-group">
+            <label>Email</label>
+            <input type="email" id="cm-login-email" placeholder="Email address">
+        </div>
+        <div class="cm-form-group">
+            <label>Password</label>
+            <input type="password" id="cm-login-password" placeholder="Password">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+            <button class="close-btn" onclick="CM.closeLoginModal()">Cancel</button>
+            <button class="cm-btn" id="cm-login-submit" onclick="CM.handleLogin()">Sign In</button>
+        </div>
+    </div>
+</div>
+
+<div class="cm-modal-overlay" id="cm-queue-modal">
+    <div class="cm-modal" style="text-align:center;">
+        <h3 style="margin:0 0 10px 0;">In Queue</h3>
+        <p>Position: <span id="cm-queue-pos">--</span></p>
+        <p>Estimated Time: <span id="cm-queue-time">--</span></p>
+        <div style="display:flex; justify-content:center; margin-top:15px;">
+            <button class="close-btn" onclick="CM.cancelQueue()">Cancel Queue</button>
+        </div>
+    </div>
 </div>
 
 <script>
 const dropdown = document.getElementById("dropdown")
 const dropdownBtn = document.getElementById("dropdownBtn")
 const dropdownLabel = document.getElementById("dropdownLabel")
+const zoneViewer = document.getElementById("zoneViewer")
+let zoneFrame = document.getElementById("zoneFrame")
 
-let selectedCategory = "UGS"
-let gamesData = null
+let selectedCategory = "Lumin"
+let zones = []
+let luminInitialized = false
+let cloudmoonGamesList = []
+let activeGame = null
+
+const UGS_JSON_URL = "/assets/game/ugs.json";
+const UGS_FALLBACK_IMG = "/assets/img/game.svg";
+let ugsGamesList = [];
+
+const NBLI_JSON_URL = "/assets/game/n.json";
+let nbliGamesList = [];
+
+const WASM_JSON_URL = "/assets/game/w.json";
+let wasmGamesList = [];
+
+const CKV_JSON_URL = "/assets/game/c.json";
+let ckvGamesList = [];
+
+const TRUFFLED_JSON_URL = "/assets/game/truffled.json";
+const TRUFFLED_BASE_URL = "/assets/game/t/";
+const TRUFFLED_THUMB_BASE = "https://cdn.jsdelivr.net/gh/aukak/truffled/public/";
+
+let truffledGamesList = [];
+
+function handleImgError(img) {
+    img.onerror = null;
+    img.src = UGS_FALLBACK_IMG;
+    img.classList.add('fallback-icon');
+}
+
+function truffledSlugify(text) {
+    return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-');
+}
+
+async function fetchCKVData() {
+    if (ckvGamesList.length > 0) return ckvGamesList;
+    try {
+        const response = await fetch(CKV_JSON_URL + "?t=" + Date.now());
+        const games = await response.json();
+        if (Array.isArray(games)) {
+            ckvGamesList = games.map(g => {
+                const img = (g.img && g.img.trim() !== '') ? g.img.trim() : UGS_FALLBACK_IMG;
+                return {
+                    type: 'ckv',
+                    name: g.name || 'Game',
+                    data: { url: g.url, thumbnail: img, icon: img }
+                };
+            });
+        }
+    } catch (e) {
+        console.error("[CKV Load Error]: " + e.message);
+        ckvGamesList = [];
+    }
+    return ckvGamesList;
+}
+
+function openCKVGame(item) {
+    addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
+    document.getElementById('zoneName').textContent = item.name;
+
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe");
+        zoneFrame.id = "zoneFrame";
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad";
+        zoneViewer.appendChild(zoneFrame);
+    }
+    zoneViewer.style.display = "flex";
+    zoneFrame.removeAttribute('srcdoc');
+    zoneFrame.src = item.data.url || "about:blank";
+}
+
+async function renderCKVSection(query = "") {
+    const container = document.getElementById("games-container");
+    const games = await fetchCKVData();
+    const filtered = query ? games.filter(game => game.name.toLowerCase().includes(query)) : games;
+
+    const title = document.createElement("h2");
+    title.textContent = `CKV (${filtered.length})`;
+
+    const section = document.createElement("div");
+    section.className = "games-section";
+
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No games found.";
+        section.appendChild(empty);
+    } else {
+        filtered.forEach(game => {
+            const div = createGameCard(game);
+            section.appendChild(div);
+        });
+    }
+
+    container.appendChild(title);
+    container.appendChild(section);
+    container.appendChild(createDivider());
+    applySearchFilter();
+}
+
+async function fetchWasmData() {
+    if (wasmGamesList.length > 0) return wasmGamesList;
+    try {
+        const response = await fetch(WASM_JSON_URL + "?t=" + Date.now());
+        const games = await response.json();
+        if (Array.isArray(games)) {
+            wasmGamesList = games.map(g => {
+                const img = (g.image && g.image.trim() !== '') ? g.image.trim() : UGS_FALLBACK_IMG;
+                return {
+                    type: 'wasm',
+                    name: g.title || 'Game',
+                    data: { url: g.href, thumbnail: img, icon: img }
+                };
+            });
+        }
+    } catch (e) {
+        console.error("[Wasm Load Error]: " + e.message);
+        wasmGamesList = [];
+    }
+    return wasmGamesList;
+}
+
+function openWasmGame(item) {
+    addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
+    document.getElementById('zoneName').textContent = item.name;
+
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe");
+        zoneFrame.id = "zoneFrame";
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad";
+        zoneViewer.appendChild(zoneFrame);
+    }
+    zoneViewer.style.display = "flex";
+    zoneFrame.removeAttribute('srcdoc');
+    zoneFrame.src = item.data.url || "about:blank";
+}
+
+async function renderWasmSection(query = "") {
+    const container = document.getElementById("games-container");
+    const games = await fetchWasmData();
+    const filtered = query ? games.filter(game => game.name.toLowerCase().includes(query)) : games;
+
+    const title = document.createElement("h2");
+    title.textContent = `Wasm.rip (${filtered.length})`;
+
+    const section = document.createElement("div");
+    section.className = "games-section";
+
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No games found.";
+        section.appendChild(empty);
+    } else {
+        filtered.forEach(game => {
+            const div = createGameCard(game);
+            section.appendChild(div);
+        });
+    }
+
+    container.appendChild(title);
+    container.appendChild(section);
+    container.appendChild(createDivider());
+    applySearchFilter();
+}
+
+async function fetchNBLIData() {
+    if (nbliGamesList.length > 0) return nbliGamesList;
+    try {
+        const response = await fetch(NBLI_JSON_URL + "?t=" + Date.now());
+        const games = await response.json();
+        if (Array.isArray(games)) {
+            nbliGamesList = games.map(g => {
+                const img = (g.image && g.image.trim() !== '') ? g.image.trim() : UGS_FALLBACK_IMG;
+                return {
+                    type: 'nbli',
+                    name: g.title || 'Game',
+                    data: { url: g.href, thumbnail: img, icon: img }
+                };
+            });
+        }
+    } catch (e) {
+        console.error("[NBLI Load Error]: " + e.message);
+        nbliGamesList = [];
+    }
+    return nbliGamesList;
+}
+
+function openNBLIGame(item) {
+    addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
+    document.getElementById('zoneName').textContent = item.name;
+
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe");
+        zoneFrame.id = "zoneFrame";
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad";
+        zoneViewer.appendChild(zoneFrame);
+    }
+    zoneViewer.style.display = "flex";
+    zoneFrame.removeAttribute('srcdoc');
+    zoneFrame.src = item.data.url || "about:blank";
+}
+
+async function renderNBLISection(query = "") {
+    const container = document.getElementById("games-container");
+    const games = await fetchNBLIData();
+    const filtered = query ? games.filter(game => game.name.toLowerCase().includes(query)) : games;
+
+    const title = document.createElement("h2");
+    title.textContent = `NBLI-Ports (${filtered.length})`;
+
+    const section = document.createElement("div");
+    section.className = "games-section";
+
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No games found.";
+        section.appendChild(empty);
+    } else {
+        filtered.forEach(game => {
+            const div = createGameCard(game);
+            section.appendChild(div);
+        });
+    }
+
+    container.appendChild(title);
+    container.appendChild(section);
+    container.appendChild(createDivider());
+    applySearchFilter();
+}
+
+async function openTruffledGame(item) {
+    const url = item.data.url;
+    addToRecent(item.name, item.data.thumbnail || "", "#");
+    document.getElementById('zoneName').textContent = item.name;
+
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe");
+        zoneFrame.id = "zoneFrame";
+        zoneViewer.appendChild(zoneFrame);
+    }
+    zoneViewer.style.display = "flex";
+    zoneFrame.removeAttribute('srcdoc');
+    zoneFrame.removeAttribute('src');
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        let htmlText = await response.text();
+        const baseUrl = url.substring(0, url.lastIndexOf('/') + 1);
+        const baseTag = `<base href="${baseUrl}">`;
+
+        if (/<head[^>]*>/i.test(htmlText)) {
+            htmlText = htmlText.replace(/<head([^>]*)>/i, `<head$1>${baseTag}`);
+        } else {
+            htmlText = baseTag + htmlText;
+        }
+
+        zoneFrame.srcdoc = htmlText;
+    } catch (err) {
+        console.error("[Truffled Loader Error]: " + err.message);
+        zoneFrame.srcdoc = `<body style="background:#0e0114;color:#ff5555;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">Failed to load game content.</body>`;
+    }
+}
+
+async function fetchTruffledData() {
+    if (truffledGamesList.length > 0) return truffledGamesList;
+    try {
+        const truffledResponse = await fetch(TRUFFLED_JSON_URL + "?t=" + Date.now());
+        const truffledData = await truffledResponse.json();
+
+        if (truffledData && Array.isArray(truffledData.games)) {
+            truffledGamesList = [];
+            truffledData.games.forEach(g => {
+                const slug = truffledSlugify(g.name);
+                const basename = (g.url || '').split('/').pop();
+                const newUrl = TRUFFLED_BASE_URL + slug + '/' + basename;
+                const thumb = g.thumbnail ? TRUFFLED_THUMB_BASE + g.thumbnail.replace(/^\/+/, '') : null;
+                
+                truffledGamesList.push({ 
+                    type: 'truffled', 
+                    name: g.name, 
+                    data: { url: newUrl, thumbnail: thumb, frameType: g.frameType, icon: thumb } 
+                });
+            });
+        }
+    } catch (e) {
+        console.error("[Truffled Load Error]: " + e.message);
+        truffledGamesList = [];
+    }
+    return truffledGamesList;
+}
+
+async function renderTruffledSection(query = "") {
+    const container = document.getElementById("games-container");
+    const games = await fetchTruffledData();
+    const filtered = query ? games.filter(game => game.name.toLowerCase().includes(query)) : games;
+
+    const title = document.createElement("h2");
+    title.textContent = `Truffled (${filtered.length})`;
+
+    const section = document.createElement("div");
+    section.className = "games-section";
+
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No games found.";
+        section.appendChild(empty);
+    } else {
+        filtered.forEach(game => {
+            const div = createGameCard(game);
+            section.appendChild(div);
+        });
+    }
+
+    container.appendChild(title);
+    container.appendChild(section);
+    container.appendChild(createDivider());
+    applySearchFilter();
+}
+
+async function fetchUGSData() {
+    if (ugsGamesList.length > 0) return ugsGamesList;
+    try {
+        const response = await fetch(UGS_JSON_URL + "?t=" + Date.now());
+        const games = await response.json();
+        if (Array.isArray(games)) {
+            ugsGamesList = games.map(g => {
+                const img = (g.img && g.img.trim() !== '') ? g.img.trim() : UGS_FALLBACK_IMG;
+                return {
+                    type: 'ugs',
+                    name: g.name || 'Game',
+                    data: { url: g.url, thumbnail: img, icon: img }
+                };
+            });
+        }
+    } catch (e) {
+        console.error("[UGS Load Error]: " + e.message);
+        ugsGamesList = [];
+    }
+    return ugsGamesList;
+}
+
+function openUGSGame(item) {
+    addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
+    document.getElementById('zoneName').textContent = item.name;
+
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe");
+        zoneFrame.id = "zoneFrame";
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad";
+        zoneViewer.appendChild(zoneFrame);
+    }
+    zoneViewer.style.display = "flex";
+    zoneFrame.removeAttribute('srcdoc');
+    zoneFrame.src = item.data.url || "about:blank";
+}
+
+async function renderUGSSection(query = "") {
+    const container = document.getElementById("games-container");
+    const games = await fetchUGSData();
+    const filtered = query ? games.filter(game => game.name.toLowerCase().includes(query)) : games;
+
+    const title = document.createElement("h2");
+    title.textContent = `UGS (${filtered.length})`;
+
+    const section = document.createElement("div");
+    section.className = "games-section";
+
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No games found.";
+        section.appendChild(empty);
+    } else {
+        filtered.forEach(game => {
+            const div = createGameCard(game);
+            section.appendChild(div);
+        });
+    }
+
+    container.appendChild(title);
+    container.appendChild(section);
+    container.appendChild(createDivider());
+    applySearchFilter();
+}
+
+const CM_API_LIST = ["https://api.cloudmoon.cloudbatata.com","https://api.prod.cloudmoonapp.com","https://api.prod.geometry.today"];
+const CM_BACKUP_API_LIST = ["https://hrz5zfjq02.execute-api.us-east-1.amazonaws.com","https://api.prod.viewoncloud.com"];
+const CM_PLAYER_URL = "https://cdn.jsdelivr.net/gh/blockfreeubg/synapse-lite@HEAD/play-260430.html";
+
+function createGameCard(item) {
+    const div = document.createElement("div");
+    div.className = "game";
+    const rawImg = item.data && (item.data.icon || item.data.thumbnail) ? (item.data.icon || item.data.thumbnail) : zoneURL(item.cover);
+    const imgUrl = (rawImg && rawImg.trim() !== '') ? rawImg.trim() : UGS_FALLBACK_IMG;
+    const isFallback = imgUrl === UGS_FALLBACK_IMG;
+    div.onclick = () => {
+        if (item.type === 'cm') {
+            CM.showGameDetails(item.data.id);
+        } else if (item.type === 'truffled') {
+            openTruffledGame(item);
+        } else if (item.type === 'ugs') {
+            openUGSGame(item);
+        } else if (item.type === 'nbli') {
+            openNBLIGame(item);
+        } else if (item.type === 'wasm') {
+            openWasmGame(item);
+        } else if (item.type === 'ckv') {
+            openCKVGame(item);
+        } else {
+            openZone(item);
+        }
+    };
+    div.innerHTML = `
+        <img src="${imgUrl}" alt="${item.name}" loading="lazy" class="${isFallback ? 'fallback-icon' : ''}" onerror="handleImgError(this)">
+        <button type="button">${item.name}</button>
+    `;
+    return div;
+}
+
+function renderCloudmoonLibrary(list) {
+  const container = document.getElementById("cloudmoon-sections-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No games match your search";
+    container.appendChild(empty);
+    return;
+  }
+
+  list.sort((a, b) => a.name.localeCompare(b.name));
+
+  list.forEach(item => {
+    container.appendChild(createGameCard(item));
+  });
+}
+
+function logConsoleError(msg) {
+  console.error(msg);
+}
+
+function clearConsoleErrors() {}
+
+function showPage(page) {
+  if (page === 'player') {
+    zoneViewer.style.display = "flex";
+  }
+}
+
+const CM = {
+  currentApiHost: null,
+  apiHostPromise: null,
+  token: localStorage.getItem("cm_auth_token"),
+  rawGames: [],
+  searchQuery: '',
+  userLevel: 0,
+  timeLeft: '',
+  currentPkg: null,
+  currentItem: null,
+  queueInterval: null,
+  searchTimer: null,
+
+  async probeApi() {
+    if (this.currentApiHost) return this.currentApiHost;
+    if (this.apiHostPromise) return this.apiHostPromise;
+    this.apiHostPromise = (async () => {
+      console.log("[Cloudmoon] Probing primary API hosts:", CM_API_LIST);
+      let host = await this.findAvailableApiFast(CM_API_LIST);
+      if (!host) {
+        console.warn("[Cloudmoon] No primary host responded, trying backups:", CM_BACKUP_API_LIST);
+        host = await this.findAvailableApiFast(CM_BACKUP_API_LIST);
+      }
+      if (host) { console.log("[Cloudmoon] Using API host:", host); this.currentApiHost = host; return host; }
+      console.error("[Cloudmoon] All API hosts (primary + backup) failed to respond.");
+      return null;
+    })();
+    return this.apiHostPromise;
+  },
+
+  async findAvailableApiFast(list) {
+    const controllers = list.map(() => new AbortController());
+    return new Promise(resolve => {
+      let failed = 0, done = false;
+      list.forEach((url, i) => {
+        const t = setTimeout(() => controllers[i].abort(), 3000);
+        fetch(url + "/_ping", { signal: controllers[i].signal })
+          .then(r => {
+            clearTimeout(t);
+            if (r.ok && !done) {
+              done = true;
+              controllers.forEach((c, j) => { if (j !== i) c.abort(); });
+              resolve(url);
+            } else if (!r.ok) {
+              console.error("[Cloudmoon] Ping to " + url + " returned HTTP " + r.status + " " + r.statusText);
+              throw new Error("HTTP " + r.status);
+            }
+          })
+          .catch(err => {
+            clearTimeout(t);
+            if (!done) {
+              const detail = err && err.name === "AbortError" ? "timed out after 3s" : ((err && err.name ? err.name + ": " : "") + (err && err.message ? err.message : err));
+              console.error("[Cloudmoon] Ping to " + url + " failed - " + detail);
+            }
+            if (++failed === list.length && !done) resolve(null);
+          });
+      });
+    });
+  },
+
+  generateUUID() {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+      const r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);
+    });
+  },
+
+  getDeviceId() {
+    let id = localStorage.getItem("cm_device_id");
+    if (!id) { id = this.generateUUID(); localStorage.setItem("cm_device_id", id); }
+    return id;
+  },
+
+  async customFetch(path, opts = {}) {
+    const host = await this.probeApi();
+    if (!host) {
+      console.error("[Cloudmoon] customFetch aborted for " + path + " - no reachable API host.");
+      throw new Error("API unavailable");
+    }
+    const url = new URL(host + (path.startsWith('/') ? path : '/' + path));
+    url.searchParams.set("device_type", "web");
+    url.searchParams.set("query_uuid", this.generateUUID());
+    url.searchParams.set("site", "cm");
+    url.searchParams.set("device_id", this.getDeviceId());
+    const headers = new Headers(opts.headers || {});
+    const tok = localStorage.getItem("cm_auth_token");
+    if (tok) headers.set("X-User-Token", tok);
+    const lang = (localStorage.getItem("cm_lang") || navigator.language.split('-')[0] || 'en');
+    headers.set("X-User-Language", lang);
+    const loc = (navigator.language.split('-')[1] || navigator.language.split('-')[0]).toUpperCase();
+    headers.set("X-User-Locale", loc);
+    if (!headers.has("Content-Type")) headers.set("Content-Type", "application/json");
+    console.log("[Cloudmoon] " + (opts.method || "GET") + " " + url.toString() + (opts.body ? " body=" + opts.body : ""));
+    try {
+      const res = await fetch(url.toString(), { ...opts, headers });
+      const clone = res.clone();
+      let bodyText = null;
+      try {
+        bodyText = await clone.text();
+        const j = JSON.parse(bodyText);
+        if (j && String(j.code) === "40001") {
+          console.warn("[Cloudmoon] 40001 Unauthorized on " + url.toString() + " -> signing out.");
+          this.signOut(false);
+          throw new Error("Unauthorized");
+        }
+        if (!res.ok || String(j.code) !== "0") {
+          console.warn("[Cloudmoon] Response from " + url.toString() + " HTTP " + res.status + " body: " + bodyText);
+        }
+      } catch (parseErr) {
+        if (!res.ok) console.error("[Cloudmoon] Non-JSON error body from " + url.toString() + ": " + bodyText);
+      }
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return JSON.parse(bodyText);
+    } catch (e) {
+      const detail = e && e.name === "TypeError" && /fetch/i.test(e.message || "")
+        ? "network/CORS failure (browser blocked or could not reach the request - check the Network tab for the real reason)"
+        : ((e && e.name ? e.name + ": " : "") + (e && e.message !== undefined ? e.message : e));
+      console.error("[Cloudmoon] " + (opts.method || "GET") + " " + url.toString() + " FAILED - " + detail);
+      this.currentApiHost = null;
+      this.apiHostPromise = null;
+      throw e;
+    }
+  },
+
+  async init() {
+    this.renderAuthArea();
+    try {
+      const host = await this.probeApi();
+      if (!host) {
+        const target = document.getElementById('cloudmoon-sections-container');
+        if (target) target.innerHTML = '<div class="empty-state">Unable to connect to Cloudmoon server.</div>';
+        return;
+      }
+      if (this.token) { await this.loadUserLevel(); }
+      await this.loadGames();
+      this.applyFilter();
+    } catch (e) {
+      logConsoleError("Cloudmoon Load Error: " + e.message);
+    }
+  },
+
+  async loadUserLevel() {
+    try {
+      const r = await this.customFetch("/phone/list");
+      if (r.code === 0 && r.data && r.data.list && r.data.list.length > 0) {
+        this.userLevel = Math.max(...r.data.list.map(x => x.level || 0));
+        this.timeLeft = r.data.list[0].time_left || "0h 0m";
+        this.renderAuthArea();
+      }
+    } catch (e) {}
+  },
+
+  async loadGames() {
+    try {
+      const r = await this.customFetch(this.token ? "/game/list" : "/game/guest_list");
+      if (r.code === 0 && r.data && r.data.list) {
+        this.rawGames = r.data.list.map(g => ({
+          id: g.package_name, title: g.title, icon: g.icon_url,
+          status: g.status, categories: g.categories || [],
+          isHigh: g.is_high || false
+        }));
+        cloudmoonGamesList = this.rawGames.map(g => ({ type: 'cm', name: g.title, data: g }));
+      }
+    } catch (e) {
+      const target = document.getElementById('cloudmoon-sections-container');
+      if (target) target.innerHTML = '<div class="empty-state">Failed to load Cloudmoon games.</div>';
+    }
+  },
+
+  handleSearch(val) {
+    this.searchQuery = val.toLowerCase();
+    if (this.searchTimer) clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => this.applyFilter(), 120);
+  },
+
+  applyFilter() {
+    const filtered = this.rawGames.filter(g => {
+      if (g.status !== 1) return false;
+      if (g.isHigh && this.userLevel !== 3) return false;
+      return g.title.toLowerCase().includes(this.searchQuery);
+    });
+    renderCloudmoonLibrary(filtered.map(g => ({ type: 'cm', name: g.title, data: g })));
+  },
+
+  renderAuthArea() {
+    const el = document.getElementById('cmAuthArea');
+    if (!el) return;
+    if (this.token) {
+      el.innerHTML = `<button class="cm-btn cm-btn-signout" onclick="CM.signOut()">Sign Out</button>`;
+    } else {
+      el.innerHTML = `<button class="cm-btn cm-btn-signin" onclick="CM.showLogin()">Sign In</button>`;
+    }
+  },
+
+  showLogin() {
+    document.getElementById('cm-login-modal').style.display = 'flex';
+  },
+
+  closeLoginModal() {
+    document.getElementById('cm-login-modal').style.display = 'none';
+  },
+
+  async handleLogin() {
+    const email = document.getElementById('cm-login-email').value;
+    const pass = document.getElementById('cm-login-password').value;
+    const btn = document.getElementById('cm-login-submit');
+    if (!email || !pass) { alert("Enter credentials"); return; }
+    try {
+      btn.disabled = true;
+      btn.textContent = "Signing In...";
+      const r = await this.customFetch("/login/pwd", { method: "POST", body: JSON.stringify({ email, password: pass }) });
+      if (r.code === 0 && r.data && r.data.token) {
+        localStorage.setItem("cm_auth_token", r.data.token);
+        this.token = r.data.token;
+        this.closeLoginModal();
+        await this.loadUserLevel();
+        this.renderAuthArea();
+        await this.loadGames();
+        this.applyFilter();
+      } else {
+        alert("Login failed: " + (r.message || "Error"));
+      }
+    } catch (e) {
+      alert("Error during login.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Sign In";
+    }
+  },
+
+  signOut(confirmFirst = true) {
+    if (confirmFirst && !window.confirm("Sign out of Cloudmoon?")) return;
+    localStorage.removeItem("cm_auth_token");
+    this.token = null;
+    this.userLevel = 0;
+    this.timeLeft = '';
+    this.renderAuthArea();
+    this.loadGames().then(() => this.applyFilter());
+  },
+
+  async showGameDetails(pkg) {
+    this.currentPkg = pkg;
+    const modal = document.getElementById('cm-game-modal');
+    const content = document.getElementById('cm-modal-content');
+    modal.style.display = 'flex';
+    content.innerHTML = '<div class="empty-state">Loading...</div>';
+    try {
+      const r = await this.customFetch("/game/info?pkg=" + pkg);
+      if (r.code === 0 && r.data) {
+        const d = r.data, i18n = d.i18n || {};
+        const title = i18n.title || d.title;
+        const icon = i18n.icon || d.icon_url;
+        const desc = (i18n.desc || '').replace(/\n/g, '<br>');
+        content.innerHTML = `
+          <div class="cm-modal-header">
+            <img src="${icon}" class="cm-modal-icon" onerror="this.style.display='none'">
+            <div class="cm-modal-titlewrap">
+              <h2 class="cm-modal-title">${title}</h2>
+              <p class="cm-modal-cats">${(i18n.categoryList || []).join(' / ')}</p>
+              ${d.is_high ? '<span class="cm-pro-badge">PRO</span>' : ''}
+              ${d.status === 4 ? '<span class="cm-maint-badge">Maintenance</span>' : ''}
+            </div>
+            <button class="cm-modal-close" onclick="CM.closeModal()">&times;</button>
+          </div>
+          ${desc ? `<div class="cm-modal-desc">${desc}</div>` : ''}
+          <button class="cm-play-btn" id="cm-play-btn-el" onclick="CM.handlePlay('${d.package_name}', ${d.status})">
+            Play Now
+          </button>`;
+      } else {
+        content.innerHTML = '<div class="empty-state">Error loading details.</div>';
+      }
+    } catch (e) {
+      content.innerHTML = '<div class="empty-state">Error loading details.</div>';
+    }
+  },
+
+  closeModal() {
+    document.getElementById('cm-game-modal').style.display = 'none';
+  },
+
+  async handlePlay(pkg, status) {
+    if (!this.token) {
+      this.closeModal();
+      if (window.confirm("Sign in required to play. Sign in now?")) this.showLogin();
+      return;
+    }
+    if (status === 4) { alert("This game is under maintenance."); return; }
+    if (!this.timeLeft || this.timeLeft === "0h 0m") { alert("No cloud play time left on your account."); return; }
+    const btn = document.getElementById('cm-play-btn-el');
+    const orig = btn ? btn.innerHTML : '';
+    try {
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Connecting...'; }
+      const phones = await this.customFetch("/phone/list");
+      console.log("[Cloudmoon] /phone/list response:", phones);
+      if (phones.code === 0 && phones.data && phones.data.list && phones.data.list.length > 0) {
+        const androidId = phones.data.list[0].android_id;
+        const conn = await this.customFetch("/phone/connect", {
+          method: "POST",
+          body: JSON.stringify({
+            android_id: androidId, game_name: pkg, screen_res: "720x1280",
+            server_id: parseInt(localStorage.getItem("cm_selected_server") || '23'),
+            params: JSON.stringify({ language: 'en', locale: 'us' }),
+            ad_unblock: false
+          })
+        });
+        console.log("[Cloudmoon] /phone/connect response:", conn);
+        if (conn.code === 0 && conn.data) {
+          this.closeModal();
+          if (conn.data.android_instance_id) this.launchGameAction(conn.data.sid, pkg);
+          else if (conn.data.position) this.showQueue(pkg, conn.data, androidId);
+        } else {
+          console.error("[Cloudmoon] /phone/connect returned code " + conn.code + ": " + conn.message);
+          alert("Failed: " + conn.message);
+          if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+        }
+      } else {
+        console.error("[Cloudmoon] /phone/list returned no devices:", phones);
+        alert("No cloud device available.");
+        if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+      }
+    } catch (e) {
+      console.error("[Cloudmoon] handlePlay failed:", e);
+      alert("Connection error: " + (e && e.message ? e.message : e) + " (see browser console for full detail)");
+      if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+    }
+  },
+
+  showQueue(pkg, data, androidId) {
+    this.currentPkg = pkg;
+    document.getElementById('cm-queue-modal').style.display = 'flex';
+    this.updateQueueUI(data);
+    if (this.queueInterval) clearInterval(this.queueInterval);
+    this.queueInterval = setInterval(async () => {
+      try {
+        const r = await this.customFetch("/phone/connect", {
+          method: "POST",
+          body: JSON.stringify({
+            android_id: androidId, game_name: pkg, screen_res: "720x1280",
+            server_id: parseInt(localStorage.getItem("cm_selected_server") || '23'),
+            params: JSON.stringify({ language: 'en', locale: 'us' }),
+            ad_unblock: false
+          })
+        });
+        if (r.code === 0 && r.data) {
+          if (r.data.android_instance_id) {
+            clearInterval(this.queueInterval);
+            this.queueInterval = null;
+            document.getElementById('cm-queue-modal').style.display = 'none';
+            this.launchGameAction(r.data.sid, pkg);
+          } else {
+            this.updateQueueUI(r.data);
+          }
+        }
+      } catch (e) {}
+    }, 5000);
+  },
+
+  updateQueueUI(data) {
+    document.getElementById('cm-queue-pos').textContent = data.position || '--';
+    document.getElementById('cm-queue-time').textContent = data.waiting_time ? Math.ceil(data.waiting_time / 60) + 'm' : '--';
+  },
+
+  async cancelQueue() {
+    const pkg = this.currentPkg;
+    if (this.queueInterval) { clearInterval(this.queueInterval); this.queueInterval = null; }
+    document.getElementById('cm-queue-modal').style.display = 'none';
+    if (pkg) { try { await this.customFetch("/phone/disconnect", { method: "POST", body: JSON.stringify({ game_name: pkg }) }); } catch (e) {} }
+  },
+
+  async launchGameAction(sid, pkg) {
+    localStorage.setItem("cm_launch_data", JSON.stringify({ sid, quality: 'SD', timestamp: Date.now() }));
+    const item = cloudmoonGamesList.find(g => g.data.id === pkg) || this.currentItem || { type: 'cm', name: pkg, data: { id: pkg } };
+    activeGame = item;
+    const titleEl = document.getElementById('zoneName');
+    if (titleEl) titleEl.textContent = item.name;
+    clearConsoleErrors();
+    
+    if (!zoneFrame) {
+      zoneFrame = document.createElement("iframe");
+      zoneFrame.id = "zoneFrame";
+      zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad";
+      zoneViewer.appendChild(zoneFrame);
+    }
+    zoneFrame.removeAttribute('src');
+    zoneFrame.srcdoc = "";
+    addToRecent(item.name, item.data.icon || "", "#");
+    showPage('player');
+    console.log("[Cloudmoon] Fetching player harness from " + CM_PLAYER_URL);
+    try {
+      const res = await fetch(CM_PLAYER_URL + "?t=" + Date.now());
+      if (!res.ok) throw new Error("HTTP " + res.status + " " + res.statusText);
+      let code = await res.text();
+      const baseUrl = CM_PLAYER_URL.substring(0, CM_PLAYER_URL.lastIndexOf('/') + 1);
+      const baseTag = `<base href="${baseUrl}">`;
+      if (/<head[^>]*>/i.test(code)) {
+        code = code.replace(/<head([^>]*)>/i, `<head$1>${baseTag}`);
+      } else {
+        code = baseTag + code;
+      }
+      zoneFrame.srcdoc = code;
+      console.log("[Cloudmoon] Player harness loaded (" + code.length + " chars).");
+    } catch (e) {
+      const detail = (e && e.name ? e.name + ": " : "") + (e && e.message ? e.message : e);
+      console.error("[Cloudmoon] Failed to fetch player harness - " + detail);
+      logConsoleError("Cloudmoon Player Fetch Error: " + detail);
+      zoneFrame.srcdoc = "<p style=\"color:#fff;font-family:sans-serif;padding:20px;\">Failed to load Cloudmoon player. Check the browser console for details.</p>";
+    }
+  }
+};
+
+const categoryData = {}
+
+const zonesURL = "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json"
+const coverURL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/"
+const htmlURL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main/"
+const excludedGNMathGames = new Set(["[!] SUGGEST GAMES .gg/D4c9VFYWyU", "[!] COMMENTS", "Chat Bot AI (A.I GPT)"])
 
 dropdownBtn.onclick = () => dropdown.classList.toggle("open")
 
@@ -305,6 +1479,7 @@ document.querySelectorAll(".dropdown-item").forEach(item => {
         dropdownLabel.textContent = item.textContent
         selectedCategory = item.textContent
         dropdown.classList.remove("open")
+        document.getElementById("search").value = ""
         renderGames()
     }
 })
@@ -313,81 +1488,182 @@ document.addEventListener("click", e => {
     if (!dropdown.contains(e.target)) dropdown.classList.remove("open")
 })
 
-async function loadGames() {
-    const res = await fetch("/assets/game/games.json")
-    gamesData = await res.json()
-    renderGames()
+function zoneURL(u) {
+    if (!u) return "";
+    return (u + "").replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL)
 }
 
-function renderGames() {
+async function fetchZones() {
+    try {
+        const response = await fetch(zonesURL + "?t=" + Date.now())
+        zones = await response.json()
+        zones.sort((a, b) => a.name.localeCompare(b.name))
+        renderGames()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+async function fetchCategoryData(category) {
+    if (categoryData[category]) return categoryData[category]
+    const url = categorySources[category]
+    if (!url) return []
+    try {
+        const response = await fetch(url + "?t=" + Date.now())
+        let data = await response.json()
+        data.sort((a, b) => (a.name || "").localeCompare(b.name || ""))
+        categoryData[category] = data
+        return data
+    } catch (error) {
+        console.error(`Failed to load data for ${category}:`, error)
+        categoryData[category] = []
+        return []
+    }
+}
+
+async function renderGenericCategoryGames(category, query = "") {
+    const container = document.getElementById("games-container")
+    const allList = await fetchCategoryData(category)
+    const list = query ? allList.filter(file => (file.name || file.title || "").toLowerCase().includes(query)) : allList
+    if (!list.length) return
+
+    const title = document.createElement("h2")
+    title.textContent = `${category} (${list.length})`
+
+    const section = document.createElement("div")
+    section.className = "games-section"
+
+    list.forEach(file => {
+        const div = createGameCard(file)
+        section.appendChild(div)
+    })
+
+    container.appendChild(title)
+    container.appendChild(section)
+    container.appendChild(createDivider())
+    applySearchFilter()
+}
+
+async function renderLuminGames(query = "") {
+    const container = document.getElementById("games-container")
+    try {
+        if (!luminInitialized) {
+            await Lumin.init({ headless: true })
+            luminInitialized = true
+        }
+
+        const { games: allGames } = await Lumin.getGames({ page: 1, limit: 99999999 })
+        const games = query ? allGames.filter(game => (game.name || "").toLowerCase().includes(query)) : allGames
+        if (!games.length) return
+
+        const title = document.createElement("h2")
+        title.textContent = `Lumin (${games.length})`
+
+        const section = document.createElement("div")
+        section.className = "games-section"
+
+        for (const game of games) {
+            const rawImg = await Lumin.getImageUrl(game.image_token)
+            const imgUrl = (rawImg && rawImg.trim() !== '') ? rawImg.trim() : UGS_FALLBACK_IMG;
+            const isFallback = imgUrl === UGS_FALLBACK_IMG;
+            const div = document.createElement("div")
+            div.className = "game"
+            div.onclick = async () => {
+                addToRecent(game.name, imgUrl, "#")
+                const { url } = await Lumin.getGameUrl(game.id)
+                openLuminGame(game.name, url)
+            }
+            div.innerHTML = `
+                <img src="${imgUrl}" alt="${game.name}" loading="lazy" class="${isFallback ? 'fallback-icon' : ''}" onerror="handleImgError(this)">
+                <button type="button">${game.name}</button>
+            `
+            section.appendChild(div)
+        }
+
+        container.appendChild(title)
+        container.appendChild(section)
+        container.appendChild(createDivider())
+        applySearchFilter()
+    } catch (error) {
+        console.error("Failed to load Lumin games:", error)
+    }
+}
+
+async function renderCloudmoonSection(query = "") {
+    const container = document.getElementById("games-container");
+
+    const header = document.createElement("div");
+    header.className = "cm-header-controls";
+    header.innerHTML = `
+        <h2>Cloudmoon (Synapse)</h2>
+        <div id="cmAuthArea"></div>
+    `;
+    container.appendChild(header);
+
+    const sectionContainer = document.createElement("div");
+    sectionContainer.id = "cloudmoon-sections-container";
+    sectionContainer.className = "games-section";
+    container.appendChild(sectionContainer);
+
+    container.appendChild(createDivider());
+
+    await CM.init();
+    if (query) {
+        CM.handleSearch(query);
+    }
+}
+
+function openLuminGame(name, url) {
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe")
+        zoneFrame.id = "zoneFrame"
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad"
+        zoneViewer.appendChild(zoneFrame)
+    }
+    zoneViewer.style.display = "flex"
+    zoneFrame.src = url
+    document.getElementById('zoneName').textContent = name
+}
+
+async function renderGames() {
     const container = document.getElementById("games-container")
     container.innerHTML = ""
 
-    if (gamesData["Uncategorized"]) {
-        const section = document.createElement("div")
-        section.className = "games-section"
-
-        gamesData["Uncategorized"].forEach(game => {
-            const div = document.createElement("div")
-            div.className = "game"
-            div.innerHTML = `
-                <img src="${game.image}" alt="${game.alt}">
-                <a href="${game.href}">${game.title}</a>
-            `
-            section.appendChild(div)
-        })
-
-        container.appendChild(section)
-        container.appendChild(createDivider())
-    }
-
     displayRecent()
 
-    if (gamesData[selectedCategory]) {
+    if (selectedCategory === "GN-Math") {
         const title = document.createElement("h2")
-        title.textContent = selectedCategory
+        title.textContent = `GN-Math (${zones.length})`
 
         const section = document.createElement("div")
         section.className = "games-section"
 
-        gamesData[selectedCategory].forEach(game => {
-            const div = document.createElement("div")
-            div.className = "game"
-            div.innerHTML = `
-                <img src="${game.image}">
-                <a href="${game.href}">${game.title}</a>
-            `
+        zones.filter(file => !excludedGNMathGames.has(file.name || file.title || "")).forEach(file => {
+            const div = createGameCard(file)
             section.appendChild(div)
         })
 
         container.appendChild(title)
         container.appendChild(section)
         container.appendChild(createDivider())
+        applySearchFilter()
+    } else if (selectedCategory === "Lumin") {
+        await renderLuminGames()
+    } else if (selectedCategory === "UGS") {
+        await renderUGSSection()
+    } else if (selectedCategory === "CKV") {
+        await renderCKVSection()
+    } else if (selectedCategory === "NBLI-Ports") {
+        await renderNBLISection()
+    } else if (selectedCategory === "Wasm.rip") {
+        await renderWasmSection()
+    } else if (selectedCategory === "Cloudmoon") {
+        await renderCloudmoonSection()
+    } else if (selectedCategory === "Truffled") {
+        await renderTruffledSection()
+    } else {
+        await renderGenericCategoryGames(selectedCategory)
     }
-
-    Object.keys(gamesData).forEach(category => {
-        if (category === "Uncategorized" || category === "Recently Played" || category === selectedCategory) return
-
-        const title = document.createElement("h2")
-        title.textContent = category
-
-        const section = document.createElement("div")
-        section.className = "games-section"
-
-        gamesData[category].forEach(game => {
-            const div = document.createElement("div")
-            div.className = "game"
-            div.innerHTML = `
-                <img src="${game.image}">
-                <a href="${game.href}">${game.title}</a>
-            `
-            section.appendChild(div)
-        })
-
-        container.appendChild(title)
-        container.appendChild(section)
-        container.appendChild(createDivider())
-    })
 }
 
 function createDivider() {
@@ -415,8 +1691,11 @@ function displayRecent() {
     recent.forEach(game => {
         const div = document.createElement("div")
         div.className = "game"
+        const rawImg = game.img;
+        const imgUrl = (rawImg && rawImg.trim() !== '') ? rawImg.trim() : UGS_FALLBACK_IMG;
+        const isFallback = imgUrl === UGS_FALLBACK_IMG;
         div.innerHTML = `
-            <img src="${game.img}">
+            <img src="${imgUrl}" class="${isFallback ? 'fallback-icon' : ''}" onerror="handleImgError(this)">
             <a href="${game.link}">${game.name}</a>
         `
         section.appendChild(div)
@@ -424,15 +1703,71 @@ function displayRecent() {
 }
 
 function addToRecent(name, img, link) {
-    if (link.includes("forms.gle")) return
+    if (link && link.includes("forms.gle")) return
 
     let recent = JSON.parse(localStorage.getItem("recentGames")) || []
     recent = recent.filter(g => g.name !== name)
-    recent.unshift({ name, img, link })
+    recent.unshift({ name, img, link: link || "#" })
 
     if (recent.length > 8) recent.pop()
 
     localStorage.setItem("recentGames", JSON.stringify(recent))
+}
+
+const BASE_TAG_RE = /<base\b[^>]*>/i
+const BASE_HREF_RE = /<base\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s">]+))[^>]*>/i
+
+function zoneBaseFor(url, html) {
+    const folder = url.substring(0, url.lastIndexOf('/') + 1)
+    let root
+    try { root = new URL(folder, document.baseURI).href } catch (e) { root = folder }
+    const m = html.match(BASE_HREF_RE)
+    const declared = m ? (m[1] !== undefined ? m[1] : m[2] !== undefined ? m[2] : m[3]) : ""
+    if (!declared) return root
+    try { return new URL(declared, root).href } catch (e) { return root }
+}
+
+function injectZoneBase(html, url) {
+    const tag = '<base href="' + zoneBaseFor(url, html) + '">'
+    if (BASE_TAG_RE.test(html)) return html.replace(BASE_TAG_RE, tag)
+    if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, function (m) { return m + tag })
+    if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, function (m) { return m + tag })
+    return tag + html
+}
+
+function openZone(file) {
+    addToRecent(file.name, zoneURL(file.cover), file.url.startsWith("http") ? file.url : "")
+
+    if (file.url.startsWith("http")) {
+        window.open(file.url, "_blank")
+    } else {
+        const url = zoneURL(file.url)
+        fetch(url + "?t=" + Date.now()).then(response => response.text()).then(html => {
+            html = injectZoneBase(html, url)
+            
+            if (!zoneFrame) {
+                zoneFrame = document.createElement("iframe")
+                zoneFrame.id = "zoneFrame"
+                zoneViewer.appendChild(zoneFrame)
+            }
+            
+            zoneViewer.style.display = "flex"
+            
+            zoneFrame.contentDocument.open()
+            zoneFrame.contentDocument.write(html)
+            zoneFrame.contentDocument.close()
+            
+            document.getElementById('zoneName').textContent = file.name
+        }).catch(error => alert("Failed to load zone: " + error))
+    }
+}
+
+function closeZone() {
+    zoneViewer.style.display = "none"
+    if (zoneFrame && zoneFrame.parentNode) {
+        zoneFrame.parentNode.removeChild(zoneFrame)
+        zoneFrame = null
+    }
 }
 
 document.addEventListener("click", e => {
@@ -442,22 +1777,83 @@ document.addEventListener("click", e => {
     const link = game.querySelector("a")
     const img = game.querySelector("img")
 
-    addToRecent(
-        link.textContent.trim(),
-        img.src,
-        link.href
-    )
+    if (link) {
+        addToRecent(
+            link.textContent.trim(),
+            img.src,
+            link.href
+        )
+    }
 })
 
-document.getElementById("search").addEventListener("input", e => {
-    const q = e.target.value.toLowerCase()
+let searchRenderId = 0
+
+async function renderAllSourceSearch() {
+    const query = document.getElementById("search").value.trim().toLowerCase()
+    if (!query) {
+        renderGames()
+        return
+    }
+
+    const renderId = ++searchRenderId
+    const container = document.getElementById("games-container")
+    container.innerHTML = ""
+
+    const sources = ["GN-Math", "Lumin", "UGS", "Cloudmoon", "Truffled", "Wasm.rip", "CKV", "NBLI-Ports"]
+    const orderedSources = [selectedCategory, ...sources.filter(source => source !== selectedCategory)]
+
+    for (const source of orderedSources) {
+        if (renderId !== searchRenderId) return
+        if (source === "GN-Math") {
+            const matching = zones.filter(file => {
+                const name = (file.name || file.title || "").toLowerCase()
+                return !excludedGNMathGames.has(file.name || file.title || "") && name.includes(query)
+            })
+            if (matching.length) {
+                const title = document.createElement("h2")
+                title.textContent = `GN-Math (${matching.length})`
+                const section = document.createElement("div")
+                section.className = "games-section"
+                matching.forEach(file => section.appendChild(createGameCard(file)))
+                container.appendChild(title)
+                container.appendChild(section)
+                container.appendChild(createDivider())
+            }
+        } else if (source === "Lumin") {
+            await renderLuminGames(query)
+        } else if (source === "UGS") {
+            await renderUGSSection(query)
+        } else if (source === "CKV") {
+            await renderCKVSection(query)
+        } else if (source === "NBLI-Ports") {
+            await renderNBLISection(query)
+        } else if (source === "Wasm.rip") {
+            await renderWasmSection(query)
+        } else if (source === "Cloudmoon") {
+            await renderCloudmoonSection(query)
+        } else if (source === "Truffled") {
+            await renderTruffledSection(query)
+        } else {
+            await renderGenericCategoryGames(source, query)
+        }
+    }
+
+}
+
+function applySearchFilter() {
+    const q = document.getElementById("search").value.toLowerCase()
     document.querySelectorAll(".game").forEach(g => {
-        const name = g.querySelector("a").textContent.toLowerCase()
-        g.style.display = name.includes(q) ? "block" : "none"
+        const el = g.querySelector("a, button")
+        if (el) {
+            const nameText = el.textContent.toLowerCase()
+            g.style.display = nameText.includes(q) ? "block" : "none"
+        }
     })
-})
+}
 
-loadGames()
+document.getElementById("search").addEventListener("input", renderAllSourceSearch)
+
+fetchZones()
 </script>
 </body>
 </html>
