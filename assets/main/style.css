@@ -70,6 +70,25 @@ body {
   display: none;
 }
 
+#windowMaximizeDropZone {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: min(420px, calc(100vw - 32px));
+  height: 6px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 0.15s ease;
+  z-index: 2000;
+}
+
+#windowMaximizeDropZone.active {
+  opacity: 1;
+}
+
 #wrapper.fullscreen, 
 #wrapper.immersive-fullscreen {
     border-radius: 0 !important;

@@ -229,6 +229,7 @@ function setupWindowDrag(windowElement, headerElement, windowId) {
       dragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
+      startPointerY: 0,
       targetX: 0,
       targetY: 0,
       currentX: 0,
@@ -271,6 +272,7 @@ function setupWindowDrag(windowElement, headerElement, windowId) {
     const rect = windowElement.getBoundingClientRect();
     state.dragOffsetX = e.clientX - rect.left;
     state.dragOffsetY = e.clientY - rect.top;
+    state.startPointerY = e.clientY;
     
     state.currentX = rect.left;
     state.currentY = rect.top;
@@ -285,6 +287,22 @@ function setupWindowDrag(windowElement, headerElement, windowId) {
   document.addEventListener('pointermove', e => {
     const state = appWindowDragStates[windowId];
     if (!state || !state.dragging) return;
+
+    const maximizeDropZone = document.getElementById('windowMaximizeDropZone');
+    if (maximizeDropZone) {
+      maximizeDropZone.classList.toggle('active', e.clientY <= 16);
+    }
+
+    const windowData = appWindows[windowId];
+    if (windowData && windowData.maximized && e.clientY > state.startPointerY + 10) {
+      const maximizedRect = windowElement.getBoundingClientRect();
+      const horizontalRatio = (e.clientX - maximizedRect.left) / maximizedRect.width;
+      maximizeAppWindow(windowId);
+      const restoredRect = windowElement.getBoundingClientRect();
+      state.currentX = restoredRect.left;
+      state.currentY = restoredRect.top;
+      state.dragOffsetX = windowElement.offsetWidth * Math.max(0, Math.min(1, horizontalRatio));
+    }
     
     let newLeft = e.clientX - state.dragOffsetX;
     let newTop = e.clientY - state.dragOffsetY;
@@ -310,6 +328,22 @@ function setupWindowDrag(windowElement, headerElement, windowId) {
     if (state && state.dragging) {
       state.dragging = false;
       headerElement.style.cursor = 'grab';
+
+      const maximizeDropZone = document.getElementById('windowMaximizeDropZone');
+      if (maximizeDropZone) maximizeDropZone.classList.remove('active');
+
+      const windowData = appWindows[windowId];
+      if (e.clientY <= 16 && windowData && !windowData.maximized) {
+        if (state.animationFrameId) {
+          cancelAnimationFrame(state.animationFrameId);
+          state.animationFrameId = null;
+        }
+        state.currentX = state.targetX;
+        state.currentY = state.targetY;
+        windowElement.style.left = state.targetX + 'px';
+        windowElement.style.top = state.targetY + 'px';
+        maximizeAppWindow(windowId);
+      }
     }
   });
 }
@@ -1019,6 +1053,7 @@ tabs.addEventListener('pointerdown', e => {
   const rect = wrapper.getBoundingClientRect();
   wrapperDragState.dragOffsetX = e.clientX - rect.left;
   wrapperDragState.dragOffsetY = e.clientY - rect.top;
+  wrapperDragState.startPointerY = e.clientY;
   
   wrapperDragState.currentX = rect.left;
   wrapperDragState.currentY = rect.top;
@@ -1034,6 +1069,21 @@ tabs.addEventListener('pointerdown', e => {
 
 document.addEventListener('pointermove', e => {
   if (!wrapperDragState.dragging) return;
+
+  const maximizeDropZone = document.getElementById('windowMaximizeDropZone');
+  if (maximizeDropZone) {
+    maximizeDropZone.classList.toggle('active', e.clientY <= 16);
+  }
+
+  if (wrapper.classList.contains('fullscreen') && e.clientY > wrapperDragState.startPointerY + 10) {
+    const horizontalRatio = e.clientX / wrapper.offsetWidth;
+    toggleMaximize();
+    wrapper.style.transform = 'none';
+    const restoredRect = wrapper.getBoundingClientRect();
+    wrapperDragState.currentX = restoredRect.left;
+    wrapperDragState.currentY = restoredRect.top;
+    wrapperDragState.dragOffsetX = wrapper.offsetWidth * Math.max(0, Math.min(1, horizontalRatio));
+  }
   
   let newLeft = e.clientX - wrapperDragState.dragOffsetX;
   let newTop = e.clientY - wrapperDragState.dragOffsetY;
@@ -1059,6 +1109,21 @@ document.addEventListener('pointerup', e => {
     wrapperDragState.dragging = false;
     tabs.style.cursor = 'grab';
     wrapper.style.transition = '';
+
+    const maximizeDropZone = document.getElementById('windowMaximizeDropZone');
+    if (maximizeDropZone) maximizeDropZone.classList.remove('active');
+
+    if (e.clientY <= 16 && !wrapper.classList.contains('fullscreen')) {
+      if (wrapperDragState.animationFrameId) {
+        cancelAnimationFrame(wrapperDragState.animationFrameId);
+        wrapperDragState.animationFrameId = null;
+      }
+      wrapperDragState.currentX = wrapperDragState.targetX;
+      wrapperDragState.currentY = wrapperDragState.targetY;
+      wrapper.style.left = wrapperDragState.targetX + 'px';
+      wrapper.style.top = wrapperDragState.targetY + 'px';
+      toggleMaximize();
+    }
   }
 });
 
