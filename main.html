@@ -87,24 +87,30 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 </div>
 
 <div id="appButtonsContainer">
-<button id="browserBtn" title="Internet">
+<button id="browserBtn" data-window-key="browser" title="Internet">
 <img src="/assets/img/internet.svg" alt="Internet"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
-<button id="gamesBtn" title="Games">
+<button id="gamesBtn" data-window-key="games" title="Games">
 <img src="/assets/img/game.svg" alt="Games"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
-<button id="toolsBtn" title="Tools">
+<button id="toolsBtn" data-window-key="tools" title="Tools">
 <img src="/assets/img/tool.svg" alt="Tools"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
-<button id="filesBtn" title="Files">
+<button id="filesBtn" data-window-key="files" title="Files">
 <img src="/assets/img/folder.svg" alt="Files"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
-<button id="moreBtn" title="More">
+<button id="moreBtn" data-window-key="more" title="More">
 <img src="/assets/img/more.svg" alt="More"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
 <div id="customAppsContainer"></div>
-<button id="taskbarSettingsBtn" title="Settings">
+<button id="taskbarSettingsBtn" data-window-key="settings" title="Settings">
 <img src="/assets/img/setting.svg" alt="Settings"/>
+<span class="window-indicator" aria-hidden="true"></span>
 </button>
 </div>
 </div>

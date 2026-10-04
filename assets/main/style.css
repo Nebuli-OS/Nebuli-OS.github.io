@@ -767,6 +767,34 @@ body {
   min-height: 44px;
 }
 
+.taskbar button[data-window-key] {
+  position: relative;
+}
+
+.taskbar button[data-window-key] .window-indicator {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 2px;
+  width: 20px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.15s ease, background 0.15s ease;
+  pointer-events: none;
+}
+
+.taskbar button[data-window-key].window-open .window-indicator {
+  opacity: 1;
+}
+
+.taskbar button[data-window-key].window-focused .window-indicator {
+  background: #fff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
+}
+
 .taskbar-button::before {
   content: "";
   position: absolute;

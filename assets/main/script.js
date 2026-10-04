@@ -219,6 +219,7 @@ function updateBubblePosition() {
 function raiseWindowToTop(element) {
   maxZIndex++;
   element.style.zIndex = maxZIndex;
+  requestAnimationFrame(refreshTaskbarWindowIndicators);
 }
 
 let appWindowDragStates = {};
@@ -592,6 +593,7 @@ function createAppWindow(url, title, showUrl, iconUrl) {
 
   const iframe = document.createElement('iframe');
   iframe.src = url;
+  iframe.addEventListener('focus', () => raiseWindowToTop(windowElement));
   iframe.style.cssText = `
     width: 100%;
     height: 100%;
@@ -820,6 +822,7 @@ function closeAppWindow(windowId) {
     delete appWindowDragStates[windowId];
     delete appWindowResizeStates[windowId];
     delete appWindows[windowId];
+    refreshTaskbarWindowIndicators();
   }
 }
 
@@ -828,6 +831,7 @@ function minimizeAppWindow(windowId) {
   if (windowData) {
     windowData.element.style.display = 'none';
     windowData.minimized = true;
+    refreshTaskbarWindowIndicators();
   }
 }
 
@@ -1488,6 +1492,9 @@ function addTab(url, title = 'New Tab', showUrl = null, iconUrl = null) {
   }
 
   view.appendChild(panel);
+  if (panel.tagName === 'IFRAME') {
+    panel.addEventListener('focus', () => raiseWindowToTop(wrapper));
+  }
   activateTab(id);
 
   if (url === 'nebuli://settings') {
@@ -1542,6 +1549,7 @@ function addTab(url, title = 'New Tab', showUrl = null, iconUrl = null) {
   minimizeBubble.style.display = 'none';
 
   updateNavButtons();
+  refreshTaskbarWindowIndicators();
   return id;
 }
 
@@ -1581,6 +1589,7 @@ function closeTab(id) {
     wrapper.style.display = 'none';
     minimizeBubble.style.display = 'none';
     setFavicon('/assets/img/internet.svg');
+    refreshTaskbarWindowIndicators();
   }
 }
 
@@ -1737,6 +1746,45 @@ let appWindowStates = {
   more: null,
   settings: null
 };
+
+function refreshTaskbarWindowIndicators() {
+  const buttons = [...document.querySelectorAll('.taskbar [data-window-key]')];
+  const windowStates = buttons.map(button => {
+    const key = button.dataset.windowKey;
+    let element = null;
+    let isOpen = false;
+
+    if (key === 'browser') {
+      element = wrapper;
+      isOpen = tabs.querySelector('.tab') !== null;
+    } else {
+      const windowData = appWindows[appWindowStates[key]];
+      if (windowData) {
+        element = windowData.element;
+        isOpen = true;
+      }
+    }
+
+    const isVisible = isOpen && element && getComputedStyle(element).display !== 'none';
+    button.classList.toggle('window-open', isOpen);
+    button.classList.remove('window-focused');
+
+    return { button, element, isOpen, isVisible };
+  });
+
+  const visibleWindows = windowStates.filter(state => state.isVisible);
+  const focusedWindow = visibleWindows.reduce((currentTop, state) => {
+    const zIndex = Number.parseInt(getComputedStyle(state.element).zIndex, 10) || 0;
+    const topZIndex = currentTop
+      ? Number.parseInt(getComputedStyle(currentTop).zIndex, 10) || 0
+      : -1;
+    return zIndex > topZIndex ? state.element : currentTop;
+  }, null);
+
+  windowStates.forEach(state => {
+    state.button.classList.toggle('window-focused', state.isVisible && state.element === focusedWindow);
+  });
+}
 
 function getTaskbarIconForInternal(url) {
   if (url.includes('search')) return browserBtn.querySelector('img').src;
@@ -1906,6 +1954,7 @@ if (trafficClose) {
     wrapper.style.display = 'none';
     minimizeBubble.style.display = 'none';
     setFavicon('/assets/img/internet.svg');
+    refreshTaskbarWindowIndicators();
   });
 }
 
@@ -1913,6 +1962,7 @@ if (trafficMin) {
   trafficMin.addEventListener('click', () => {
     wrapper.style.display = 'none';
     minimizeBubble.style.display = 'flex';
+    refreshTaskbarWindowIndicators();
   });
 }
 
@@ -1928,6 +1978,7 @@ if (minimizeBubble) {
   minimizeBubble.addEventListener('click', () => {
     wrapper.style.display = 'flex';
     minimizeBubble.style.display = 'none';
+    raiseWindowToTop(wrapper);
   });
 
   minimizeBubble.addEventListener('pointerdown', e => {
@@ -2136,8 +2187,13 @@ function renderCustomAppButtons() {
   apps.forEach((app, index) => {
     const btn = document.createElement('button');
     btn.className = 'custom-app-btn';
+    btn.dataset.windowKey = 'customApp_' + index;
     btn.title = app.title;
     btn.innerHTML = `<img src="${app.icon}" alt="${app.title}" style="border-radius: 4px;">`;
+    const indicator = document.createElement('span');
+    indicator.className = 'window-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    btn.appendChild(indicator);
     btn.addEventListener('click', () => {
       const windowKey = 'customApp_' + index;
       if (appWindowStates[windowKey] && appWindows[appWindowStates[windowKey]]) {
@@ -2155,6 +2211,7 @@ function renderCustomAppButtons() {
     });
     container.appendChild(btn);
   });
+  refreshTaskbarWindowIndicators();
 }
 
 function loadCustomApps(panel) {
@@ -2546,6 +2603,7 @@ function openSettingsInOmnibox(forceNewTab = false) {
   wrapper.classList.remove('immersive-fullscreen');
   applyRestoredStyles();
   minimizeBubble.style.display = 'none';
+  raiseWindowToTop(wrapper);
 
   if (fullscreenIcon) {
     fullscreenIcon.src = '/assets/img/fullscreen.svg';
