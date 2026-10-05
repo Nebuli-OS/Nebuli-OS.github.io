@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/assets/main/style.css">
+<link rel="stylesheet" href="/assets/main/style.css?v=5">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NebuliOS</title>
 </head>
@@ -15,6 +15,7 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 </script>
 
 <canvas id="starfield"></canvas>
+<div id="customBackground" aria-hidden="true"></div>
 <div id="windowMaximizeDropZone" aria-hidden="true"></div>
 
 <div id="wrapper" role="region" aria-label="Browser Omnibox">
@@ -55,11 +56,12 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 <img src="/assets/img/internet.svg" alt="🌐" style="width:32px; height:32px;"/>
 </div>
 
-<div id="nebuliText" aria-hidden="true">NebuliOS</div>
-
-<div id="centerTextContainer" aria-live="polite" aria-label="Current time and battery level">
-<div id="centerTime">00:00:00</div>
-<div id="centerBattery">Battery: N/A</div>
+<div id="homeStatusCard">
+  <div id="nebuliText" aria-hidden="true">NebuliOS</div>
+  <div id="centerTextContainer" aria-live="polite" aria-label="Current time and battery level">
+    <div id="centerTime">00:00:00</div>
+    <div id="centerBattery">Battery: N/A</div>
+  </div>
 </div>
 
 <div id="nebuliRootPopup">
@@ -80,11 +82,6 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 <button id="startMenuBtn" title="Start Menu" style="background: none; border: none; padding: 8px 12px; cursor: pointer; display: flex; filter: invert(0); align-items: center; justify-content: center; height: 100%;">
 <img src="/assets/img/logo/nebuli.png" alt="Start Menu" style="width: 24px; height: 24px;"/>
 </button>
-
-<div id="statusIndicator">
-<div id="statusTime"></div>
-<div id="statusBattery"></div>
-</div>
 
 <div id="appButtonsContainer">
 <button id="browserBtn" data-window-key="browser" title="Internet">
@@ -113,6 +110,11 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 <span class="window-indicator" aria-hidden="true"></span>
 </button>
 </div>
+
+<div id="statusIndicator">
+<div id="statusTime"></div>
+<div id="statusBattery"></div>
+</div>
 </div>
 
 <div id="taskbarCollapsedHint"></div>
@@ -120,6 +122,7 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 <div id="settingsTemplate" style="display: none;">
   <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
     <button class="settings-pill active" data-section="main">Main Settings</button>
+    <button class="settings-pill" data-section="background">Background Settings</button>
     <button class="settings-pill" data-section="taskbar">Taskbar Settings</button>
     <button class="settings-pill" data-section="custom">Custom Apps</button>
   </div>
@@ -160,6 +163,42 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
         </label>
         <span id="modeSwitchRootLabel" style="font-size: 13px; color: #ffffff; font-weight: 600;">Root Mode</span>
       </div>
+    </div>
+  </div>
+
+  <div class="settings-section" data-section-content="background" style="display: none;">
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #ffffff;">Background Settings</div>
+
+    <label for="backgroundTypeSelect">
+      <span>Background:</span>
+      <select id="backgroundTypeSelect">
+        <option value="starry">Starry Animation</option>
+        <option value="color">Single Color</option>
+        <option value="custom">Custom Image or Video</option>
+        <option value="preinstalled">Pre-installed Background</option>
+      </select>
+    </label>
+
+    <div id="backgroundColorSettings" class="background-option">
+      <label for="backgroundColorInput">
+        <span>Choose a color:</span>
+        <input type="color" id="backgroundColorInput" value="#000000">
+      </label>
+    </div>
+
+    <div id="customBackgroundSettings" class="background-option">
+      <label for="backgroundFileInput" class="background-upload-label">
+        <span>Upload an image or video:</span>
+        <input type="file" id="backgroundFileInput" accept="image/*,video/*">
+      </label>
+      <div id="backgroundFileName" class="background-file-name">No custom background uploaded.</div>
+      <button type="button" id="removeBackgroundBtn" class="background-remove-btn">Remove Custom Background</button>
+    </div>
+
+    <div class="preinstalled-backgrounds">
+      <div class="preinstalled-backgrounds-title">Pre-installed Backgrounds</div>
+      <div class="preinstalled-backgrounds-placeholder">Choose a background:</div>
+      <div id="preinstalledBackgroundGrid" class="preinstalled-background-grid"></div>
     </div>
   </div>
 
@@ -263,6 +302,6 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
   </button>
 </div>
 
-<script src="/assets/main/script.js"></script>
+<script src="/assets/main/script.js?v=5"></script>
 </body>
 </html>

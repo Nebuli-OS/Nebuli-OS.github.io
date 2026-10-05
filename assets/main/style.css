@@ -1022,6 +1022,18 @@ body {
     height: 100%;
 }
 
+.taskbar.appearance-glassy #statusTime,
+.taskbar.appearance-glassy #statusBattery {
+    color: white;
+}
+
+.taskbar.appearance-solid #statusTime,
+.taskbar.appearance-solid #statusBattery,
+.taskbar.appearance-gradient #statusTime,
+.taskbar.appearance-gradient #statusBattery {
+    color: black !important;
+}
+
 .taskbar-full.pos-left #statusIndicator,
 .taskbar-full.pos-right #statusIndicator {
     flex-direction: column;
@@ -1044,7 +1056,7 @@ body {
     line-height: 1.2;
 }
 
-.taskbar.taskbar-full ~ #centerTextContainer {
+.taskbar.taskbar-full ~ #homeStatusCard {
     display: none;
 }
 
@@ -1187,16 +1199,161 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 0;
   background: black;
+  pointer-events: none;
+}
+
+#customBackground {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#customBackground img,
+#customBackground video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.background-option {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.background-option input[type="color"] {
+  width: 80px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.background-option .background-upload-label {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: none;
+}
+
+.background-option input[type="file"] {
+  max-width: 100%;
+  color: #ffffff;
+}
+
+.background-file-name,
+.preinstalled-backgrounds-placeholder {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  padding: 6px 0;
+}
+
+.background-remove-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.background-remove-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.preinstalled-backgrounds {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.preinstalled-backgrounds-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.preinstalled-background-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.preinstalled-background-card {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.preinstalled-background-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.preinstalled-background-card:focus-visible {
+  outline: 2px solid #ffd600;
+  outline-offset: 2px;
+}
+
+.preinstalled-background-card.selected {
+  border-color: #ffd600;
+  box-shadow: 0 0 0 1px #ffd600;
+}
+
+.preinstalled-background-preview {
+  display: block;
+  width: 100%;
+  height: 84px;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.preinstalled-background-label {
+  display: block;
+  padding: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+}
+
+#homeStatusCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 22px clamp(16px, 5vw, 32px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: rgba(0, 0, 0, 0.48);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  user-select: none;
+  pointer-events: none;
 }
 
 #nebuliText {
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  font-size: 50px;
+  font-size: clamp(32px, 8vw, 50px);
   font-weight: 800;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
@@ -1204,11 +1361,9 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 3s linear infinite;
-  z-index: 100;
-  user-select: none;
-  pointer-events: none;
   text-transform: none;
   letter-spacing: 0.1em;
+  line-height: 1.1;
 }
 
 @keyframes shimmer {
@@ -1221,29 +1376,26 @@ body {
 }
 
 #centerTextContainer {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
   color: white;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  user-select: none;
-  z-index: 99;
-  pointer-events: none;
 }
 
 #centerTime {
-  font-size: 72px;
+  font-size: clamp(28px, 9vw, 72px);
   font-weight: 600;
   margin-bottom: 8px;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 #centerBattery {
-  font-size: 24px;
+  font-size: clamp(16px, 4vw, 24px);
   font-weight: 400;
   letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 #resize-handle {

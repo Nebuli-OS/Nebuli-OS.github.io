@@ -2071,8 +2071,302 @@ if ('getBattery' in navigator) {
 
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
+const customBackground = document.getElementById('customBackground');
+const BACKGROUND_MODE_KEY = 'nebuli-background-mode';
+const BACKGROUND_COLOR_KEY = 'nebuli-background-color';
+const BACKGROUND_FILE_NAME_KEY = 'nebuli-background-file-name';
+const PREINSTALLED_BACKGROUND_KEY = 'nebuli-preinstalled-background';
+const BACKGROUND_DB_NAME = 'nebuli-backgrounds';
+const BACKGROUND_DB_STORE = 'files';
+const PREINSTALLED_BACKGROUNDS = [
+  'rainy-valley.mp4',
+  'wave-abstract.jpg',
+  'cubes.jpg',
+  'black_hole.jpg',
+  'black-fins.jpg',
+  'bloom.jpg',
+  'neon-abstract.jpg',
+  'rain.gif',
+  'hill-abstract.jpg',
+  'roses-rain.mp4',
+  'black-sand.jpg',
+  'rain-drops-on-window.960x540.mp4',
+  'streaked-light.jpg',
+  'neon-abstract-2.jpg',
+  'cherry-tree.mp4',
+  'japan-scene.jpg',
+  'fluid-abstract.jpg',
+  'calm-lake.mp4',
+  'fox.gif',
+  'landscape.jpg',
+  'crystals.jpg'
+].map(file => ({
+  file,
+  path: `/assets/bg/${file}`,
+  label: file.replace(/\.[^.]+$/, '').replace(/[_.-]+/g, ' ')
+}));
+let customBackgroundObjectUrl = null;
+let backgroundApplyVersion = 0;
 let stars = [];
 const STAR_COUNT = 200;
+
+function openBackgroundDatabase() {
+  return new Promise((resolve, reject) => {
+    if (!window.indexedDB) {
+      reject(new Error('This browser does not support persistent background uploads.'));
+      return;
+    }
+
+    const request = indexedDB.open(BACKGROUND_DB_NAME, 1);
+    request.onupgradeneeded = () => {
+      if (!request.result.objectStoreNames.contains(BACKGROUND_DB_STORE)) {
+        request.result.createObjectStore(BACKGROUND_DB_STORE);
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error || new Error('Could not open background storage.'));
+  });
+}
+
+async function storeCustomBackground(file) {
+  const database = await openBackgroundDatabase();
+  await new Promise((resolve, reject) => {
+    const transaction = database.transaction(BACKGROUND_DB_STORE, 'readwrite');
+    transaction.objectStore(BACKGROUND_DB_STORE).put({
+      blob: file,
+      name: file.name,
+      type: getBackgroundMediaType(file)
+    }, 'custom');
+    transaction.oncomplete = resolve;
+    transaction.onerror = () => reject(transaction.error || new Error('Could not save the background file.'));
+    transaction.onabort = () => reject(transaction.error || new Error('Saving the background file was cancelled.'));
+  }).finally(() => database.close());
+}
+
+function getBackgroundMediaType(file) {
+  if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+    return file.type;
+  }
+
+  const extension = file.name.split('.').pop().toLowerCase();
+  const mediaTypes = {
+    gif: 'image/gif',
+    jpeg: 'image/jpeg',
+    jpg: 'image/jpeg',
+    png: 'image/png',
+    webp: 'image/webp',
+    mp4: 'video/mp4',
+    m4v: 'video/mp4',
+    mov: 'video/quicktime',
+    ogv: 'video/ogg',
+    webm: 'video/webm'
+  };
+  return mediaTypes[extension] || '';
+}
+
+function createBackgroundMedia(source, mediaType) {
+  const media = document.createElement(mediaType.startsWith('video/') ? 'video' : 'img');
+  media.src = source;
+  media.addEventListener('error', () => {
+    console.error(`Could not load background media: ${source}`);
+  });
+  if (media instanceof HTMLVideoElement) {
+    media.autoplay = true;
+    media.loop = true;
+    media.muted = true;
+    media.playsInline = true;
+  } else {
+    media.alt = '';
+  }
+  return media;
+}
+
+function playBackgroundVideo(media) {
+  if (media instanceof HTMLVideoElement) {
+    media.play().catch(error => console.error('Could not play background video:', error));
+  }
+}
+
+async function getCustomBackground() {
+  const database = await openBackgroundDatabase();
+  try {
+    return await new Promise((resolve, reject) => {
+      const transaction = database.transaction(BACKGROUND_DB_STORE, 'readonly');
+      const request = transaction.objectStore(BACKGROUND_DB_STORE).get('custom');
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error || new Error('Could not read the background file.'));
+    });
+  } finally {
+    database.close();
+  }
+}
+
+async function deleteCustomBackground() {
+  const database = await openBackgroundDatabase();
+  try {
+    await new Promise((resolve, reject) => {
+      const transaction = database.transaction(BACKGROUND_DB_STORE, 'readwrite');
+      transaction.objectStore(BACKGROUND_DB_STORE).delete('custom');
+      transaction.oncomplete = resolve;
+      transaction.onerror = () => reject(transaction.error || new Error('Could not remove the background file.'));
+      transaction.onabort = () => reject(transaction.error || new Error('Removing the background file was cancelled.'));
+    });
+  } finally {
+    database.close();
+  }
+}
+
+async function applyBackgroundSettings() {
+  const version = ++backgroundApplyVersion;
+  const mode = localStorage.getItem(BACKGROUND_MODE_KEY) || 'starry';
+  customBackground.replaceChildren();
+  customBackground.style.display = 'none';
+  if (customBackgroundObjectUrl) {
+    URL.revokeObjectURL(customBackgroundObjectUrl);
+    customBackgroundObjectUrl = null;
+  }
+
+  if (mode === 'color') {
+    const storedColor = localStorage.getItem(BACKGROUND_COLOR_KEY) || '#000000';
+    const color = /^#[0-9a-f]{6}$/i.test(storedColor) ? storedColor : '#000000';
+    canvas.style.display = 'none';
+    document.body.style.background = color;
+    return;
+  }
+
+  if (mode === 'preinstalled') {
+    const selectedPath = localStorage.getItem(PREINSTALLED_BACKGROUND_KEY);
+    const background = PREINSTALLED_BACKGROUNDS.find(item => item.path === selectedPath);
+    if (!background) {
+      console.error('The selected pre-installed background is not available.');
+      localStorage.setItem(BACKGROUND_MODE_KEY, 'starry');
+    } else {
+      const extension = background.file.split('.').pop().toLowerCase();
+      const mediaType = extension === 'mp4' ? 'video/mp4' : `image/${extension === 'jpg' ? 'jpeg' : extension}`;
+      const media = createBackgroundMedia(background.path, mediaType);
+      customBackground.appendChild(media);
+      playBackgroundVideo(media);
+      customBackground.style.display = 'block';
+      canvas.style.display = 'none';
+      document.body.style.background = 'transparent';
+      return;
+    }
+  }
+
+  if (mode === 'custom') {
+    canvas.style.display = 'block';
+    document.body.style.background = '';
+    try {
+      const background = await getCustomBackground();
+      if (version !== backgroundApplyVersion) return;
+      if (!background || !background.blob) {
+        canvas.style.display = 'block';
+        document.body.style.background = '';
+        return;
+      }
+
+      customBackgroundObjectUrl = URL.createObjectURL(background.blob);
+      const media = createBackgroundMedia(customBackgroundObjectUrl, background.type);
+      customBackground.appendChild(media);
+      customBackground.style.display = 'block';
+      canvas.style.display = 'none';
+      document.body.style.background = 'transparent';
+      playBackgroundVideo(media);
+      return;
+    } catch (error) {
+      if (version !== backgroundApplyVersion) return;
+      console.error('Could not apply the custom background:', error);
+      localStorage.setItem(BACKGROUND_MODE_KEY, 'starry');
+    }
+  }
+
+  customBackground.replaceChildren();
+  customBackground.style.display = 'none';
+  canvas.style.display = 'block';
+  document.body.style.background = '';
+}
+
+function updateBackgroundControls(panel) {
+  const backgroundTypeSelect = panel.querySelector('#backgroundTypeSelect');
+  const colorSettings = panel.querySelector('#backgroundColorSettings');
+  const customSettings = panel.querySelector('#customBackgroundSettings');
+  const gallery = panel.querySelector('#preinstalledBackgroundGrid');
+  const fileName = panel.querySelector('#backgroundFileName');
+  const removeButton = panel.querySelector('#removeBackgroundBtn');
+
+  if (colorSettings) {
+    colorSettings.style.display = backgroundTypeSelect && backgroundTypeSelect.value === 'color' ? 'block' : 'none';
+  }
+  if (customSettings) {
+    customSettings.style.display = backgroundTypeSelect && backgroundTypeSelect.value === 'custom' ? 'block' : 'none';
+  }
+  if (fileName) {
+    fileName.textContent = localStorage.getItem(BACKGROUND_FILE_NAME_KEY) || 'No custom background uploaded.';
+  }
+  if (removeButton) {
+    removeButton.style.display = localStorage.getItem(BACKGROUND_FILE_NAME_KEY) ? 'inline-block' : 'none';
+  }
+  if (gallery) {
+    const selectedPath = localStorage.getItem(PREINSTALLED_BACKGROUND_KEY);
+    const currentMode = localStorage.getItem(BACKGROUND_MODE_KEY) || 'starry';
+    gallery.querySelectorAll('[data-background-path]').forEach(button => {
+      const selected = currentMode === 'preinstalled' && button.dataset.backgroundPath === selectedPath;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+  }
+}
+
+function refreshBackgroundControls() {
+  const mode = localStorage.getItem(BACKGROUND_MODE_KEY) || 'starry';
+  const storedColor = localStorage.getItem(BACKGROUND_COLOR_KEY) || '#000000';
+  const color = /^#[0-9a-f]{6}$/i.test(storedColor) ? storedColor : '#000000';
+  document.querySelectorAll('.settings-page').forEach(panel => {
+    const backgroundTypeSelect = panel.querySelector('#backgroundTypeSelect');
+    const backgroundColorInput = panel.querySelector('#backgroundColorInput');
+    if (backgroundTypeSelect) {
+      backgroundTypeSelect.value = ['starry', 'color', 'custom', 'preinstalled'].includes(mode) ? mode : 'starry';
+    }
+    if (backgroundColorInput) backgroundColorInput.value = color;
+    updateBackgroundControls(panel);
+  });
+}
+
+function populatePreinstalledBackgrounds(panel) {
+  const gallery = panel.querySelector('#preinstalledBackgroundGrid');
+  if (!gallery || gallery.childElementCount) return;
+
+  for (const background of PREINSTALLED_BACKGROUNDS) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'preinstalled-background-card';
+    button.dataset.backgroundPath = background.path;
+    button.setAttribute('aria-label', `Use ${background.label} background`);
+    button.setAttribute('aria-pressed', 'false');
+
+    const extension = background.file.split('.').pop().toLowerCase();
+    const mediaType = extension === 'mp4' ? 'video/mp4' : `image/${extension === 'jpg' ? 'jpeg' : extension}`;
+    const preview = createBackgroundMedia(background.path, mediaType);
+    preview.classList.add('preinstalled-background-preview');
+
+    const label = document.createElement('span');
+    label.className = 'preinstalled-background-label';
+    label.textContent = background.label;
+
+    button.append(preview, label);
+    button.addEventListener('click', () => {
+      localStorage.setItem(PREINSTALLED_BACKGROUND_KEY, background.path);
+      localStorage.setItem(BACKGROUND_MODE_KEY, 'preinstalled');
+      refreshBackgroundControls();
+      applyBackgroundSettings();
+    });
+    gallery.appendChild(button);
+    playBackgroundVideo(preview);
+  }
+  updateBackgroundControls(panel);
+}
+
+applyBackgroundSettings();
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -2250,6 +2544,8 @@ function loadAllSettings(panel) {
   const solidColorInput = panel.querySelector('#solidColorInput');
   const gradientColor1Input = panel.querySelector('#gradientColor1Input');
   const gradientColor2Input = panel.querySelector('#gradientColor2Input');
+  const backgroundTypeSelect = panel.querySelector('#backgroundTypeSelect');
+  const backgroundColorInput = panel.querySelector('#backgroundColorInput');
   const pSelect = panel.querySelector('#pSelect');
   const wispInput = panel.querySelector('#wispInput');
   const bareInput = panel.querySelector('#bareInput');
@@ -2263,6 +2559,8 @@ function loadAllSettings(panel) {
   const p = localStorage.getItem('nebuli-p');
   const wisp = localStorage.getItem('wisp');
   const bare = localStorage.getItem('bare');
+  const backgroundMode = localStorage.getItem(BACKGROUND_MODE_KEY);
+  const backgroundColor = localStorage.getItem(BACKGROUND_COLOR_KEY);
 
   if (taskbarFullCheckbox) {
     taskbarFullCheckbox.checked = isFull === 'true';
@@ -2285,6 +2583,12 @@ function loadAllSettings(panel) {
   if (gradientColor2Input) {
     gradientColor2Input.value = color2 || DEFAULT_GRADIENT_COLOR2;
   }
+  if (backgroundTypeSelect) {
+    backgroundTypeSelect.value = ['starry', 'color', 'custom', 'preinstalled'].includes(backgroundMode) ? backgroundMode : 'starry';
+  }
+  if (backgroundColorInput) {
+    backgroundColorInput.value = /^#[0-9a-f]{6}$/i.test(backgroundColor || '') ? backgroundColor : '#000000';
+  }
   if (pSelect) {
     pSelect.value = p || DEFAULT_p;
   }
@@ -2301,6 +2605,7 @@ function loadAllSettings(panel) {
   }
 
   loadCustomApps(panel);
+  updateBackgroundControls(panel);
 
   if (panel) toggleAppearanceInputs(panel);
 }
@@ -2487,6 +2792,7 @@ function applyTaskbarSettings() {
 
 function setupSettingsBindings(panel) {
   loadAllSettings(panel);
+  populatePreinstalledBackgrounds(panel);
   const resetBtn = panel.querySelector('#resetAllSettingsBtn');
   const taskbarFullCheckbox = panel.querySelector('#taskbarFullCheckbox');
   const taskbarCollapseCheckbox = panel.querySelector('#taskbarCollapseCheckbox');
@@ -2495,6 +2801,10 @@ function setupSettingsBindings(panel) {
   const solidColorInput = panel.querySelector('#solidColorInput');
   const gradientColor1Input = panel.querySelector('#gradientColor1Input');
   const gradientColor2Input = panel.querySelector('#gradientColor2Input');
+  const backgroundTypeSelect = panel.querySelector('#backgroundTypeSelect');
+  const backgroundColorInput = panel.querySelector('#backgroundColorInput');
+  const backgroundFileInput = panel.querySelector('#backgroundFileInput');
+  const removeBackgroundBtn = panel.querySelector('#removeBackgroundBtn');
   const pSelect = panel.querySelector('#pSelect');
   const wispInput = panel.querySelector('#wispInput');
   const bareInput = panel.querySelector('#bareInput');
@@ -2510,6 +2820,62 @@ function setupSettingsBindings(panel) {
   if (solidColorInput) solidColorInput.addEventListener('input', () => saveAllSettings(panel));
   if (gradientColor1Input) gradientColor1Input.addEventListener('input', () => saveAllSettings(panel));
   if (gradientColor2Input) gradientColor2Input.addEventListener('input', () => saveAllSettings(panel));
+  if (backgroundTypeSelect) {
+    backgroundTypeSelect.addEventListener('change', () => {
+      const mode = backgroundTypeSelect.value;
+      if (mode === 'preinstalled' && !PREINSTALLED_BACKGROUNDS.some(background => background.path === localStorage.getItem(PREINSTALLED_BACKGROUND_KEY))) {
+        localStorage.setItem(PREINSTALLED_BACKGROUND_KEY, PREINSTALLED_BACKGROUNDS[0].path);
+      }
+      localStorage.setItem(BACKGROUND_MODE_KEY, mode);
+      refreshBackgroundControls();
+      applyBackgroundSettings();
+    });
+  }
+  if (backgroundColorInput) {
+    backgroundColorInput.addEventListener('input', () => {
+      localStorage.setItem(BACKGROUND_COLOR_KEY, backgroundColorInput.value);
+      refreshBackgroundControls();
+      if ((localStorage.getItem(BACKGROUND_MODE_KEY) || 'starry') === 'color') {
+        applyBackgroundSettings();
+      }
+    });
+  }
+  if (backgroundFileInput) {
+    backgroundFileInput.addEventListener('change', async () => {
+      const file = backgroundFileInput.files && backgroundFileInput.files[0];
+      if (!file) return;
+      const mediaType = getBackgroundMediaType(file);
+      if (!mediaType) {
+        alert('Choose a supported image or video file.');
+        backgroundFileInput.value = '';
+        return;
+      }
+      try {
+        await storeCustomBackground(file);
+        localStorage.setItem(BACKGROUND_FILE_NAME_KEY, file.name);
+        localStorage.setItem(BACKGROUND_MODE_KEY, 'custom');
+        refreshBackgroundControls();
+        applyBackgroundSettings();
+      } catch (error) {
+        console.error('Could not save the custom background:', error);
+        alert('The background could not be saved in this browser. Please try a smaller file or another browser.');
+      }
+    });
+  }
+  if (removeBackgroundBtn) {
+    removeBackgroundBtn.addEventListener('click', async () => {
+      try {
+        await deleteCustomBackground();
+        localStorage.removeItem(BACKGROUND_FILE_NAME_KEY);
+        localStorage.setItem(BACKGROUND_MODE_KEY, 'starry');
+        refreshBackgroundControls();
+        applyBackgroundSettings();
+      } catch (error) {
+        console.error('Could not remove the custom background:', error);
+        alert('The custom background could not be removed. Please try again.');
+      }
+    });
+  }
   if (pSelect) pSelect.addEventListener('change', () => saveAllSettings(panel));
   if (wispInput) wispInput.addEventListener('input', () => saveAllSettings(panel));
   if (bareInput) bareInput.addEventListener('input', () => saveAllSettings(panel));
@@ -2547,7 +2913,7 @@ function setupSettingsBindings(panel) {
   }
 
   if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
+    resetBtn.addEventListener('click', async () => {
       localStorage.removeItem('nebuli-taskbar-full');
       localStorage.removeItem('nebuli-taskbar-collapse');
       localStorage.removeItem('nebuli-taskbar-position');
@@ -2555,10 +2921,22 @@ function setupSettingsBindings(panel) {
       localStorage.removeItem('nebuli-taskbar-solid-color');
       localStorage.removeItem('nebuli-taskbar-gradient-color1');
       localStorage.removeItem('nebuli-taskbar-gradient-color2');
+      localStorage.removeItem(BACKGROUND_MODE_KEY);
+      localStorage.removeItem(BACKGROUND_COLOR_KEY);
+      localStorage.removeItem(BACKGROUND_FILE_NAME_KEY);
+      localStorage.removeItem(PREINSTALLED_BACKGROUND_KEY);
       localStorage.removeItem('nebuli-p');
       localStorage.removeItem('wisp');
       localStorage.removeItem('bare');
 
+      try {
+        await deleteCustomBackground();
+      } catch (error) {
+        console.error('Could not clear the stored custom background during settings reset:', error);
+        alert('Other settings were reset, but the uploaded background file could not be removed.');
+      }
+      applyBackgroundSettings();
+      refreshBackgroundControls();
       loadAllSettings(panel);
       saveAllSettings(panel);
     });
