@@ -608,7 +608,9 @@ const WASM_JSON_URL = "/assets/game/w.json";
 let wasmGamesList = [];
 
 const CKV_JSON_URL = "/assets/game/c.json";
+const CKV_GAMEFILES_BASE_URL = "https://cdn.jsdelivr.net/gh/WanoCapy/ChickenKingsVault@main/gamefiles/";
 let ckvGamesList = [];
+let ckvGameLoadId = 0;
 
 const TRUFFLED_JSON_URL = "/assets/game/truffled.json";
 const TRUFFLED_BASE_URL = "/assets/game/t/";
@@ -654,7 +656,25 @@ async function fetchCKVData() {
     return ckvGamesList;
 }
 
-function openCKVGame(item) {
+function prepareCKVGameHtml(html) {
+    const gameDocument = new DOMParser().parseFromString(html, "text/html");
+    const toolbars = gameDocument.querySelectorAll(".toolbar");
+
+    toolbars.forEach(toolbar => toolbar.remove());
+
+    const frameWrapper = gameDocument.querySelector(".frame-wrapper");
+    if (frameWrapper && toolbars.length > 0) {
+        frameWrapper.style.height = "100%";
+    }
+
+    const gameFrame = gameDocument.querySelector(".frame-wrapper #gameFrame[src]");
+    return gameFrame
+        ? new URL(gameFrame.getAttribute("src"), CKV_GAMEFILES_BASE_URL).href
+        : null;
+}
+
+async function openCKVGame(item) {
+    const loadId = ++ckvGameLoadId;
     addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
     document.getElementById('zoneName').textContent = item.name;
 
@@ -666,7 +686,25 @@ function openCKVGame(item) {
     }
     zoneViewer.style.display = "flex";
     zoneFrame.removeAttribute('srcdoc');
-    zoneFrame.src = item.data.url || "about:blank";
+    zoneFrame.removeAttribute('src');
+
+    try {
+        const response = await fetch(item.data.url || "about:blank");
+        if (!response.ok) {
+            throw new Error(`Game request failed with status ${response.status}`);
+        }
+
+        const gameUrl = prepareCKVGameHtml(await response.text());
+        if (loadId !== ckvGameLoadId) return;
+        if (!gameUrl) {
+            throw new Error(`CKV wrapper did not contain a game frame: ${item.data.url}`);
+        }
+        zoneFrame.src = gameUrl;
+    } catch (error) {
+        if (loadId !== ckvGameLoadId) return;
+        console.error("[CKV Game Load Error]:", error);
+        zoneFrame.srcdoc = "<!doctype html><title>Game load failed</title><p>Unable to load this game. Check your connection and try again.</p>";
+    }
 }
 
 async function renderCKVSection(query = "") {
@@ -999,6 +1037,7 @@ function createGameCard(item) {
     const imgUrl = (rawImg && rawImg.trim() !== '') ? rawImg.trim() : UGS_FALLBACK_IMG;
     const isFallback = imgUrl === UGS_FALLBACK_IMG;
     div.onclick = () => {
+        if (item.type !== 'ckv') ckvGameLoadId++;
         if (item.type === 'cm') {
             CM.showGameDetails(item.data.id);
         } else if (item.type === 'truffled') {
@@ -1763,6 +1802,7 @@ function openZone(file) {
 }
 
 function closeZone() {
+    ckvGameLoadId++;
     zoneViewer.style.display = "none"
     if (zoneFrame && zoneFrame.parentNode) {
         zoneFrame.parentNode.removeChild(zoneFrame)
