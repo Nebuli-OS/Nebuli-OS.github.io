@@ -890,9 +890,11 @@ async function renderNBLISection(query = "") {
     applySearchFilter();
 }
 
-async function openTruffledGame(item) {
+async function openTruffledGame(item, saveToRecent = true) {
     const url = item.data.url;
-    addToRecent(item.name, item.data.thumbnail || "", "#");
+    if (saveToRecent) {
+        addToRecent(item.name, item.data.thumbnail || "", url, "truffled");
+    }
     document.getElementById('zoneName').textContent = item.name;
 
     if (!zoneFrame) {
@@ -1501,7 +1503,10 @@ const CM = {
     }
     zoneFrame.removeAttribute('src');
     zoneFrame.srcdoc = "";
-    addToRecent(item.name, item.data.icon || "", "#");
+    addToRecent(item.name, item.data.icon || "", "#", "cloudmoon", {
+      id: item.data.id,
+      status: item.data.status
+    });
     showPage('player');
     console.log("[Cloudmoon] Fetching player harness from " + CM_PLAYER_URL);
     try {
@@ -1630,9 +1635,8 @@ async function renderLuminGames(query = "") {
             const div = document.createElement("div")
             div.className = "game"
             div.onclick = async () => {
-                addToRecent(game.name, imgUrl, "#")
                 const { url } = await Lumin.getGameUrl(game.id)
-                openLuminGame(game.name, url)
+                openLuminGame(game.name, url, imgUrl)
             }
             div.innerHTML = `
                 <img src="${imgUrl}" alt="${game.name}" loading="lazy" class="${isFallback ? 'fallback-icon' : ''}" onerror="handleImgError(this)">
@@ -1674,7 +1678,8 @@ async function renderCloudmoonSection(query = "") {
     }
 }
 
-function openLuminGame(name, url) {
+function openLuminGame(name, url, img = "", saveToRecent = true) {
+    if (saveToRecent) addToRecent(name, img, url, "lumin");
     if (!zoneFrame) {
         zoneFrame = document.createElement("iframe")
         zoneFrame.id = "zoneFrame"
@@ -1682,6 +1687,7 @@ function openLuminGame(name, url) {
         zoneViewer.appendChild(zoneFrame)
     }
     zoneViewer.style.display = "flex"
+    zoneFrame.removeAttribute("srcdoc")
     zoneFrame.src = url
     document.getElementById('zoneName').textContent = name
 }
@@ -1700,7 +1706,7 @@ async function renderGames() {
         section.className = "games-section"
 
         zones.filter(file => !excludedGNMathGames.has(file.name || file.title || "")).forEach(file => {
-            const div = createGameCard(file)
+            const div = createGameCard({ ...file, type: "gn-math" })
             section.appendChild(div)
         })
 
@@ -1774,10 +1780,19 @@ function displayRecent() {
 async function openRecentGame(game) {
     const link = game.link || ""
     let isCKV = game.type === "ckv"
+    let isGNMath = game.type === "gn-math"
 
     if (!isCKV && link && link !== "#") {
         try {
-            isCKV = new URL(link, document.baseURI).pathname.startsWith("/assets/game/c/")
+            const gameUrl = new URL(link, document.baseURI)
+            isCKV = gameUrl.pathname.startsWith("/assets/game/c/")
+            if (!game.type) {
+                const gnMathBase = new URL(htmlURL, document.baseURI)
+                const basePath = gnMathBase.pathname.replace(/\/+$/, "")
+                const gamePath = gameUrl.pathname.replace(/\/+$/, "")
+                isGNMath = gameUrl.origin === gnMathBase.origin &&
+                    (gamePath === basePath || gamePath.startsWith(basePath + "/"))
+            }
         } catch (error) {
             console.error("[Recent Game URL Error]:", error)
         }
@@ -1796,6 +1811,109 @@ async function openRecentGame(game) {
         }
         await openCKVGame(item, false)
         return
+    }
+
+    if (game.type === "truffled") {
+        const games = await fetchTruffledData()
+        const item = games.find(candidate =>
+            candidate.data.url === link || candidate.name === game.name
+        ) || {
+            type: "truffled",
+            name: game.name || "Game",
+            data: { url: link, thumbnail: game.img || UGS_FALLBACK_IMG }
+        }
+        await openTruffledGame(item, false)
+        return
+    }
+
+    if (game.type === "cloudmoon") {
+        if (!cloudmoonGamesList.length || (CM.token && !CM.timeLeft)) {
+            await CM.init()
+        }
+        const item = cloudmoonGamesList.find(candidate =>
+            candidate.data.id === game.data?.id || candidate.name === game.name
+        ) || {
+            type: "cm",
+            name: game.name || "Game",
+            data: {
+                id: game.data?.id,
+                status: game.data?.status
+            }
+        }
+        if (!item.data.id) {
+            console.error("[Recent Game Load Error]: Cloudmoon package ID is missing.")
+            return
+        }
+        CM.currentItem = item
+        await CM.handlePlay(item.data.id, item.data.status)
+        return
+    }
+
+    if (isGNMath) {
+        let gameUrl = link
+        try {
+            const gnMathBase = new URL(htmlURL, document.baseURI)
+            const isBaseUrl = !gameUrl || gameUrl === "#" ||
+                new URL(gameUrl, document.baseURI).pathname === gnMathBase.pathname
+            if (isBaseUrl) {
+                const file = zones.find(candidate =>
+                    (game.data?.id !== undefined && String(candidate.id) === String(game.data.id)) ||
+                    (candidate.name || candidate.title) === game.name
+                )
+                if (file) gameUrl = zoneURL(file.url)
+            }
+        } catch (error) {
+            console.error("[GN-Math Recent Game URL Error]:", error)
+        }
+        await openGNMathGame(game.name || "Game", gameUrl, game.img || "", false)
+        return
+    }
+
+    if (!game.type && (!link || link === "#")) {
+        const file = zones.find(candidate => (candidate.name || candidate.title) === game.name)
+        if (file) {
+            const fileUrl = zoneURL(file.url)
+            await openGNMathGame(
+                file.name || file.title || game.name || "Game",
+                fileUrl,
+                game.img || zoneURL(file.cover),
+                false,
+                file.id
+            )
+            return
+        }
+    }
+
+    if (game.type === "lumin" && link && link !== "#") {
+        openLuminGame(game.name || "Game", link, game.img || "", false)
+        return
+    }
+
+    if ((game.type === "lumin" || !game.type) && (!link || link === "#")) {
+        try {
+            if (!luminInitialized) {
+                await Lumin.init({ headless: true })
+                luminInitialized = true
+            }
+            const { games } = await Lumin.getGames({ page: 1, limit: 99999999 })
+            const luminGame = games.find(candidate => candidate.name === game.name)
+            if (luminGame) {
+                const { url } = await Lumin.getGameUrl(luminGame.id)
+                openLuminGame(luminGame.name, url, game.img || "", false)
+                return
+            }
+        } catch (error) {
+            console.error("[Recent Game Load Error]:", error)
+        }
+    }
+
+    if (!game.type && (!link || link === "#")) {
+        const games = await fetchTruffledData()
+        const item = games.find(candidate => candidate.name === game.name)
+        if (item) {
+            await openTruffledGame(item, false)
+            return
+        }
     }
 
     ckvGameLoadId++
@@ -1825,12 +1943,18 @@ async function openRecentGame(game) {
     zoneViewer.style.display = "flex"
 }
 
-function addToRecent(name, img, link, type = "") {
+function addToRecent(name, img, link, type = "", data = null) {
     if (link && link.includes("forms.gle")) return
 
     let recent = JSON.parse(localStorage.getItem("recentGames")) || []
     recent = recent.filter(g => g.name !== name)
-    recent.unshift({ name, img, link: link || "#", ...(type ? { type } : {}) })
+    recent.unshift({
+        name,
+        img,
+        link: link || "#",
+        ...(type ? { type } : {}),
+        ...(data ? { data } : {})
+    })
 
     if (recent.length > 8) recent.pop()
 
@@ -1858,13 +1982,76 @@ function injectZoneBase(html, url) {
     return tag + html
 }
 
+async function openGNMathGame(name, url, img = "", saveToRecent = true, gameId = null) {
+    const loadId = ++ckvGameLoadId
+    let gameUrl
+    try {
+        gameUrl = new URL(url, document.baseURI)
+        if (gameUrl.protocol !== "http:" && gameUrl.protocol !== "https:") {
+            throw new Error(`Unsupported GN-Math URL protocol: ${gameUrl.protocol}`)
+        }
+
+        const gnMathBase = new URL(htmlURL, document.baseURI)
+        const normalizePath = path => path.replace(/\/+$/, "")
+        if (gameUrl.origin === gnMathBase.origin &&
+            normalizePath(gameUrl.pathname) === normalizePath(gnMathBase.pathname)) {
+            const catalogGame = zones.find(candidate =>
+                (gameId !== null && String(candidate.id) === String(gameId)) ||
+                (candidate.name || candidate.title) === name
+            )
+            if (!catalogGame) {
+                throw new Error(`GN-Math game file not found for "${name}"`)
+            }
+            gameUrl = new URL(zoneURL(catalogGame.url), document.baseURI)
+        }
+    } catch (error) {
+        console.error("[GN-Math Game Load Error]:", error)
+        return
+    }
+
+    if (saveToRecent) {
+        addToRecent(name, img, gameUrl.href, "gn-math", gameId === null ? null : { id: gameId })
+    }
+    document.getElementById("zoneName").textContent = name
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe")
+        zoneFrame.id = "zoneFrame"
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad"
+        zoneViewer.appendChild(zoneFrame)
+    }
+    zoneViewer.style.display = "flex"
+    zoneFrame.removeAttribute("src")
+    zoneFrame.removeAttribute("srcdoc")
+
+    try {
+        const requestUrl = new URL(gameUrl.href)
+        requestUrl.searchParams.set("t", Date.now())
+        const response = await fetch(requestUrl.href)
+        if (!response.ok) {
+            throw new Error(`GN-Math HTML request failed with status ${response.status}`)
+        }
+        const html = injectZoneBase(await response.text(), gameUrl.href)
+        if (loadId !== ckvGameLoadId) return
+        zoneFrame.srcdoc = html
+    } catch (error) {
+        if (loadId !== ckvGameLoadId) return
+        console.error("[GN-Math Game Load Error]:", error)
+        zoneFrame.srcdoc = "<!doctype html><title>Game load failed</title><p>Unable to load this game. Check your connection and try again.</p>"
+    }
+}
+
 function openZone(file) {
+    const resolvedUrl = zoneURL(file.url)
+    if (file.type === "gn-math") {
+        openGNMathGame(file.name || file.title || "Game", resolvedUrl, zoneURL(file.cover), true, file.id)
+        return
+    }
     addToRecent(file.name, zoneURL(file.cover), file.url.startsWith("http") ? file.url : "")
 
     if (file.url.startsWith("http")) {
         window.open(file.url, "_blank")
     } else {
-        const url = zoneURL(file.url)
+        const url = resolvedUrl
         fetch(url + "?t=" + Date.now()).then(response => response.text()).then(html => {
             html = injectZoneBase(html, url)
             
@@ -1922,6 +2109,7 @@ async function renderAllSourceSearch() {
     const renderId = ++searchRenderId
     const container = document.getElementById("games-container")
     container.innerHTML = ""
+    displayRecent()
 
     const sources = ["GN-Math", "Lumin", "UGS", "Cloudmoon", "Truffled", "Wasm.rip", "CKV", "NBLI-Ports"]
     const orderedSources = [selectedCategory, ...sources.filter(source => source !== selectedCategory)]
@@ -1938,7 +2126,7 @@ async function renderAllSourceSearch() {
                 title.textContent = `GN-Math (${matching.length})`
                 const section = document.createElement("div")
                 section.className = "games-section"
-                matching.forEach(file => section.appendChild(createGameCard(file)))
+                matching.forEach(file => section.appendChild(createGameCard({ ...file, type: "gn-math" })))
                 container.appendChild(title)
                 container.appendChild(section)
                 container.appendChild(createDivider())
@@ -1967,6 +2155,10 @@ async function renderAllSourceSearch() {
 function applySearchFilter() {
     const q = document.getElementById("search").value.toLowerCase()
     document.querySelectorAll(".game").forEach(g => {
+        if (g.closest("#recent-section")) {
+            g.style.display = "block"
+            return
+        }
         const el = g.querySelector("a, button")
         if (el) {
             const nameText = el.textContent.toLowerCase()
