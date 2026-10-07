@@ -673,9 +673,11 @@ function prepareCKVGameHtml(html) {
         : null;
 }
 
-async function openCKVGame(item) {
+async function openCKVGame(item, saveToRecent = true) {
     const loadId = ++ckvGameLoadId;
-    addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#");
+    if (saveToRecent) {
+        addToRecent(item.name, item.data.thumbnail || "", item.data.url || "#", "ckv");
+    }
     document.getElementById('zoneName').textContent = item.name;
 
     if (!zoneFrame) {
@@ -699,7 +701,27 @@ async function openCKVGame(item) {
         if (!gameUrl) {
             throw new Error(`CKV wrapper did not contain a game frame: ${item.data.url}`);
         }
-        zoneFrame.src = gameUrl;
+
+        const gameResponse = await fetch(gameUrl);
+        if (!gameResponse.ok) {
+            throw new Error(`Game file request failed with status ${gameResponse.status}`);
+        }
+
+        let gameHtml = await gameResponse.text();
+        if (loadId !== ckvGameLoadId) return;
+
+        const baseTag = `<base href="${gameUrl.substring(0, gameUrl.lastIndexOf("/") + 1)}">`;
+        if (/<base\b[^>]*>/i.test(gameHtml)) {
+            gameHtml = gameHtml.replace(/<base\b[^>]*>/i, baseTag);
+        } else if (/<head[^>]*>/i.test(gameHtml)) {
+            gameHtml = gameHtml.replace(/<head[^>]*>/i, match => match + baseTag);
+        } else if (/<html[^>]*>/i.test(gameHtml)) {
+            gameHtml = gameHtml.replace(/<html[^>]*>/i, match => match + baseTag);
+        } else {
+            gameHtml = baseTag + gameHtml;
+        }
+
+        zoneFrame.srcdoc = gameHtml;
     } catch (error) {
         if (loadId !== ckvGameLoadId) return;
         console.error("[CKV Game Load Error]:", error);
@@ -1733,20 +1755,82 @@ function displayRecent() {
         const rawImg = game.img;
         const imgUrl = (rawImg && rawImg.trim() !== '') ? rawImg.trim() : UGS_FALLBACK_IMG;
         const isFallback = imgUrl === UGS_FALLBACK_IMG;
-        div.innerHTML = `
-            <img src="${imgUrl}" class="${isFallback ? 'fallback-icon' : ''}" onerror="handleImgError(this)">
-            <a href="${game.link}">${game.name}</a>
-        `
+        const img = document.createElement("img")
+        img.src = imgUrl
+        img.alt = game.name || "Recently played game"
+        img.loading = "lazy"
+        if (isFallback) img.classList.add("fallback-icon")
+        img.onerror = () => handleImgError(img)
+
+        const button = document.createElement("button")
+        button.type = "button"
+        button.textContent = game.name || "Game"
+        div.append(img, button)
+        div.addEventListener("click", () => openRecentGame(game))
         section.appendChild(div)
     })
 }
 
-function addToRecent(name, img, link) {
+async function openRecentGame(game) {
+    const link = game.link || ""
+    let isCKV = game.type === "ckv"
+
+    if (!isCKV && link && link !== "#") {
+        try {
+            isCKV = new URL(link, document.baseURI).pathname.startsWith("/assets/game/c/")
+        } catch (error) {
+            console.error("[Recent Game URL Error]:", error)
+        }
+    }
+
+    if (isCKV) {
+        const recentLoadId = ++ckvGameLoadId
+        const games = await fetchCKVData()
+        if (recentLoadId !== ckvGameLoadId) return
+        const item = games.find(candidate =>
+            candidate.data.url === link || candidate.name === game.name
+        ) || {
+            type: "ckv",
+            name: game.name || "Game",
+            data: { url: link, thumbnail: game.img || UGS_FALLBACK_IMG }
+        }
+        await openCKVGame(item, false)
+        return
+    }
+
+    ckvGameLoadId++
+    document.getElementById("zoneName").textContent = game.name || "Game"
+    if (!zoneFrame) {
+        zoneFrame = document.createElement("iframe")
+        zoneFrame.id = "zoneFrame"
+        zoneFrame.allow = "autoplay; fullscreen; pointer-lock; gamepad"
+        zoneViewer.appendChild(zoneFrame)
+    }
+
+    zoneFrame.removeAttribute("srcdoc")
+    if (link && link !== "#") {
+        try {
+            const gameUrl = new URL(link, document.baseURI)
+            if (gameUrl.protocol !== "http:" && gameUrl.protocol !== "https:") {
+                throw new Error(`Unsupported game URL protocol: ${gameUrl.protocol}`)
+            }
+            zoneFrame.src = gameUrl.href
+        } catch (error) {
+            console.error("[Recent Game Load Error]:", error)
+            zoneFrame.srcdoc = "<!doctype html><title>Game unavailable</title><p>This recently played game URL is invalid. Open it from its game list to play.</p>"
+        }
+    } else {
+        zoneFrame.srcdoc = "<!doctype html><title>Game unavailable</title><p>This recently played game has no saved URL. Open it from its game list to play.</p>"
+    }
+    zoneViewer.style.display = "flex"
+}
+
+function addToRecent(name, img, link, type = "") {
     if (link && link.includes("forms.gle")) return
 
     let recent = JSON.parse(localStorage.getItem("recentGames")) || []
     recent = recent.filter(g => g.name !== name)
-    recent.unshift({ name, img, link: link || "#" })
+    recent.unshift({ name, img, link: link || "#", ...(type ? { type } : {}) })
 
     if (recent.length > 8) recent.pop()
 
