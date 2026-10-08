@@ -136,6 +136,7 @@ let appWindowCounter = 0;
 let maxZIndex = 105;
 
 let startMenuOpen = false;
+let startMenuAnimation = null;
 
 const WINDOW_WIDTH = 900;
 const WINDOW_HEIGHT = 650;
@@ -876,19 +877,61 @@ function restoreAppWindow(windowId) {
 
 function toggleStartMenu() {
   if (startMenuOpen) {
-    startMenuContainer.style.display = 'none';
-    startMenuOpen = false;
+    closeStartMenu();
   } else {
+    const startMenuFrame = document.getElementById('startMenuFrame');
+    if (startMenuFrame) {
+      const startMenuUrl = new URL(startMenuFrame.src, window.location.href);
+      startMenuUrl.searchParams.set('_', Date.now().toString());
+      startMenuFrame.src = startMenuUrl.toString();
+    }
     startMenuContainer.style.display = 'block';
     startMenuOpen = true;
     raiseWindowToTop(startMenuContainer);
+    animateStartMenu(true);
   }
+}
+
+function animateStartMenu(opening) {
+  const currentStyle = getComputedStyle(startMenuContainer);
+  const currentFrame = {
+    opacity: currentStyle.opacity,
+    transform: currentStyle.transform
+  };
+  const isInterruptingAnimation = startMenuAnimation !== null;
+
+  if (startMenuAnimation) {
+    startMenuAnimation.cancel();
+  }
+
+  const from = opening && !isInterruptingAnimation
+    ? { opacity: 0, transform: 'translate(-50%, 24px) scale(0.96)' }
+    : currentFrame;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  startMenuAnimation = startMenuContainer.animate(
+    opening
+      ? [from, { opacity: 1, transform: 'translateX(-50%)' }]
+      : [from, { opacity: 0, transform: 'translate(-50%, 24px) scale(0.96)' }],
+    {
+      duration: reducedMotion ? 1 : opening ? 260 : 180,
+      easing: opening ? 'cubic-bezier(0.2, 0.8, 0.2, 1)' : 'ease-in',
+      fill: 'forwards'
+    }
+  );
+
+  startMenuAnimation.onfinish = () => {
+    if (!opening && !startMenuOpen) {
+      startMenuContainer.style.display = 'none';
+    }
+    startMenuAnimation.cancel();
+    startMenuAnimation = null;
+  };
 }
 
 function closeStartMenu() {
   if (startMenuOpen) {
-    startMenuContainer.style.display = 'none';
     startMenuOpen = false;
+    animateStartMenu(false);
   }
 }
 
@@ -987,9 +1030,34 @@ window.addEventListener('message', (event) => {
     }
     else if (event.data.type === 'open_specific_game') {
       closeStartMenu();
-      const gamePath = event.data.detail;
       const iconUrl = gamesBtn.querySelector('img').src;
-      
+      const gameSelection = event.data.detail;
+
+      if (gameSelection && typeof gameSelection === 'object') {
+        let windowData;
+        if (appWindowStates.games && appWindows[appWindowStates.games]) {
+          windowData = appWindows[appWindowStates.games];
+          if (windowData.minimized) {
+            restoreAppWindow(appWindowStates.games);
+          } else {
+            raiseWindowToTop(windowData.element);
+          }
+        } else {
+          appWindowStates.games = createAppWindow('/games.html', 'Games', 'nebuli://games', iconUrl);
+          windowData = appWindows[appWindowStates.games];
+        }
+
+        windowData.iframe.addEventListener('load', () => {
+          windowData.iframe.contentWindow.postMessage(
+            { type: 'open_game_in_frame', detail: gameSelection },
+            window.location.origin
+          );
+        }, { once: true });
+        windowData.iframe.src = '/games.html';
+        return;
+      }
+
+      const gamePath = gameSelection;
       if (appWindowStates.games && appWindows[appWindowStates.games]) {
         const windowData = appWindows[appWindowStates.games];
         windowData.iframe.src = gamePath;
@@ -3095,6 +3163,7 @@ function showShortcutsPopup() {
   `;
   
   const shortcuts = [
+    { key: 'Alt', desc: 'Open Start Menu' },
     { key: 'Alt + T', desc: 'New Tab' },
     { key: 'Alt + W', desc: 'Close Current Tab' },
     { key: 'Alt + N', desc: 'Open New Window' },
@@ -3198,6 +3267,29 @@ closeBtn.addEventListener('mouseout', () => {
   document.addEventListener('keydown', escapeHandler);
 }
 
+let altUsedWithAnotherKey = false;
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Alt') {
+    altUsedWithAnotherKey = false;
+    e.preventDefault();
+    return;
+  }
+  if (e.altKey) {
+    altUsedWithAnotherKey = true;
+  }
+});
+
+document.addEventListener('keyup', (e) => {
+  if (e.key === 'Alt') {
+    e.preventDefault();
+    if (!altUsedWithAnotherKey) {
+      toggleStartMenu();
+    }
+    altUsedWithAnotherKey = false;
+  }
+});
+
 document.addEventListener('keydown', (e) => {
   if (e.altKey) {
     if (e.key === 't' || e.key === 'T') {
@@ -3228,7 +3320,7 @@ document.addEventListener('keydown', (e) => {
         minimizeBubble.style.display = 'none';
       }
     }
-    else if (e.key === '?') {
+    else if (e.key === '/' || e.key === '?') {
       e.preventDefault();
       showShortcutsPopup();
     }

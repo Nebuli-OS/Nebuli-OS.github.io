@@ -145,19 +145,237 @@
 <script>
     const GAMES_ICON = "/assets/img/game.svg";
     const FOLDER_ICON = "/assets/img/file.svg";
-    let allGames = [];
+    const GAME_SOURCES = [
+        "Lumin",
+        "GN-Math",
+        "UGS",
+        "Cloudmoon",
+        "Truffled",
+        "Wasm.rip",
+        "CKV",
+        "NBLI-Ports"
+    ];
+    const EXCLUDED_GNMATH_GAMES = new Set([
+        "[!] SUGGEST GAMES .gg/D4c9VFYWyU",
+        "[!] COMMENTS",
+        "Chat Bot AI (A.I GPT)"
+    ]);
+    const GAME_SOURCE_LOADERS = {
+        "GN-Math": () => fetchJson("https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json")
+            .then(games => games.filter(game =>
+                !EXCLUDED_GNMATH_GAMES.has(game.name || game.title || "")
+            ))
+            .then(games => games.map(game => ({
+                name: game.name || game.title || "",
+                url: resolveZoneUrl(game.url)
+            }))),
+        "UGS": () => fetchJson("/assets/game/ugs.json").then(games => games.map(game => ({
+            name: game.name || "",
+            url: game.url
+        }))),
+        "Cloudmoon": loadCloudmoonGames,
+        "Truffled": () => fetchJson("/assets/game/truffled.json").then(data =>
+            (data.games || []).map(game => {
+                const slug = game.name.toLowerCase().trim()
+                    .replace(/\s+/g, "-")
+                    .replace(/[^\w-]+/g, "")
+                    .replace(/--+/g, "-");
+                return {
+                    name: game.name || "",
+                    url: `/assets/game/t/${slug}/${(game.url || "").split("/").pop()}`
+                };
+            })
+        ),
+        "Wasm.rip": () => fetchJson("/assets/game/w.json").then(games => games.map(game => ({
+            name: game.title || "",
+            url: game.href
+        }))),
+        "CKV": () => fetchJson("/assets/game/c.json").then(games => games.map(game => ({
+            name: game.name || "Game",
+            url: game.url
+        }))),
+        "NBLI-Ports": () => fetchJson("/assets/game/n.json").then(games => games.map(game => ({
+            name: game.title || "",
+            url: game.href
+        })))
+    };
+    const gameSourceCache = new Map();
+    let luminGamesPromise;
+    let luminScriptPromise;
+    let cloudmoonGamesPromise;
+    let searchRequestId = 0;
 
     function sendAction(type, detail = "") {
         window.parent.postMessage({ type: type, detail: detail }, "*");
     }
 
-    async function init() {
-        try {
-            const res = await fetch("/assets/game/games.json");
-            const data = await res.json();
-            allGames = Object.values(data).flat();
-            loadRecent();
-        } catch (e) { loadRecent(); }
+    async function fetchJson(url) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Request failed (${response.status}): ${url}`);
+        return response.json();
+    }
+
+    function resolveZoneUrl(url) {
+        return (url || "")
+            .replaceAll("{COVER_URL}", "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/")
+            .replaceAll("{HTML_URL}", "https://cdn.jsdelivr.net/gh/freebuisness/html@main/");
+    }
+
+    function getGameSource(source) {
+        if (source === "Lumin") return loadLuminGames();
+        if (!gameSourceCache.has(source)) {
+            const loader = GAME_SOURCE_LOADERS[source];
+            if (!loader) return Promise.resolve([]);
+            gameSourceCache.set(source, loader().catch(error => {
+                console.error(`[${source} Search Load Error]:`, error);
+                return [];
+            }));
+        }
+        return gameSourceCache.get(source);
+    }
+
+    function loadLuminScript() {
+        if (window.Lumin) return Promise.resolve(window.Lumin);
+        if (!luminScriptPromise) {
+            luminScriptPromise = new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src = "https://cdn.jsdelivr.net/gh/luminsdk/script@latest/lumin.min.js";
+                script.onload = () => window.Lumin
+                    ? resolve(window.Lumin)
+                    : reject(new Error("Lumin SDK loaded without exposing its API."));
+                script.onerror = () => reject(new Error("Failed to load the Lumin SDK."));
+                document.head.appendChild(script);
+            }).catch(error => {
+                luminScriptPromise = null;
+                throw error;
+            });
+        }
+        return luminScriptPromise;
+    }
+
+    function loadLuminGames() {
+        if (!luminGamesPromise) {
+            luminGamesPromise = (async () => {
+                const lumin = await loadLuminScript();
+                await lumin.init({ headless: true });
+                const { games } = await lumin.getGames({ page: 1, limit: 99999999 });
+                return games.map(game => ({
+                    name: game.name || "",
+                    url: null
+                }));
+            })().catch(error => {
+                console.error("[Lumin Search Load Error]:", error);
+                luminGamesPromise = null;
+                return [];
+            });
+        }
+        return luminGamesPromise;
+    }
+
+    function generateUUID() {
+        if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, character => {
+            const random = Math.random() * 16 | 0;
+            return (character === "x" ? random : (random & 3 | 8)).toString(16);
+        });
+    }
+
+    async function loadCloudmoonGames() {
+        if (!cloudmoonGamesPromise) {
+            cloudmoonGamesPromise = (async () => {
+                const hosts = [
+                    "https://api.cloudmoon.cloudbatata.com",
+                    "https://api.prod.cloudmoonapp.com",
+                    "https://api.prod.geometry.today",
+                    "https://hrz5zfjq02.execute-api.us-east-1.amazonaws.com",
+                    "https://api.prod.viewoncloud.com"
+                ];
+                const host = await new Promise(resolve => {
+                    let failures = 0;
+                    let settled = false;
+                    const controllers = hosts.map(() => new AbortController());
+                    hosts.forEach((url, index) => {
+                        const controller = controllers[index];
+                        const timeout = setTimeout(() => controller.abort(), 3000);
+                        fetch(`${url}/_ping`, { signal: controller.signal })
+                            .then(response => {
+                                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                                if (!settled) {
+                                    settled = true;
+                                    controllers.forEach((other, otherIndex) => {
+                                        if (otherIndex !== index) other.abort();
+                                    });
+                                    resolve(url);
+                                }
+                            })
+                            .catch(() => {
+                                if (++failures === hosts.length && !settled) resolve(null);
+                            })
+                            .finally(() => clearTimeout(timeout));
+                    });
+                });
+                if (!host) throw new Error("No Cloudmoon API host responded.");
+
+                const deviceId = localStorage.getItem("cm_device_id") || generateUUID();
+                localStorage.setItem("cm_device_id", deviceId);
+                const token = localStorage.getItem("cm_auth_token");
+                const makeRequest = async path => {
+                    const url = new URL(`${host}${path}`);
+                    url.searchParams.set("device_type", "web");
+                    url.searchParams.set("query_uuid", generateUUID());
+                    url.searchParams.set("site", "cm");
+                    url.searchParams.set("device_id", deviceId);
+                    const headers = {
+                        "Content-Type": "application/json",
+                        "X-User-Language": localStorage.getItem("cm_lang") || navigator.language.split("-")[0] || "en",
+                        "X-User-Locale": (navigator.language.split("-")[1] || navigator.language.split("-")[0]).toUpperCase()
+                    };
+                    if (token) headers["X-User-Token"] = token;
+                    const response = await fetch(url, { headers });
+                    if (!response.ok) throw new Error(`Cloudmoon request failed (${response.status}): ${path}`);
+                    return response.json();
+                };
+
+                let userLevel = 0;
+                if (token) {
+                    try {
+                        const phones = await makeRequest("/phone/list");
+                        if (phones.code === 0 && phones.data?.list?.length) {
+                            userLevel = Math.max(...phones.data.list.map(phone => phone.level || 0));
+                        }
+                    } catch (error) {
+                        console.error("[Cloudmoon User Level Load Error]:", error);
+                    }
+                }
+
+                const response = await makeRequest(token ? "/game/list" : "/game/guest_list");
+                if (response.code !== 0 || !response.data?.list) {
+                    throw new Error(response.message || "Cloudmoon returned no game list.");
+                }
+                return response.data.list
+                    .filter(game => game.status === 1 && (!game.is_high || userLevel === 3))
+                    .map(game => ({
+                        name: game.title || "",
+                        url: null
+                    }));
+            })().catch(error => {
+                console.error("[Cloudmoon Search Load Error]:", error);
+                cloudmoonGamesPromise = null;
+                return [];
+            });
+        }
+        return cloudmoonGamesPromise;
+    }
+
+    async function searchGames(query) {
+        const sourceGames = await Promise.all(GAME_SOURCES.map(async source => ({
+            source,
+            games: await getGameSource(source)
+        })));
+        return sourceGames.flatMap(({ source, games }) =>
+            games.filter(game => (game.name || "").toLowerCase().includes(query))
+                .map(game => ({ ...game, source }))
+        );
     }
 
     function loadRecent() {
@@ -190,24 +408,43 @@
         return results;
     }
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const q = e.target.value.toLowerCase();
+    document.getElementById('searchInput').addEventListener('input', async (e) => {
+        const q = e.target.value.trim().toLowerCase();
         const container = document.getElementById('dynamicList');
         const appsWrapper = document.getElementById('appsWrapper');
+        const requestId = ++searchRequestId;
         if (q === "") { loadRecent(); return; }
         appsWrapper.style.display = "none";
         document.getElementById('listTitle').textContent = "Results";
         container.innerHTML = "";
 
-        allGames.filter(g => g.title.toLowerCase().includes(q)).slice(0, 4).forEach(g => {
-            createItem(container, g.title, "Game", GAMES_ICON, () => sendAction('open_specific_game', g.href));
-        });
+        try {
+            const matches = await searchGames(q);
+            if (requestId !== searchRequestId) return;
+            matches.forEach(game => {
+                const selection = {
+                        source: game.source,
+                        name: game.name,
+                        url: game.url || null
+                };
+                const launchUrl = `/games.html?startGame=${encodeURIComponent(JSON.stringify(selection))}`;
+                createItem(container, game.name, game.source, GAMES_ICON, () =>
+                    sendAction("open_specific_game", launchUrl)
+                );
+            });
+        } catch (error) {
+            console.error("[Game Search Error]:", error);
+        }
 
         const vfsRaw = localStorage.getItem("vfs_file_manager_data");
         if (vfsRaw) {
-            searchVFS(JSON.parse(vfsRaw), q).slice(0, 6).forEach(file => {
-                createItem(container, file.name, "File", FOLDER_ICON, () => sendAction('open_specific_file', file.fullPath));
-            });
+            try {
+                searchVFS(JSON.parse(vfsRaw), q).slice(0, 6).forEach(file => {
+                    createItem(container, file.name, "File", FOLDER_ICON, () => sendAction('open_specific_file', file.fullPath));
+                });
+            } catch (error) {
+                console.error("[File Search Error]:", error);
+            }
         }
     });
 
@@ -215,16 +452,22 @@
         const item = document.createElement('div');
         item.className = 'recent-item';
         item.onclick = callback;
-        item.innerHTML = `
-            <img src="${iconSrc}" class="recent-icon">
-            <div class="recent-info">
-                <span class="recent-name">${title}</span>
-                <span class="recent-meta">${meta}</span>
-            </div>
-        `;
+        const icon = document.createElement("img");
+        icon.src = iconSrc;
+        icon.className = "recent-icon";
+        const info = document.createElement("div");
+        info.className = "recent-info";
+        const name = document.createElement("span");
+        name.className = "recent-name";
+        name.textContent = title;
+        const details = document.createElement("span");
+        details.className = "recent-meta";
+        details.textContent = meta;
+        info.append(name, details);
+        item.append(icon, info);
         parent.appendChild(item);
     }
-    init();
+    loadRecent();
 </script>
 
 </body>

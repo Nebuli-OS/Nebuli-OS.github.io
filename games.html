@@ -2152,6 +2152,88 @@ async function renderAllSourceSearch() {
 
 }
 
+async function openGameFromStartMenu(selection) {
+    if (!selection || typeof selection.name !== "string") {
+        throw new Error("The selected game is missing its name.");
+    }
+
+    const matchesSelection = game =>
+        game.name === selection.name &&
+        (!selection.url || game.data?.url === selection.url);
+
+    switch (selection.source) {
+        case "GN-Math": {
+            if (!zones.length) await fetchZones();
+            const game = zones.find(candidate =>
+                (candidate.name || candidate.title) === selection.name &&
+                (!selection.url || zoneURL(candidate.url) === selection.url)
+            );
+            if (!game) throw new Error(`GN-Math game not found: ${selection.name}`);
+            openZone({ ...game, type: "gn-math" });
+            return;
+        }
+        case "Lumin": {
+            if (!luminInitialized) {
+                await Lumin.init({ headless: true });
+                luminInitialized = true;
+            }
+            const { games } = await Lumin.getGames({ page: 1, limit: 99999999 });
+            const game = games.find(candidate => candidate.name === selection.name);
+            if (!game) throw new Error(`Lumin game not found: ${selection.name}`);
+            const { url } = await Lumin.getGameUrl(game.id);
+            openLuminGame(game.name, url);
+            return;
+        }
+        case "UGS": {
+            const game = (await fetchUGSData()).find(matchesSelection);
+            if (!game) throw new Error(`UGS game not found: ${selection.name}`);
+            openUGSGame(game);
+            return;
+        }
+        case "Cloudmoon": {
+            await CM.init();
+            const item = cloudmoonGamesList.find(candidate => candidate.name === selection.name);
+            if (!item) throw new Error(`Cloudmoon game not found: ${selection.name}`);
+            CM.currentItem = item;
+            await CM.showGameDetails(item.data.id);
+            return;
+        }
+        case "Truffled": {
+            const game = (await fetchTruffledData()).find(matchesSelection);
+            if (!game) throw new Error(`Truffled game not found: ${selection.name}`);
+            await openTruffledGame(game);
+            return;
+        }
+        case "Wasm.rip": {
+            const game = (await fetchWasmData()).find(matchesSelection);
+            if (!game) throw new Error(`Wasm.rip game not found: ${selection.name}`);
+            openWasmGame(game);
+            return;
+        }
+        case "CKV": {
+            const game = (await fetchCKVData()).find(matchesSelection);
+            if (!game) throw new Error(`CKV game not found: ${selection.name}`);
+            await openCKVGame(game);
+            return;
+        }
+        case "NBLI-Ports": {
+            const game = (await fetchNBLIData()).find(matchesSelection);
+            if (!game) throw new Error(`NBLI-Ports game not found: ${selection.name}`);
+            openNBLIGame(game);
+            return;
+        }
+        default:
+            throw new Error(`Unknown game source: ${selection.source}`);
+    }
+}
+
+window.addEventListener("message", event => {
+    if (event.source !== window.parent || event.data?.type !== "open_game_in_frame") return;
+    openGameFromStartMenu(event.data.detail).catch(error => {
+        console.error("[Start Menu Game Launch Error]:", error);
+    });
+});
+
 function applySearchFilter() {
     const q = document.getElementById("search").value.toLowerCase()
     document.querySelectorAll(".game").forEach(g => {
@@ -2168,6 +2250,17 @@ function applySearchFilter() {
 }
 
 document.getElementById("search").addEventListener("input", renderAllSourceSearch)
+
+const startMenuGameParam = new URLSearchParams(window.location.search).get("startGame")
+if (startMenuGameParam) {
+    try {
+        openGameFromStartMenu(JSON.parse(startMenuGameParam)).catch(error => {
+            console.error("[Start Menu Game Launch Error]:", error)
+        })
+    } catch (error) {
+        console.error("[Start Menu Game Launch Error]: Invalid game selection in URL.", error)
+    }
+}
 
 fetchZones()
 </script>
