@@ -42,6 +42,7 @@ async function run() {
   const homeFrame = doc.createElement('iframe');
   homeFrame.id = 'homeFrame';
   homeFrame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:none;z-index:2;';
+  homeFrame.setAttribute('allowfullscreen', 'true');
   const iframeContainer = doc.getElementById('iframeContainer');
   if (iframeContainer) iframeContainer.appendChild(homeFrame);
 
@@ -133,6 +134,7 @@ async function run() {
         ctrl.iframe.style.height = '100%'
         ctrl.iframe.style.border = 'none'
         ctrl.iframe.style.display = 'none'
+        ctrl.iframe.setAttribute('allowfullscreen', 'true')
         iframeContainer.appendChild(ctrl.iframe)
         frameControllers[tabId] = ctrl
         ctrl.iframe.addEventListener('load', () => updateNavButtons())
@@ -149,6 +151,7 @@ async function run() {
       if (!frame) {
         frame = document.createElement('iframe')
         frame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:none;z-index:2;'
+        frame.setAttribute('allowfullscreen', 'true')
         iframeContainer.appendChild(frame)
         tabs[tabId].srcdocFrame = frame
       }
@@ -327,8 +330,16 @@ async function run() {
     addressInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadURL(addressInput.value) })
     reloadBtn.addEventListener('click', () => {
       const active = Object.values(tabs).find(t => t.isActive)
-      if (active && frameControllers[active.id]) {
-        try { frameControllers[active.id].iframe.contentWindow.location.reload() } catch(e) {}
+      if (!active) return
+      if (active.isHome) {
+        homeFrame.srcdoc = homeFrame.srcdoc
+      } else if (active.isSrcdoc && active.srcdocFrame) {
+        active.srcdocFrame.srcdoc = active.srcdocFrame.srcdoc
+      } else {
+        const ctrl = frameControllers[active.id]
+        const history = histories[active.id]
+        const url = history && history.stack[history.idx]
+        if (ctrl && url) ctrl.navigate_to(url)
       }
     })
 
@@ -416,13 +427,21 @@ async function run() {
 
     fullscreenBtn.addEventListener('click', () => {
       const activeTab = Object.values(tabs).find(t => t.isActive)
-      if (!activeTab || !frameControllers[activeTab.id]) return
-      const target = frameControllers[activeTab.id].iframe
+      if (!activeTab) return
+      const target = activeTab.isHome
+        ? homeFrame
+        : activeTab.isSrcdoc
+          ? activeTab.srcdocFrame
+          : frameControllers[activeTab.id] && frameControllers[activeTab.id].iframe
+      if (!target) return
       if (!document.fullscreenElement) {
         if (target.requestFullscreen) target.requestFullscreen()
         else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen()
+        else if (target.msRequestFullscreen) target.msRequestFullscreen()
       } else {
-        document.exitFullscreen()
+        if (document.exitFullscreen) document.exitFullscreen()
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen()
+        else if (document.msExitFullscreen) document.msExitFullscreen()
       }
     })
 

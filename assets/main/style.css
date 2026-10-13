@@ -309,8 +309,8 @@ body {
   filter: invert(1);
 }
 
-#reloadBtn {
-  filter: none;
+#reloadBtn img {
+  filter: invert(1);
 }
 
 .nav-btn:disabled {
