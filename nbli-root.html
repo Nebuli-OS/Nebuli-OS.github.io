@@ -108,8 +108,8 @@
     }
 
     .panel.settings-page {
-        background: rgba(255 255 255 / 0.95);
-        color: #111;
+      background: color-mix(in srgb, var(--root-shell-color) 94%, var(--root-shell-foreground));
+      color: var(--root-shell-foreground);
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -122,7 +122,7 @@
 
     .panel.settings-page .settings-section {
         padding: 20px 0;
-        border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid color-mix(in srgb, var(--root-shell-foreground) 22%, transparent);
     }
 
     .panel.settings-page .settings-section:first-child {
@@ -138,7 +138,7 @@
         font-weight: bold;
         margin-bottom: 8px;
         font-size: 20px;
-        color: #111;
+      color: var(--root-shell-foreground) !important;
     }
 
     .panel.settings-page label {
@@ -147,7 +147,7 @@
         justify-content: space-between;
         cursor: pointer;
         padding: 10px 0;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid color-mix(in srgb, var(--root-shell-foreground) 16%, transparent);
     }
 
     .panel.settings-page label:last-of-type {
@@ -155,9 +155,9 @@
     }
 
     .panel.settings-page select {
-        background: #f8f8f8;
-        border: 1px solid #ccc;
-        color: #111;
+      background: color-mix(in srgb, var(--root-shell-color) 84%, var(--root-shell-foreground));
+      border: 1px solid color-mix(in srgb, var(--root-shell-foreground) 36%, transparent);
+      color: var(--root-shell-foreground);
         padding: 8px 12px;
         border-radius: 6px;
         cursor: pointer;
@@ -178,15 +178,15 @@
     .settings-divider {
         margin: 12px 0;
         padding-top: 12px;
-        border-top: 1px solid #ddd;
+      border-top: 1px solid color-mix(in srgb, var(--root-shell-foreground) 22%, transparent);
     }
 
     .settings-pill {
       padding: 8px 16px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border: 1px solid color-mix(in srgb, var(--root-shell-foreground) 28%, transparent);
       border-radius: 20px;
-      background: #f0f0f0;
-      color: #333;
+      background: color-mix(in srgb, var(--root-shell-color) 84%, var(--root-shell-foreground));
+      color: var(--root-shell-foreground);
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -210,14 +210,13 @@
     }
 
     .settings-pill:hover {
-      background: #e0e0e0;
-      border-color: rgba(0, 0, 0, 0.3);
+      background: color-mix(in srgb, var(--root-shell-color) 72%, var(--root-shell-foreground));
+      border-color: color-mix(in srgb, var(--root-shell-foreground) 42%, transparent);
     }
 
     .settings-pill.active {
-      background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600);
-      background-size: 200% 200%;
-      color: white;
+      background: var(--root-shell-foreground);
+      color: var(--root-shell-color);
       border-color: transparent;
     }
 
@@ -227,7 +226,7 @@
       margin-bottom: 20px;
       flex-wrap: wrap;
       padding-bottom: 12px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid color-mix(in srgb, var(--root-shell-foreground) 22%, transparent);
     }
 
     #view {
@@ -240,15 +239,92 @@
 
     .screen-cloaking-actions { display: flex; gap: 10px; flex-wrap: wrap; padding: 12px 0; }
     .screen-cloaking-actions button {
-      padding: 9px 14px; border: 1px solid #ccc; border-radius: 6px;
-      background: #f4f4f4; color: #111; font: inherit; cursor: pointer;
+      padding: 9px 14px; border: 1px solid color-mix(in srgb, var(--root-shell-foreground) 36%, transparent); border-radius: 6px;
+      background: color-mix(in srgb, var(--root-shell-color) 84%, var(--root-shell-foreground)); color: var(--root-shell-foreground); font: inherit; cursor: pointer;
     }
-    .screen-cloaking-actions button:hover:not(:disabled) { background: #e8e8e8; }
+    .screen-cloaking-actions button:hover:not(:disabled) { background: color-mix(in srgb, var(--root-shell-color) 72%, var(--root-shell-foreground)); }
     .screen-cloaking-actions button:disabled { opacity: 0.5; cursor: default; }
     .screen-cloaking-fullscreen { accent-color: #9c27b0; }
     .screen-cloaking-shortcut {
-      width: 92px; padding: 7px 8px; border: 1px solid #ccc; border-radius: 4px;
-      background: #f8f8f8; color: #111; text-align: center; font: inherit; cursor: pointer;
+      width: 92px; padding: 7px 8px; border: 1px solid color-mix(in srgb, var(--root-shell-foreground) 36%, transparent); border-radius: 4px;
+      background: color-mix(in srgb, var(--root-shell-color) 84%, var(--root-shell-foreground)); color: var(--root-shell-foreground); text-align: center; font: inherit; cursor: pointer;
+    }
+    .panel.settings-page :is(div, label, span, button, input, select) { color: var(--root-shell-foreground) !important; }
+    .panel.settings-page input[type="text"] {
+      background: color-mix(in srgb, var(--root-shell-color) 84%, var(--root-shell-foreground)) !important;
+      border-color: color-mix(in srgb, var(--root-shell-foreground) 36%, transparent) !important;
+    }
+    .panel.settings-page input[type="checkbox"] { accent-color: var(--root-shell-foreground); }
+    .panel.settings-page .settings-pill.active { color: var(--root-shell-color) !important; }
+    .panel.settings-page #resetAllSettingsBtn {
+      background: var(--root-shell-foreground) !important;
+      color: var(--root-shell-color) !important;
+    }
+    .panel.settings-page #modeSwitchOsLabel,
+    .panel.settings-page #modeSwitchRootLabel { color: var(--root-shell-foreground) !important; }
+    .panel.settings-page .mode-switch-input:checked ~ .mode-switch-track {
+      background: color-mix(in srgb, var(--root-shell-foreground) 45%, transparent);
+      border-color: color-mix(in srgb, var(--root-shell-foreground) 55%, transparent);
+    }
+    .panel.settings-page .mode-switch-thumb { background: var(--root-shell-foreground) !important; }
+    .panel.settings-page .appearance-swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      gap: 10px;
+      padding: 12px 0;
+    }
+    .appearance-swatches button {
+      width: 38px;
+      height: 38px;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+    .appearance-swatches button.light-swatch {
+      border-color: rgba(0, 0, 0, 0.55);
+      box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+    }
+    .appearance-swatches button[aria-pressed="true"] {
+      outline: 3px solid var(--root-shell-foreground);
+      outline-offset: 2px;
+    }
+    body.root-shell {
+      --glass-bg: color-mix(in srgb, var(--root-shell-color) 82%, transparent);
+      --glass-border: 1px solid color-mix(in srgb, var(--root-shell-foreground) 18%, transparent);
+      background: var(--root-shell-color);
+      color: var(--root-shell-foreground);
+    }
+    body.root-shell.light-theme .sidebar button:not(#homeBtn) img,
+    body.root-shell.light-theme .nav-btn img { filter: invert(1); }
+    body.root-shell.light-theme .tab,
+    body.root-shell.light-theme #urlInput,
+    body.root-shell.light-theme #reloadBtn { color: #000; }
+    body.root-shell.sidebar-right .sidebar {
+      left: auto;
+      right: 0;
+      border-right: none;
+      border-left: var(--glass-border);
+    }
+    body.root-shell.sidebar-right #wrapper {
+      left: 0;
+      right: 68px;
+      width: auto;
+    }
+    body.root-shell.sidebar-right #iframeContainer {
+      left: 0;
+      right: 68px;
+      width: auto;
+    }
+    body.root-shell.sidebar-icons-only .sidebar button {
+      background: transparent;
+      border-color: transparent;
+      border-radius: 0;
+      transition: background 0.2s ease, border-radius 0.2s ease;
+    }
+    body.root-shell.sidebar-icons-only .sidebar button:hover {
+      background: color-mix(in srgb, var(--root-shell-foreground) 12%, transparent);
+      border-radius: 12px;
     }
   </style>
 </head>
@@ -301,6 +377,8 @@
   <div id="settingsTemplate" style="display: none;">
     <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
       <button class="settings-pill active" data-section="main">Main Settings</button>
+      <button class="settings-pill" data-section="appearance">Appearance</button>
+      <button class="settings-pill" data-section="sidebar-settings">Sidebar Settings</button>
       <button class="settings-pill" data-section="screen-cloaking">Screen Cloaking</button>
     </div>
 
@@ -345,6 +423,49 @@
       <button id="resetAllSettingsBtn" title="Reset all settings to default" style="padding: 10px; border-radius: 6px; border: none; background: linear-gradient(90deg, #ffd600, #9c27b0, #ffd600); background-size: 200% 200%; color: white; font-weight: 700; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; width: 100%; margin-top: 0;">
         Reset All Settings to Default
       </button>
+    </div>
+
+    <div class="settings-section" data-section-content="appearance" style="display: none;">
+      <div>Appearance</div>
+      <label><span>Choose a chrome color</span></label>
+      <div class="appearance-swatches" aria-label="Appearance colors">
+        <button type="button" data-color="#000000" aria-label="Black" title="Black"></button>
+        <button type="button" class="light-swatch" data-color="#f1f3f5" aria-label="Light gray" title="Light gray"></button>
+        <button type="button" class="light-swatch" data-color="#fff4e6" aria-label="Light peach" title="Light peach"></button>
+        <button type="button" class="light-swatch" data-color="#fff1f2" aria-label="Light rose" title="Light rose"></button>
+        <button type="button" class="light-swatch" data-color="#f3f0ff" aria-label="Light lilac" title="Light lilac"></button>
+        <button type="button" class="light-swatch" data-color="#e9f5e9" aria-label="Light green" title="Light green"></button>
+        <button type="button" class="light-swatch" data-color="#eaf4ff" aria-label="Light blue" title="Light blue"></button>
+        <button type="button" class="light-swatch" data-color="#e6f7f5" aria-label="Light mint" title="Light mint"></button>
+        <button type="button" class="light-swatch" data-color="#fff9db" aria-label="Light yellow" title="Light yellow"></button>
+        <button type="button" data-color="#20252b" aria-label="Graphite" title="Graphite"></button>
+        <button type="button" data-color="#253746" aria-label="Slate blue" title="Slate blue"></button>
+        <button type="button" data-color="#173f5f" aria-label="Ocean blue" title="Ocean blue"></button>
+        <button type="button" data-color="#233c67" aria-label="Cobalt" title="Cobalt"></button>
+        <button type="button" data-color="#263b2c" aria-label="Forest green" title="Forest green"></button>
+        <button type="button" data-color="#174c3c" aria-label="Emerald" title="Emerald"></button>
+        <button type="button" data-color="#124e4a" aria-label="Teal" title="Teal"></button>
+        <button type="button" data-color="#4a4a25" aria-label="Olive" title="Olive"></button>
+        <button type="button" data-color="#4e3217" aria-label="Amber brown" title="Amber brown"></button>
+        <button type="button" data-color="#552a20" aria-label="Rust" title="Rust"></button>
+        <button type="button" data-color="#522b3c" aria-label="Rose" title="Rose"></button>
+        <button type="button" data-color="#45253d" aria-label="Berry" title="Berry"></button>
+        <button type="button" data-color="#3e2744" aria-label="Plum" title="Plum"></button>
+        <button type="button" data-color="#34244f" aria-label="Violet" title="Violet"></button>
+        <button type="button" data-color="#252d58" aria-label="Indigo" title="Indigo"></button>
+      </div>
+    </div>
+
+    <div class="settings-section" data-section-content="sidebar-settings" style="display: none;">
+      <div>Sidebar Settings</div>
+      <label for="sidebarPositionInput">
+        <span>Place sidebar on the right</span>
+        <input type="checkbox" id="sidebarPositionInput">
+      </label>
+      <label for="sidebarIconsOnlyInput">
+        <span>Show icons without button outlines</span>
+        <input type="checkbox" id="sidebarIconsOnlyInput">
+      </label>
     </div>
 
     <div class="settings-section" data-section-content="screen-cloaking" style="display: none;">
@@ -532,8 +653,26 @@
     const DEFAULT_p = 'light'
     const DEFAULT_WISP = 'wss://wisp.rhw.one/'
     const DEFAULT_BARE = 'https://larp.foundation/tspmo/'
+    const ROOT_SHELL_COLOR_KEY = 'nebuli-root-shell-color'
+    const ROOT_SIDEBAR_POSITION_KEY = 'nebuli-root-sidebar-position'
+    const ROOT_SIDEBAR_ICONS_ONLY_KEY = 'nebuli-root-sidebar-icons-only'
+    const DEFAULT_ROOT_SHELL_COLOR = '#000000'
+    const LIGHT_ROOT_SHELL_COLORS = new Set(['#f1f3f5', '#fff4e6', '#fff1f2', '#f3f0ff', '#e9f5e9', '#eaf4ff', '#e6f7f5', '#fff9db'])
     const NEBULI_MODE_KEY = 'nebuli-mode'
     const DEFAULT_NEBULI_MODE = 'os'
+
+    function applyRootAppearance() {
+      const shellColor = localStorage.getItem(ROOT_SHELL_COLOR_KEY) || DEFAULT_ROOT_SHELL_COLOR
+      const lightTheme = LIGHT_ROOT_SHELL_COLORS.has(shellColor)
+      document.body.classList.add('root-shell')
+      document.body.classList.toggle('light-theme', lightTheme)
+      document.body.style.setProperty('--root-shell-color', shellColor)
+      document.body.style.setProperty('--root-shell-foreground', lightTheme ? '#000000' : '#ffffff')
+      document.body.classList.toggle('sidebar-right', localStorage.getItem(ROOT_SIDEBAR_POSITION_KEY) === 'right')
+      document.body.classList.toggle('sidebar-icons-only', localStorage.getItem(ROOT_SIDEBAR_ICONS_ONLY_KEY) === 'true')
+    }
+
+    applyRootAppearance()
     
     let currentTabId = 0
     let tabs = {}
@@ -667,6 +806,16 @@
       const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut')
       if (screenCloakingFullscreen) screenCloakingFullscreen.checked = isScreenCloakingFullscreenEnabled()
       if (screenCloakingShortcut) screenCloakingShortcut.value = getScreenCloakingShortcut() === ' ' ? 'Space' : getScreenCloakingShortcut()
+
+      const sidebarPosition = panel.querySelector('#sidebarPositionInput')
+      const sidebarIconsOnly = panel.querySelector('#sidebarIconsOnlyInput')
+      if (sidebarPosition) sidebarPosition.checked = localStorage.getItem(ROOT_SIDEBAR_POSITION_KEY) === 'right'
+      if (sidebarIconsOnly) sidebarIconsOnly.checked = localStorage.getItem(ROOT_SIDEBAR_ICONS_ONLY_KEY) === 'true'
+      panel.querySelectorAll('.appearance-swatches button').forEach(button => {
+        const color = button.dataset.color
+        button.style.backgroundColor = color
+        button.setAttribute('aria-pressed', String(color === (localStorage.getItem(ROOT_SHELL_COLOR_KEY) || DEFAULT_ROOT_SHELL_COLOR)))
+      })
     }
 
     function saveAllSettings(panel) {
@@ -695,6 +844,8 @@
       const screenCloakingStop = panel.querySelector('.screen-cloaking-stop')
       const screenCloakingFullscreen = panel.querySelector('.screen-cloaking-fullscreen')
       const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut')
+      const sidebarPosition = panel.querySelector('#sidebarPositionInput')
+      const sidebarIconsOnly = panel.querySelector('#sidebarIconsOnlyInput')
 
       if (screenCloakingStart) screenCloakingStart.addEventListener('click', startScreenCloaking)
       if (screenCloakingStop) screenCloakingStop.addEventListener('click', stopScreenCloaking)
@@ -712,6 +863,27 @@
           screenCloakingShortcut.value = event.key === ' ' ? 'Space' : event.key
         })
         screenCloakingShortcut.addEventListener('click', () => screenCloakingShortcut.select())
+      }
+      panel.querySelectorAll('.appearance-swatches button').forEach(button => {
+        button.addEventListener('click', () => {
+          localStorage.setItem(ROOT_SHELL_COLOR_KEY, button.dataset.color)
+          applyRootAppearance()
+          panel.querySelectorAll('.appearance-swatches button').forEach(item => {
+            item.setAttribute('aria-pressed', String(item === button))
+          })
+        })
+      })
+      if (sidebarPosition) {
+        sidebarPosition.addEventListener('change', () => {
+          localStorage.setItem(ROOT_SIDEBAR_POSITION_KEY, sidebarPosition.checked ? 'right' : 'left')
+          applyRootAppearance()
+        })
+      }
+      if (sidebarIconsOnly) {
+        sidebarIconsOnly.addEventListener('change', () => {
+          localStorage.setItem(ROOT_SIDEBAR_ICONS_ONLY_KEY, String(sidebarIconsOnly.checked))
+          applyRootAppearance()
+        })
       }
       syncScreenCloakingButtons()
 
@@ -746,8 +918,12 @@
           localStorage.removeItem('bare')
           localStorage.removeItem(SCREEN_CLOAKING_FULLSCREEN_KEY)
           localStorage.removeItem(SCREEN_CLOAKING_SHORTCUT_KEY)
+          localStorage.removeItem(ROOT_SHELL_COLOR_KEY)
+          localStorage.removeItem(ROOT_SIDEBAR_POSITION_KEY)
+          localStorage.removeItem(ROOT_SIDEBAR_ICONS_ONLY_KEY)
 
           loadAllSettings(panel)
+          applyRootAppearance()
           saveAllSettings(panel)
           syncScreenCloakingButtons()
         })
