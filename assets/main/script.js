@@ -1,5 +1,115 @@
 const NEBULI_MODE_KEY = 'nebuli-mode';
 const DEFAULT_NEBULI_MODE = 'os';
+const SCREEN_CLOAKING_FULLSCREEN_KEY = 'nebuli-screen-cloaking-fullscreen';
+const SCREEN_CLOAKING_SHORTCUT_KEY = 'nebuli-screen-cloaking-shortcut';
+const DEFAULT_SCREEN_CLOAKING_SHORTCUT = '`';
+
+let screenCloakingStream = null;
+let screenCloakingVideo = null;
+let screenCloakingNativeFullscreen = false;
+
+function getScreenCloakingShortcut() {
+  return localStorage.getItem(SCREEN_CLOAKING_SHORTCUT_KEY) || DEFAULT_SCREEN_CLOAKING_SHORTCUT;
+}
+
+function isScreenCloakingFullscreenEnabled() {
+  return localStorage.getItem(SCREEN_CLOAKING_FULLSCREEN_KEY) !== 'false';
+}
+
+function syncScreenCloakingButtons() {
+  const sharing = Boolean(screenCloakingStream);
+  document.querySelectorAll('.screen-cloaking-start').forEach(button => {
+    button.disabled = sharing;
+  });
+  document.querySelectorAll('.screen-cloaking-stop').forEach(button => {
+    button.disabled = !sharing;
+  });
+}
+
+function getScreenCloakingVideo() {
+  if (!screenCloakingVideo) {
+    screenCloakingVideo = document.createElement('video');
+    screenCloakingVideo.id = 'nebuliScreenCloakingVideo';
+    screenCloakingVideo.autoplay = true;
+    screenCloakingVideo.playsInline = true;
+    screenCloakingVideo.muted = true;
+    screenCloakingVideo.style.cssText = 'display:none;position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;background:#000;z-index:999999;pointer-events:none;';
+    document.body.appendChild(screenCloakingVideo);
+  }
+  return screenCloakingVideo;
+}
+
+function attachScreenCloakingStream(stream) {
+  if (screenCloakingStream && screenCloakingStream !== stream) {
+    stopScreenCloaking();
+  }
+  screenCloakingStream = stream;
+  getScreenCloakingVideo().srcObject = stream;
+  const videoTrack = stream.getVideoTracks()[0];
+  if (videoTrack) videoTrack.addEventListener('ended', stopScreenCloaking, { once: true });
+  syncScreenCloakingButtons();
+}
+
+async function startScreenCloaking() {
+  if (screenCloakingStream) return;
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    attachScreenCloakingStream(stream);
+  } catch (error) {
+    console.error('Could not start screen sharing:', error);
+  }
+}
+
+function stopScreenCloaking() {
+  const stream = screenCloakingStream;
+  screenCloakingStream = null;
+  if (stream) stream.getTracks().forEach(track => track.stop());
+  if (screenCloakingVideo) screenCloakingVideo.srcObject = null;
+  hideScreenCloakingVideo();
+  syncScreenCloakingButtons();
+}
+
+function showScreenCloakingVideo() {
+  if (!screenCloakingStream) return;
+  const video = getScreenCloakingVideo();
+  video.style.display = 'block';
+  if (isScreenCloakingFullscreenEnabled()) {
+    screenCloakingNativeFullscreen = true;
+    document.documentElement.requestFullscreen?.().catch(() => {});
+  }
+}
+
+function hideScreenCloakingVideo() {
+  if (screenCloakingVideo) screenCloakingVideo.style.display = 'none';
+  if (screenCloakingNativeFullscreen && document.fullscreenElement) {
+    document.exitFullscreen?.().catch(() => {});
+  }
+  screenCloakingNativeFullscreen = false;
+}
+
+function toggleScreenCloakingVideo() {
+  if (!screenCloakingStream) return;
+  if (screenCloakingVideo && screenCloakingVideo.style.display !== 'none') {
+    hideScreenCloakingVideo();
+  } else {
+    showScreenCloakingVideo();
+  }
+}
+
+window.nebuliScreenCloaking = {
+  attachStream: attachScreenCloakingStream,
+  stop: stopScreenCloaking,
+  toggle: toggleScreenCloakingVideo,
+  isActive: () => Boolean(screenCloakingStream)
+};
+
+document.addEventListener('keydown', event => {
+  if (event.target.closest?.('.screen-cloaking-shortcut')) return;
+  if (event.key === getScreenCloakingShortcut()) {
+    event.preventDefault();
+    toggleScreenCloakingVideo();
+  }
+});
 
 function getNebuliMode() {
   return localStorage.getItem(NEBULI_MODE_KEY) || DEFAULT_NEBULI_MODE;
@@ -2672,6 +2782,11 @@ function loadAllSettings(panel) {
     modeSwitchInput.checked = getNebuliMode() === 'root';
   }
 
+  const screenCloakingFullscreen = panel.querySelector('.screen-cloaking-fullscreen');
+  const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut');
+  if (screenCloakingFullscreen) screenCloakingFullscreen.checked = isScreenCloakingFullscreenEnabled();
+  if (screenCloakingShortcut) screenCloakingShortcut.value = getScreenCloakingShortcut() === ' ' ? 'Space' : getScreenCloakingShortcut();
+
   loadCustomApps(panel);
   updateBackgroundControls(panel);
 
@@ -2880,6 +2995,29 @@ function setupSettingsBindings(panel) {
   const appUrlInput = panel.querySelector('#appUrlInput');
   const appTitleInput = panel.querySelector('#appTitleInput');
   const modeSwitchInput = panel.querySelector('#modeSwitchInput');
+  const screenCloakingStart = panel.querySelector('.screen-cloaking-start');
+  const screenCloakingStop = panel.querySelector('.screen-cloaking-stop');
+  const screenCloakingFullscreen = panel.querySelector('.screen-cloaking-fullscreen');
+  const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut');
+
+  if (screenCloakingStart) screenCloakingStart.addEventListener('click', startScreenCloaking);
+  if (screenCloakingStop) screenCloakingStop.addEventListener('click', stopScreenCloaking);
+  if (screenCloakingFullscreen) {
+    screenCloakingFullscreen.addEventListener('change', () => {
+      localStorage.setItem(SCREEN_CLOAKING_FULLSCREEN_KEY, screenCloakingFullscreen.checked ? 'true' : 'false');
+    });
+  }
+  if (screenCloakingShortcut) {
+    screenCloakingShortcut.addEventListener('keydown', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (['Control', 'Alt', 'Shift', 'Meta'].includes(event.key)) return;
+      localStorage.setItem(SCREEN_CLOAKING_SHORTCUT_KEY, event.key);
+      screenCloakingShortcut.value = event.key === ' ' ? 'Space' : event.key;
+    });
+    screenCloakingShortcut.addEventListener('click', () => screenCloakingShortcut.select());
+  }
+  syncScreenCloakingButtons();
 
   if (taskbarFullCheckbox) taskbarFullCheckbox.addEventListener('change', () => saveAllSettings(panel));
   if (taskbarCollapseCheckbox) taskbarCollapseCheckbox.addEventListener('change', () => saveAllSettings(panel));
@@ -2996,6 +3134,8 @@ function setupSettingsBindings(panel) {
       localStorage.removeItem('nebuli-p');
       localStorage.removeItem('wisp');
       localStorage.removeItem('bare');
+      localStorage.removeItem(SCREEN_CLOAKING_FULLSCREEN_KEY);
+      localStorage.removeItem(SCREEN_CLOAKING_SHORTCUT_KEY);
 
       try {
         await deleteCustomBackground();
@@ -3007,6 +3147,7 @@ function setupSettingsBindings(panel) {
       refreshBackgroundControls();
       loadAllSettings(panel);
       saveAllSettings(panel);
+      syncScreenCloakingButtons();
     });
   }
 

@@ -634,6 +634,48 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.screen-cloaking-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+}
+
+.screen-cloaking-actions button {
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.screen-cloaking-actions button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.screen-cloaking-actions button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.screen-cloaking-fullscreen {
+  accent-color: #ffd600;
+}
+
+.screen-cloaking-shortcut {
+  width: 92px;
+  padding: 7px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  text-align: center;
+  font: inherit;
+  cursor: pointer;
+}
+
 .taskbar {
   position: fixed;
   display: flex;

@@ -237,6 +237,19 @@
       z-index: 109;
       overflow: hidden;
     }
+
+    .screen-cloaking-actions { display: flex; gap: 10px; flex-wrap: wrap; padding: 12px 0; }
+    .screen-cloaking-actions button {
+      padding: 9px 14px; border: 1px solid #ccc; border-radius: 6px;
+      background: #f4f4f4; color: #111; font: inherit; cursor: pointer;
+    }
+    .screen-cloaking-actions button:hover:not(:disabled) { background: #e8e8e8; }
+    .screen-cloaking-actions button:disabled { opacity: 0.5; cursor: default; }
+    .screen-cloaking-fullscreen { accent-color: #9c27b0; }
+    .screen-cloaking-shortcut {
+      width: 92px; padding: 7px 8px; border: 1px solid #ccc; border-radius: 4px;
+      background: #f8f8f8; color: #111; text-align: center; font: inherit; cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -288,6 +301,7 @@
   <div id="settingsTemplate" style="display: none;">
     <div id="settingsPills" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
       <button class="settings-pill active" data-section="main">Main Settings</button>
+      <button class="settings-pill" data-section="screen-cloaking">Screen Cloaking</button>
     </div>
 
     <div class="settings-section" data-section-content="main">
@@ -332,6 +346,22 @@
         Reset All Settings to Default
       </button>
     </div>
+
+    <div class="settings-section" data-section-content="screen-cloaking" style="display: none;">
+      <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #111;">Screen Cloaking</div>
+      <div class="screen-cloaking-actions">
+        <button type="button" class="screen-cloaking-start">Start Screen Share</button>
+        <button type="button" class="screen-cloaking-stop" disabled>Stop Screen Share</button>
+      </div>
+      <label for="screenCloakingFullscreen">
+        <span>Enable Native Fullscreen</span>
+        <input type="checkbox" id="screenCloakingFullscreen" class="screen-cloaking-fullscreen">
+      </label>
+      <label for="screenCloakingShortcut">
+        <span>Toggle Display Shortcut</span>
+        <input type="text" id="screenCloakingShortcut" class="screen-cloaking-shortcut" value="`" readonly>
+      </label>
+    </div>
   </div>
 
   <script>
@@ -352,6 +382,132 @@
     const fullscreenBtn = document.getElementById('fullscreenBtn')
     const settingsBtn = document.getElementById('settingsBtn')
     const settingsTemplate = document.getElementById('settingsTemplate')
+
+    const SCREEN_CLOAKING_FULLSCREEN_KEY = 'nebuli-screen-cloaking-fullscreen'
+    const SCREEN_CLOAKING_SHORTCUT_KEY = 'nebuli-screen-cloaking-shortcut'
+    const DEFAULT_SCREEN_CLOAKING_SHORTCUT = '`'
+    let screenCloakingStream = null
+    let screenCloakingVideo = null
+    let screenCloakingNativeFullscreen = false
+
+    function getScreenCloakingHost() {
+      try {
+        if (window.parent !== window && window.parent.nebuliScreenCloaking) return window.parent.nebuliScreenCloaking
+      } catch (e) {}
+      return null
+    }
+
+    function getScreenCloakingShortcut() {
+      return localStorage.getItem(SCREEN_CLOAKING_SHORTCUT_KEY) || DEFAULT_SCREEN_CLOAKING_SHORTCUT
+    }
+
+    function isScreenCloakingFullscreenEnabled() {
+      return localStorage.getItem(SCREEN_CLOAKING_FULLSCREEN_KEY) !== 'false'
+    }
+
+    function syncScreenCloakingButtons() {
+      const sharing = Boolean(screenCloakingStream) || Boolean(getScreenCloakingHost()?.isActive())
+      document.querySelectorAll('.screen-cloaking-start').forEach(button => { button.disabled = sharing })
+      document.querySelectorAll('.screen-cloaking-stop').forEach(button => { button.disabled = !sharing })
+    }
+
+    function getScreenCloakingVideo() {
+      if (!screenCloakingVideo) {
+        screenCloakingVideo = document.createElement('video')
+        screenCloakingVideo.id = 'nebuliScreenCloakingVideo'
+        screenCloakingVideo.autoplay = true
+        screenCloakingVideo.playsInline = true
+        screenCloakingVideo.muted = true
+        screenCloakingVideo.style.cssText = 'display:none;position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;background:#000;z-index:999999;pointer-events:none;'
+        document.body.appendChild(screenCloakingVideo)
+      }
+      return screenCloakingVideo
+    }
+
+    function stopLocalScreenCloaking() {
+      const stream = screenCloakingStream
+      screenCloakingStream = null
+      if (stream) stream.getTracks().forEach(track => track.stop())
+      if (screenCloakingVideo) screenCloakingVideo.srcObject = null
+      hideLocalScreenCloakingVideo()
+      syncScreenCloakingButtons()
+    }
+
+    function attachLocalScreenCloakingStream(stream) {
+      screenCloakingStream = stream
+      getScreenCloakingVideo().srcObject = stream
+      const videoTrack = stream.getVideoTracks()[0]
+      if (videoTrack) videoTrack.addEventListener('ended', stopLocalScreenCloaking, { once: true })
+      syncScreenCloakingButtons()
+    }
+
+    async function startScreenCloaking() {
+      const host = getScreenCloakingHost()
+      if (screenCloakingStream || host?.isActive()) {
+        syncScreenCloakingButtons()
+        return
+      }
+      try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+        if (host) {
+          screenCloakingStream = stream
+          host.attachStream(stream)
+        } else {
+          attachLocalScreenCloakingStream(stream)
+        }
+        const videoTrack = stream.getVideoTracks()[0]
+        if (videoTrack) videoTrack.addEventListener('ended', () => {
+          screenCloakingStream = null
+          syncScreenCloakingButtons()
+        }, { once: true })
+        syncScreenCloakingButtons()
+      } catch (error) {
+        console.error('Could not start screen sharing:', error)
+      }
+    }
+
+    function stopScreenCloaking() {
+      const host = getScreenCloakingHost()
+      if (host && host.isActive()) host.stop()
+      else stopLocalScreenCloaking()
+      screenCloakingStream = null
+      syncScreenCloakingButtons()
+    }
+
+    function showLocalScreenCloakingVideo() {
+      if (!screenCloakingStream) return
+      getScreenCloakingVideo().style.display = 'block'
+      if (isScreenCloakingFullscreenEnabled()) {
+        screenCloakingNativeFullscreen = true
+        document.documentElement.requestFullscreen?.().catch(() => {})
+      }
+    }
+
+    function hideLocalScreenCloakingVideo() {
+      if (screenCloakingVideo) screenCloakingVideo.style.display = 'none'
+      if (screenCloakingNativeFullscreen && document.fullscreenElement) document.exitFullscreen?.().catch(() => {})
+      screenCloakingNativeFullscreen = false
+    }
+
+    function toggleLocalScreenCloakingVideo() {
+      if (!screenCloakingStream) return
+      if (screenCloakingVideo && screenCloakingVideo.style.display !== 'none') hideLocalScreenCloakingVideo()
+      else showLocalScreenCloakingVideo()
+    }
+
+    function toggleScreenCloakingVideo() {
+      const host = getScreenCloakingHost()
+      if (host && host.isActive()) host.toggle()
+      else toggleLocalScreenCloakingVideo()
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.target.closest?.('.screen-cloaking-shortcut')) return
+      if (event.key === getScreenCloakingShortcut()) {
+        event.preventDefault()
+        toggleScreenCloakingVideo()
+      }
+    })
 
     const CUSTOM_PROTOCOL = 'nebuli-root://'
     const TITLES = { HOME: 'Home', GAMES: 'Games', AI: 'AI', MUSIC: 'Music', CODE: 'Code Editor', STREAMING: 'Movies & TV', CHAT: 'Chat', NEW_TAB: 'New Tab', SETTINGS: 'Settings' }
@@ -506,6 +662,11 @@
       if (modeSwitchInput) {
         modeSwitchInput.checked = getNebuliMode() === 'root'
       }
+
+      const screenCloakingFullscreen = panel.querySelector('.screen-cloaking-fullscreen')
+      const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut')
+      if (screenCloakingFullscreen) screenCloakingFullscreen.checked = isScreenCloakingFullscreenEnabled()
+      if (screenCloakingShortcut) screenCloakingShortcut.value = getScreenCloakingShortcut() === ' ' ? 'Space' : getScreenCloakingShortcut()
     }
 
     function saveAllSettings(panel) {
@@ -530,6 +691,39 @@
       const wispInput = panel.querySelector('#wispInput')
       const bareInput = panel.querySelector('#bareInput')
       const modeSwitchInput = panel.querySelector('#modeSwitchInput')
+      const screenCloakingStart = panel.querySelector('.screen-cloaking-start')
+      const screenCloakingStop = panel.querySelector('.screen-cloaking-stop')
+      const screenCloakingFullscreen = panel.querySelector('.screen-cloaking-fullscreen')
+      const screenCloakingShortcut = panel.querySelector('.screen-cloaking-shortcut')
+
+      if (screenCloakingStart) screenCloakingStart.addEventListener('click', startScreenCloaking)
+      if (screenCloakingStop) screenCloakingStop.addEventListener('click', stopScreenCloaking)
+      if (screenCloakingFullscreen) {
+        screenCloakingFullscreen.addEventListener('change', () => {
+          localStorage.setItem(SCREEN_CLOAKING_FULLSCREEN_KEY, screenCloakingFullscreen.checked ? 'true' : 'false')
+        })
+      }
+      if (screenCloakingShortcut) {
+        screenCloakingShortcut.addEventListener('keydown', event => {
+          event.preventDefault()
+          event.stopPropagation()
+          if (['Control', 'Alt', 'Shift', 'Meta'].includes(event.key)) return
+          localStorage.setItem(SCREEN_CLOAKING_SHORTCUT_KEY, event.key)
+          screenCloakingShortcut.value = event.key === ' ' ? 'Space' : event.key
+        })
+        screenCloakingShortcut.addEventListener('click', () => screenCloakingShortcut.select())
+      }
+      syncScreenCloakingButtons()
+
+      panel.querySelectorAll('.settings-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const section = pill.getAttribute('data-section')
+          panel.querySelectorAll('.settings-pill').forEach(item => item.classList.toggle('active', item === pill))
+          panel.querySelectorAll('[data-section-content]').forEach(content => {
+            content.style.display = content.getAttribute('data-section-content') === section ? 'block' : 'none'
+          })
+        })
+      })
 
       if (pSelect) pSelect.addEventListener('change', () => saveAllSettings(panel))
       if (wispInput) wispInput.addEventListener('input', () => saveAllSettings(panel))
@@ -550,9 +744,12 @@
           localStorage.removeItem('nebuli-p')
           localStorage.removeItem('wisp')
           localStorage.removeItem('bare')
+          localStorage.removeItem(SCREEN_CLOAKING_FULLSCREEN_KEY)
+          localStorage.removeItem(SCREEN_CLOAKING_SHORTCUT_KEY)
 
           loadAllSettings(panel)
           saveAllSettings(panel)
+          syncScreenCloakingButtons()
         })
       }
     }

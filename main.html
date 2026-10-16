@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/assets/main/style.css?v=5">
+<link rel="stylesheet" href="/assets/main/style.css?v=6">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NebuliOS</title>
 </head>
@@ -73,7 +73,7 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
 </div>
 
 <div id="nebuliRootFrameContainer">
-<iframe id="nebuliRootFrame" src="/nbli-root.html"></iframe>
+<iframe id="nebuliRootFrame" src="/nbli-root.html" allow="display-capture; fullscreen" allowfullscreen></iframe>
 </div>
 
 <div id="startMenuContainer" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: 415px; height: 525px; z-index: 10001; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);">
@@ -127,6 +127,7 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
     <button class="settings-pill" data-section="background">Background Settings</button>
     <button class="settings-pill" data-section="taskbar">Taskbar Settings</button>
     <button class="settings-pill" data-section="custom">Custom Apps</button>
+    <button class="settings-pill" data-section="screen-cloaking">Screen Cloaking</button>
   </div>
 
   <div class="settings-section" data-section-content="main">
@@ -299,11 +300,30 @@ if (sessionStorage.getItem('nebuli-mode-switch') === '1') {
     <div class="settings-divider"></div>
   </div>
 
+  <div class="settings-section" data-section-content="screen-cloaking" style="display: none;">
+    <div style="font-weight:bold; margin-bottom: 8px; font-size: 20px; color: #ffffff;">Screen Cloaking</div>
+
+    <div class="screen-cloaking-actions">
+      <button type="button" class="screen-cloaking-start">Start Screen Share</button>
+      <button type="button" class="screen-cloaking-stop" disabled>Stop Screen Share</button>
+    </div>
+
+    <label for="screenCloakingFullscreen">
+      <span>Enable Native Fullscreen</span>
+      <input type="checkbox" id="screenCloakingFullscreen" class="screen-cloaking-fullscreen">
+    </label>
+
+    <label for="screenCloakingShortcut">
+      <span>Toggle Display Shortcut</span>
+      <input type="text" id="screenCloakingShortcut" class="screen-cloaking-shortcut" value="`" readonly>
+    </label>
+  </div>
+
   <button id="resetAllSettingsBtn" title="Reset all settings to default">
       Reset All Settings to Default
   </button>
 </div>
 
-<script src="/assets/main/script.js?v=5"></script>
+<script src="/assets/main/script.js?v=6"></script>
 </body>
 </html>
